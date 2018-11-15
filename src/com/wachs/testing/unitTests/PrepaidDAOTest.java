@@ -1,21 +1,15 @@
-package com.wachs.test.unitTests;
+package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Stay;
-import com.wachs.main.dataBaseLayer.DAO.*;
-import org.junit.Test;
-import java.sql.SQLException;
-import static org.junit.Assert.*;
+public class PrepaidDAOTest {
 
-class StayDAOTest {
-
-/**
+    /**
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -23,12 +17,12 @@ class StayDAOTest {
         int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-        int nights_expected = aStay.findOneData(idGuest, pkHouse).getNights();
-        int nights_setted = 50;
+        aPrepaid.insertData(idGuest, pkHouse,50.0);
+        double prepaid_expected = aPrepaid.findOneData(idGuest, pkHouse).getPrepaid();
+        double prepaid_setted = 50;
 
         //Assert
-        assertEquals(nights_expected,nights_setted);
+       // assertEquals(prepaid_expected,prepaid_setted);
 
     }
 
@@ -39,7 +33,7 @@ class StayDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -47,12 +41,12 @@ class StayDAOTest {
         int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-        int nights_expected = aStay.findOneData(idGuest, pkHouse).getNights();
-        int nights_setted = 51;
+        aPrepaid.insertData(idGuest, pkHouse,50.0);
+        double prepaid_expected = aPrepaid.findOneData(idGuest, pkHouse).getPrepaid();
+        double prepaid_setted = 51;
 
         //Assert
-        assertNotEquals(nights_expected,nights_setted);
+        assertNotEquals(prepaid_expected,prepaid_setted);
 
     }
 
@@ -63,7 +57,7 @@ class StayDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        DrinksDAO aDrink = new DrinksDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -71,15 +65,14 @@ class StayDAOTest {
         int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-        aStay.deleteData(idGuest,pkHouse);
+        aDrink.insertData(idGuest, pkHouse,50);
+        aDrink.deleteData(idGuest,pkHouse);
 
         /**
         //Assert
         Assertions.assertThrows(SQLException.class, () -> {
-            aStay.findOneData(idGuest,pkHouse);
+            aDrink.findOneData(idGuest,pkHouse);
         });
-
 
     }
 
@@ -90,7 +83,7 @@ class StayDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -98,15 +91,13 @@ class StayDAOTest {
         int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-
+        aPrepaid.insertData(idGuest, pkHouse,50.00);
 
 
         //Assert
         Assertions.assertThrows(SQLException.class, () -> {
-           aStay.insertData(idGuest, pkHouse,50);
+            aPrepaid.insertData(idGuest, pkHouse,50.00);
         });
-
 
     }
 
@@ -117,7 +108,7 @@ class StayDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -125,15 +116,13 @@ class StayDAOTest {
         int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-
+        aPrepaid.insertData(idGuest, pkHouse,50.00);
 
 
         //Assert
-        ArrayList<Stay> listOfStay = new ArrayList<Stay>();
-        listOfStay = aStay.readAllData();
-        assertNotNull(listOfStay.get(0));
-
+        ArrayList<Prepaid> listOfPrepaids = new ArrayList<Prepaid>();
+        listOfPrepaids = aPrepaid.readAllData();
+        assertNotNull(listOfPrepaids.get(0));
 
     }
 
@@ -144,25 +133,23 @@ class StayDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        DrinksDAO aDrink = new DrinksDAOImpl();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
-        int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
-        aGuest.insertData(pkHouse,"NeuerName");
-        int idGuest = aGuest.findOneData("NeuerName", pkHouse).getPK_id();
+        int idHouse = aHouse.findOneData("NameDesHauses").getPK_id();
+        aGuest.insertData(idHouse,"NeuerName");
+        int idGuest = aGuest.findOneData("NeuerName", idHouse).getPK_id();
 
         //Act
-        aStay.insertData(idGuest, pkHouse,50);
-        aStay.updateData(idGuest, pkHouse, 60);
+        aDrink.insertData(idGuest, idHouse,50);
+        aDrink.updateData(idGuest, idHouse, 60);
 
         int newNightsCount = 60;
-        int oldNightCount = aStay.findOneData(idGuest,pkHouse).getNights();
+        int oldNightCount = aDrink.findOneData(idGuest,idHouse).getNights();
 
         //Assert
         assertEquals(newNightsCount, oldNightCount);
 
-
     }
-
 **/
 }

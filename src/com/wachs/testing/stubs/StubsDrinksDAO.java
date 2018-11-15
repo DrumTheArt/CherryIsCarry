@@ -1,18 +1,19 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Drinks;
 import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockDrinksDAO implements DrinksDAO {
+public class StubsDrinksDAO implements DrinksDAO {
 
     private Drinks alphaDrink;
     private Drinks drinkOne;
     private Drinks drinkTwo;
     private ArrayList<Drinks> listOfDrinks;
 
-    public MockDrinksDAO() {
+    public StubsDrinksDAO() {
 
         listOfDrinks = new ArrayList<Drinks>();
         alphaDrink = new Drinks();
@@ -25,7 +26,6 @@ public class MockDrinksDAO implements DrinksDAO {
     public Drinks findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
 
         return this.alphaDrink;
-
     }
 
     @Override

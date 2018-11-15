@@ -22,16 +22,5 @@ public class DataBaseSource {
                 "liegt unter: " + DATABASEPATH.getAbsolutePath()+ "/" + DATABASENAME);
     }
 
-    public static void setNewDatabaseName(String newDatabaseName){
-
-        DATABASENAME = newDatabaseName;
-    }
-
-    public static void resetDatabaseName(){
-
-        DATABASENAME = "adhDB.db";
-    }
-
-
 }
 

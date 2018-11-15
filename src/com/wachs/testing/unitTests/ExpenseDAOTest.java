@@ -1,12 +1,7 @@
-package com.wachs.test.unitTests;
+package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Drinks;
-import com.wachs.main.dataBaseLayer.DAO.*;
-import org.junit.Test;
-import java.sql.SQLException;
-import static org.junit.Assert.*;
+public class ExpenseDAOTest {
 
-public class FoodDAOTest {
 
     /**
     @Test
@@ -15,7 +10,7 @@ public class FoodDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        ExpenseDAO aExpense = new ExpenseDAOImpl();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -23,14 +18,15 @@ public class FoodDAOTest {
         int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
         //Act
-        aFood.insertData(idGuest, pkHouse,50);
-        int nights_expected = aFood.findOneData(idGuest, pkHouse).getNights();
-        int nights_setted = 50;
+        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
+        double price_expected = aExpense.findOneData(idGuest, pkHouse).getREAL_price();
+        double price_setted = 300.00;
 
         //Assert
-        assertEquals(nights_expected,nights_setted);
+        assertEquals(price_expected,price_setted);
 
     }
+
 
 
     @Test
@@ -39,7 +35,7 @@ public class FoodDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        ExpenseDAO aExpense = new ExpenseDAOImpl();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -47,14 +43,15 @@ public class FoodDAOTest {
         int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
         //Act
-        aFood.insertData(idGuest, pkHouse,50);
-        int nights_expected = aFood.findOneData(idGuest, pkHouse).getNights();
-        int nights_setted = 51;
+        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
+        String reasonDBValue = aExpense.findOneData(idGuest, pkHouse).getTXT_name();
+        String reasonUnequalDBValue = "Einkaufen1";
 
         //Assert
-        assertNotEquals(nights_expected,nights_setted);
+        assertNotEquals(reasonDBValue,reasonUnequalDBValue);
 
     }
+
 
 
     @Test
@@ -63,7 +60,7 @@ public class FoodDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        ExpenseDAO aExpense = new ExpenseDAOImpl();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -71,41 +68,13 @@ public class FoodDAOTest {
         int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
         //Act
-        aFood.insertData(idGuest, pkHouse,50);
-        aFood.deleteData(idGuest,pkHouse);
+        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
+        aExpense.deleteData(idGuest,pkHouse);
 
         /**
         //Assert
         Assertions.assertThrows(SQLException.class, () -> {
-            aFood.findOneData(idGuest,pkHouse);
-        });
-
-
-    }
-
-
-    @Test
-    public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
-
-        //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
-        aHouse.deleteData("Namedeshauses");
-        aHouse.insertData("Namedeshauses",200.0, 300.0);
-        int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
-        aGuest.insertData(pkHouse,"Neuername");
-        int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
-
-        //Act
-        aFood.insertData(idGuest, pkHouse,50);
-
-        //Assert
-
-
-
-        Assertions.assertThrows(SQLException.class, () -> {
-            aFood.insertData(idGuest, pkHouse,50);
+            aExpense.findOneData(idGuest,pkHouse);
         });
 
 
@@ -118,7 +87,7 @@ public class FoodDAOTest {
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        ExpenseDAO aExpense = new ExpenseDAOImpl();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -126,41 +95,46 @@ public class FoodDAOTest {
         int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
         //Act
-        aFood.insertData(idGuest, pkHouse,50);
+        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
 
-/**
+
         //Assert
-        ArrayList<Drinks> listOfDrinks = new ArrayList<Drinks>();
-        listOfDrinks = aFood.readAllData();
+        ArrayList<Expense> listOfDrinks = new ArrayList<Expense>();
+        listOfDrinks = aExpense.readAllData();
         assertNotNull(listOfDrinks.get(0));
 
     }
 
 
+    /**
     @Test
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
         //Arrange
         HouseDAO aHouse = new HouseDAOImpl();
         GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        ExpenseDAO aExpense = new ExpenseDAOImpl();
+
+
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
-        int idHouse = aHouse.findOneData("Namedeshauses").getPK_id();
-        aGuest.insertData(idHouse,"Neuername");
-        int idGuest = aGuest.findOneData("Neuername", idHouse).getPK_id();
+
+        int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
+        aGuest.insertData(pkHouse,"Neuername");
+        int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
         //Act
-        aFood.insertData(idGuest, idHouse,50);
-        aFood.updateData(idGuest, idHouse, 60);
-
-        int newNightsCount = 60;
-        int oldNightCount = aFood.findOneData(idGuest,idHouse).getNights();
+        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
+        aExpense.updateData(idGuest, pkHouse, 60.0,"newReason","03/04/2018");
+        double newPrepaidAmount = 60.0;
+        double oldPrepaidAmount = aExpense.findOneData(idGuest,pkHouse).getREAL_price();
 
         //Assert
-        assertEquals(newNightsCount, oldNightCount);
+        assertEquals(newPrepaidAmount, oldPrepaidAmount);
 
 
     }
-     **/
+
+
+**/
 }

@@ -1,18 +1,19 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.House;
 import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockHouseDAO implements HouseDAO {
+public class StubsHouseDAO implements HouseDAO {
 
     private House alphaHouse;
     private House houseOne;
     private House houseTwo;
     private ArrayList<House> listOfHouses;
 
-    public MockHouseDAO() {
+    public StubsHouseDAO() {
 
         listOfHouses = new ArrayList<House>();
         alphaHouse = new House();

@@ -1,4 +1,4 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Food;
 import com.wachs.main.dataBaseLayer.DAO.FoodDAO;
@@ -6,14 +6,14 @@ import com.wachs.main.dataBaseLayer.DAO.FoodDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockFoodDAO implements FoodDAO {
+public class StubsFoodDAO implements FoodDAO {
 
     private Food alphaFood;
     private Food foodOne;
     private Food foodTwo;
     private ArrayList<Food> listOfFood;
 
-    public MockFoodDAO() {
+    public StubsFoodDAO() {
 
         listOfFood = new ArrayList<Food>();
         alphaFood = new Food();

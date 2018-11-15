@@ -1,4 +1,4 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Stay;
 import com.wachs.main.dataBaseLayer.DAO.StayDAO;
@@ -6,14 +6,14 @@ import com.wachs.main.dataBaseLayer.DAO.StayDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockStayDAO implements StayDAO {
+public class StubsStayDAO implements StayDAO {
 
     private Stay alphaStay;
     private Stay stayOne;
     private Stay stayTwo;
     private ArrayList<Stay> listOfStays;
 
-    public MockStayDAO() {
+    public StubsStayDAO() {
 
         listOfStays = new ArrayList<Stay>();
         alphaStay = new Stay();

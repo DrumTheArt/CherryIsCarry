@@ -1,15 +1,4 @@
-package com.wachs.test.unitTests;
-
-import com.wachs.main.businessLayer.House;
-import com.wachs.main.dataBaseLayer.DAO.*;
-import com.wachs.main.dataBaseLayer.DBValidation.IDbColumnValidator;
-import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
-import com.wachs.main.dataBaseLayer.DBValidation.TblHouseColumnValidate;
-import org.junit.Test;
-import java.sql.SQLException;
-import static org.junit.Assert.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
+package com.wachs.testing.unitTests;
 
 public class HouseDAOTest {
 
@@ -112,12 +101,12 @@ public class HouseDAOTest {
     @Test
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
-        HouseDAO test = new HouseDAOImpl();
+    HouseDAO testing = new HouseDAOImpl();
 
 
 
         Assertions.assertThrows(SQLException.class, () -> {
-            House test2 = (House) test.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123");
+    House testDoNotConvertIfStringIsAllright = (House) testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123");
         });
 
 
@@ -127,29 +116,29 @@ public class HouseDAOTest {
     @Test
     public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, SQLiteException, ClassNotFoundException {
 
-        HouseDAO test = new HouseDAOImpl();
-        test.deleteData("NeuesHouse22222323");
-        test.insertData("NeuesHouse22222323", 300.0, 200.0);
+    HouseDAO testing = new HouseDAOImpl();
+    testing.deleteData("NeuesHouse22222323");
+    testing.insertData("NeuesHouse22222323", 300.0, 200.0);
 
         Assertions.assertThrows(SQLiteException.class, () -> {
-            test.insertData("NeuesHouse22222323", 300.0, 200.0);
+    testing.insertData("NeuesHouse22222323", 300.0, 200.0);
         });
     }
 
     @Test
     public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, SQLiteException, ClassNotFoundException {
 
-        HouseDAO test = new HouseDAOImpl();
-        test.deleteData("NeuesHaus");
-        test.insertData("NeuesHaus", 300.00, 200.00);
-        House firstTry = (House) test.findOneData("NeuesHaus");
+    HouseDAO testing = new HouseDAOImpl();
+    testing.deleteData("NeuesHaus");
+    testing.insertData("NeuesHaus", 300.00, 200.00);
+    House firstTry = (House) testing.findOneData("NeuesHaus");
 
         assertNotNull(firstTry);
 
-        test.deleteData("NeuesHaus");
+    testing.deleteData("NeuesHaus");
 
         Assertions.assertThrows(SQLException.class, () -> {
-            test.findOneData("NeuesHaus");
+    testing.findOneData("NeuesHaus");
         });
 
     }

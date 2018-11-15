@@ -1,18 +1,19 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Expense;
 import com.wachs.main.dataBaseLayer.DAO.ExpenseDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockExpenseDAO implements ExpenseDAO {
+public class StubsExpenseDAO implements ExpenseDAO {
 
     private Expense alphaExpense;
     private Expense expenseOne;
     private Expense expenseTwo;
     private ArrayList<Expense> listOfExpenses;
 
-    public MockExpenseDAO() {
+    public StubsExpenseDAO() {
 
         listOfExpenses = new ArrayList<Expense>();
         alphaExpense = new Expense();

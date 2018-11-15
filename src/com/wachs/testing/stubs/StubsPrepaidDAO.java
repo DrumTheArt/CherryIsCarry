@@ -1,18 +1,19 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Prepaid;
 import com.wachs.main.dataBaseLayer.DAO.PrepaidDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockPrepaidDAO implements PrepaidDAO {
+public class StubsPrepaidDAO implements PrepaidDAO {
 
     private Prepaid alphaPrepaid;
     private Prepaid prepaidOne;
     private Prepaid prepaidTwo;
     private ArrayList<Prepaid> listOfPrepaid;
 
-    public MockPrepaidDAO() {
+    public StubsPrepaidDAO() {
 
         listOfPrepaid = new ArrayList<Prepaid>();
         alphaPrepaid = new Prepaid();

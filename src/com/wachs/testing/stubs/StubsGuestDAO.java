@@ -1,18 +1,19 @@
-package com.wachs.test.unitTests.mocks;
+package com.wachs.testing.stubs;
 
 import com.wachs.main.businessLayer.Guest;
 import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MockGuestDAO implements GuestDAO {
+public class StubsGuestDAO implements GuestDAO {
 
     private Guest alphaGuest;
     private Guest guestOne;
     private Guest guestTwo;
     private ArrayList<Guest> listOfGuests;
 
-    public MockGuestDAO() {
+    public StubsGuestDAO() {
 
         listOfGuests = new ArrayList<Guest>();
         alphaGuest = new Guest();
@@ -55,7 +56,7 @@ public class MockGuestDAO implements GuestDAO {
     }
 
     @Override
-    public ArrayList findListDataWhereHouseID(int id_house) throws SQLException, ClassNotFoundException {
+    public ArrayList findListDataWhereHouseID(int id_house) {
         return listOfGuests;
     }
 

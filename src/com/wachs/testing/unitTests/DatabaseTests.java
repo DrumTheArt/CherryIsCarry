@@ -1,10 +1,7 @@
-package com.wachs.test.unitTests;
+package com.wachs.testing.unitTests;
 
-import com.wachs.main.dataBaseLayer.DBConfig.DataBaseSource;
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 import com.wachs.main.dataBaseLayer.DBValidation.*;
-import com.wachs.main.dataBaseLayer.DBValidation.TblExpenseColumnValidate;
-import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +9,9 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 
 
 public class DatabaseTests {
@@ -24,15 +23,14 @@ public class DatabaseTests {
 
     @After
     public void tearDown(){
-        DataBaseSource.resetDatabaseName();
+
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testDatabaseConnection() throws SQLException, ClassNotFoundException {
-        DataBaseSource.setNewDatabaseName("newDatabaseThatDoesNotExists");
         Connection dbConnection = DbConnection.getConnection();
+        assertNotNull(dbConnection);
     }
-
 
     @Test
     public void testIsColumnOrderValidate_TblGuest() throws ClassNotFoundException, SQLException {
@@ -86,7 +84,7 @@ public class DatabaseTests {
     @Test
     public void TestIsColumnOrderValidate_TblPrepaid() throws ClassNotFoundException, SQLException {
         IDbColumnValidator isValidate = new TblPrepaidColumnValidate();
-        boolean IsValidate = ((TblPrepaidColumnValidate) isValidate).getIsColumnTitleOrderValidate();
+        boolean IsValidate = isValidate.getIsColumnTitleOrderValidate();
 
         assertTrue(IsValidate);
     }

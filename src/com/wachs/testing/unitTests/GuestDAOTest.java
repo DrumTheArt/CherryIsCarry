@@ -1,15 +1,4 @@
-package com.wachs.test.unitTests;
-
-import com.wachs.main.businessLayer.Guest;
-import com.wachs.main.dataBaseLayer.DAO.*;
-import com.wachs.main.dataBaseLayer.DBValidation.IDbColumnValidator;
-import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
-import org.junit.Test;
-import org.sqlite.SQLiteException;
-
-import java.sql.SQLException;
-import static org.junit.Assert.*;
-import java.util.ArrayList;
+package com.wachs.testing.unitTests;
 
 public class GuestDAOTest {
 
@@ -133,11 +122,11 @@ public class GuestDAOTest {
     @Test
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
-        GuestDAO test = new GuestDAOImpl();
+    GuestDAO testing = new GuestDAOImpl();
 
 
         Assertions.assertThrows(SQLException.class, () -> {
-            Guest test2 = (Guest) test.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123", 1);
+    Guest testDoNotConvertIfStringIsAllright = (Guest) testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123", 1);
         });
 
 
@@ -146,12 +135,12 @@ public class GuestDAOTest {
     @Test
     public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, SQLiteException, ClassNotFoundException {
 
-        GuestDAO test = new GuestDAOImpl();
-        test.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
-        test.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+    GuestDAO testing = new GuestDAOImpl();
+    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
 
         Assertions.assertThrows(SQLiteException.class, () -> {
-            test.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
         });
 
     }
@@ -159,17 +148,17 @@ public class GuestDAOTest {
     @Test
     public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, SQLiteException, ClassNotFoundException {
 
-        GuestDAO test = new GuestDAOImpl();
-        test.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
-        test.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
-        Guest firstTry = (Guest) test.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+    GuestDAO testing = new GuestDAOImpl();
+    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+    Guest firstTry = (Guest) testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
 
         assertNotNull(firstTry);
 
-        test.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
+    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
 
         Assertions.assertThrows(SQLException.class, () -> {
-            test.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
+    testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
         });
 
     }

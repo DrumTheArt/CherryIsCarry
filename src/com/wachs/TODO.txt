@@ -1,0 +1,56 @@
+@author Sebastian @05.08.2018
+
+- Maven Tool benutzen für den AutoBuild
+- Metriken für Testabdeckungen (Cobertura oder clover)
+- Jenkins
+
+- Hibernate benutzen (oder ein anderes Entity-Framework)
+- log4j 2.x --- benutzen
+- Was ist mit SQL-Injection?
+- S. 318 Besser coden --> anstatt langer Parameterliste, wurde eine Parameter-Klasse gebaut:
+		- public class Parameter{
+		private int = 0;
+		private int to = Integer.MAX_VALUE;
+		private Actor customer = null;
+		dann setter und getter dazu
+}
+
+
+	Verwendetemethode(new Parameter().setActor(IRGENDEINER)
+
+
+    Little Steps:
+        - Anpassungen bei den Tests (ResultSet closed exception)
+        - Initialisierung GuestModel in Abhängigkeit
+
+    Big Steps:
+        - Bau einer Serializable Version (wie das Adressbuch) ...
+        - Implementierung von JTattoo Framework für Look and Feel Swing (NoireLookAndFeel)
+
+                 Implementierung:
+                 public static void main(String[] args) throws AddressBookException {
+
+                        	try {
+                                UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.SmartLookAndFeel");
+
+                        	} catch (ClassNotFoundException e) {
+
+                				e.printStackTrace();
+                			} catch (InstantiationException e) {
+                				e.printStackTrace();
+                			} catch (IllegalAccessException e) {
+                				e.printStackTrace();
+                			} catch (UnsupportedLookAndFeelException e) {
+                			    	e.printStackTrace();
+                			}
+
+
+                            new Main();
+                    }
+
+	Zuletzt am 23.08.
+	    - Splash Screen bauen
+	    - View bauen
+
+
+

@@ -126,11 +126,11 @@ public class MockHouseDAO implements HouseDAO {
 
         QueryGeneratorHouse newQuery = new QueryGeneratorHouse();
 
-        statement = DbConnection.getConnection().createStatement();
+        statement = DbTestConnection.getConnection().createStatement();
         statement.executeUpdate(newQuery.queryDeleteData(name));
 
         statement.close();
-        DbConnection.closeConnection();
+        DbTestConnection.closeConnection();
 
     }
 

@@ -1,16 +1,30 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.Expense;
+import com.wachs.main.dataBaseLayer.DAO.ExpenseDAO;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.testing.mocks.MockExpenseDAO;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import org.junit.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
 public class ExpenseDAOTest {
 
 
-    /**
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        ExpenseDAO aExpense = new ExpenseDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        ExpenseDAO aExpense = new MockExpenseDAO();
+
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -27,15 +41,13 @@ public class ExpenseDAOTest {
 
     }
 
-
-
     @Test
     public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        ExpenseDAO aExpense = new ExpenseDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        ExpenseDAO aExpense = new MockExpenseDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -52,15 +64,13 @@ public class ExpenseDAOTest {
 
     }
 
-
-
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        ExpenseDAO aExpense = new ExpenseDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        ExpenseDAO aExpense = new MockExpenseDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -71,23 +81,17 @@ public class ExpenseDAOTest {
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
         aExpense.deleteData(idGuest,pkHouse);
 
-        /**
-        //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            aExpense.findOneData(idGuest,pkHouse);
-        });
-
+        aExpense.findOneData(idGuest, pkHouse);
 
     }
-
 
     @Test
     public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        ExpenseDAO aExpense = new ExpenseDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        ExpenseDAO aExpense = new MockExpenseDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -105,16 +109,13 @@ public class ExpenseDAOTest {
 
     }
 
-
-    /**
     @Test
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        ExpenseDAO aExpense = new ExpenseDAOImpl();
-
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        ExpenseDAO aExpense = new MockExpenseDAO();
 
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
@@ -132,9 +133,6 @@ public class ExpenseDAOTest {
         //Assert
         assertEquals(newPrepaidAmount, oldPrepaidAmount);
 
-
     }
 
-
-**/
 }

@@ -1,30 +1,41 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.Drinks;
+import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.testing.mocks.MockDrinksDAO;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import org.junit.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
 public class DrinksDAOTest {
 
-    /**
-     public HouseDAO aHouse = new StubsHouseDAO();
-     GuestDAO aGuest = new StubsGuestDAO();
-     DrinksDAO aDrink = new StubsDrinksDAO();
 
-     public void setUp() throws SQLException, ClassNotFoundException {
-
-     aHouse.insertData("newHouse",200,300);
+    public void setUp() {
 
      }
 
-     public void tearDown() throws SQLException, ClassNotFoundException {
-
-     aHouse.deleteData("newHouse");
+    public void tearDown() {
 
      }
 
-     @Test public void test_InsertStatement_Should_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
+    @Test
+    public void test_InsertStatement_Should_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
      //Arrange
-
-     int pkHouse = aHouse.findOneData("newHouse").getPK_id();
-     aGuest.insertData(pkHouse,"newGuest");
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        DrinksDAO aDrink = new MockDrinksDAO();
+        aHouse.deleteData("Namedeshauses");
+        aHouse.insertData("Namedeshauses", 200.0, 300.0);
+        int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
+        aGuest.insertData(pkHouse, "Neuername");
      int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
 
      //Act
@@ -37,13 +48,13 @@ public class DrinksDAOTest {
 
      }
 
-     /**
+
      @Test public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
      //Arrange
-     HouseDAO aHouse = new HouseDAOImpl();
-     GuestDAO aGuest = new GuestDAOImpl();
-     DrinksDAO aDrink = new DrinksDAOImpl();
+         HouseDAO aHouse = new MockHouseDAO();
+         GuestDAO aGuest = new MockGuestDAO();
+         DrinksDAO aDrink = new MockDrinksDAO();
      aHouse.deleteData("Namedeshauses");
      aHouse.insertData("Namedeshauses",200.0, 300.0);
      int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -60,13 +71,13 @@ public class DrinksDAOTest {
 
      }
 
-
-     @Test public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
+    @Test(expected = SQLException.class)
+    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
 
      //Arrange
-     HouseDAO aHouse = new HouseDAOImpl();
-     GuestDAO aGuest = new GuestDAOImpl();
-     DrinksDAO aDrink = new DrinksDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        DrinksDAO aDrink = new MockDrinksDAO();
      aHouse.deleteData("Namedeshauses");
      aHouse.insertData("Namedeshauses",200.0, 300.0);
      int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -76,23 +87,18 @@ public class DrinksDAOTest {
      //Act
      aDrink.insertData(idGuest, pkHouse,50);
      aDrink.deleteData(idGuest,pkHouse);
-
-
-     //Assert
-     Assertions.assertThrows(SQLException.class, () -> {
      aDrink.findOneData(idGuest,pkHouse);
-     });
-
 
      }
 
 
-     @Test public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
+    @Test(expected = SQLException.class)
+    public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
 
      //Arrange
-     HouseDAO aHouse = new HouseDAOImpl();
-     GuestDAO aGuest = new GuestDAOImpl();
-     DrinksDAO aDrink = new DrinksDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        DrinksDAO aDrink = new MockDrinksDAO();
      aHouse.deleteData("Namedeshauses");
      aHouse.insertData("Namedeshauses",200.0, 300.0);
      int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -101,22 +107,16 @@ public class DrinksDAOTest {
 
      //Act
      aDrink.insertData(idGuest, pkHouse,50);
-
-
-     //Assert
-     Assertions.assertThrows(SQLException.class, () -> {
      aDrink.insertData(idGuest, pkHouse,50);
-     });
 
      }
-
 
      @Test public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
 
      //Arrange
-     HouseDAO aHouse = new HouseDAOImpl();
-     GuestDAO aGuest = new GuestDAOImpl();
-     DrinksDAO aDrink = new DrinksDAOImpl();
+         HouseDAO aHouse = new MockHouseDAO();
+         GuestDAO aGuest = new MockGuestDAO();
+         DrinksDAO aDrink = new MockDrinksDAO();
      aHouse.deleteData("Namedeshauses");
      aHouse.insertData("Namedeshauses",200.0, 300.0);
      int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -125,7 +125,6 @@ public class DrinksDAOTest {
 
      //Act
      aDrink.insertData(idGuest, pkHouse,50);
-
 
      //Assert
      ArrayList<Drinks> listOfDrinks = new ArrayList<Drinks>();
@@ -138,9 +137,9 @@ public class DrinksDAOTest {
      @Test public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
      //Arrange
-     HouseDAO aHouse = new HouseDAOImpl();
-     GuestDAO aGuest = new GuestDAOImpl();
-     DrinksDAO aDrink = new DrinksDAOImpl();
+         HouseDAO aHouse = new MockHouseDAO();
+         GuestDAO aGuest = new MockGuestDAO();
+         DrinksDAO aDrink = new MockDrinksDAO();
      aHouse.deleteData("Namedeshauses");
      aHouse.insertData("Namedeshauses",200.0, 300.0);
      int idHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -157,7 +156,6 @@ public class DrinksDAOTest {
      //Assert
      assertEquals(newNightsCount, oldNightCount);
 
-
      }
-**/
+
 }

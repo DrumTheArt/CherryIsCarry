@@ -6,16 +6,15 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 
-        UtilClassTests.class
-        /**
-         * DrinksDAOTest.class,
+        UtilClassTests.class,
+        DrinksDAOTest.class,
         ExpenseDAOTest.class,
         FoodDAOTest.class,
         GuestDAOTest.class,
         HouseDAOTest.class,
         PrepaidDAOTest.class,
         StayDAOTest.class
-**/
+
 })
 
 public class RunAllTests {

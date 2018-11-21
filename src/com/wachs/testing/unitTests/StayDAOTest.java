@@ -1,15 +1,29 @@
 package com.wachs.testing.unitTests;
 
-class StayDAOTest {
+import com.wachs.main.businessLayer.Stay;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.dataBaseLayer.DAO.StayDAO;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import com.wachs.testing.mocks.MockStayDAO;
+import org.junit.Test;
 
-/**
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+public class StayDAOTest {
+
+
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -31,9 +45,9 @@ class StayDAOTest {
     public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -51,13 +65,13 @@ class StayDAOTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -68,23 +82,20 @@ class StayDAOTest {
         aStay.insertData(idGuest, pkHouse,50);
         aStay.deleteData(idGuest,pkHouse);
 
-        /**
         //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            aStay.findOneData(idGuest,pkHouse);
-        });
 
+        aStay.findOneData(idGuest, pkHouse);
 
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -94,13 +105,8 @@ class StayDAOTest {
         //Act
         aStay.insertData(idGuest, pkHouse,50);
 
-
-
         //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-           aStay.insertData(idGuest, pkHouse,50);
-        });
-
+        aStay.insertData(idGuest, pkHouse, 50);
 
     }
 
@@ -109,9 +115,9 @@ class StayDAOTest {
     public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -136,9 +142,9 @@ class StayDAOTest {
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        StayDAO aStay = new StayDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        StayDAO aStay = new MockStayDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -158,5 +164,5 @@ class StayDAOTest {
 
     }
 
-**/
+
 }

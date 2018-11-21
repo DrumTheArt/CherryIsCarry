@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 
 public class ExpenseDAOTest {
 
-
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
@@ -37,7 +36,7 @@ public class ExpenseDAOTest {
         double price_setted = 300.00;
 
         //Assert
-        assertEquals(price_expected,price_setted);
+        assertEquals(price_expected, price_setted, 0.0001);
 
     }
 
@@ -131,7 +130,7 @@ public class ExpenseDAOTest {
         double oldPrepaidAmount = aExpense.findOneData(idGuest,pkHouse).getREAL_price();
 
         //Assert
-        assertEquals(newPrepaidAmount, oldPrepaidAmount);
+        assertEquals(newPrepaidAmount, oldPrepaidAmount, 0.00001);
 
     }
 

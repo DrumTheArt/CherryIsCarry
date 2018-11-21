@@ -1,15 +1,32 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.Prepaid;
+import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.dataBaseLayer.DAO.PrepaidDAO;
+import com.wachs.testing.mocks.MockDrinksDAO;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import com.wachs.testing.mocks.MockPrepaidDAO;
+import org.junit.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+
 public class PrepaidDAOTest {
 
-    /**
+
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        PrepaidDAO aPrepaid = new MockPrepaidDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -31,9 +48,9 @@ public class PrepaidDAOTest {
     public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        PrepaidDAO aPrepaid = new MockPrepaidDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -51,13 +68,13 @@ public class PrepaidDAOTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        DrinksDAO aDrink = new DrinksDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        DrinksDAO aDrink = new MockDrinksDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -68,22 +85,19 @@ public class PrepaidDAOTest {
         aDrink.insertData(idGuest, pkHouse,50);
         aDrink.deleteData(idGuest,pkHouse);
 
-        /**
         //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            aDrink.findOneData(idGuest,pkHouse);
-        });
+        aDrink.findOneData(idGuest, pkHouse);
 
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        PrepaidDAO aPrepaid = new MockPrepaidDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -95,9 +109,7 @@ public class PrepaidDAOTest {
 
 
         //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            aPrepaid.insertData(idGuest, pkHouse,50.00);
-        });
+        aPrepaid.insertData(idGuest, pkHouse, 50.00);
 
     }
 
@@ -106,9 +118,9 @@ public class PrepaidDAOTest {
     public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        PrepaidDAO aPrepaid = new PrepaidDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        PrepaidDAO aPrepaid = new MockPrepaidDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -131,9 +143,9 @@ public class PrepaidDAOTest {
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        DrinksDAO aDrink = new DrinksDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        DrinksDAO aDrink = new MockDrinksDAO();
         aHouse.deleteData("NameDesHauses");
         aHouse.insertData("NameDesHauses",200.0, 300.0);
         int idHouse = aHouse.findOneData("NameDesHauses").getPK_id();
@@ -151,5 +163,5 @@ public class PrepaidDAOTest {
         assertEquals(newNightsCount, oldNightCount);
 
     }
-**/
+
 }

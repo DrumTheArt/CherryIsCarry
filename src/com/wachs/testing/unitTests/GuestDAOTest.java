@@ -1,14 +1,29 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.Guest;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.dataBaseLayer.DBValidation.IDbColumnValidator;
+import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import org.junit.Test;
+import org.sqlite.SQLiteException;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+
 public class GuestDAOTest {
 
-/**
     @Test
     public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException {
 
 
         //Arrange
-        GuestDAO toFindGuest = new GuestDAOImpl();
+        GuestDAO toFindGuest = new MockGuestDAO();
 
         //Act
         toFindGuest.deleteData("NeuerGast2", 1);
@@ -23,12 +38,12 @@ public class GuestDAOTest {
     public void testTwo_insertData_Values_Should_be_Equal_On_TXT_name_And_Id_house() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        GuestDAO toFindGuest = new GuestDAOImpl();
+        GuestDAO toFindGuest = new MockGuestDAO();
 
         //Act
         toFindGuest.deleteData("NeuerGast2", 1);
         toFindGuest.insertData(1, "NeuerGast2");
-        Guest toCompareGuest = (Guest) toFindGuest.findOneData("NeuerGast2", 1);
+        Guest toCompareGuest = toFindGuest.findOneData("NeuerGast2", 1);
         Guest oldGuest = new Guest("Neuergast2", 1);
 
 
@@ -43,13 +58,13 @@ public class GuestDAOTest {
     public void testTwo_insertData_Values_Should_be_Equal_ButNot_PKid() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        GuestDAO toFindGuest = new GuestDAOImpl();
+        GuestDAO toFindGuest = new MockGuestDAO();
 
         //Act
 
         toFindGuest.deleteData("NeuerGast2", 1);
         toFindGuest.insertData(1, "NeuerGast2");
-        Guest toCompareGuest = (Guest) toFindGuest.findOneData("NeuerGast2", 1);
+        Guest toCompareGuest = toFindGuest.findOneData("NeuerGast2", 1);
         Guest oldGuest = new Guest("NeuerGast2", 1);
 
 
@@ -58,36 +73,18 @@ public class GuestDAOTest {
 
     }
 
-    @Test
-    public void testReadAllData_Should_Be_same_Amount_as_Guestlist() throws SQLException, ClassNotFoundException {
-
-        //Arrange
-        GuestDAO daoObject = new GuestDAOImpl();
-        ArrayList<Guest> listGuests = daoObject.readAllData();
-
-        //Act
-        IDbColumnValidator countRows = new TblGuestColumnValidate();
-        int countGuestListObjects = ((ArrayList) listGuests).size();
-        System.out.println("Count objects: " + countGuestListObjects);
-        int countGuestDataBase = countRows.getCountRow();
-        System.out.println("Count DB-Tupel: " + countGuestDataBase);
-
-        //Assert
-        assertEquals(countGuestListObjects, countGuestDataBase);
-
-    }
 
     @Test
     public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        GuestDAO daoObject = new GuestDAOImpl();
+        GuestDAO daoObject = new MockGuestDAO();
         ArrayList<Guest> listGuests = daoObject.readAllData();
 
         //Act
         IDbColumnValidator countRows = new TblGuestColumnValidate();
         listGuests.remove(0);
-        int countGuestListObjects = ((ArrayList) listGuests).size();
+        int countGuestListObjects = listGuests.size();
         int countGuestDataBase = countRows.getCountRow();
 
         //Assert
@@ -99,7 +96,7 @@ public class GuestDAOTest {
     public void testUpdateData() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        GuestDAO daoObject = new GuestDAOImpl();
+        GuestDAO daoObject = new MockGuestDAO();
         daoObject.deleteData("Robert", 1);
         daoObject.deleteData("Elenaaasdasdasda", 1);
         daoObject.insertData(1, "Elenaaasdasdasda");
@@ -119,47 +116,37 @@ public class GuestDAOTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
-    GuestDAO testing = new GuestDAOImpl();
+        GuestDAO testing = new MockGuestDAO();
 
-
-        Assertions.assertThrows(SQLException.class, () -> {
-    Guest testDoNotConvertIfStringIsAllright = (Guest) testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123", 1);
-        });
-
+        testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123", 1);
 
     }
 
-    @Test
-    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, SQLiteException, ClassNotFoundException {
+    @Test(expected = SQLiteException.class)
+    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException {
 
-    GuestDAO testing = new GuestDAOImpl();
+        GuestDAO testing = new MockGuestDAO();
     testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
     testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
 
-        Assertions.assertThrows(SQLiteException.class, () -> {
     testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
-        });
 
     }
 
-    @Test
-    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, SQLiteException, ClassNotFoundException {
+    @Test(expected = SQLException.class)
+    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException {
 
-    GuestDAO testing = new GuestDAOImpl();
+        GuestDAO testing = new MockGuestDAO();
     testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
     testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
-    Guest firstTry = (Guest) testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+        Guest firstTry = testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
 
         assertNotNull(firstTry);
-
     testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
-
-        Assertions.assertThrows(SQLException.class, () -> {
     testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
-        });
 
     }
 
@@ -167,12 +154,12 @@ public class GuestDAOTest {
     public void testFindAllDataWhereHouseID() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
         aHouse.deleteData("Test2222");
         aHouse.insertData("Test2222", 800.00, 600.00);
         int id_house = aHouse.findOneData("Test2222").getPK_id();
 
-        GuestDAO aGuest = new GuestDAOImpl();
+        GuestDAO aGuest = new MockGuestDAO();
         aGuest.insertData(id_house, "1Person");
         aGuest.insertData(id_house, "2Person");
         aGuest.insertData(id_house, "3Person");
@@ -186,6 +173,6 @@ public class GuestDAOTest {
         assertEquals(countRelevantGuests,4);
 
     }
- **/
+
 
 }

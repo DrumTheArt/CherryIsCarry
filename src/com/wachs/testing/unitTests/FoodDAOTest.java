@@ -1,15 +1,31 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.Drinks;
+import com.wachs.main.dataBaseLayer.DAO.FoodDAO;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.testing.mocks.MockFoodDAO;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import org.junit.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+
+
 public class FoodDAOTest {
 
-    /**
+
     @Test
     public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -31,9 +47,9 @@ public class FoodDAOTest {
     public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -51,13 +67,13 @@ public class FoodDAOTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -67,24 +83,18 @@ public class FoodDAOTest {
         //Act
         aFood.insertData(idGuest, pkHouse,50);
         aFood.deleteData(idGuest,pkHouse);
-
-        /**
-        //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            aFood.findOneData(idGuest,pkHouse);
-        });
-
+        aFood.findOneData(idGuest, pkHouse);
 
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -93,15 +103,7 @@ public class FoodDAOTest {
 
         //Act
         aFood.insertData(idGuest, pkHouse,50);
-
-        //Assert
-
-
-
-        Assertions.assertThrows(SQLException.class, () -> {
-            aFood.insertData(idGuest, pkHouse,50);
-        });
-
+        aFood.insertData(idGuest, pkHouse, 50);
 
     }
 
@@ -110,9 +112,9 @@ public class FoodDAOTest {
     public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -122,7 +124,6 @@ public class FoodDAOTest {
         //Act
         aFood.insertData(idGuest, pkHouse,50);
 
-/**
         //Assert
         ArrayList<Drinks> listOfDrinks = new ArrayList<Drinks>();
         listOfDrinks = aFood.readAllData();
@@ -135,9 +136,9 @@ public class FoodDAOTest {
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO aHouse = new HouseDAOImpl();
-        GuestDAO aGuest = new GuestDAOImpl();
-        FoodDAO aFood = new FoodDAOImpl();
+        HouseDAO aHouse = new MockHouseDAO();
+        GuestDAO aGuest = new MockGuestDAO();
+        FoodDAO aFood = new MockFoodDAO();
         aHouse.deleteData("Namedeshauses");
         aHouse.insertData("Namedeshauses",200.0, 300.0);
         int idHouse = aHouse.findOneData("Namedeshauses").getPK_id();
@@ -156,5 +157,5 @@ public class FoodDAOTest {
 
 
     }
-     **/
+
 }

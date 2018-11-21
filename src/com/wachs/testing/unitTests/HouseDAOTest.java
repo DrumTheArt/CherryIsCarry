@@ -1,14 +1,30 @@
 package com.wachs.testing.unitTests;
 
+import com.wachs.main.businessLayer.House;
+import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.dataBaseLayer.DBValidation.IDbColumnValidator;
+import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
+import com.wachs.testing.mocks.MockGuestDAO;
+import com.wachs.testing.mocks.MockHouseDAO;
+import org.junit.Test;
+import org.sqlite.SQLiteException;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+
 public class HouseDAOTest {
 
-    /**
+
     @Test
     public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException {
 
 
         //Arrange
-        HouseDAO toFindGuest = new HouseDAOImpl();
+        HouseDAO toFindGuest = new MockHouseDAO();
 
         //Act
         toFindGuest.deleteData("NeuesHaus");
@@ -20,11 +36,11 @@ public class HouseDAOTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testTwo_Equals_HouseObjects_Should_Not_Be_Allowed_toSave() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO toFindHouse = new HouseDAOImpl();
+        HouseDAO toFindHouse = new MockHouseDAO();
 
         //Act
 
@@ -32,42 +48,22 @@ public class HouseDAOTest {
         toFindHouse.insertData("NeuesHaus", 300., 200.0);
 
         //Assert
-        Assertions.assertThrows(SQLException.class, () -> {
-            toFindHouse.insertData("NeuesHaus", 300.0, 200.0);
-        });
 
+        toFindHouse.insertData("NeuesHaus", 300.0, 200.0);
     }
 
-    @Test
-    public void testReadAllData_Should_Be_same_Amount_as_Houselist() throws SQLException, ClassNotFoundException {
-
-        //Arrange
-        HouseDAO daoObject = new HouseDAOImpl();
-        ArrayList<House> listHouse = daoObject.readAllData();
-
-        //Act
-        IDbColumnValidator countRows = new TblHouseColumnValidate();
-        int countHouseListObjects = ((ArrayList) listHouse).size();
-        System.out.println("Count objects: " + countHouseListObjects);
-        int countHouseDataBase = countRows.getCountRow();
-        System.out.println("Count DB-Tupel: " + countHouseDataBase);
-
-        //Assert
-        assertEquals(countHouseListObjects, countHouseDataBase);
-
-    }
 
     @Test
     public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        GuestDAO daoObject = new GuestDAOImpl();
+        GuestDAO daoObject = new MockGuestDAO();
         ArrayList<House> listHouse = daoObject.readAllData();
 
         //Act
         IDbColumnValidator countRows = new TblGuestColumnValidate();
         listHouse.remove(0);
-        int countGuestListObjects = ((ArrayList) listHouse).size();
+        int countGuestListObjects = listHouse.size();
         int countGuestDataBase = countRows.getCountRow();
 
         //Assert
@@ -79,7 +75,7 @@ public class HouseDAOTest {
     public void testUpdateData() throws SQLException, ClassNotFoundException {
 
         //Arrange
-        HouseDAO daoObject = new HouseDAOImpl();
+        HouseDAO daoObject = new MockHouseDAO();
         daoObject.deleteData("NeuesHaus");
         daoObject.deleteData("NeuesHaus2");
         daoObject.insertData("NeuesHaus2", 300.0, 200.0);
@@ -88,7 +84,7 @@ public class HouseDAOTest {
         //Act
         String oldName = daoObject.findOneData("NeuesHaus2").getTXT_name();
         int oldPkId = daoObject.findOneData("NeuesHaus2").getPK_id();
-        daoObject.updateData(oldPkId, "NeuesHaus");
+        daoObject.updateData(oldPkId, "NeuesHaus", 200.00, 300.00);
         String newName = daoObject.findOneData("NeuesHaus").getTXT_name();
         int newPkId = daoObject.findOneData("NeuesHaus").getPK_id();
 
@@ -98,49 +94,39 @@ public class HouseDAOTest {
 
     }
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
 
-    HouseDAO testing = new HouseDAOImpl();
+        HouseDAO testing = new MockHouseDAO();
 
-
-
-        Assertions.assertThrows(SQLException.class, () -> {
-    House testDoNotConvertIfStringIsAllright = (House) testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123");
-        });
-
+        House testDoNotConvertIfStringIsAllright = testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123");
 
     }
 
 
-    @Test
-    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, SQLiteException, ClassNotFoundException {
+    @Test(expected = SQLiteException.class)
+    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException {
 
-    HouseDAO testing = new HouseDAOImpl();
+        HouseDAO testing = new MockHouseDAO();
     testing.deleteData("NeuesHouse22222323");
     testing.insertData("NeuesHouse22222323", 300.0, 200.0);
 
-        Assertions.assertThrows(SQLiteException.class, () -> {
     testing.insertData("NeuesHouse22222323", 300.0, 200.0);
-        });
     }
 
-    @Test
-    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, SQLiteException, ClassNotFoundException {
 
-    HouseDAO testing = new HouseDAOImpl();
+    @Test(expected = SQLException.class)
+    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException {
+
+        HouseDAO testing = new MockHouseDAO();
     testing.deleteData("NeuesHaus");
     testing.insertData("NeuesHaus", 300.00, 200.00);
-    House firstTry = (House) testing.findOneData("NeuesHaus");
+        House firstTry = testing.findOneData("NeuesHaus");
 
         assertNotNull(firstTry);
-
     testing.deleteData("NeuesHaus");
-
-        Assertions.assertThrows(SQLException.class, () -> {
     testing.findOneData("NeuesHaus");
-        });
 
     }
-    **/
+
 }

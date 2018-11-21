@@ -3,7 +3,10 @@ package com.wachs.main.dataBaseLayer.DDL;
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,7 +15,7 @@ public class DropAndCreateTableDB implements ITableDBScript {
     private Statement st;
     private StringBuffer queryCreateTableCommands;
 
-    public DropAndCreateTableDB() throws SQLException, IOException, ClassNotFoundException {
+    public DropAndCreateTableDB() {
 
         queryCreateTableCommands = new StringBuffer();
     }
@@ -47,7 +50,7 @@ public class DropAndCreateTableDB implements ITableDBScript {
 
     private String getSQLScriptFilePath() {
         String absPath = new File("").getAbsolutePath();
-        return absPath + "//DataBase/CREATE_TABLE.sql";
+        return absPath + "//sources//database/CREATE_TABLE.sql";
     }
 
 }

@@ -1,13 +1,15 @@
 package com.wachs.main.dataBaseLayer.DAO;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay.*;
-import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 import com.wachs.main.businessLayer.Drinks;
+import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorDrinks;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay.*;
 
 public class DrinksDAOImpl implements DrinksDAO {
 
@@ -70,7 +72,7 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         statement = DbConnection.getConnection().createStatement();
 
-        statement.executeUpdate(((QueryGeneratorDrinks) newQuery).queryUpdateData(id_guest, id_house, newNights));
+        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newNights));
 
         statement.close();
         DbConnection.closeConnection();
@@ -99,7 +101,6 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         statement.close();
         DbConnection.closeConnection();
-
     }
 
 }

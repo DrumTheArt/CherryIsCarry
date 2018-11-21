@@ -1,9 +1,13 @@
-package com.wachs.main.dataBaseLayer.DDL;
+package com.wachs.testing.dbTestConfig;
 
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
+import com.wachs.main.dataBaseLayer.DDL.ITableDBScript;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,7 +16,7 @@ public class InsertValuesDBTestData implements ITableDBScript {
     private Statement st;
     private StringBuffer queryInsertValueCommands;
 
-    public InsertValuesDBTestData() throws SQLException, IOException, ClassNotFoundException {
+    public InsertValuesDBTestData() {
 
         queryInsertValueCommands = new StringBuffer();
     }
@@ -48,7 +52,7 @@ public class InsertValuesDBTestData implements ITableDBScript {
 
     private String getSQLScriptFilePath() {
         String absPath = new File("").getAbsolutePath();
-        return absPath + "//DataBase/INSERT_INTO.sql";
+        return absPath + "//sources//testdatabase/INSERT_INTO.sql";
     }
 
 }

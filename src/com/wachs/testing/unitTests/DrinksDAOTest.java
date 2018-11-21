@@ -4,11 +4,15 @@ import com.wachs.main.businessLayer.Drinks;
 import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
 import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
 import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.dataBaseLayer.DDL.DropAndCreateTableDB;
+import com.wachs.main.dataBaseLayer.DDL.ITableDBScript;
+import com.wachs.testing.dbTestConfig.InsertValuesDBTestData;
 import com.wachs.testing.mocks.MockDrinksDAO;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,12 +21,20 @@ import static org.junit.Assert.*;
 public class DrinksDAOTest {
 
 
-    public void setUp() {
+    public void setUp() throws SQLException, IOException, ClassNotFoundException {
+
+        ITableDBScript createTable = new DropAndCreateTableDB();
+        createTable.executeQuery();
+
+        ITableDBScript insertTestValuesForDb = new InsertValuesDBTestData();
+        insertTestValuesForDb.executeQuery();
 
      }
 
-    public void tearDown() {
+    public void tearDown() throws SQLException, IOException, ClassNotFoundException {
 
+        ITableDBScript createTable = new DropAndCreateTableDB();
+        createTable.executeQuery();
      }
 
     @Test

@@ -1,5 +1,7 @@
 package com.wachs.main.dataBaseLayer.DDL;
 
+import com.wachs.testing.dbTestConfig.InsertValuesDBTestData;
+
 import java.io.IOException;
 import java.sql.SQLException;
 

@@ -9,6 +9,7 @@ import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 public class ExpenseDAOTest {
 
     @Test
-    public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
+    public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -41,7 +42,7 @@ public class ExpenseDAOTest {
     }
 
     @Test
-    public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
+    public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -64,7 +65,7 @@ public class ExpenseDAOTest {
     }
 
     @Test(expected = SQLException.class)
-    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
+    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -85,7 +86,7 @@ public class ExpenseDAOTest {
     }
 
     @Test
-    public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
+    public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -100,7 +101,6 @@ public class ExpenseDAOTest {
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
 
-
         //Assert
         ArrayList<Expense> listOfDrinks = new ArrayList<Expense>();
         listOfDrinks = aExpense.readAllData();
@@ -109,7 +109,7 @@ public class ExpenseDAOTest {
     }
 
     @Test
-    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();

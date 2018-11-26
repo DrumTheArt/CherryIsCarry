@@ -5,6 +5,7 @@ import com.wachs.main.viewModelLayer.InitializingComboBoxModel;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class MainFrame extends JFrame {
@@ -37,7 +38,7 @@ public class MainFrame extends JFrame {
     private JButton btnEditGuest;
 
 
-    MainFrame() throws SQLException, ClassNotFoundException {
+    MainFrame() throws SQLException, ClassNotFoundException, IOException {
 
         frame = new JFrame();
 
@@ -220,7 +221,7 @@ public class MainFrame extends JFrame {
 
     }
 
-    private void initializingHouseJComboBox() throws SQLException, ClassNotFoundException {
+    private void initializingHouseJComboBox() throws SQLException, ClassNotFoundException, IOException {
 
         cbSelectedHouse = new InitializingComboBoxModel().getAllHouses();
         cbSelectedHouse.setPreferredSize(new Dimension(150,30));

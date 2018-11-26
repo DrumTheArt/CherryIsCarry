@@ -1,13 +1,17 @@
 package com.wachs.main.dataBaseLayer.DAO;
 
+import com.wachs.main.businessLayer.Prepaid;
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid;
-import com.wachs.main.businessLayer.Prepaid;
+import com.wachs.main.dataBaseLayer.Util.ApplicationLogger;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid.*;
 
 public class PrepaidDAOImpl implements PrepaidDAO {
@@ -23,11 +27,14 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     }
 
     @Override
-    public Prepaid findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public Prepaid findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         statement = DbConnection.getConnection().createStatement();
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
         ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
 
         int FK_id = result.getInt(1);
         double prepaid = result.getDouble(2);
@@ -44,11 +51,14 @@ public class PrepaidDAOImpl implements PrepaidDAO {
         return aPrepaid;
     }
 
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
         statement = DbConnection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query.queryReadAllData());
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryReadAllData());
 
         while (result.next()) {
             allDataList.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -63,12 +73,15 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, double prepaid) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, double prepaid) throws SQLException, ClassNotFoundException, IOException {
 
-        QueryGeneratorPrepaid newQuery = new QueryGeneratorPrepaid();
+        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
         statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryInsertData(id_guest, id_house, prepaid));
+        statement.executeUpdate(query.queryInsertData(id_guest, id_house, prepaid));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, prepaid));
 
         statement.close();
         DbConnection.closeConnection();
@@ -76,13 +89,16 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double newPrepaid) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, double newPrepaid) throws SQLException, ClassNotFoundException, IOException {
 
-        QueryGeneratorPrepaid newQuery = new QueryGeneratorPrepaid();
+        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
         statement = DbConnection.getConnection().createStatement();
 
-        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newPrepaid));
+        statement.executeUpdate(query.queryUpdateData(id_guest, id_house, newPrepaid));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, newPrepaid));
 
         statement.close();
         DbConnection.closeConnection();
@@ -90,16 +106,18 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
-        QueryGeneratorExpense newQuery = new QueryGeneratorExpense();
+        QueryGeneratorExpense query = new QueryGeneratorExpense();
 
         statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
+        statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
 
         statement.close();
         DbConnection.closeConnection();
     }
-
 
 }

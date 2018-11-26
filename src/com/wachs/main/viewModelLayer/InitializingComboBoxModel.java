@@ -3,11 +3,11 @@ package com.wachs.main.viewModelLayer;
 import com.wachs.main.businessLayer.House;
 import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
 import com.wachs.main.dataBaseLayer.DAO.HouseDAOImpl;
-import com.wachs.main.dataBaseLayer.DAO.IDAO;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
     private JComboBox allHouses;
     private JComboBox allRelativeGuests;
 
-    private String[] getAllHousesComboBoxModel() throws SQLException, ClassNotFoundException {
+    private String[] getAllHousesComboBoxModel() throws SQLException, ClassNotFoundException, IOException {
 
         HouseDAO aHouse = new HouseDAOImpl();
         ArrayList<House> listOfHouse;
@@ -34,7 +34,7 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
         return allHousesComboBoxModel;
     }
 
-    private String[] getAllGuestsComboBoxModel() throws SQLException, ClassNotFoundException {
+    private String[] getAllGuestsComboBoxModel() {
 
 
         HouseDAO aHouse = new HouseDAOImpl();
@@ -50,6 +50,8 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
             e1.printStackTrace();
         } catch (ClassNotFoundException e1) {
             e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 /**
         ArrayList<Guest> allRelativeGuests =
@@ -70,14 +72,14 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
     }
 
 
-    public JComboBox getAllHouses() throws SQLException, ClassNotFoundException {
+    public JComboBox getAllHouses() throws SQLException, ClassNotFoundException, IOException {
 
         allHouses = new JComboBox(getAllHousesComboBoxModel());
 
         return allHouses;
     }
 
-    public JComboBox getAllGuests() throws SQLException, ClassNotFoundException {
+    public JComboBox getAllGuests() {
 
         allRelativeGuests = new JComboBox(getAllGuestsComboBoxModel());
 
@@ -87,13 +89,7 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
 
     public void actionPerformed(ActionEvent e) {
 
-        try {
-            allRelativeGuests.setSelectedItem(this.getAllGuestsComboBoxModel());
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        } catch (ClassNotFoundException e1) {
-            e1.printStackTrace();
-        }
+        allRelativeGuests.setSelectedItem(this.getAllGuestsComboBoxModel());
     }
 
 }

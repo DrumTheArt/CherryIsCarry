@@ -11,6 +11,7 @@ import com.wachs.testing.mocks.MockHouseDAO;
 import com.wachs.testing.mocks.MockPrepaidDAO;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class PrepaidDAOTest {
 
 
     @Test
-    public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
+    public void testDataBaseCall_Should_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -45,7 +46,7 @@ public class PrepaidDAOTest {
 
 
     @Test
-    public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException {
+    public void testDataBaseCall_ShouldNot_Be_Equals_To_InsertStatement() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -69,7 +70,7 @@ public class PrepaidDAOTest {
 
 
     @Test(expected = SQLException.class)
-    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException {
+    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -92,7 +93,7 @@ public class PrepaidDAOTest {
 
 
     @Test(expected = SQLException.class)
-    public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException {
+    public void testConstraints_On_DataBase_ShouldWork_When_Same_IdGuest_AND_IdHouse() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -115,7 +116,7 @@ public class PrepaidDAOTest {
 
 
     @Test
-    public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException {
+    public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -140,7 +141,7 @@ public class PrepaidDAOTest {
 
 
     @Test
-    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();

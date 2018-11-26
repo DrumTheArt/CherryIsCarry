@@ -1,18 +1,20 @@
 package com.wachs.main.dataBaseLayer.DAO;
 
 import com.wachs.main.businessLayer.Food;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface FoodDAO {
 
-    Food findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException;
+    Food findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException;
 
-    ArrayList readAllData() throws SQLException, ClassNotFoundException;
+    ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException;
 
-    void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException;
+    void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException, IOException;
 
-    void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException;
+    void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException;
 
-    void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException;
+    void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException, IOException;
 }

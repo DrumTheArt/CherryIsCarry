@@ -28,6 +28,7 @@ public class DatabaseTests {
 
     @Test
     public void testDatabaseConnection() throws SQLException, ClassNotFoundException {
+
         Connection dbConnection = DbConnection.getConnection();
         assertNotNull(dbConnection);
     }
@@ -43,6 +44,7 @@ public class DatabaseTests {
 
     @Test
     public void testIsColumnOrderValidate_TblExpense() throws ClassNotFoundException, SQLException{
+
         IDbColumnValidator isValidate = new TblExpenseColumnValidate();
         boolean IsValidate = ((TblExpenseColumnValidate) isValidate).getIsColumnTitleOrderValidate();
 
@@ -51,6 +53,7 @@ public class DatabaseTests {
 
     @Test
     public void testIsColumnOrderValidate_TblDrinks() throws ClassNotFoundException, SQLException {
+
         IDbColumnValidator isValidate = new TblStayColumnValidate();
         boolean IsValidate = ((TblStayColumnValidate) isValidate).getIsColumnTitleOrderValidate();
 
@@ -59,6 +62,7 @@ public class DatabaseTests {
 
     @Test
     public void testIsColumnOrderValidate_TblFood() throws ClassNotFoundException, SQLException {
+
         IDbColumnValidator isValidate = new TblFoodColumnValidate();
         boolean IsValidate = ((TblFoodColumnValidate) isValidate).getIsColumnTitleOrderValidate();
 
@@ -67,6 +71,7 @@ public class DatabaseTests {
 
     @Test
     public void testIsColumnOrderValidate_TblHouse() throws ClassNotFoundException, SQLException {
+
         IDbColumnValidator isValidate = new TblHouseColumnValidate();
         boolean IsValidate = ((TblHouseColumnValidate) isValidate).getIsColumnTitleOrderValidate();
 
@@ -75,6 +80,7 @@ public class DatabaseTests {
 
     @Test
     public void testIsColumnOrderValidate_TblStay() throws ClassNotFoundException, SQLException {
+
         IDbColumnValidator isValidate = new TblStayColumnValidate();
         boolean IsValidate = ((TblStayColumnValidate) isValidate).getIsColumnTitleOrderValidate();
 
@@ -83,6 +89,7 @@ public class DatabaseTests {
 
     @Test
     public void TestIsColumnOrderValidate_TblPrepaid() throws ClassNotFoundException, SQLException {
+
         IDbColumnValidator isValidate = new TblPrepaidColumnValidate();
         boolean IsValidate = isValidate.getIsColumnTitleOrderValidate();
 

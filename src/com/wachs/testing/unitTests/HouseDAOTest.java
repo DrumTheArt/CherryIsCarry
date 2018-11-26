@@ -10,6 +10,7 @@ import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 import org.sqlite.SQLiteException;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class HouseDAOTest {
 
 
     @Test
-    public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException {
+    public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException, IOException {
 
 
         //Arrange
@@ -37,7 +38,7 @@ public class HouseDAOTest {
 
 
     @Test(expected = SQLException.class)
-    public void testTwo_Equals_HouseObjects_Should_Not_Be_Allowed_toSave() throws SQLException, ClassNotFoundException {
+    public void testTwo_Equals_HouseObjects_Should_Not_Be_Allowed_toSave() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO toFindHouse = new MockHouseDAO();
@@ -54,7 +55,7 @@ public class HouseDAOTest {
 
 
     @Test
-    public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException {
+    public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         GuestDAO daoObject = new MockGuestDAO();
@@ -72,7 +73,7 @@ public class HouseDAOTest {
     }
 
     @Test
-    public void testUpdateData() throws SQLException, ClassNotFoundException {
+    public void testUpdateData() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO daoObject = new MockHouseDAO();
@@ -95,38 +96,36 @@ public class HouseDAOTest {
     }
 
     @Test(expected = SQLException.class)
-    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException, IOException {
 
         HouseDAO testing = new MockHouseDAO();
 
         House testDoNotConvertIfStringIsAllright = testing.findOneData("ThisStringWillBeNeverInTheDataBaseISwearForeverForever1233213123123123");
-
     }
 
 
     @Test(expected = SQLiteException.class)
-    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException {
+    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException, IOException {
 
         HouseDAO testing = new MockHouseDAO();
-    testing.deleteData("NeuesHouse22222323");
-    testing.insertData("NeuesHouse22222323", 300.0, 200.0);
+        testing.deleteData("NeuesHouse22222323");
+        testing.insertData("NeuesHouse22222323", 300.0, 200.0);
 
-    testing.insertData("NeuesHouse22222323", 300.0, 200.0);
+        testing.insertData("NeuesHouse22222323", 300.0, 200.0);
     }
 
 
     @Test(expected = SQLException.class)
-    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException, IOException {
 
         HouseDAO testing = new MockHouseDAO();
-    testing.deleteData("NeuesHaus");
-    testing.insertData("NeuesHaus", 300.00, 200.00);
+        testing.deleteData("NeuesHaus");
+        testing.insertData("NeuesHaus", 300.00, 200.00);
         House firstTry = testing.findOneData("NeuesHaus");
 
         assertNotNull(firstTry);
-    testing.deleteData("NeuesHaus");
-    testing.findOneData("NeuesHaus");
-
+        testing.deleteData("NeuesHaus");
+        testing.findOneData("NeuesHaus");
     }
 
 }

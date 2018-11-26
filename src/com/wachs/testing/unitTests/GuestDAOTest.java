@@ -10,6 +10,7 @@ import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 import org.sqlite.SQLiteException;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
 public class GuestDAOTest {
 
     @Test
-    public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException {
+    public void testInsertData_Should_be_NotNull() throws SQLException, ClassNotFoundException, IOException {
 
 
         //Arrange
@@ -35,7 +36,7 @@ public class GuestDAOTest {
     }
 
     @Test
-    public void testTwo_insertData_Values_Should_be_Equal_On_TXT_name_And_Id_house() throws SQLException, ClassNotFoundException {
+    public void testTwo_insertData_Values_Should_be_Equal_On_TXT_name_And_Id_house() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         GuestDAO toFindGuest = new MockGuestDAO();
@@ -55,7 +56,7 @@ public class GuestDAOTest {
     }
 
     @Test
-    public void testTwo_insertData_Values_Should_be_Equal_ButNot_PKid() throws SQLException, ClassNotFoundException {
+    public void testTwo_insertData_Values_Should_be_Equal_ButNot_PKid() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         GuestDAO toFindGuest = new MockGuestDAO();
@@ -75,7 +76,7 @@ public class GuestDAOTest {
 
 
     @Test
-    public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException {
+    public void testReadAllData_Should_BeNot_Same_Amount_when_Dropping_One_Element() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         GuestDAO daoObject = new MockGuestDAO();
@@ -93,7 +94,7 @@ public class GuestDAOTest {
     }
 
     @Test
-    public void testUpdateData() throws SQLException, ClassNotFoundException {
+    public void testUpdateData() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         GuestDAO daoObject = new MockGuestDAO();
@@ -117,7 +118,7 @@ public class GuestDAOTest {
 
 
     @Test(expected = SQLException.class)
-    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException, IOException {
 
         GuestDAO testing = new MockGuestDAO();
 
@@ -126,32 +127,31 @@ public class GuestDAOTest {
     }
 
     @Test(expected = SQLiteException.class)
-    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException {
+    public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException, IOException {
 
         GuestDAO testing = new MockGuestDAO();
-    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
-    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
-
-    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+        testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+        testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+        testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
 
     }
 
     @Test(expected = SQLException.class)
-    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException {
+    public void testDeleteData_Should_be_Deleting_A_DatabaseObject() throws SQLException, ClassNotFoundException, IOException {
 
         GuestDAO testing = new MockGuestDAO();
-    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
-    testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
+        testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+        testing.insertData(1, "Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd");
         Guest firstTry = testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
 
         assertNotNull(firstTry);
-    testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
-    testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd",1);
+        testing.deleteData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
+        testing.findOneData("Hannnnnnnnnnnnaaaaahhhhhhhhhdhdhd", 1);
 
     }
 
     @Test
-    public void testFindAllDataWhereHouseID() throws SQLException, ClassNotFoundException {
+    public void testFindAllDataWhereHouseID() throws SQLException, ClassNotFoundException, IOException {
 
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
@@ -173,6 +173,5 @@ public class GuestDAOTest {
         assertEquals(countRelevantGuests,4);
 
     }
-
 
 }

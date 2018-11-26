@@ -1,10 +1,12 @@
 package com.wachs.main.dataBaseLayer.DAO;
 
+import com.wachs.main.businessLayer.House;
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorHouse;
+import com.wachs.main.dataBaseLayer.Util.ApplicationLogger;
 import com.wachs.main.dataBaseLayer.Util.ConverterStringForDataBase;
-import com.wachs.main.businessLayer.House;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,15 +30,17 @@ public class HouseDAOImpl implements HouseDAO {
     }
 
     @Override
-    public House findOneData(String name) throws SQLException, ClassNotFoundException {
+    public House findOneData(String name) throws SQLException, ClassNotFoundException, IOException {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
 
-
         statement = DbConnection.getConnection().createStatement();
         QueryGeneratorHouse query = new QueryGeneratorHouse();
         ResultSet result = statement.executeQuery(query.queryFindOneData(name));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryFindOneData(name));
 
         //Get db-attributes
         int pk_id = result.getInt(1);
@@ -59,11 +63,14 @@ public class HouseDAOImpl implements HouseDAO {
 
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
         statement = DbConnection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query.queryReadAllData());
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryReadAllData());
 
         while (result.next()) {
             allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
@@ -75,43 +82,48 @@ public class HouseDAOImpl implements HouseDAO {
         DbConnection.closeConnection();
 
         return allDataList;
-
     }
 
     @Override
-    public void insertData(String name, double price, double deposite) throws SQLException, ClassNotFoundException {
+    public void insertData(String name, double price, double deposite) throws SQLException, ClassNotFoundException, IOException {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
 
-        QueryGeneratorHouse newQuery = new QueryGeneratorHouse();
+        QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryInsertData(name, price, deposite));
+        statement.executeUpdate(query.queryInsertData(name, price, deposite));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryInsertData(name, price, deposite));
 
         statement.close();
         DbConnection.closeConnection();
     }
 
     @Override
-    public void updateData(int oldId, String newName, double newPrice, double newDeposite) throws SQLException, ClassNotFoundException {
+    public void updateData(int oldId, String newName, double newPrice, double newDeposite) throws SQLException, ClassNotFoundException, IOException {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
         newName = convertString.convertString(newName);
 
-        QueryGeneratorHouse newQuery = new QueryGeneratorHouse();
+        QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         statement = DbConnection.getConnection().createStatement();
 
-        statement.executeUpdate(newQuery.queryUpdateData(oldId, newName, newPrice, newDeposite));
+        statement.executeUpdate(query.queryUpdateData(oldId, newName, newPrice, newDeposite));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryUpdateData(oldId, newName, newPrice, newDeposite));
 
         statement.close();
         DbConnection.closeConnection();
     }
 
     @Override
-    public void deleteData(String name) throws SQLException, ClassNotFoundException {
+    public void deleteData(String name) throws SQLException, ClassNotFoundException, IOException {
 
 
         //Because every names starts with a Capital, Rest lowerCases
@@ -121,14 +133,16 @@ public class HouseDAOImpl implements HouseDAO {
 
         name = firstLetter + lastLetters;
 
-        QueryGeneratorHouse newQuery = new QueryGeneratorHouse();
+        QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryDeleteData(name));
+        statement.executeUpdate(query.queryDeleteData(name));
+
+        //Log the query
+        ApplicationLogger.loggingQueries(query.queryDeleteData(name));
 
         statement.close();
         DbConnection.closeConnection();
-
     }
 
 }

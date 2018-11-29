@@ -71,7 +71,6 @@ public class InitializingComboBoxModel extends JComboBox implements ActionListen
         return null;
     }
 
-
     public JComboBox getAllHouses() throws SQLException, ClassNotFoundException, IOException {
 
         allHouses = new JComboBox(getAllHousesComboBoxModel());

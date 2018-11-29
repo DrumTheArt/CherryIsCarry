@@ -17,7 +17,8 @@ public class NewGUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("NewGUI.fxml"));
         primaryStage.setTitle("CherryIsCarry");
-        primaryStage.setScene(new Scene(root, 1500, 700));
+        primaryStage.setScene(new Scene(root, 1400, 900));
+
         primaryStage.show();
     }
 

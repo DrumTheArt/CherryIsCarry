@@ -1,0 +1,9 @@
+Nov. 26, 2018 9:42:06 NACHM. com.wachs.main.dataBaseLayer.Util.ApplicationLogger logging
+INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_guest = 1 AND ID_house = 1
+Nov. 26, 2018 9:44:01 NACHM. com.wachs.main.dataBaseLayer.Util.ApplicationLogger loggingQueries
+INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_guest = 1 AND ID_house = 1
+[2018-11-26 21:47:47] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_guest = 1 AND ID_house = 1 
+[2018-11-26 21:48:39] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_guest = 1 AND ID_house = 1[2018-11-26 21:49:06] [INFO   ] 
+[2018-11-29 14:59:01] [INFORMATION] SELECT * FROM TBL_HOUSE 
+[2018-11-29 15:52:21] [INFORMATION] SELECT * FROM TBL_HOUSE 
+[2018-11-29 15:52:27] [INFORMATION] SELECT * FROM TBL_HOUSE 

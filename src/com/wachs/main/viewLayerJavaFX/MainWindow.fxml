@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane minHeight="600.0" minWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.wachs.main.viewLayerJavaFX.MainWindow">
+<AnchorPane minHeight="600.0" minWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wachs.main.viewLayerJavaFX.MainWindow">
     <children>
-        <AnchorPane prefHeight="242.0" prefWidth="413.0" style="-fx-background-color: #3D4956;"/>
-        <AnchorPane layoutY="247.0" prefHeight="903.0" prefWidth="413.0" style="-fx-background-color: #3D4956;"/>
+        <AnchorPane prefHeight="242.0" prefWidth="413.0" style="-fx-background-color: #3D4956;">
+            <children>
+                <!-- ScrollPane for Projects!-->
+                <ScrollPane prefHeight="242.0" prefWidth="413.0">
+                    <content>
+
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="247.0" prefHeight="903.0" prefWidth="413.0" style="-fx-background-color: #3D4956;">
+            <children>
+                <!-- ScrollPane for Guests!-->
+                <ScrollPane prefHeight="903.0" prefWidth="413.0">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
         <AnchorPane layoutX="417.0" prefHeight="775.0" prefWidth="1435.0" style="-fx-background-color: #3D4956;">
             <children>
 
@@ -29,16 +49,19 @@
 
                     </rowConstraints>
                     <children>
+                        <!-- Button for adding new GuestData!-->
                         <ImageView fitHeight="68.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../../../sources/others/add.png"/>
                             </image>
+                            <!-- Button for deleting Guest!-->
                         </ImageView>
                         <ImageView fitHeight="67.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true"
                                    GridPane.columnIndex="1">
                             <image>
                                 <Image url="@../../../../../sources/others/delete.png"/>
                             </image>
+                            <!-- Button for editing GuestData!-->
                         </ImageView>
                         <ImageView fitHeight="69.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true"
                                    GridPane.columnIndex="2">
@@ -48,9 +71,260 @@
                         </ImageView>
                     </children>
                 </GridPane>
+                <GridPane layoutX="14.0" layoutY="14.0" prefHeight="666.0" prefWidth="1306.0">
+                    <!-- GridPane for GuetsDetailData!-->
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <GridPane>
+                            <!-- GridPane for CountNights!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!-- CountNightsValues!-->
+                                <TextField prefHeight="65.0" prefWidth="276.0" GridPane.columnIndex="1"/>
+                                <Label prefHeight="45.0" prefWidth="382.0" text="Nights "/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="1">
+
+                            <!-- GridPane for NightsEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!-- NightsEURValues!-->
+                                <Label prefHeight="45.0" prefWidth="327.0" text="Nights in EUR"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="2">
+                            <!-- GridPane for DrinksCount!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!-- DrinksDaysValues!-->
+                                <Label prefHeight="45.0" prefWidth="335.0" text="Drinks (in Days)"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="3">
+
+                            <!-- GridPane for DrinksEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <!-- DrinksDaysEURValues!-->
+                            </rowConstraints>
+                            <children>
+                                <Label prefHeight="45.0" prefWidth="326.0" text="Drinks (in EUR)"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="4">
+                            <!-- GridPane for FoodDays!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!--FoodDaysValues!-->
+                                <TextField GridPane.columnIndex="1"/>
+                                <Label text="Food (in Days)"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1">
+                            <!-- GridPane for FoodEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!--FoodEURValues!-->
+                                <Label prefHeight="45.0" prefWidth="331.0" text="Food (in EUR)"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <!-- GridPane for AllCostsGuest!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!-- AllCostsGuesEURValue!-->
+                                <TextField GridPane.columnIndex="1"/>
+                                <Label prefHeight="45.0" prefWidth="335.0" text="All Costs"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <!-- GridPane for AllreadyPaid!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <!-- AllreadyPaidGuestEUR!-->
+                            <children>
+                                <Label prefHeight="45.0" prefWidth="328.0" text="Allready paid"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- StillToPayGuestEUR!-->
+                                <TextField GridPane.columnIndex="1"/>
+                                <Label prefHeight="45.0" prefWidth="329.0" text="Still to Pay"/>
+                            </children>
+                        </GridPane>
+                    </children>
+                </GridPane>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="417.0" layoutY="779.0" prefHeight="371.0" prefWidth="1435.0"
-                    style="-fx-background-color: #3D4956;"/>
+                    style="-fx-background-color: #3D4956;">
+            <children>
+                <GridPane layoutX="14.0" layoutY="54.0" prefHeight="298.0" prefWidth="1208.0">
+                    <!-- AllGuestsDataGrid!-->
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <GridPane>
+                            <!-- Grid HouseRentInEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- RentHouseEURValues!-->
+                                <Label prefHeight="45.0" prefWidth="320.0" text="Rent House"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="1">
+                            <!-- Grid DrinksAllEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+
+                            </rowConstraints>
+                            <children>
+                                <!-- DrinksAllEURValues!-->
+                                <Label prefHeight="45.0" prefWidth="309.0" text="Drinks all Guests (EUR)"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="2">
+                            <!-- Grid FoodAllEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- FoodAllEURValues!-->
+                                <TextField GridPane.columnIndex="1"/>
+                                <Label text="Food all Guests (EUR)"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1">
+                            <!-- Grid AllGuetsAllCostsEUR!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- AllGuetsAllCostsEURValues!-->
+                                <Label prefHeight="45.0" prefWidth="307.0" text="All Costs all Guests"/>
+                                <TextField GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <!-- Grid RentAllGuests!-->
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- AllGuestRentToPayEURValues!-->
+                                <TextField GridPane.columnIndex="1"/>
+                                <Label text="Rent to Pay"/>
+                            </children>
+                        </GridPane>
+                    </children>
+                </GridPane>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

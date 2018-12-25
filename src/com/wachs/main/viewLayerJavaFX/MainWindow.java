@@ -20,7 +20,7 @@ public class MainWindow extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle("CherryIsCarry");
-
+        primaryStage.setMaximized(true);
 
         Scene scene = new Scene(root, 1440, 900);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);

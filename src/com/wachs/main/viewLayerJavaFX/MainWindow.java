@@ -23,16 +23,13 @@ public class MainWindow extends Application {
         //primaryStage.setMaximized(true);
 
 
-        Scene scene = new Scene(root, 1440, 900);
+        Scene scene = new Scene(root);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-
+        primaryStage.sizeToScene();
         primaryStage.show();
-        primaryStage.setMinWidth(1440);
-        primaryStage.setMinHeight(900);
-        primaryStage.setMaxWidth(1440);
-        primaryStage.setMaxHeight(900);
+        primaryStage.sizeToScene();
     }
 }

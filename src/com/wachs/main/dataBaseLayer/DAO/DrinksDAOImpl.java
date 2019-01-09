@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay.*;
 
-public class DrinksDAOImpl implements DrinksDAO {
+public class DrinksDAOImpl {
 
     private Statement statement;
     private ArrayList<Drinks> allDataList;
@@ -25,7 +25,6 @@ public class DrinksDAOImpl implements DrinksDAO {
         allDataList = new ArrayList<Drinks>();
     }
 
-    @Override
     public Drinks findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         statement = DbConnection.getConnection().createStatement();
@@ -50,7 +49,6 @@ public class DrinksDAOImpl implements DrinksDAO {
         return aDrink;
     }
 
-    @Override
     public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
@@ -72,7 +70,6 @@ public class DrinksDAOImpl implements DrinksDAO {
         return allDataList;
     }
 
-    @Override
     public void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
@@ -88,7 +85,6 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     }
 
-    @Override
     public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
@@ -103,7 +99,6 @@ public class DrinksDAOImpl implements DrinksDAO {
         DbConnection.closeConnection();
     }
 
-    @Override
     public void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface DrinksDAO extends IDAO{
+public interface DrinksDAO {
 
     Drinks findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException;
 

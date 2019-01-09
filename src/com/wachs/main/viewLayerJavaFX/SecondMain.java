@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -94,7 +96,10 @@ public class SecondMain extends Application {
         HBox_Buttons.setSpacing(10);
         HBox_Buttons.setPadding(new Insets(20, 20, 10, 20));
 
-        btnAddProject = new Button(GUILabels.BTN_ADD_PROJECT);
+        Image ButtonImage = new Image(getClass().getResourceAsStream("sources/others/add.png"));
+
+        btnAddProject = new Button(GUILabels.BTN_ADD_PROJECT, new ImageView(ButtonImage));
+        btnAddProject.setStyle("-fx-base: #b6e7c9;");
         btnAddProject.setTooltip(new Tooltip(GUILabels.BTN_ADD_PROJECT_TT));
         btnAddProject.setMaxWidth(Double.MAX_VALUE);
 

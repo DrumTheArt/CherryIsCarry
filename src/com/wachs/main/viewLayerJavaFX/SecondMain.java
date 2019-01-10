@@ -33,47 +33,49 @@ public class SecondMain extends Application {
     private Button btnEditGuestData;
 
     //AllTextFields
-    private TextField TF_firstGuestDetails;
-    private TextField TF_secondGuestDetails;
-    private TextField TF_thirdGuestDetails;
-    private TextField TF_fourthGuestDetails;
-    private TextField TF_fifthGuestDetails;
-    private TextField TF_sixthGuestDetails;
-    private TextField TF_seventhGuestDetails;
-    private TextField TF_eighthGuestDetails;
-    private TextField TF_ninthGuestDetails;
+    private TextField tf_GuestNights;
+    private TextField tf_GuestNightsEUR;
+    private TextField tf_GuestDrinks;
+    private TextField tf_GuestDrinksEUR;
+    private TextField tf_GuestFood;
+    private TextField tf_GuestFoodEUR;
+    private TextField tf_GuestTotalCosts;
+    private TextField tf_GuestAlreadyPaid;
+    private TextField tf_StillToPay;
+
 
     //AllTextFields
-    private TextField TF_firstAllDetails;
-    private TextField TF_secondAllDetails;
-    private TextField TF_thirdAllDetails;
-    private TextField TF_fourthAllDetails;
-    private TextField TF_fifthAllDetails;
+    private TextField tf_AllRentPrice;
+    private TextField tf_AllDrinks;
+    private TextField tf_AllFood;
+    private TextField tf_AllTotalCosts;
+    private TextField tf_AllOutstandingPayment;
+
 
     //AllLabelsGuest
-    private Label LB_firstGuest;
-    private Label LB_secondGuest;
-    private Label LB_thirdGuest;
-    private Label LB_fourthGuest;
-    private Label LB_fifthGuest;
-    private Label LB_sixthGuest;
-    private Label LB_seventhGuest;
-    private Label LB_eighthGuest;
-    private Label LB_ninthGuest;
+    private Label lb_GuestNights;
+    private Label lb_GuestNightsEUR;
+    private Label lb_GuestDrinks;
+    private Label lb_GuestDrinksEUR;
+    private Label lb_GuestFood;
+    private Label lb_GuestFoodEUR;
+    private Label lb_GuestTotalCosts;
+    private Label lb_GuestAlreadyPaid;
+    private Label lb_GuestStillToPay;
+
 
     //AllLabelsAll
-    private Label LB_firstAll;
-    private Label LB_secondAll;
-    private Label LB_thirdAll;
-    private Label LB_fourthAll;
-    private Label LB_fifthAll;
+    private Label lb_AllRentPrice;
+    private Label lb_AllDrinks;
+    private Label lb_AllFood;
+    private Label lb_AllTotalCosts;
+    private Label lb_AllOutstandingPayment;
+
 
     //AllGrids
     private GridPane GridForGuestDetails;
     private GridPane GridForAllDetails;
 
-    //Sizes
-    private int sizeWidthForLabelsAndTextFields = 140;
 
     public static void main(String[] args) {
         launch(args);
@@ -84,10 +86,8 @@ public class SecondMain extends Application {
 
         primaryStage.setTitle("CherryIsCarry");
 
-
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
-
 
         //Holding all HBoxes
         verticalBox = new VBox();
@@ -101,23 +101,23 @@ public class SecondMain extends Application {
 
         //Button Add new Project
         Image ButtonImageAddProject = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/addProject.png"));
-        btnAddProject = new Button(GUILabels.BTN_ADD_PROJECT, new ImageView(ButtonImageAddProject));
-        btnAddProject.setStyle("-fx-base: #b6e7c9;");
-        btnAddProject.setTooltip(new Tooltip(GUILabels.BTN_ADD_PROJECT_TT));
+        btnAddProject = new Button(GUINaming.BTN_ADD_PROJECT, new ImageView(ButtonImageAddProject));
+        btnAddProject.setStyle(GUIProperties.BTN_COLOR_BLUELIGHT);
+        btnAddProject.setTooltip(new Tooltip(GUINaming.TT_BTN_ADD_PROJECT));
         btnAddProject.setMaxWidth(Double.MAX_VALUE);
 
         //Button Add new Guest
-        Image ButtonImageAddGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/addGuest.png"));
-        btnAddGuest = new Button(GUILabels.BTN_ADD_GUEST, new ImageView(ButtonImageAddGuest));
-        btnAddGuest.setStyle("-fx-base: #b6e7c9;");
-        btnAddGuest.setTooltip(new Tooltip(GUILabels.BTN_ADD_GUEST_TT));
+        Image ButtonImageAddGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/addGuest2.png"));
+        btnAddGuest = new Button(GUINaming.BTN_ADD_GUEST, new ImageView(ButtonImageAddGuest));
+        btnAddGuest.setStyle(GUIProperties.BTN_COLOR_BLUELIGHT);
+        btnAddGuest.setTooltip(new Tooltip(GUINaming.TT_BTN_ADD_GUEST));
         btnAddGuest.setMaxWidth(Double.MAX_VALUE);
 
         //Button Edit Guest
         Image ButtonImageEditGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/editGuest.png"));
-        btnEditGuestData = new Button(GUILabels.BTN_EDIT_GUEST, new ImageView(ButtonImageEditGuest));
-        btnEditGuestData.setStyle("-fx-base: #c2dbe7;");
-        btnEditGuestData.setTooltip(new Tooltip(GUILabels.BTN_EDIT_GUEST_TT));
+        btnEditGuestData = new Button(GUINaming.BTN_EDIT_GUEST, new ImageView(ButtonImageEditGuest));
+        btnEditGuestData.setStyle(GUIProperties.BTN_COLOR_BLUELIGHT);
+        btnEditGuestData.setTooltip(new Tooltip(GUINaming.TT_BTN_EDIT_GUEST));
         btnEditGuestData.setMaxWidth(Double.MAX_VALUE);
 
         HBox_Buttons.getChildren().addAll(btnAddProject, btnAddGuest, btnEditGuestData);
@@ -141,107 +141,115 @@ public class SecondMain extends Application {
         HBox_LabelFieldsGuests.setSpacing(10);
         HBox_LabelFieldsGuests.setPadding(new Insets(80, 20, 0, 20));
 
-        LB_firstGuest = new Label();
-        LB_firstGuest.setText(GUILabels.FIRST_LB_GUEST);
-        LB_firstGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_firstGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestNights = new Label();
+        lb_GuestNights.setText(GUINaming.LB_GUEST_NIGHTS);
+        lb_GuestNights.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestNights.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_secondGuest = new Label();
-        LB_secondGuest.setText(GUILabels.SECOND_LB_GUEST);
-        LB_secondGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_secondGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestNightsEUR = new Label();
+        lb_GuestNightsEUR.setText(GUINaming.LB_GUEST_NIGHTS_EUR);
+        lb_GuestNightsEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestNightsEUR.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_thirdGuest = new Label();
-        LB_thirdGuest.setText(GUILabels.THIRD_LB_GUEST);
-        LB_thirdGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_thirdGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestDrinks = new Label();
+        lb_GuestDrinks.setText(GUINaming.LB_GUEST_DRINKS);
+        lb_GuestDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestDrinks.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_fourthGuest = new Label();
-        LB_fourthGuest.setText(GUILabels.FOURTH_LB_GUEST);
-        LB_fourthGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_fourthGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestDrinksEUR = new Label();
+        lb_GuestDrinksEUR.setText(GUINaming.LB_GUEST_DRINKS_EUR);
+        lb_GuestDrinksEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestDrinksEUR.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_fifthGuest = new Label();
-        LB_fifthGuest.setText(GUILabels.FIFTH_LB_GUEST);
-        LB_fifthGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_fifthGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestFood = new Label();
+        lb_GuestFood.setText(GUINaming.LB_GUEST_FOOD_EUR);
+        lb_GuestFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestFood.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_sixthGuest = new Label();
-        LB_sixthGuest.setText(GUILabels.SIXTH_LB_GUEST);
-        LB_sixthGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_sixthGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestFoodEUR = new Label();
+        lb_GuestFoodEUR.setText(GUINaming.LB_GUEST_FOOD);
+        lb_GuestFoodEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestFoodEUR.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_seventhGuest = new Label();
-        LB_seventhGuest.setText(GUILabels.SEVENTH_LB_GUEST);
-        LB_seventhGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_seventhGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestTotalCosts = new Label();
+        lb_GuestTotalCosts.setText(GUINaming.LB_GUEST_TOTAL_COSTS);
+        lb_GuestTotalCosts.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestTotalCosts.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_eighthGuest = new Label();
-        LB_eighthGuest.setText(GUILabels.EIGHTH_LB_GUEST);
-        LB_eighthGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_eighthGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestAlreadyPaid = new Label();
+        lb_GuestAlreadyPaid.setText(GUINaming.LB_GUEST_ALREADY_PAID);
+        lb_GuestAlreadyPaid.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestAlreadyPaid.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_ninthGuest = new Label();
-        LB_ninthGuest.setText(GUILabels.NINTH_LB_GUEST);
-        LB_ninthGuest.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_ninthGuest.setStyle("-fx-font-weight: bold");
+        lb_GuestStillToPay = new Label();
+        lb_GuestStillToPay.setText(GUINaming.LB_GUEST_STILL_TO_PAY);
+        lb_GuestStillToPay.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_GuestStillToPay.setStyle(GUIProperties.FONT_BOLD);
 
 
-        HBox_LabelFieldsGuests.getChildren().addAll(LB_firstGuest, LB_secondGuest, LB_thirdGuest, LB_fourthGuest, LB_fifthGuest, LB_sixthGuest, LB_seventhGuest, LB_eighthGuest, LB_ninthGuest);
+        HBox_LabelFieldsGuests.getChildren().addAll(lb_GuestNights, lb_GuestNightsEUR, lb_GuestDrinks, lb_GuestDrinksEUR, lb_GuestFood, lb_GuestFoodEUR, lb_GuestTotalCosts, lb_GuestAlreadyPaid, lb_GuestStillToPay);
 
 
         HBox_TextFieldsGuests = new HBox();
         HBox_TextFieldsGuests.setSpacing(10);
         HBox_TextFieldsGuests.setPadding(new Insets(4, 20, 10, 20));
 
-        TF_firstGuestDetails = new TextField("TEST");
-        TF_firstGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_firstGuestDetails.setTooltip(new Tooltip(GUILabels.FIRST_LB_GUEST_TT));
-        TF_firstGuestDetails.setEditable(false);
-        //TF_firstGuestDetails.setStyle("-fx-border-color:red;-fx-text-fill: green;-fx-background-color: blue; -fx-font-weight: bold;");
+        tf_GuestNights = new TextField("3 nights");
+        tf_GuestNights.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestNights.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_NIGHTS));
+        tf_GuestNights.setEditable(false);
+        tf_GuestNights.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_secondGuestDetails = new TextField();
-        TF_secondGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_secondGuestDetails.setTooltip(new Tooltip(GUILabels.SECOND_LB_GUEST_TT));
-        TF_secondGuestDetails.setEditable(false);
+        tf_GuestNightsEUR = new TextField("120.25 EUR");
+        tf_GuestNightsEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestNightsEUR.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_NIGHTS_EUR));
+        tf_GuestNightsEUR.setEditable(false);
+        tf_GuestNightsEUR.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_thirdGuestDetails = new TextField();
-        TF_thirdGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_thirdGuestDetails.setTooltip(new Tooltip(GUILabels.THIRD_LB_GUEST_TT));
-        TF_thirdGuestDetails.setEditable(false);
+        tf_GuestDrinks = new TextField();
+        tf_GuestDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestDrinks.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_DRINKS));
+        tf_GuestDrinks.setEditable(false);
+        tf_GuestDrinks.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_fourthGuestDetails = new TextField();
-        TF_fourthGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_fourthGuestDetails.setTooltip(new Tooltip(GUILabels.FOURTH_LB_GUEST_TT));
-        TF_fourthGuestDetails.setEditable(false);
+        tf_GuestDrinksEUR = new TextField();
+        tf_GuestDrinksEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestDrinksEUR.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_DRINKS_EUR));
+        tf_GuestDrinksEUR.setEditable(false);
+        tf_GuestDrinksEUR.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_fifthGuestDetails = new TextField();
-        TF_fifthGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_fifthGuestDetails.setTooltip(new Tooltip(GUILabels.FIFTH_LB_GUEST_TT));
-        TF_fifthGuestDetails.setEditable(false);
+        tf_GuestFood = new TextField();
+        tf_GuestFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestFood.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_FOOD));
+        tf_GuestFood.setEditable(false);
+        tf_GuestFood.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_sixthGuestDetails = new TextField();
-        TF_sixthGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_sixthGuestDetails.setTooltip(new Tooltip(GUILabels.SIXTH_LB_GUEST_TT));
-        TF_sixthGuestDetails.setEditable(false);
+        tf_GuestFoodEUR = new TextField();
+        tf_GuestFoodEUR.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestFoodEUR.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_FOOD_EUR));
+        tf_GuestFoodEUR.setEditable(false);
+        tf_GuestFoodEUR.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_seventhGuestDetails = new TextField();
-        TF_seventhGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_seventhGuestDetails.setTooltip(new Tooltip(GUILabels.SEVENTH_LB_GUEST_TT));
-        TF_seventhGuestDetails.setEditable(false);
+        tf_GuestTotalCosts = new TextField();
+        tf_GuestTotalCosts.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestTotalCosts.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_TOTAL_COSTS));
+        tf_GuestTotalCosts.setEditable(false);
+        tf_GuestTotalCosts.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_eighthGuestDetails = new TextField();
-        TF_eighthGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_eighthGuestDetails.setTooltip(new Tooltip(GUILabels.EIGHTH_LB_GUEST_TT));
-        TF_eighthGuestDetails.setEditable(false);
+        tf_GuestAlreadyPaid = new TextField();
+        tf_GuestAlreadyPaid.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_GuestAlreadyPaid.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_ALREADY_PAID));
+        tf_GuestAlreadyPaid.setEditable(false);
+        tf_GuestAlreadyPaid.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        TF_ninthGuestDetails = new TextField();
-        TF_ninthGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_ninthGuestDetails.setTooltip(new Tooltip(GUILabels.NINTH_LB_GUEST_TT));
-        TF_ninthGuestDetails.setEditable(false);
+        tf_StillToPay = new TextField();
+        tf_StillToPay.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_StillToPay.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_STILL_TO_PAY));
+        tf_StillToPay.setEditable(false);
+        tf_StillToPay.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
 
-        HBox_TextFieldsGuests.getChildren().addAll(TF_firstGuestDetails, TF_secondGuestDetails, TF_thirdGuestDetails, TF_fourthGuestDetails, TF_fifthGuestDetails, TF_sixthGuestDetails, TF_seventhGuestDetails, TF_eighthGuestDetails, TF_ninthGuestDetails);
+        HBox_TextFieldsGuests.getChildren().addAll(tf_GuestNights, tf_GuestNightsEUR, tf_GuestDrinks, tf_GuestDrinksEUR, tf_GuestFood, tf_GuestFoodEUR, tf_GuestTotalCosts, tf_GuestAlreadyPaid, tf_StillToPay);
 
         GridPane.setConstraints(HBox_LabelFieldsGuests, 1, 1);
         GridPane.setConstraints(HBox_TextFieldsGuests, 1, 2);
@@ -255,62 +263,67 @@ public class SecondMain extends Application {
         HBox_LabelFieldsAll.setSpacing(10);
         HBox_LabelFieldsAll.setPadding(new Insets(80, 20, 0, 20));
 
-        LB_firstAll = new Label();
-        LB_firstAll.setText(GUILabels.FIRST_LB_ALL);
-        LB_firstAll.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_firstAll.setStyle("-fx-font-weight: bold");
+        lb_AllRentPrice = new Label();
+        lb_AllRentPrice.setText(GUINaming.LB_ALL_RENT_PRICE);
+        lb_AllRentPrice.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_AllRentPrice.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_secondAll = new Label();
-        LB_secondAll.setText(GUILabels.SECOND_LB_ALL);
-        LB_secondAll.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_secondAll.setStyle("-fx-font-weight: bold");
+        lb_AllDrinks = new Label();
+        lb_AllDrinks.setText(GUINaming.LB_ALL_DRINKS_EUR);
+        lb_AllDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_AllDrinks.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_thirdAll = new Label();
-        LB_thirdAll.setText(GUILabels.THIRD_LB_ALL);
-        LB_thirdAll.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_thirdAll.setStyle("-fx-font-weight: bold");
+        lb_AllFood = new Label();
+        lb_AllFood.setText(GUINaming.LB_ALL_FOOD_EUR);
+        lb_AllFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_AllFood.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_fourthAll = new Label();
-        LB_fourthAll.setText(GUILabels.FOURTH_LB_ALL);
-        LB_fourthAll.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_fourthAll.setStyle("-fx-font-weight: bold");
+        lb_AllTotalCosts = new Label();
+        lb_AllTotalCosts.setText(GUINaming.LB_ALL_TOTAL_COSTS);
+        lb_AllTotalCosts.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_AllTotalCosts.setStyle(GUIProperties.FONT_BOLD);
 
-        LB_fifthAll = new Label();
-        LB_fifthAll.setText(GUILabels.FIFTH_LB_ALL);
-        LB_fifthAll.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        LB_fifthAll.setStyle("-fx-font-weight: bold");
+        lb_AllOutstandingPayment = new Label();
+        lb_AllOutstandingPayment.setText(GUINaming.LB_ALL_OUTSTANDING_PAYMENT);
+        lb_AllOutstandingPayment.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        lb_AllOutstandingPayment.setStyle(GUIProperties.FONT_BOLD);
 
 
-        HBox_LabelFieldsAll.getChildren().addAll(LB_firstAll, LB_secondAll, LB_thirdAll, LB_fourthAll, LB_fifthAll);
+        HBox_LabelFieldsAll.getChildren().addAll(lb_AllRentPrice, lb_AllDrinks, lb_AllFood, lb_AllTotalCosts, lb_AllOutstandingPayment);
 
 
         HBox_TextFieldsAll = new HBox();
         HBox_TextFieldsAll.setSpacing(10);
         HBox_TextFieldsAll.setPadding(new Insets(4, 20, 10, 20));
 
-        TF_firstAllDetails = new TextField();
-        TF_firstAllDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_firstAllDetails.setTooltip(new Tooltip(GUILabels.FIRST_LB_ALL_TT));
-        TF_firstAllDetails.setEditable(false);
-        TF_secondAllDetails = new TextField();
-        TF_secondAllDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_secondAllDetails.setTooltip(new Tooltip(GUILabels.SECOND_LB_ALL_TT));
-        TF_secondAllDetails.setEditable(false);
-        TF_thirdAllDetails = new TextField();
-        TF_thirdAllDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_thirdAllDetails.setTooltip(new Tooltip(GUILabels.THIRD_LB_ALL_TT));
-        TF_thirdAllDetails.setEditable(false);
-        TF_fourthAllDetails = new TextField();
-        TF_fourthAllDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_fourthAllDetails.setTooltip(new Tooltip(GUILabels.FOURTH_LB_ALL_TT));
-        TF_fourthAllDetails.setEditable(false);
-        TF_fifthAllDetails = new TextField();
-        TF_fifthAllDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
-        TF_fifthAllDetails.setTooltip(new Tooltip(GUILabels.FIFTH_LB_ALL_TT));
-        TF_fifthAllDetails.setEditable(false);
+        tf_AllRentPrice = new TextField();
+        tf_AllRentPrice.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_AllRentPrice.setTooltip(new Tooltip(GUINaming.TT_TF_ALL_RENT));
+        tf_AllRentPrice.setEditable(false);
+        tf_AllRentPrice.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_AllDrinks = new TextField();
+        tf_AllDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_AllDrinks.setTooltip(new Tooltip(GUINaming.TT_TF_ALL_DRINKS_EUR));
+        tf_AllDrinks.setEditable(false);
+        tf_AllDrinks.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_AllFood = new TextField();
+        tf_AllFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_AllFood.setTooltip(new Tooltip(GUINaming.TT_TF_ALL_FOOD_EUR));
+        tf_AllFood.setEditable(false);
+        tf_AllFood.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_AllTotalCosts = new TextField();
+        tf_AllTotalCosts.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_AllTotalCosts.setTooltip(new Tooltip(GUINaming.TT_TF_ALL_TOTAL_COSTS));
+        tf_AllTotalCosts.setEditable(false);
+        tf_AllTotalCosts.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_AllOutstandingPayment = new TextField();
+        tf_AllOutstandingPayment.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
+        tf_AllOutstandingPayment.setTooltip(new Tooltip(GUINaming.TT_TF_ALL_OUTSTANDING_SUM));
+        tf_AllOutstandingPayment.setEditable(false);
+        tf_AllOutstandingPayment.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
 
-        HBox_TextFieldsAll.getChildren().addAll(TF_firstAllDetails, TF_secondAllDetails, TF_thirdAllDetails, TF_fourthAllDetails, TF_fifthAllDetails);
+        HBox_TextFieldsAll.getChildren().addAll(tf_AllRentPrice, tf_AllDrinks, tf_AllFood, tf_AllTotalCosts, tf_AllOutstandingPayment);
 
         GridPane.setConstraints(HBox_LabelFieldsAll, 1, 1);
         GridPane.setConstraints(HBox_TextFieldsAll, 1, 2);
@@ -319,9 +332,10 @@ public class SecondMain extends Application {
 
         verticalBox.getChildren().addAll(HBox_Buttons, HBox_Selector, GridForGuestDetails, GridForAllDetails);
 
-        Scene scene = new Scene(verticalBox, 1200, 400);
+        Scene scene = new Scene(verticalBox, 1200, 450);
 
         primaryStage.setScene(scene);
+
         primaryStage.show();
 
     }

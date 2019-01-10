@@ -1,4 +1,4 @@
-package com.wachs.main.viewLayerJavaFX;
+package com.wachs.main.viewLayerJavaFX.GUISetup;
 
 public class GUIProperties {
 

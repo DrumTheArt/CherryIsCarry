@@ -1,5 +1,7 @@
 package com.wachs.main.viewLayerJavaFX;
 
+import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
+import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

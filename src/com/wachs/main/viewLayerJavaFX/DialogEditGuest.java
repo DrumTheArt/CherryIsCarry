@@ -1,5 +1,7 @@
 package com.wachs.main.viewLayerJavaFX;
 
+import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
+import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -214,7 +216,7 @@ public class DialogEditGuest extends Application {
         tf_GuestExpensesReason.setStyle(GUIProperties.TEXTFIELD_DESIGN);
         tf_GuestExpensesWhen = new TextField();
         tf_GuestExpensesWhen.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestExpensesWhen.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_EXPENSE_REASON));
+        tf_GuestExpensesWhen.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_EXPENSE_WHEN));
         tf_GuestExpensesWhen.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
 
@@ -238,10 +240,7 @@ public class DialogEditGuest extends Application {
         HBox_LIST_Expense.setSpacing(10);
         HBox_LIST_Expense.setPadding(new Insets(4, 20, 10, 20));
 
-        //Table for all Expenses each Guest
-        tableExpenses = new TableView();
-        tableExpenses.setEditable(false);
-        tableExpenses.setPrefSize(630, 500);
+        tableExpenses = createTable("Amount", "Reason", "Date");
 
         HBox_LIST_Expense.setAlignment(Pos.BOTTOM_CENTER);
         HBox_LIST_Expense.getChildren().add(tableExpenses);
@@ -254,5 +253,27 @@ public class DialogEditGuest extends Application {
 
         primaryStage.show();
 
+    }
+
+    //Table for all Expenses each Guest
+    private TableView createTable(String col1, String col2, String col3) {
+
+        TableView newTable = new TableView();
+        newTable.setEditable(false);
+        newTable.setPrefSize(630, 500);
+
+        TableColumn<Void, Void> amountColumn = new TableColumn<>(col1);
+        TableColumn<Void, Void> reasonColumn = new TableColumn<>(col2);
+        TableColumn<Void, Void> whenColumn = new TableColumn<>(col3);
+
+        newTable.getColumns().add(amountColumn);
+        newTable.getColumns().add(reasonColumn);
+        newTable.getColumns().add(whenColumn);
+
+        newTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        amountColumn.prefWidthProperty().bind(newTable.widthProperty().multiply(0.1));
+
+        return newTable;
     }
 }

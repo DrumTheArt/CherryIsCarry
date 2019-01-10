@@ -34,7 +34,7 @@
                 <ImageView fitHeight="90.0" fitWidth="80.0" layoutX="1341.0" layoutY="14.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../sources/others/ShutDown.png"/>
+                        <Image url="@others/ShutDown.png"/>
                     </image>
                 </ImageView>
                 <GridPane layoutX="1121.0" layoutY="694.0" prefHeight="67.0" prefWidth="300.0">
@@ -52,21 +52,21 @@
                         <!-- Button for adding new GuestData!-->
                         <ImageView fitHeight="68.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../sources/others/add.png"/>
+                                <Image url="@others/add.png"/>
                             </image>
                             <!-- Button for deleting Guest!-->
                         </ImageView>
                         <ImageView fitHeight="67.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true"
                                    GridPane.columnIndex="1">
                             <image>
-                                <Image url="@../../../../../sources/others/delete.png"/>
+                                <Image url="@others/delete.png"/>
                             </image>
                             <!-- Button for editing GuestData!-->
                         </ImageView>
                         <ImageView fitHeight="69.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true"
                                    GridPane.columnIndex="2">
                             <image>
-                                <Image url="@../../../../../sources/others/edit.png"/>
+                                <Image url="@others/edit.png"/>
                             </image>
                         </ImageView>
                     </children>

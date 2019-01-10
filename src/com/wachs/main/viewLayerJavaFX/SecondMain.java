@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.net.URISyntaxException;
+
 public class SecondMain extends Application {
 
     //AllColumns
@@ -78,7 +80,7 @@ public class SecondMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws URISyntaxException {
 
         primaryStage.setTitle("CherryIsCarry");
 
@@ -96,18 +98,25 @@ public class SecondMain extends Application {
         HBox_Buttons.setSpacing(10);
         HBox_Buttons.setPadding(new Insets(20, 20, 10, 20));
 
-        Image ButtonImage = new Image(getClass().getResourceAsStream("sources/others/add.png"));
 
-        btnAddProject = new Button(GUILabels.BTN_ADD_PROJECT, new ImageView(ButtonImage));
+        //Button Add new Project
+        Image ButtonImageAddProject = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/addProject.png"));
+        btnAddProject = new Button(GUILabels.BTN_ADD_PROJECT, new ImageView(ButtonImageAddProject));
         btnAddProject.setStyle("-fx-base: #b6e7c9;");
         btnAddProject.setTooltip(new Tooltip(GUILabels.BTN_ADD_PROJECT_TT));
         btnAddProject.setMaxWidth(Double.MAX_VALUE);
 
-        btnAddGuest = new Button(GUILabels.BTN_ADD_GUEST);
+        //Button Add new Guest
+        Image ButtonImageAddGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/addGuest.png"));
+        btnAddGuest = new Button(GUILabels.BTN_ADD_GUEST, new ImageView(ButtonImageAddGuest));
+        btnAddGuest.setStyle("-fx-base: #b6e7c9;");
         btnAddGuest.setTooltip(new Tooltip(GUILabels.BTN_ADD_GUEST_TT));
         btnAddGuest.setMaxWidth(Double.MAX_VALUE);
 
-        btnEditGuestData = new Button(GUILabels.BTN_EDIT_GUEST);
+        //Button Edit Guest
+        Image ButtonImageEditGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/editGuest.png"));
+        btnEditGuestData = new Button(GUILabels.BTN_EDIT_GUEST, new ImageView(ButtonImageEditGuest));
+        btnEditGuestData.setStyle("-fx-base: #c2dbe7;");
         btnEditGuestData.setTooltip(new Tooltip(GUILabels.BTN_EDIT_GUEST_TT));
         btnEditGuestData.setMaxWidth(Double.MAX_VALUE);
 
@@ -189,7 +198,7 @@ public class SecondMain extends Application {
         TF_firstGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);
         TF_firstGuestDetails.setTooltip(new Tooltip(GUILabels.FIRST_LB_GUEST_TT));
         TF_firstGuestDetails.setEditable(false);
-        TF_firstGuestDetails.setStyle("-fx-border-color:red;-fx-text-fill: green;-fx-background-color: blue; -fx-font-weight: bold;");
+        //TF_firstGuestDetails.setStyle("-fx-border-color:red;-fx-text-fill: green;-fx-background-color: blue; -fx-font-weight: bold;");
 
         TF_secondGuestDetails = new TextField();
         TF_secondGuestDetails.setPrefWidth(sizeWidthForLabelsAndTextFields);

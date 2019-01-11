@@ -86,15 +86,15 @@ public class DialogEditGuest extends Application {
         HBox_BTN_Regular.setSpacing(10);
         HBox_BTN_Regular.setPadding(new Insets(20, 20, 10, 20));
 
-        btnSaveAll = createBtn(GUISourceIcons.sourceSaveData,GUIProperties.BTN_COLOR_BLUELIGHT,GUINaming.TT_BTN_SAVE_GUEST);
+        btnSaveAll = createBtn(GUINaming.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
 
         //Button Delete Guest
-        btnDeleteGuest = createBtn(GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
+        btnDeleteGuest = createBtn(GUINaming.BTN_DELETE_GUEST, GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
 
         HBox_BTN_Regular.getChildren().addAll(btnSaveAll, btnDeleteGuest);
 
         //Button Save Expenses
-        btnSaveExpenses = createBtn(GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
+        btnSaveExpenses = createBtn(GUINaming.BTN_SAVE_EXPENSE, GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
 
         //Third Row Labels & TextFields for GuestDetails
         GridForGuestDetails = new GridPane();
@@ -103,25 +103,11 @@ public class DialogEditGuest extends Application {
         HBox_LB_AreaGuests.setSpacing(10);
         HBox_LB_AreaGuests.setPadding(new Insets(10, 20, 0, 20));
 
-        lb_GuestNights = new Label();
-        lb_GuestNights.setText(GUINaming.LB_GUEST_NIGHTS);
-        lb_GuestNights.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestNights.setStyle(GUIProperties.FONT_BOLD);
+        lb_GuestNights = createLabel(GUINaming.LB_GUEST_NIGHTS, GUIProperties.SIZE_GUI_ELEMENTS,GUIProperties.FONT_BOLD);
+        lb_GuestDrinks = createLabel(GUINaming.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestFood = createLabel(GUINaming.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestPrepaid = createLabel(GUINaming.LB_GUEST_ALREADY_PAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
-        lb_GuestDrinks = new Label();
-        lb_GuestDrinks.setText(GUINaming.LB_GUEST_DRINKS);
-        lb_GuestDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestDrinks.setStyle(GUIProperties.FONT_BOLD);
-
-        lb_GuestFood = new Label();
-        lb_GuestFood.setText(GUINaming.LB_GUEST_FOOD);
-        lb_GuestFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestFood.setStyle(GUIProperties.FONT_BOLD);
-
-        lb_GuestPrepaid = new Label();
-        lb_GuestPrepaid.setText(GUINaming.LB_GUEST_ALREADY_PAID);
-        lb_GuestPrepaid.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestPrepaid.setStyle(GUIProperties.FONT_BOLD);
 
         HBox_LB_AreaGuests.getChildren().addAll(lb_GuestNights, lb_GuestDrinks, lb_GuestFood, lb_GuestPrepaid);
 
@@ -129,25 +115,11 @@ public class DialogEditGuest extends Application {
         HBox_TF_AreaGuests.setSpacing(10);
         HBox_TF_AreaGuests.setPadding(new Insets(4, 20, 10, 20));
 
-        tf_GuestNights = new TextField("3 nights");
-        tf_GuestNights.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestNights.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_NIGHTS));
-        tf_GuestNights.setStyle(GUIProperties.TEXTFIELD_DESIGN);
 
-        tf_GuestDrinks = new TextField("120.25 EUR");
-        tf_GuestDrinks.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestDrinks.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_DRINKS_EUR));
-        tf_GuestDrinks.setStyle(GUIProperties.TEXTFIELD_DESIGN);
-
-        tf_GuestFood = new TextField();
-        tf_GuestFood.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestFood.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_FOOD_EUR));
-        tf_GuestFood.setStyle(GUIProperties.TEXTFIELD_DESIGN);
-
-        tf_prepaid = new TextField();
-        tf_prepaid.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_prepaid.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_ALREADY_PAID));
-        tf_prepaid.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_GuestNights = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestDrinks = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestFood = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_prepaid = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
         HBox_TF_AreaGuests.setAlignment(Pos.BOTTOM_CENTER);
@@ -166,20 +138,9 @@ public class DialogEditGuest extends Application {
         HBox_LB_AreaExpenses.setSpacing(10);
         HBox_LB_AreaExpenses.setPadding(new Insets(40, 20, 0, 20));
 
-        lb_GuestExpensePrice = new Label();
-        lb_GuestExpensePrice.setText(GUINaming.LB_GUEST_EXPENSE_PRICE);
-        lb_GuestExpensePrice.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestExpensePrice.setStyle(GUIProperties.FONT_BOLD);
-
-        lb_GuestExpenseReason = new Label();
-        lb_GuestExpenseReason.setText(GUINaming.LB_GUEST_EXPENSE_REASON);
-        lb_GuestExpenseReason.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestExpenseReason.setStyle(GUIProperties.FONT_BOLD);
-
-        lb_GuestExpenseWhen = new Label();
-        lb_GuestExpenseWhen.setText(GUINaming.LB_GUEST_EXPENSE_WHEN);
-        lb_GuestExpenseWhen.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        lb_GuestExpenseWhen.setStyle(GUIProperties.FONT_BOLD);
+        lb_GuestExpensePrice = createLabel(GUINaming.LB_GUEST_EXPENSE_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseReason = createLabel(GUINaming.LB_GUEST_EXPENSE_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseWhen = createLabel(GUINaming.LB_GUEST_EXPENSE_WHEN, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
         HBox_LB_AreaExpenses.setAlignment(Pos.BOTTOM_CENTER);
         HBox_LB_AreaExpenses.getChildren().addAll(lb_GuestExpensePrice, lb_GuestExpenseReason, lb_GuestExpenseWhen);
@@ -189,18 +150,9 @@ public class DialogEditGuest extends Application {
         HBox_TF_AreaExpenses.setSpacing(10);
         HBox_TF_AreaExpenses.setPadding(new Insets(4, 20, 10, 20));
 
-        tf_GuestExpensesPrice = new TextField();
-        tf_GuestExpensesPrice.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestExpensesPrice.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_EXPENSE_PRICE));
-        tf_GuestExpensesPrice.setStyle(GUIProperties.TEXTFIELD_DESIGN);
-        tf_GuestExpensesReason = new TextField();
-        tf_GuestExpensesReason.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestExpensesReason.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_EXPENSE_REASON));
-        tf_GuestExpensesReason.setStyle(GUIProperties.TEXTFIELD_DESIGN);
-        tf_GuestExpensesWhen = new TextField();
-        tf_GuestExpensesWhen.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
-        tf_GuestExpensesWhen.setTooltip(new Tooltip(GUINaming.TT_TF_GUEST_EXPENSE_WHEN));
-        tf_GuestExpensesWhen.setStyle(GUIProperties.TEXTFIELD_DESIGN);
+        tf_GuestExpensesPrice = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true );
+        tf_GuestExpensesReason = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestExpensesWhen = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_WHEN, GUIProperties.TEXTFIELD_DESIGN,true);
 
 
         HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
@@ -238,13 +190,36 @@ public class DialogEditGuest extends Application {
 
     }
 
-    private Button createBtn(String source, String color, String toolTip) {
+
+
+    private TextField createTextfield(int size, String toolTip, String setStyle, boolean editable) {
+
+        TextField newTextField = new TextField();
+        newTextField.setPrefWidth(size);
+        newTextField.setTooltip(new Tooltip(toolTip));
+        newTextField.setStyle(setStyle);
+        newTextField.setEditable(editable);
+
+        return newTextField;
+    }
+
+    private Label createLabel(String labelName, int sizeWidth, String front) {
+
+        Label newLabel = new Label();
+        newLabel.setText(labelName);
+        newLabel.setPrefWidth(sizeWidth);
+        newLabel.setStyle(front);
+
+        return newLabel;
+    }
+
+    private Button createBtn(String btnName, String btnIconSourcePath, String btnColor, String btnToolTip) {
 
         //DEPENDECY INJECTION HIER TROTZDEM NÖTIG ... NEW OPERATOR
-        Image ButtonImageSaveData = new Image(getClass().getClassLoader().getResourceAsStream(source));
-        Button newButton = new Button(GUINaming.BTN_SAVE_ALLDATA, new ImageView(ButtonImageSaveData));
-        newButton.setStyle(color);
-        newButton.setTooltip(new Tooltip(toolTip));
+        Image ButtonImageSaveData = new Image(getClass().getClassLoader().getResourceAsStream(btnIconSourcePath));
+        Button newButton = new Button(btnName, new ImageView(ButtonImageSaveData));
+        newButton.setStyle(btnColor);
+        newButton.setTooltip(new Tooltip(btnToolTip));
         newButton.setMaxWidth(Double.MAX_VALUE);
 
         return newButton;

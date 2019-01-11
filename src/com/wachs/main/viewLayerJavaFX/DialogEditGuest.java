@@ -2,6 +2,7 @@ package com.wachs.main.viewLayerJavaFX;
 
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
+import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -80,36 +81,20 @@ public class DialogEditGuest extends Application {
         //Holding all HBoxes
         verticalBox = new VBox();
 
-
         //First Row
         HBox_BTN_Regular = new HBox();
         HBox_BTN_Regular.setSpacing(10);
         HBox_BTN_Regular.setPadding(new Insets(20, 20, 10, 20));
 
-
-        //Button Save new data
-        Image ButtonImageSaveData = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/saveData.png"));
-        btnSaveAll = new Button(GUINaming.BTN_SAVE_ALLDATA, new ImageView(ButtonImageSaveData));
-        btnSaveAll.setStyle(GUIProperties.BTN_COLOR_BLUELIGHT);
-        btnSaveAll.setTooltip(new Tooltip(GUINaming.TT_BTN_SAVE_GUEST));
-        btnSaveAll.setMaxWidth(Double.MAX_VALUE);
+        btnSaveAll = createBtn(GUISourceIcons.sourceSaveData,GUIProperties.BTN_COLOR_BLUELIGHT,GUINaming.TT_BTN_SAVE_GUEST);
 
         //Button Delete Guest
-        Image ButtonImageDeleteGuest = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/delete3.png"));
-        btnDeleteGuest = new Button(GUINaming.BTN_DELETE_GUEST, new ImageView(ButtonImageDeleteGuest));
-        btnDeleteGuest.setStyle(GUIProperties.BTN_COLOR_RED);
-        btnDeleteGuest.setTooltip(new Tooltip(GUINaming.TT_BTN_DELETE_GUEST));
-        btnDeleteGuest.setMaxWidth(Double.MAX_VALUE);
+        btnDeleteGuest = createBtn(GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
 
         HBox_BTN_Regular.getChildren().addAll(btnSaveAll, btnDeleteGuest);
 
         //Button Save Expenses
-        btnSaveExpenses = new Button();
-        Image ButtonImageSaveExpenses = new Image(getClass().getClassLoader().getResourceAsStream("com/wachs/main/viewLayerJavaFX/Icons/saveExpense.png"));
-        btnSaveExpenses = new Button(GUINaming.BTN_SAVE_EXPENSE, new ImageView(ButtonImageSaveExpenses));
-        btnSaveExpenses.setStyle("-fx-base: #b6e7c9;");
-        btnSaveExpenses.setTooltip(new Tooltip(GUINaming.TT_BTN_SAVE_EXPENSE));
-        btnSaveExpenses.setMaxWidth(Double.MAX_VALUE);
+        btnSaveExpenses = createBtn(GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
 
         //Third Row Labels & TextFields for GuestDetails
         GridForGuestDetails = new GridPane();
@@ -138,9 +123,7 @@ public class DialogEditGuest extends Application {
         lb_GuestPrepaid.setPrefWidth(GUIProperties.SIZE_GUI_ELEMENTS);
         lb_GuestPrepaid.setStyle(GUIProperties.FONT_BOLD);
 
-
         HBox_LB_AreaGuests.getChildren().addAll(lb_GuestNights, lb_GuestDrinks, lb_GuestFood, lb_GuestPrepaid);
-
 
         HBox_TF_AreaGuests = new HBox();
         HBox_TF_AreaGuests.setSpacing(10);
@@ -255,16 +238,27 @@ public class DialogEditGuest extends Application {
 
     }
 
-    //Table for all Expenses each Guest
-    private TableView createTable(String col1, String col2, String col3) {
+    private Button createBtn(String source, String color, String toolTip) {
+
+        //DEPENDECY INJECTION HIER TROTZDEM NÖTIG ... NEW OPERATOR
+        Image ButtonImageSaveData = new Image(getClass().getClassLoader().getResourceAsStream(source));
+        Button newButton = new Button(GUINaming.BTN_SAVE_ALLDATA, new ImageView(ButtonImageSaveData));
+        newButton.setStyle(color);
+        newButton.setTooltip(new Tooltip(toolTip));
+        newButton.setMaxWidth(Double.MAX_VALUE);
+
+        return newButton;
+    }
+
+    private TableView createTable(String column1, String column2, String column3) {
 
         TableView newTable = new TableView();
         newTable.setEditable(false);
         newTable.setPrefSize(630, 500);
 
-        TableColumn<Void, Void> amountColumn = new TableColumn<>(col1);
-        TableColumn<Void, Void> reasonColumn = new TableColumn<>(col2);
-        TableColumn<Void, Void> whenColumn = new TableColumn<>(col3);
+        TableColumn<Void, Void> amountColumn = new TableColumn<>(column1);
+        TableColumn<Void, Void> reasonColumn = new TableColumn<>(column2);
+        TableColumn<Void, Void> whenColumn = new TableColumn<>(column3);
 
         newTable.getColumns().add(amountColumn);
         newTable.getColumns().add(reasonColumn);

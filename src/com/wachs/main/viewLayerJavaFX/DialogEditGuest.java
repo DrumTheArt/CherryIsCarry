@@ -82,9 +82,7 @@ public class DialogEditGuest extends Application {
         verticalBox = new VBox();
 
         //First Row
-        HBox_BTN_Regular = new HBox();
-        HBox_BTN_Regular.setSpacing(10);
-        HBox_BTN_Regular.setPadding(new Insets(20, 20, 10, 20));
+        HBox_BTN_Regular = createHBox(10, 20, 20, 10, 20);
 
         btnSaveAll = createBtn(GUINaming.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
 
@@ -99,9 +97,8 @@ public class DialogEditGuest extends Application {
         //Third Row Labels & TextFields for GuestDetails
         GridForGuestDetails = new GridPane();
 
-        HBox_LB_AreaGuests = new HBox();
-        HBox_LB_AreaGuests.setSpacing(10);
-        HBox_LB_AreaGuests.setPadding(new Insets(10, 20, 0, 20));
+
+        HBox_LB_AreaGuests = createHBox(10,10,20,0,20);
 
         lb_GuestNights = createLabel(GUINaming.LB_GUEST_NIGHTS, GUIProperties.SIZE_GUI_ELEMENTS,GUIProperties.FONT_BOLD);
         lb_GuestDrinks = createLabel(GUINaming.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
@@ -111,10 +108,7 @@ public class DialogEditGuest extends Application {
 
         HBox_LB_AreaGuests.getChildren().addAll(lb_GuestNights, lb_GuestDrinks, lb_GuestFood, lb_GuestPrepaid);
 
-        HBox_TF_AreaGuests = new HBox();
-        HBox_TF_AreaGuests.setSpacing(10);
-        HBox_TF_AreaGuests.setPadding(new Insets(4, 20, 10, 20));
-
+        HBox_TF_AreaGuests = createHBox(10, 4, 20, 10, 20);
 
         tf_GuestNights = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestDrinks = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
@@ -134,9 +128,7 @@ public class DialogEditGuest extends Application {
         //Fourth Row Labels & TextFields for AllDetails
         GridForExpensesDetails = new GridPane();
 
-        HBox_LB_AreaExpenses = new HBox();
-        HBox_LB_AreaExpenses.setSpacing(10);
-        HBox_LB_AreaExpenses.setPadding(new Insets(40, 20, 0, 20));
+        HBox_LB_AreaExpenses = createHBox(10, 40, 20, 0, 20);
 
         lb_GuestExpensePrice = createLabel(GUINaming.LB_GUEST_EXPENSE_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestExpenseReason = createLabel(GUINaming.LB_GUEST_EXPENSE_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
@@ -146,9 +138,7 @@ public class DialogEditGuest extends Application {
         HBox_LB_AreaExpenses.getChildren().addAll(lb_GuestExpensePrice, lb_GuestExpenseReason, lb_GuestExpenseWhen);
 
 
-        HBox_TF_AreaExpenses = new HBox();
-        HBox_TF_AreaExpenses.setSpacing(10);
-        HBox_TF_AreaExpenses.setPadding(new Insets(4, 20, 10, 20));
+        HBox_TF_AreaExpenses = createHBox(10, 4, 20, 10, 20);
 
         tf_GuestExpensesPrice = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true );
         tf_GuestExpensesReason = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
@@ -158,9 +148,7 @@ public class DialogEditGuest extends Application {
         HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
 
         //Fifth Row
-        HBox_BTN_SaveExpense = new HBox();
-        HBox_BTN_SaveExpense.setSpacing(10);
-        HBox_BTN_SaveExpense.setPadding(new Insets(20, 20, 10, 20));
+        HBox_BTN_SaveExpense = createHBox(10, 20, 20, 10, 20);
 
         HBox_BTN_SaveExpense.setAlignment(Pos.BOTTOM_CENTER);
         HBox_BTN_SaveExpense.getChildren().add(btnSaveExpenses);
@@ -171,9 +159,7 @@ public class DialogEditGuest extends Application {
         GridForExpensesDetails.getChildren().addAll(HBox_LB_AreaExpenses, HBox_TF_AreaExpenses);
 
         //Sixth Row
-        HBox_LIST_Expense = new HBox();
-        HBox_LIST_Expense.setSpacing(10);
-        HBox_LIST_Expense.setPadding(new Insets(4, 20, 10, 20));
+        HBox_LIST_Expense = createHBox(10, 4, 20, 10,20);
 
         tableExpenses = createTable("Amount", "Reason", "Date");
 
@@ -190,7 +176,14 @@ public class DialogEditGuest extends Application {
 
     }
 
+    private HBox createHBox(int spacing, int top, int right, int bottom, int left) {
 
+        HBox newHBox = new HBox();
+        newHBox.setSpacing(spacing);
+        newHBox.setPadding(new Insets(top, right, bottom, left));
+
+        return newHBox;
+    }
 
     private TextField createTextfield(int size, String toolTip, String setStyle, boolean editable) {
 

@@ -7,9 +7,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import java.net.URISyntaxException;
 
 public class DialogEditGuest extends Application {
+
 
     //AllColumns
     private VBox verticalBox;
@@ -82,44 +84,38 @@ public class DialogEditGuest extends Application {
         verticalBox = new VBox();
 
         //First Row
-        HBox_BTN_Regular = new HBox();
-        HBox_BTN_Regular.setSpacing(10);
-        HBox_BTN_Regular.setPadding(new Insets(20, 20, 10, 20));
+        HBox_BTN_Regular = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
-        btnSaveAll = createBtn(GUINaming.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
+        btnSaveAll = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
 
         //Button Delete Guest
-        btnDeleteGuest = createBtn(GUINaming.BTN_DELETE_GUEST, GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
+        btnDeleteGuest = new CreateGUIButton().createBtn(GUINaming.BTN_DELETE_GUEST, GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
 
         HBox_BTN_Regular.getChildren().addAll(btnSaveAll, btnDeleteGuest);
 
         //Button Save Expenses
-        btnSaveExpenses = createBtn(GUINaming.BTN_SAVE_EXPENSE, GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
+        btnSaveExpenses = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_EXPENSE, GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
 
         //Third Row Labels & TextFields for GuestDetails
         GridForGuestDetails = new GridPane();
 
-        HBox_LB_AreaGuests = new HBox();
-        HBox_LB_AreaGuests.setSpacing(10);
-        HBox_LB_AreaGuests.setPadding(new Insets(10, 20, 0, 20));
 
-        lb_GuestNights = createLabel(GUINaming.LB_GUEST_NIGHTS, GUIProperties.SIZE_GUI_ELEMENTS,GUIProperties.FONT_BOLD);
-        lb_GuestDrinks = createLabel(GUINaming.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestFood = createLabel(GUINaming.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestPrepaid = createLabel(GUINaming.LB_GUEST_ALREADY_PAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        HBox_LB_AreaGuests = new CreateGUIHBox().CreateHBox(10, 10, 20, 0, 20);
+
+        lb_GuestNights = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_NIGHTS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestDrinks = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestFood = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestPrepaid = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_ALREADY_PAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
 
         HBox_LB_AreaGuests.getChildren().addAll(lb_GuestNights, lb_GuestDrinks, lb_GuestFood, lb_GuestPrepaid);
 
-        HBox_TF_AreaGuests = new HBox();
-        HBox_TF_AreaGuests.setSpacing(10);
-        HBox_TF_AreaGuests.setPadding(new Insets(4, 20, 10, 20));
+        HBox_TF_AreaGuests = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
-
-        tf_GuestNights = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestDrinks = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestFood = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_prepaid = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestNights = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_prepaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
         HBox_TF_AreaGuests.setAlignment(Pos.BOTTOM_CENTER);
@@ -134,33 +130,27 @@ public class DialogEditGuest extends Application {
         //Fourth Row Labels & TextFields for AllDetails
         GridForExpensesDetails = new GridPane();
 
-        HBox_LB_AreaExpenses = new HBox();
-        HBox_LB_AreaExpenses.setSpacing(10);
-        HBox_LB_AreaExpenses.setPadding(new Insets(40, 20, 0, 20));
+        HBox_LB_AreaExpenses = new CreateGUIHBox().CreateHBox(10, 40, 20, 0, 20);
 
-        lb_GuestExpensePrice = createLabel(GUINaming.LB_GUEST_EXPENSE_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestExpenseReason = createLabel(GUINaming.LB_GUEST_EXPENSE_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestExpenseWhen = createLabel(GUINaming.LB_GUEST_EXPENSE_WHEN, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpensePrice = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_EXPENSE_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseReason = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_EXPENSE_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseWhen = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_EXPENSE_WHEN, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
         HBox_LB_AreaExpenses.setAlignment(Pos.BOTTOM_CENTER);
         HBox_LB_AreaExpenses.getChildren().addAll(lb_GuestExpensePrice, lb_GuestExpenseReason, lb_GuestExpenseWhen);
 
 
-        HBox_TF_AreaExpenses = new HBox();
-        HBox_TF_AreaExpenses.setSpacing(10);
-        HBox_TF_AreaExpenses.setPadding(new Insets(4, 20, 10, 20));
+        HBox_TF_AreaExpenses = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
-        tf_GuestExpensesPrice = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true );
-        tf_GuestExpensesReason = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestExpensesWhen = createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_WHEN, GUIProperties.TEXTFIELD_DESIGN,true);
+        tf_GuestExpensesPrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestExpensesReason = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestExpensesWhen = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_TF_GUEST_EXPENSE_WHEN, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
         HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
 
         //Fifth Row
-        HBox_BTN_SaveExpense = new HBox();
-        HBox_BTN_SaveExpense.setSpacing(10);
-        HBox_BTN_SaveExpense.setPadding(new Insets(20, 20, 10, 20));
+        HBox_BTN_SaveExpense = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
         HBox_BTN_SaveExpense.setAlignment(Pos.BOTTOM_CENTER);
         HBox_BTN_SaveExpense.getChildren().add(btnSaveExpenses);
@@ -171,11 +161,9 @@ public class DialogEditGuest extends Application {
         GridForExpensesDetails.getChildren().addAll(HBox_LB_AreaExpenses, HBox_TF_AreaExpenses);
 
         //Sixth Row
-        HBox_LIST_Expense = new HBox();
-        HBox_LIST_Expense.setSpacing(10);
-        HBox_LIST_Expense.setPadding(new Insets(4, 20, 10, 20));
+        HBox_LIST_Expense = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
-        tableExpenses = createTable("Amount", "Reason", "Date");
+        tableExpenses = new CreateGUITable().createTable("Amount", "Reason", "Date");
 
         HBox_LIST_Expense.setAlignment(Pos.BOTTOM_CENTER);
         HBox_LIST_Expense.getChildren().add(tableExpenses);
@@ -190,59 +178,4 @@ public class DialogEditGuest extends Application {
 
     }
 
-
-
-    private TextField createTextfield(int size, String toolTip, String setStyle, boolean editable) {
-
-        TextField newTextField = new TextField();
-        newTextField.setPrefWidth(size);
-        newTextField.setTooltip(new Tooltip(toolTip));
-        newTextField.setStyle(setStyle);
-        newTextField.setEditable(editable);
-
-        return newTextField;
-    }
-
-    private Label createLabel(String labelName, int sizeWidth, String front) {
-
-        Label newLabel = new Label();
-        newLabel.setText(labelName);
-        newLabel.setPrefWidth(sizeWidth);
-        newLabel.setStyle(front);
-
-        return newLabel;
-    }
-
-    private Button createBtn(String btnName, String btnIconSourcePath, String btnColor, String btnToolTip) {
-
-        //DEPENDECY INJECTION HIER TROTZDEM NÖTIG ... NEW OPERATOR
-        Image ButtonImageSaveData = new Image(getClass().getClassLoader().getResourceAsStream(btnIconSourcePath));
-        Button newButton = new Button(btnName, new ImageView(ButtonImageSaveData));
-        newButton.setStyle(btnColor);
-        newButton.setTooltip(new Tooltip(btnToolTip));
-        newButton.setMaxWidth(Double.MAX_VALUE);
-
-        return newButton;
-    }
-
-    private TableView createTable(String column1, String column2, String column3) {
-
-        TableView newTable = new TableView();
-        newTable.setEditable(false);
-        newTable.setPrefSize(630, 500);
-
-        TableColumn<Void, Void> amountColumn = new TableColumn<>(column1);
-        TableColumn<Void, Void> reasonColumn = new TableColumn<>(column2);
-        TableColumn<Void, Void> whenColumn = new TableColumn<>(column3);
-
-        newTable.getColumns().add(amountColumn);
-        newTable.getColumns().add(reasonColumn);
-        newTable.getColumns().add(whenColumn);
-
-        newTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        amountColumn.prefWidthProperty().bind(newTable.widthProperty().multiply(0.1));
-
-        return newTable;
-    }
 }

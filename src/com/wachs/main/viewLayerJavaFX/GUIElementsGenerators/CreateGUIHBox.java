@@ -1,4 +1,4 @@
-package com.wachs.main.viewLayerJavaFX;
+package com.wachs.main.viewLayerJavaFX.GUIElementsGenerators;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;

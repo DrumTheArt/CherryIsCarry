@@ -1,9 +1,9 @@
 package com.wachs.main.viewLayerJavaFX.GUIDialogs;
 
-import com.wachs.main.viewLayerJavaFX.CreateGUIButton;
-import com.wachs.main.viewLayerJavaFX.CreateGUIHBox;
-import com.wachs.main.viewLayerJavaFX.CreateGUILabel;
-import com.wachs.main.viewLayerJavaFX.CreateGUITextfield;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUIButton;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUIHBox;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUILabel;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUITextfield;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;

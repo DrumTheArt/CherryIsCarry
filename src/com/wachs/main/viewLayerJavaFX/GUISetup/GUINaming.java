@@ -13,6 +13,7 @@ public class GUINaming {
     public static String BTN_SAVE_NEWPROJECT = "Save new Vacation";
 
     //Labels for GuestDetails
+
     public static String LB_GUEST_NEWGUESTNAME = "New Guest Name";
     public static String LB_GUEST_NIGHTS = "Nights";
     public static String LB_GUEST_NIGHTS_EUR = "Nights";
@@ -38,10 +39,8 @@ public class GUINaming {
 
     //Labels for Projects
     public static String LB_PROJECTS_NEWPROJECTNAME = "New Vacation Project";
-    public static String LB_PROJECTS_SELECTED = "Select Vacation";
     public static String LB_PROJECTS_PRICE = "Rent/Price";
     public static String LB_PROJECTS_DEPOSITE = "Deposite";
-
 
     //ToolTips for Buttons
     public static String TT_BTN_ADD_PROJECT = "Adding a new Project/Vacation for Cost Sharing";
@@ -53,6 +52,7 @@ public class GUINaming {
     public static String TT_BTN_SAVE_NEWPROJECT = "Saving new Vacation";
 
     //ToolTips for GuestDetails
+    public static String TT_LB_GUEST_SELECT = "Select Guest";
     public static String TT_TF_GUEST_NEWGUESTNAME = "Fill in the name of the new Guest";
     public static String TT_TF_GUEST_NIGHTS = "How many overnights";
     public static String TT_TF_GUEST_NIGHTS_EUR = "Price for all overnights";
@@ -77,9 +77,11 @@ public class GUINaming {
     public static String TT_TF_GUEST_EXPENSE_WHEN = "Put in the date of the made expense of your selected guest";
 
     //ToolTips for Projects
+    public static String TT_LB_PROJECTS_SELECT = "Select Vacation";
     public static String TT_TF_PROJECTS_NEWPROJECTNAME = "New Vacation Project";
     public static String TT_TF_PROJECTS_SELECTED = "To which Projects belongs the new Guest";
     public static String TT_TF_PROJECTS_PRICE = "Price for the house without deposite";
     public static String TT_TF_PROJECTS_DEPOSITE = "Deposite for the house";
+
 
 }

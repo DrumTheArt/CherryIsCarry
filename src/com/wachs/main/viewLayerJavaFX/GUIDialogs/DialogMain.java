@@ -1,19 +1,13 @@
 package com.wachs.main.viewLayerJavaFX.GUIDialogs;
 
-import com.wachs.main.viewLayerJavaFX.CreateGUIButton;
-import com.wachs.main.viewLayerJavaFX.CreateGUIHBox;
-import com.wachs.main.viewLayerJavaFX.CreateGUILabel;
-import com.wachs.main.viewLayerJavaFX.CreateGUITextfield;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -80,6 +74,9 @@ public class DialogMain extends Application {
     private GridPane GridForGuestDetails;
     private GridPane GridForAllDetails;
 
+    //AllComboBox
+    private ComboBox selectProject;
+    private ComboBox selectGuest;
 
     public static void main(String[] args) {
         launch(args);
@@ -113,8 +110,8 @@ public class DialogMain extends Application {
         //Second Row
         HBox_Selector = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
-        ScrollPane selectProject = new ScrollPane();
-        ScrollPane selectGuest = new ScrollPane();
+        selectProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_LB_PROJECTS_SELECT);
+        selectGuest = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINaming.TT_LB_GUEST_SELECT);
 
         HBox_Selector.getChildren().addAll(selectProject, selectGuest);
 

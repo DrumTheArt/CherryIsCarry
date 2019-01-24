@@ -1,6 +1,6 @@
 package com.wachs.main.viewLayerJavaFX.GUIDialogs;
 
-import com.wachs.main.viewLayerJavaFX.*;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;

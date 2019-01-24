@@ -1,6 +1,6 @@
 package com.wachs.main.viewLayerJavaFX.GUIDialogs;
 
-import com.wachs.main.viewLayerJavaFX.*;
+import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
@@ -77,7 +77,7 @@ public class DialogAddGuest extends Application {
 
         lb_GuestNewName = new CreateGUILabel().createLabel(GUINaming.LB_GUEST_NEWGUESTNAME, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
-        lb_Guest_SelectedProject = new CreateGUILabel().createLabel(GUINaming.LB_PROJECTS_SELECTED, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_Guest_SelectedProject = new CreateGUILabel().createLabel(GUINaming.TT_LB_PROJECTS_SELECT, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
         HBox_LB_AreaNewGuestName.getChildren().addAll(lb_GuestNewName, lb_Guest_SelectedProject);
 

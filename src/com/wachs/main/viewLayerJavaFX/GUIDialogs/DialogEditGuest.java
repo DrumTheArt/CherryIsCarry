@@ -1,5 +1,6 @@
-package com.wachs.main.viewLayerJavaFX;
+package com.wachs.main.viewLayerJavaFX.GUIDialogs;
 
+import com.wachs.main.viewLayerJavaFX.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
@@ -93,7 +94,7 @@ public class DialogEditGuest extends Application {
         HBox_BTN_Regular.getChildren().addAll(btnSaveAll, btnDeleteGuest);
 
         //Button Save Expenses
-        btnSaveExpenses = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_EXPENSE, GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_DELETE_GUEST);
+        btnSaveExpenses = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_EXPENSE, GUISourceIcons.sourceSaveExpenses, GUIProperties.BTN_COLOR_RED, GUINaming.TT_BTN_SAVE_EXPENSE);
 
         //Third Row Labels & TextFields for GuestDetails
         GridForGuestDetails = new GridPane();

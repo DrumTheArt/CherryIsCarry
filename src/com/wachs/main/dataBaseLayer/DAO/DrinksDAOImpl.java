@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay.*;
 
-public class DrinksDAOImpl {
+public class DrinksDAOImpl implements DrinksDAO {
 
     private Statement statement;
     private ArrayList<Drinks> allDataList;

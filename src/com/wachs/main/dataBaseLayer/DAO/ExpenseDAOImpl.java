@@ -16,17 +16,21 @@ import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense.*;
 public class ExpenseDAOImpl implements ExpenseDAO {
 
     private Statement statement;
-    private ArrayList<Expense> allDataList;
+    private ArrayList<Expense> AllExpensesAllGuests;
+    private ArrayList<Expense> AllExpensesSearchedGuests;
     private Expense aExpense;
 
     public ExpenseDAOImpl() {
 
         aExpense = new Expense();
-        allDataList = new ArrayList<Expense>();
+        AllExpensesAllGuests = new ArrayList<Expense>();
+        AllExpensesSearchedGuests = new ArrayList<Expense>();
     }
 
     @Override
-    public Expense findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+
+
 
         statement = DbConnection.getConnection().createStatement();
         QueryGeneratorExpense query = new QueryGeneratorExpense();
@@ -35,23 +39,18 @@ public class ExpenseDAOImpl implements ExpenseDAO {
         //Log the query
         ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
 
-        int FK_id = result.getInt(1);
-        double spend = result.getDouble(2);
-        String TXT_name = result.getString(3);
-        String when = result.getString(4);
 
-        aExpense.setPK_id(FK_id);
-        aExpense.setREAL_price(spend);
-        aExpense.setTXT_name(TXT_name);
-        aExpense.setWhen(when);
-        aExpense.setId_guest(id_guest);
-        aExpense.setId_house(id_house);
+        while (result.next()) {
+            AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+        }
 
-        result.close();
         statement.close();
+        result.close();
         DbConnection.closeConnection();
 
-        return aExpense;
+        return AllExpensesSearchedGuests;
+
+
     }
 
     @Override
@@ -65,14 +64,14 @@ public class ExpenseDAOImpl implements ExpenseDAO {
         ApplicationLogger.loggingQueries(query.queryReadAllData());
 
         while (result.next()) {
-            allDataList.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+            AllExpensesAllGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
         }
 
         statement.close();
         result.close();
         DbConnection.closeConnection();
 
-        return allDataList;
+        return AllExpensesAllGuests;
     }
 
     @Override

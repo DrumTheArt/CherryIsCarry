@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface ExpenseDAO {
 
-    Expense findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException;
+    ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException;
 
     ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException;
 

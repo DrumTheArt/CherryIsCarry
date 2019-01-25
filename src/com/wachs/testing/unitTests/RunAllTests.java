@@ -13,7 +13,9 @@ import org.junit.runners.Suite;
         GuestDAOTest.class,
         HouseDAOTest.class,
         PrepaidDAOTest.class,
-        StayDAOTest.class,
+        StayDAOTest.class
+
+        /**
         DrinksModelTest.class,
         ExpenseModelTest.class,
         FoodModelTest.class,
@@ -22,6 +24,7 @@ import org.junit.runners.Suite;
         HouseModelTest.class,
         PrepaidModelTest.class,
         StayModelTest.class
+         **/
 })
 
 public class RunAllTests {

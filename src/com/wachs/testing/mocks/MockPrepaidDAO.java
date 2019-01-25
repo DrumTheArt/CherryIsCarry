@@ -2,7 +2,6 @@ package com.wachs.testing.mocks;
 
 import com.wachs.main.businessLayer.Prepaid;
 import com.wachs.main.dataBaseLayer.DAO.PrepaidDAO;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
@@ -95,7 +94,7 @@ public class MockPrepaidDAO implements PrepaidDAO {
     @Override
     public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
 
-        QueryGeneratorExpense newQuery = new QueryGeneratorExpense();
+        QueryGeneratorPrepaid newQuery = new QueryGeneratorPrepaid();
 
         statement = DbTestConnection.getConnection().createStatement();
         statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));

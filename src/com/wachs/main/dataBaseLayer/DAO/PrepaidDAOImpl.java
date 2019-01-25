@@ -2,7 +2,6 @@ package com.wachs.main.dataBaseLayer.DAO;
 
 import com.wachs.main.businessLayer.Prepaid;
 import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense;
 import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid;
 import com.wachs.main.dataBaseLayer.Util.ApplicationLogger;
 
@@ -108,7 +107,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     @Override
     public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
         statement = DbConnection.getConnection().createStatement();
         statement.executeUpdate(query.queryDeleteData(id_guest, id_house));

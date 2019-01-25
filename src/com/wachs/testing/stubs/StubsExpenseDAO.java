@@ -8,57 +8,90 @@ import java.util.ArrayList;
 
 public class StubsExpenseDAO implements ExpenseDAO {
 
-    private ArrayList<Expense> alphaExpense;
-    private Expense expenseOne;
-    private Expense expenseTwo;
-    private ArrayList<Expense> listOfExpenses;
+    private ArrayList<Expense> AllExpensesSelectedGuestOne;
+    private ArrayList<Expense> AllExpensesSelectedGuestTwo;
+    private ArrayList<Expense> listOfExpensesAllGuests;
+    private ArrayList<Expense> listOfExpensesOneGuests;
+    private Expense expenseOneForGuestOne;
+    private Expense expenseTwoForGuestOne;
+    private Expense expenseOneForGuestTwo;
+    private Expense expenseTwoForGuestTwo;
 
-    public StubsExpenseDAO() {
+    public StubsExpenseDAO() throws SQLException, ClassNotFoundException {
 
-        listOfExpenses = new ArrayList<Expense>();
-        alphaExpense = new ArrayList<Expense>();
-        expenseOne = new Expense();
-        listOfExpenses.add(alphaExpense);
-        listOfExpenses.add(expenseOne);
+        addTwoExpensesToTwoGuests();
+
+        AllExpensesSelectedGuestOne = new ArrayList<Expense>();
+        AllExpensesSelectedGuestTwo = new ArrayList<Expense>();
+
+        listOfExpensesAllGuests = new ArrayList<Expense>();
+        listOfExpensesOneGuests = new ArrayList<Expense>();
     }
 
     @Override
-    public ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
 
-        return this.alphaExpense;
+        for (Expense e : listOfExpensesAllGuests) {
+
+            if ((e.getId_guest() == id_guest) && (e.getId_house() == id_house)) {
+
+                listOfExpensesOneGuests.add(e);
+            }
+        }
+
+        return this.listOfExpensesOneGuests;
     }
 
     @Override
     public ArrayList readAllData() throws SQLException, ClassNotFoundException {
 
-        return listOfExpenses;
+        return listOfExpensesAllGuests;
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
 
-        this.alphaExpense.setId_guest(0);
-        this.alphaExpense.setId_house(0);
-        this.alphaExpense.setPK_id(0);
-        this.alphaExpense.setREAL_price(0);
-        this.alphaExpense.setTXT_name("");
-        this.alphaExpense.setWhen("");
+
+        for (Expense e : listOfExpensesAllGuests) {
+
+            if ((e.getId_guest() == id_guest) && (e.getId_house() == id_house) && (e.getREAL_price() == price) && (e.getTXT_reason() == reason) && (e.getWhen() == when)) {
+
+                listOfExpensesAllGuests.remove(e);
+            }
+        }
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) throws SQLException, ClassNotFoundException {
 
-        this.alphaExpense.setId_guest(id_guest);
-        this.alphaExpense.setId_house(id_house);
-        this.alphaExpense.setREAL_price(price);
-        this.alphaExpense.setTXT_name(reason);
-        this.alphaExpense.setWhen(when);
+
+        for (Expense e : listOfExpensesAllGuests) {
+
+            if ((e.getId_guest() == id_guest) && (e.getId_house() == id_house) && (e.getREAL_price() == price) && (e.getTXT_reason() == reason) && (e.getWhen() == when)) {
+
+                e.setTXT_reason(newReason);
+                e.setWhen(newWhen);
+                e.setREAL_price(newPrice);
+            }
+        }
+
     }
 
     @Override
     public void insertData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
 
-        expenseTwo = new Expense(1, price, reason, when, id_guest,id_house);
-        listOfExpenses.add(expenseTwo);
+        Expense someExpense = new Expense(1, price, reason, when, id_guest, id_house);
+        listOfExpensesAllGuests.add(someExpense);
+
     }
+
+    private void addTwoExpensesToTwoGuests() throws SQLException, ClassNotFoundException {
+
+        insertData(1, 1, 100, "buyingMilk", "01.01.2019");
+        insertData(1, 1, 200, "buyingButter", "02.02.2019");
+        insertData(2, 1, 100, "buyongToilettePaper", "03.03.2019");
+        insertData(2, 1, 200, "buyingDrugs", "04.04.2019");
+
+    }
+
 }

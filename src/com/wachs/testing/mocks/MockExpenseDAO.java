@@ -28,8 +28,7 @@ public class MockExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public ArrayList<Expense> findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
-
+    public ArrayList<Expense> fineAllDataToOneGuest(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         statement = DbTestConnection.getConnection().createStatement();
         QueryGeneratorExpense query = new QueryGeneratorExpense();
@@ -59,7 +58,6 @@ public class MockExpenseDAO implements ExpenseDAO {
 
         while (result.next()) {
             allDataList.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
-
         }
 
         statement.close();
@@ -70,12 +68,12 @@ public class MockExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
 
         QueryGeneratorExpense newQuery = new QueryGeneratorExpense();
 
         statement = DbTestConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
+        statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house, price, reason, when));
 
         statement.close();
         DbTestConnection.closeConnection();
@@ -83,13 +81,13 @@ public class MockExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) throws SQLException, ClassNotFoundException {
 
         QueryGeneratorExpense newQuery = new QueryGeneratorExpense();
 
         statement = DbTestConnection.getConnection().createStatement();
 
-        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, price, reason, when));
+        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
 
         statement.close();
         DbTestConnection.closeConnection();

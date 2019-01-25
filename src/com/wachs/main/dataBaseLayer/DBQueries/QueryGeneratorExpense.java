@@ -24,23 +24,24 @@ public class QueryGeneratorExpense {
         return query;
     }
 
-    public String queryDeleteData(int id_guest, int id_house) {
+    public String queryDeleteData(int id_guest, int id_house, double price, String reason, String when) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + id_guest + " AND " + COLUMN6 + " = " + id_house;
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + id_guest + " AND " + COLUMN6 + " = " + id_house + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + reason + " AND " + COLUMN4 + " = " + when;
 
         return query;
     }
 
     public String queryInsertData(int id_guest, int id_house, double spend, String reason, String when) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + spend +  "," + "'" + reason + "'" + "," + when + "," + id_guest + "," + id_house + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + spend + "," + "'" + reason + "'" + "," + when + "," + id_guest + "," + id_house + ")";
 
         return query;
+
     }
 
-    public String queryUpdateData(int id_guest, int id_house, double spend, String reason, String when) {
+    public String queryUpdateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + spend + " ," +  COLUMN3  + "=" + "'" + reason + "'" + " ,"  + COLUMN4  + " = " + "'" + when + "'" + " WHERE " + COLUMN5 + " = "  + id_guest + " AND " + COLUMN6 + " = " + id_house;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + newPrice + " ," + COLUMN3 + "=" + "'" + newReason + "'" + " ," + COLUMN4 + " = " + "'" + newWhen + "'" + " WHERE " + COLUMN5 + " = " + id_guest + " AND " + COLUMN6 + " = " + id_house + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + reason + " AND " + COLUMN4 + " = " + when;
 
         return query;
     }

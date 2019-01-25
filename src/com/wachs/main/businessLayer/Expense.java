@@ -4,7 +4,7 @@ public class Expense  {
 
     private int PK_id;
     private double spend;
-    private String TXT_name;
+    private String TXT_reason;
     private String when;
     private int id_guest;
     private int id_house;
@@ -13,11 +13,11 @@ public class Expense  {
 
     }
 
-    public Expense(int FK_id, double spend, String TXT_name, String when, int id_guest, int id_house){
+    public Expense(int FK_id, double spend, String TXT_reason, String when, int id_guest, int id_house) {
 
         this.PK_id =FK_id;
         this.spend = spend;
-        this.TXT_name = TXT_name;
+        this.TXT_reason = TXT_reason;
         this.when=when;
         this.id_guest=id_guest;
         this.id_house=id_house;
@@ -39,12 +39,12 @@ public class Expense  {
         this.id_house=id_house;
     }
 
-    public String getTXT_name() {
-        return this.TXT_name;
+    public String getTXT_reason() {
+        return this.TXT_reason;
     }
 
-    public void setTXT_name(String TXT_name) {
-        this.TXT_name=TXT_name;
+    public void setTXT_reason(String TXT_name) {
+        this.TXT_reason = TXT_name;
     }
 
     public void setREAL_price(double REAL_price) {

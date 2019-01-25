@@ -35,11 +35,11 @@ public class ExpenseDAOTest {
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
         double price_expected = 0;
         double price_setted = 300.00;
-        ArrayList<Expense> listOfExepenses = aExpense.findOneData(idGuest, pkHouse);
+        ArrayList<Expense> listOfExepenses = aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
 
         for (Expense e : listOfExepenses) {
 
-            if (e.getTXT_name().equals("Einkaufen")) {
+            if (e.getTXT_reason().equals("Einkaufen")) {
                 price_expected = e.getREAL_price();
             }
         }
@@ -66,14 +66,14 @@ public class ExpenseDAOTest {
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
         String reasonDBValue = null;
 
-        ArrayList<Expense> listOfExepenses = aExpense.findOneData(idGuest, pkHouse);
+        ArrayList<Expense> listOfExepenses = aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
 
         String reasonUnequalDBValue = "Einkaufen1";
 
         for (Expense e : listOfExepenses) {
 
-            if (e.getTXT_name().equals("Einkaufen")) {
-                reasonDBValue = e.getTXT_name();
+            if (e.getTXT_reason().equals("Einkaufen")) {
+                reasonDBValue = e.getTXT_reason();
             }
         }
 
@@ -97,9 +97,9 @@ public class ExpenseDAOTest {
 
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        aExpense.deleteData(idGuest,pkHouse);
+        aExpense.deleteData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
 
-        aExpense.findOneData(idGuest, pkHouse);
+        aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
 
     }
 
@@ -143,15 +143,15 @@ public class ExpenseDAOTest {
 
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        aExpense.updateData(idGuest, pkHouse, 60.0,"newReason","03/04/2018");
+        aExpense.updateData(idGuest, pkHouse, 300.0, "Einkaufen", "28/04/2013", 200.0, "newReason", "03/04/2018");
         double newPrepaidAmount = 60.0;
         double oldPrepaidAmount = 0;
 
-        ArrayList<Expense> getRowFromDataBase = aExpense.findOneData(idGuest, pkHouse);
+        ArrayList<Expense> getRowFromDataBase = aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
 
         for (Expense e : getRowFromDataBase) {
 
-            if (e.getTXT_name().equals("newReason")) {
+            if (e.getTXT_reason().equals("newReason")) {
                 oldPrepaidAmount = e.getREAL_price();
             }
         }

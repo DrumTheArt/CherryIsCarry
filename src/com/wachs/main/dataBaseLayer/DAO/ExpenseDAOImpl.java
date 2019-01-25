@@ -28,7 +28,7 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         statement = DbConnection.getConnection().createStatement();
         QueryGeneratorExpense query = new QueryGeneratorExpense();
@@ -71,15 +71,15 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public void deleteData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
 
         statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
+        statement.executeUpdate(query.queryDeleteData(id_guest, id_house, price, reason, when));
 
         //Log the query
-        ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
+        ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house, price, reason, when));
 
         statement.close();
         DbConnection.closeConnection();
@@ -87,16 +87,16 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException, IOException {
+    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
 
         statement = DbConnection.getConnection().createStatement();
 
-        statement.executeUpdate(query.queryUpdateData(id_guest, id_house, price, reason, when));
+        statement.executeUpdate(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
 
         //Log the query
-        ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, price, reason, when));
+        ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
 
         statement.close();
         DbConnection.closeConnection();

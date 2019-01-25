@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class StubsExpenseDAO implements ExpenseDAO {
 
-    private Expense alphaExpense;
+    private ArrayList<Expense> alphaExpense;
     private Expense expenseOne;
     private Expense expenseTwo;
     private ArrayList<Expense> listOfExpenses;
@@ -16,14 +16,14 @@ public class StubsExpenseDAO implements ExpenseDAO {
     public StubsExpenseDAO() {
 
         listOfExpenses = new ArrayList<Expense>();
-        alphaExpense = new Expense();
+        alphaExpense = new ArrayList<Expense>();
         expenseOne = new Expense();
         listOfExpenses.add(alphaExpense);
         listOfExpenses.add(expenseOne);
     }
 
     @Override
-    public Expense findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
 
         return this.alphaExpense;
     }

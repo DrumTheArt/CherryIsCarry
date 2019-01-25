@@ -30,15 +30,12 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     @Override
     public ArrayList findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
 
-
-
         statement = DbConnection.getConnection().createStatement();
         QueryGeneratorExpense query = new QueryGeneratorExpense();
         ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
         //Log the query
         ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
-
 
         while (result.next()) {
             AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -49,7 +46,6 @@ public class ExpenseDAOImpl implements ExpenseDAO {
         DbConnection.closeConnection();
 
         return AllExpensesSearchedGuests;
-
 
     }
 

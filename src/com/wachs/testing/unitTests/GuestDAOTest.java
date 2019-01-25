@@ -8,7 +8,6 @@ import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
-import org.sqlite.SQLiteException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -126,7 +125,7 @@ public class GuestDAOTest {
 
     }
 
-    @Test(expected = SQLiteException.class)
+    @Test(expected = SQLException.class)
     public void testInsertData_Name_And_idHouse_already_exists() throws SQLException, ClassNotFoundException, IOException {
 
         GuestDAO testing = new MockGuestDAO();

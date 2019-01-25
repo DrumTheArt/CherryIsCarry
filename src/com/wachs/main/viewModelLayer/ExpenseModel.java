@@ -57,7 +57,7 @@ public class ExpenseModel {
 
     private double calculateSumSpend(){
 
-        double sum=0;
+        double sum = 0;
 
         for(Expense e:expensesSearchedGuest){
             sum =+ e.getREAL_price();

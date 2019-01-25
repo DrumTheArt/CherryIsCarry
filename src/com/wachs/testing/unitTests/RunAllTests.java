@@ -13,8 +13,15 @@ import org.junit.runners.Suite;
         GuestDAOTest.class,
         HouseDAOTest.class,
         PrepaidDAOTest.class,
-        StayDAOTest.class
-
+        StayDAOTest.class,
+        DrinksModelTest.class,
+        ExpenseModelTest.class,
+        FoodModelTest.class,
+        GuestModelTest.class,
+        AllGuestModelTest.class,
+        HouseModelTest.class,
+        PrepaidModelTest.class,
+        StayModelTest.class
 })
 
 public class RunAllTests {

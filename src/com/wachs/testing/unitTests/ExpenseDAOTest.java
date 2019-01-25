@@ -33,8 +33,16 @@ public class ExpenseDAOTest {
 
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        double price_expected = aExpense.findOneData(idGuest, pkHouse).getREAL_price();
+        double price_expected = 0;
         double price_setted = 300.00;
+        ArrayList<Expense> listOfExepenses = aExpense.findOneData(idGuest, pkHouse);
+
+        for (Expense e : listOfExepenses) {
+
+            if (e.getTXT_name().equals("Einkaufen")) {
+                price_expected = e.getREAL_price();
+            }
+        }
 
         //Assert
         assertEquals(price_expected, price_setted, 0.0001);
@@ -56,8 +64,18 @@ public class ExpenseDAOTest {
 
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        String reasonDBValue = aExpense.findOneData(idGuest, pkHouse).getTXT_name();
+        String reasonDBValue = null;
+
+        ArrayList<Expense> listOfExepenses = aExpense.findOneData(idGuest, pkHouse);
+
         String reasonUnequalDBValue = "Einkaufen1";
+
+        for (Expense e : listOfExepenses) {
+
+            if (e.getTXT_name().equals("Einkaufen")) {
+                reasonDBValue = e.getTXT_name();
+            }
+        }
 
         //Assert
         assertNotEquals(reasonDBValue,reasonUnequalDBValue);
@@ -127,11 +145,19 @@ public class ExpenseDAOTest {
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
         aExpense.updateData(idGuest, pkHouse, 60.0,"newReason","03/04/2018");
         double newPrepaidAmount = 60.0;
-        double oldPrepaidAmount = aExpense.findOneData(idGuest,pkHouse).getREAL_price();
+        double oldPrepaidAmount = 0;
+
+        ArrayList<Expense> getRowFromDataBase = aExpense.findOneData(idGuest, pkHouse);
+
+        for (Expense e : getRowFromDataBase) {
+
+            if (e.getTXT_name().equals("newReason")) {
+                oldPrepaidAmount = e.getREAL_price();
+            }
+        }
 
         //Assert
         assertEquals(newPrepaidAmount, oldPrepaidAmount, 0.00001);
-
     }
 
 }

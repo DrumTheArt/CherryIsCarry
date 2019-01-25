@@ -38,7 +38,7 @@ public class PrepaidModel {
 
     }
 
-    public double getNightCount(){
+    public double getPrepaidAmount() {
 
         return staySearchedGuest.getPrepaid();
 

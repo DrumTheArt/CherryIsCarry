@@ -10,6 +10,7 @@ import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -82,27 +83,6 @@ public class ExpenseDAOTest {
 
     }
 
-    @Test(expected = SQLException.class)
-    public void testDeletedDataBaseValue_Should_Throw_SQLException() throws SQLException, ClassNotFoundException, IOException {
-
-        //Arrange
-        HouseDAO aHouse = new MockHouseDAO();
-        GuestDAO aGuest = new MockGuestDAO();
-        ExpenseDAO aExpense = new MockExpenseDAO();
-        aHouse.deleteData("Namedeshauses");
-        aHouse.insertData("Namedeshauses",200.0, 300.0);
-        int pkHouse = aHouse.findOneData("Namedeshauses").getPK_id();
-        aGuest.insertData(pkHouse,"Neuername");
-        int idGuest = aGuest.findOneData("Neuername", pkHouse).getPK_id();
-
-        //Act
-        aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        aExpense.deleteData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-
-        aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
-
-    }
-
     @Test
     public void testReadAllData_ShouldNotBeNull() throws SQLException, ClassNotFoundException, IOException {
 
@@ -129,6 +109,7 @@ public class ExpenseDAOTest {
     @Test
     public void testDeleteData_DataRowInDataBaseDoesNotExists() throws SQLException, ClassNotFoundException, IOException {
 
+
         //Arrange
         HouseDAO aHouse = new MockHouseDAO();
         GuestDAO aGuest = new MockGuestDAO();
@@ -143,11 +124,13 @@ public class ExpenseDAOTest {
 
         //Act
         aExpense.insertData(idGuest, pkHouse, 300.00, "Einkaufen", "28/04/2013");
-        aExpense.updateData(idGuest, pkHouse, 300.0, "Einkaufen", "28/04/2013", 200.0, "newReason", "03/04/2018");
+        aExpense.updateData(idGuest, pkHouse, 300.0, "Einkaufen", "28/04/2013", 60.0, "newReason", "03/04/2018");
         double newPrepaidAmount = 60.0;
         double oldPrepaidAmount = 0;
 
-        ArrayList<Expense> getRowFromDataBase = aExpense.fineAllDataToOneGuest(idGuest, pkHouse);
+
+        ArrayList<Expense> getRowFromDataBase = aExpense.fineAllDataToOneGuest(idGuest,pkHouse);
+
 
         for (Expense e : getRowFromDataBase) {
 
@@ -158,6 +141,8 @@ public class ExpenseDAOTest {
 
         //Assert
         assertEquals(newPrepaidAmount, oldPrepaidAmount, 0.00001);
+
+
     }
 
 }

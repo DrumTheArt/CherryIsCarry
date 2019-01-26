@@ -13,3 +13,20 @@ INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_gues
 [2019-01-25 17:26:35] [INFORMATION] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 503 AND ID_house = 51 
 [2019-01-25 17:27:30] [INFORMATION] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 541 AND ID_house = 55 
 [2019-01-25 17:27:30] [INFORMATION] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 542 AND ID_house = 55 
+[2019-01-26 13:13:56] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 580 AND ID_house = 59 
+[2019-01-26 13:13:56] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 581 AND ID_house = 59 
+[2019-01-26 14:48:57] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 619 AND ID_house = 63 
+[2019-01-26 14:48:57] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 620 AND ID_house = 63 
+[2019-01-26 15:07:54] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 1 AND ID_house = 1 
+[2019-01-26 15:25:06] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 638 AND ID_house = 63 
+[2019-01-26 15:25:06] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 639 AND ID_house = 63 
+[2019-01-26 15:25:06] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 1 AND ID_house = 1 
+[2019-01-26 15:27:42] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 1 AND ID_house = 1 
+[2019-01-26 15:30:01] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 1 AND ID_house = 1 
+[2019-01-26 15:38:09] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 693 AND ID_house = 67 
+[2019-01-26 15:38:09] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 694 AND ID_house = 67 
+[2019-01-26 15:38:09] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 695 AND ID_house = 67 
+[2019-01-26 15:38:09] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 696 AND ID_house = 67 
+[2019-01-26 15:46:48] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 726 AND ID_house = 71 
+[2019-01-26 15:48:22] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 727 AND ID_house = 71 
+[2019-01-26 15:53:38] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 728 AND ID_house = 71 

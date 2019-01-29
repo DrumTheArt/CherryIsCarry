@@ -1,4 +1,4 @@
-package com.wachs.main.viewLayerJavaFX.GUIDialogs;
+package com.wachs.main.viewLayerJavaFX.GUIDialogViews;
 
 import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUIButton;
 import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUIHBox;
@@ -7,7 +7,6 @@ import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.CreateGUITextfield;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,9 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.net.URISyntaxException;
-
-public class DialogAddProject {
+public class DialogAddProjectView {
 
     //AllColumns
     private VBox verticalBox;
@@ -49,7 +46,7 @@ public class DialogAddProject {
     private GridPane GridForNewName_TF_LB;
 
 
-    public void display() {
+    public Stage display() {
 
         Stage dialogAddProject = new Stage();
 
@@ -68,10 +65,11 @@ public class DialogAddProject {
 
         btnSave.setOnAction(e -> {
 
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogAddProject.close();
 
         });
+
         HBox_BTN_Regular.getChildren().addAll(btnSave);
         HBox_BTN_Regular.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -108,12 +106,47 @@ public class DialogAddProject {
 
         dialogAddProject.setOnCloseRequest(event -> {
 
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogAddProject.close();
         });
-        
+
         dialogAddProject.setScene(scene);
 
         dialogAddProject.show();
+
+        return dialogAddProject;
     }
+
+    public TextField getTf_ProjectNewName() {
+        return tf_ProjectNewName;
+    }
+
+    public void setTf_ProjectNewName(TextField tf_ProjectNewName) {
+        this.tf_ProjectNewName = tf_ProjectNewName;
+    }
+
+    public TextField getTf_ProjectPrice() {
+        return tf_ProjectPrice;
+    }
+
+    public void setTf_ProjectPrice(TextField tf_ProjectPrice) {
+        this.tf_ProjectPrice = tf_ProjectPrice;
+    }
+
+    public TextField getTf_ProjectDeposite() {
+        return tf_ProjectDeposite;
+    }
+
+    public void setTf_ProjectDeposite(TextField tf_ProjectDeposite) {
+        this.tf_ProjectDeposite = tf_ProjectDeposite;
+    }
+
+    public GridPane getGridForNewName_TF_LB() {
+        return GridForNewName_TF_LB;
+    }
+
+    public void setGridForNewName_TF_LB(GridPane gridForNewName_TF_LB) {
+        GridForNewName_TF_LB = gridForNewName_TF_LB;
+    }
+
 }

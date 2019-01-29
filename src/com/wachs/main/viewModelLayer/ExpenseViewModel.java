@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class ExpenseModel {
+public class ExpenseViewModel {
 
     private ExpenseDAO newDAO;
     private ArrayList<Expense> expensesSearchedGuest;
@@ -17,7 +17,7 @@ public class ExpenseModel {
     private ArrayList<String> expensesWhen;
 
 
-    ExpenseModel(int idGuest, int id_house) throws SQLException, IOException, ClassNotFoundException {
+    ExpenseViewModel(int idGuest, int id_house) throws SQLException, IOException, ClassNotFoundException {
 
         createModel(idGuest, id_house);
     }

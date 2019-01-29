@@ -1,10 +1,9 @@
-package com.wachs.main.viewLayerJavaFX.GUIDialogs;
+package com.wachs.main.viewLayerJavaFX.GUIDialogViews;
 
 import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class DialogAddGuest {
+public class DialogAddGuestView {
 
 
     //AllColumns
@@ -47,7 +46,7 @@ public class DialogAddGuest {
     private GridPane GridForNewGuestName_LB_TF;
 
 
-    public void display(){
+    public Stage display(){
 
         Stage dialogAddGuest = new Stage();
 
@@ -65,7 +64,7 @@ public class DialogAddGuest {
         btnSave = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_NEWGUEST, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
 
         btnSave.setOnAction(e -> {
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogAddGuest.close();
         });
 
@@ -106,13 +105,40 @@ public class DialogAddGuest {
 
         dialogAddGuest.setOnCloseRequest(event -> {
 
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogAddGuest.close();
         });
 
         dialogAddGuest.show();
 
+        return dialogAddGuest;
+
     }
+    public TextField getTf_GuestNewName() {
+        return tf_GuestNewName;
     }
+
+    public void setTf_GuestNewName(TextField tf_GuestNewName) {
+        this.tf_GuestNewName = tf_GuestNewName;
+    }
+
+    public ComboBox getCb_SelectedProject() {
+        return cb_SelectedProject;
+    }
+
+    public void setCb_SelectedProject(ComboBox cb_SelectedProject) {
+        this.cb_SelectedProject = cb_SelectedProject;
+    }
+
+    public GridPane getGridForNewGuestName_LB_TF() {
+        return GridForNewGuestName_LB_TF;
+    }
+
+    public void setGridForNewGuestName_LB_TF(GridPane gridForNewGuestName_LB_TF) {
+        GridForNewGuestName_LB_TF = gridForNewGuestName_LB_TF;
+    }
+
+}
+
 
 

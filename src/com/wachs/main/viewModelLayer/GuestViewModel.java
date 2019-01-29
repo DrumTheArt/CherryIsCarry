@@ -7,7 +7,7 @@ import com.wachs.main.dataBaseLayer.DAO.GuestDAOImpl;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class GuestModel {
+public class GuestViewModel {
 
     /**
     private GuestDAO newDAO;

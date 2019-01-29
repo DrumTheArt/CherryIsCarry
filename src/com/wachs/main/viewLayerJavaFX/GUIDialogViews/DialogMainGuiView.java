@@ -1,10 +1,9 @@
-package com.wachs.main.viewLayerJavaFX.GUIDialogs;
+package com.wachs.main.viewLayerJavaFX.GUIDialogViews;
 
 import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,9 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.net.URISyntaxException;
-
-public class DialogMain {
+public class DialogMainGuiView {
 
     //AllColumns
     private VBox verticalBox;
@@ -79,8 +76,6 @@ public class DialogMain {
     private ComboBox selectGuest;
 
 
-
-
     public Stage displayMainGui() {
 
         Stage primaryStage = new Stage();
@@ -101,7 +96,7 @@ public class DialogMain {
 
         btnAddProject.setOnAction(e -> {
 
-            new DialogAddProject().display();
+            new DialogAddProjectView().display();
             primaryStage.close();
 
         });
@@ -109,7 +104,8 @@ public class DialogMain {
         btnAddGuest = new CreateGUIButton().createBtn(GUINaming.BTN_ADD_GUEST, GUISourceIcons.sourceAddGuest2, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_ADD_GUEST);
 
         btnAddGuest.setOnAction(e -> {
-            new DialogAddGuest().display();
+
+            new DialogAddGuestView().display();
             primaryStage.close();
 
         });
@@ -119,7 +115,7 @@ public class DialogMain {
 
         btnEditGuestData.setOnAction(e -> {
 
-            new DialogEditGuest().display();
+            new DialogEditGuestView().display();
             primaryStage.close();
 
         });
@@ -207,5 +203,151 @@ public class DialogMain {
         primaryStage.show();
 
         return primaryStage;
+    }
+
+    public TextField getTf_GuestNights() {
+        return tf_GuestNights;
+    }
+
+    public void setTf_GuestNights(TextField tf_GuestNights) {
+        this.tf_GuestNights = tf_GuestNights;
+    }
+
+    public TextField getTf_GuestNightsEUR() {
+        return tf_GuestNightsEUR;
+    }
+
+    public void setTf_GuestNightsEUR(TextField tf_GuestNightsEUR) {
+        this.tf_GuestNightsEUR = tf_GuestNightsEUR;
+    }
+
+    public TextField getTf_GuestDrinks() {
+        return tf_GuestDrinks;
+    }
+
+    public void setTf_GuestDrinks(TextField tf_GuestDrinks) {
+        this.tf_GuestDrinks = tf_GuestDrinks;
+    }
+
+    public TextField getTf_GuestDrinksEUR() {
+        return tf_GuestDrinksEUR;
+    }
+
+    public void setTf_GuestDrinksEUR(TextField tf_GuestDrinksEUR) {
+        this.tf_GuestDrinksEUR = tf_GuestDrinksEUR;
+    }
+
+    public TextField getTf_GuestFood() {
+        return tf_GuestFood;
+    }
+
+    public void setTf_GuestFood(String tf_GuestFood) {
+
+        this.tf_GuestFood.setText(tf_GuestFood);
+
+    }
+
+    public TextField getTf_GuestFoodEUR() {
+        return tf_GuestFoodEUR;
+    }
+
+    public void setTf_GuestFoodEUR(TextField tf_GuestFoodEUR) {
+        this.tf_GuestFoodEUR = tf_GuestFoodEUR;
+    }
+
+    public TextField getTf_GuestTotalCosts() {
+        return tf_GuestTotalCosts;
+    }
+
+    public void setTf_GuestTotalCosts(TextField tf_GuestTotalCosts) {
+        this.tf_GuestTotalCosts = tf_GuestTotalCosts;
+    }
+
+    public TextField getTf_GuestAlreadyPaid() {
+        return tf_GuestAlreadyPaid;
+    }
+
+    public void setTf_GuestAlreadyPaid(TextField tf_GuestAlreadyPaid) {
+        this.tf_GuestAlreadyPaid = tf_GuestAlreadyPaid;
+    }
+
+    public TextField getTf_StillToPay() {
+        return tf_StillToPay;
+    }
+
+    public void setTf_StillToPay(TextField tf_StillToPay) {
+        this.tf_StillToPay = tf_StillToPay;
+    }
+
+    public TextField getTf_AllRentPrice() {
+        return tf_AllRentPrice;
+    }
+
+    public void setTf_AllRentPrice(TextField tf_AllRentPrice) {
+        this.tf_AllRentPrice = tf_AllRentPrice;
+    }
+
+    public TextField getTf_AllDrinks() {
+        return tf_AllDrinks;
+    }
+
+    public void setTf_AllDrinks(TextField tf_AllDrinks) {
+        this.tf_AllDrinks = tf_AllDrinks;
+    }
+
+    public TextField getTf_AllFood() {
+        return tf_AllFood;
+    }
+
+    public void setTf_AllFood(TextField tf_AllFood) {
+        this.tf_AllFood = tf_AllFood;
+    }
+
+    public TextField getTf_AllTotalCosts() {
+        return tf_AllTotalCosts;
+    }
+
+    public void setTf_AllTotalCosts(TextField tf_AllTotalCosts) {
+        this.tf_AllTotalCosts = tf_AllTotalCosts;
+    }
+
+    public TextField getTf_AllOutstandingPayment() {
+        return tf_AllOutstandingPayment;
+    }
+
+    public void setTf_AllOutstandingPayment(TextField tf_AllOutstandingPayment) {
+        this.tf_AllOutstandingPayment = tf_AllOutstandingPayment;
+    }
+
+    public GridPane getGridForGuestDetails() {
+        return GridForGuestDetails;
+    }
+
+    public void setGridForGuestDetails(GridPane gridForGuestDetails) {
+        GridForGuestDetails = gridForGuestDetails;
+    }
+
+    public GridPane getGridForAllDetails() {
+        return GridForAllDetails;
+    }
+
+    public void setGridForAllDetails(GridPane gridForAllDetails) {
+        GridForAllDetails = gridForAllDetails;
+    }
+
+    public ComboBox getSelectProject() {
+        return selectProject;
+    }
+
+    public void setSelectProject(ComboBox selectProject) {
+        this.selectProject = selectProject;
+    }
+
+    public ComboBox getSelectGuest() {
+        return selectGuest;
+    }
+
+    public void setSelectGuest(ComboBox selectGuest) {
+        this.selectGuest = selectGuest;
     }
 }

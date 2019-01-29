@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class DrinksModel {
+public class DrinksViewModel {
 
     private DrinksDAO newDAO;
     private Drinks drinksSearchedGuest;
 
-    DrinksModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
+    DrinksViewModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
 
         createModel(idGuest, idHouse);
     }

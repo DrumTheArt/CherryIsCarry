@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class PrepaidModel {
+public class PrepaidViewModel {
 
     private PrepaidDAO newDAO;
     private Prepaid staySearchedGuest;
 
-    PrepaidModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
+    PrepaidViewModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
 
         createModel(idGuest, idHouse);
     }

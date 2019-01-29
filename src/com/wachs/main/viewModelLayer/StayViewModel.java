@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class StayModel {
+public class StayViewModel {
 
     private StayDAO newDAO;
     private Stay staySearchedGuest;
 
-    StayModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
+    StayViewModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
 
         createModel(idGuest, idHouse);
     }

@@ -7,12 +7,12 @@ import com.wachs.main.dataBaseLayer.DAO.HouseDAOImpl;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class HouseModel {
+public class HouseViewModel {
 
     private HouseDAO newDAO;
     private House searchedHouse;
 
-    HouseModel(String nameHouse) throws SQLException, IOException, ClassNotFoundException {
+    HouseViewModel(String nameHouse) throws SQLException, IOException, ClassNotFoundException {
 
         createModel(nameHouse);
     }

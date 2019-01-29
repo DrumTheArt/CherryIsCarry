@@ -1,10 +1,9 @@
-package com.wachs.main.viewLayerJavaFX.GUIDialogs;
+package com.wachs.main.viewLayerJavaFX.GUIDialogViews;
 
 import com.wachs.main.viewLayerJavaFX.GUIElementsGenerators.*;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUINaming;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUIProperties;
 import com.wachs.main.viewLayerJavaFX.GUISetup.GUISourceIcons;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,9 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.net.URISyntaxException;
-
-public class DialogEditGuest {
+public class DialogEditGuestView {
 
     //AllColumns
     private VBox verticalBox;
@@ -68,7 +65,7 @@ public class DialogEditGuest {
     //AllLists
     private TableView tableExpenses;
 
-    public void display(){
+    public Stage display(){
 
         Stage dialogEditGuest = new Stage();
 
@@ -87,7 +84,7 @@ public class DialogEditGuest {
 
         btnSaveAll.setOnAction(e -> {
 
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogEditGuest.close();
 
         });
@@ -179,15 +176,99 @@ public class DialogEditGuest {
 
         dialogEditGuest.setOnCloseRequest(event -> {
 
-            new DialogMain().displayMainGui();
+            new DialogMainGuiView().displayMainGui();
             dialogEditGuest.close();
+
         });
 
         dialogEditGuest.setScene(scene);
 
         dialogEditGuest.show();
 
+        return dialogEditGuest;
+
     }
+
+    public TextField getTf_GuestNights() {
+        return tf_GuestNights;
+    }
+
+    public void setTf_GuestNights(TextField tf_GuestNights) {
+        this.tf_GuestNights = tf_GuestNights;
+    }
+
+    public TextField getTf_GuestDrinks() {
+        return tf_GuestDrinks;
+    }
+
+    public void setTf_GuestDrinks(TextField tf_GuestDrinks) {
+        this.tf_GuestDrinks = tf_GuestDrinks;
+    }
+
+    public TextField getTf_GuestFood() {
+        return tf_GuestFood;
+    }
+
+    public void setTf_GuestFood(TextField tf_GuestFood) {
+        this.tf_GuestFood = tf_GuestFood;
+    }
+
+    public TextField getTf_prepaid() {
+        return tf_prepaid;
+    }
+
+    public void setTf_prepaid(TextField tf_prepaid) {
+        this.tf_prepaid = tf_prepaid;
+    }
+
+    public TextField getTf_GuestExpensesPrice() {
+        return tf_GuestExpensesPrice;
+    }
+
+    public void setTf_GuestExpensesPrice(TextField tf_GuestExpensesPrice) {
+        this.tf_GuestExpensesPrice = tf_GuestExpensesPrice;
+    }
+
+    public TextField getTf_GuestExpensesReason() {
+        return tf_GuestExpensesReason;
+    }
+
+    public void setTf_GuestExpensesReason(TextField tf_GuestExpensesReason) {
+        this.tf_GuestExpensesReason = tf_GuestExpensesReason;
+    }
+
+    public TextField getTf_GuestExpensesWhen() {
+        return tf_GuestExpensesWhen;
+    }
+
+    public void setTf_GuestExpensesWhen(TextField tf_GuestExpensesWhen) {
+        this.tf_GuestExpensesWhen = tf_GuestExpensesWhen;
+    }
+
+    public GridPane getGridForGuestDetails() {
+        return GridForGuestDetails;
+    }
+
+    public void setGridForGuestDetails(GridPane gridForGuestDetails) {
+        GridForGuestDetails = gridForGuestDetails;
+    }
+
+    public GridPane getGridForExpensesDetails() {
+        return GridForExpensesDetails;
+    }
+
+    public void setGridForExpensesDetails(GridPane gridForExpensesDetails) {
+        GridForExpensesDetails = gridForExpensesDetails;
+    }
+
+    public TableView getTableExpenses() {
+        return tableExpenses;
+    }
+
+    public void setTableExpenses(TableView tableExpenses) {
+        this.tableExpenses = tableExpenses;
+    }
+
 }
 
 

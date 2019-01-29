@@ -1,6 +1,6 @@
 package com.wachs.main.viewModelLayer;
 
-public class AllGuestsModel {
+public class AllGuestsViewModel {
 
 
     private double rentHouse;

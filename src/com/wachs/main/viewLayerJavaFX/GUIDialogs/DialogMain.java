@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.net.URISyntaxException;
 
-public class DialogMain extends Application {
+public class DialogMain {
 
     //AllColumns
     private VBox verticalBox;
@@ -78,12 +78,12 @@ public class DialogMain extends Application {
     private ComboBox selectProject;
     private ComboBox selectGuest;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) throws URISyntaxException {
+
+
+    public Stage displayMainGui() {
+
+        Stage primaryStage = new Stage();
 
         primaryStage.setTitle("CherryIsCarry");
 
@@ -99,11 +99,30 @@ public class DialogMain extends Application {
         //Button Add new Project
         btnAddProject = new CreateGUIButton().createBtn(GUINaming.BTN_ADD_PROJECT, GUISourceIcons.sourceAddProject, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_ADD_PROJECT);
 
+        btnAddProject.setOnAction(e -> {
+
+            new DialogAddProject().display();
+            primaryStage.close();
+
+        });
         //Button Add new Guest
         btnAddGuest = new CreateGUIButton().createBtn(GUINaming.BTN_ADD_GUEST, GUISourceIcons.sourceAddGuest2, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_ADD_GUEST);
 
+        btnAddGuest.setOnAction(e -> {
+            new DialogAddGuest().display();
+            primaryStage.close();
+
+        });
+
         //Button Edit Guest
         btnEditGuestData = new CreateGUIButton().createBtn(GUINaming.BTN_EDIT_GUEST, GUISourceIcons.sourceEditGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_EDIT_GUEST);
+
+        btnEditGuestData.setOnAction(e -> {
+
+            new DialogEditGuest().display();
+            primaryStage.close();
+
+        });
 
         HBox_Buttons.getChildren().addAll(btnAddProject, btnAddGuest, btnEditGuestData);
 
@@ -186,5 +205,7 @@ public class DialogMain extends Application {
         primaryStage.setScene(scene);
 
         primaryStage.show();
+
+        return primaryStage;
     }
 }

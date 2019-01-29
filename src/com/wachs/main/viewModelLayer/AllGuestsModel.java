@@ -15,6 +15,6 @@ public class AllGuestsModel {
     //Calculator().getFoodAll(id_house)
     //Calculator().getFoodAll(id_house)
 
-    //QueryGenerator 
+    //QueryGenerator
 
 }

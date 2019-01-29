@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 import java.net.URISyntaxException;
 
-public class DialogEditGuest extends Application {
+public class DialogEditGuest {
 
     //AllColumns
     private VBox verticalBox;
@@ -68,14 +68,11 @@ public class DialogEditGuest extends Application {
     //AllLists
     private TableView tableExpenses;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public void display(){
 
-    @Override
-    public void start(Stage primaryStage) throws URISyntaxException {
+        Stage dialogEditGuest = new Stage();
 
-        primaryStage.setTitle("CherryIsCarry --- Edit Guest Details");
+        dialogEditGuest.setTitle("CherryIsCarry --- Edit Guest Details");
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
@@ -88,6 +85,12 @@ public class DialogEditGuest extends Application {
 
         btnSaveAll = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
 
+        btnSaveAll.setOnAction(e -> {
+
+            new DialogMain().displayMainGui();
+            dialogEditGuest.close();
+
+        });
         //Button Delete Guest
         btnDeleteGuest = new CreateGUIButton().createBtn(GUINaming.BTN_DELETE_GUEST, GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_DELETE_GUEST);
 
@@ -174,10 +177,17 @@ public class DialogEditGuest extends Application {
 
         Scene scene = new Scene(verticalBox, 700, 700);
 
-        primaryStage.setScene(scene);
+        dialogEditGuest.setOnCloseRequest(event -> {
 
-        primaryStage.show();
+            new DialogMain().displayMainGui();
+            dialogEditGuest.close();
+        });
+
+        dialogEditGuest.setScene(scene);
+
+        dialogEditGuest.show();
 
     }
-
 }
+
+

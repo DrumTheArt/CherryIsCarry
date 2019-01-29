@@ -18,9 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.net.URISyntaxException;
 
-public class DialogAddGuest extends Application {
+public class DialogAddGuest {
+
 
     //AllColumns
     private VBox verticalBox;
@@ -47,14 +47,11 @@ public class DialogAddGuest extends Application {
     private GridPane GridForNewGuestName_LB_TF;
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public void display(){
 
-    @Override
-    public void start(Stage primaryStage) throws URISyntaxException {
+        Stage dialogAddGuest = new Stage();
 
-        primaryStage.setTitle("CherryIsCarry --- Add new Guest");
+        dialogAddGuest.setTitle("CherryIsCarry --- Add new Guest");
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
@@ -66,6 +63,11 @@ public class DialogAddGuest extends Application {
         HBox_BTN_Save = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
         btnSave = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_NEWGUEST, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_GUEST);
+
+        btnSave.setOnAction(e -> {
+            new DialogMain().displayMainGui();
+            dialogAddGuest.close();
+        });
 
         HBox_BTN_Save.getChildren().addAll(btnSave);
         HBox_BTN_Save.setAlignment(Pos.BOTTOM_CENTER);
@@ -100,10 +102,17 @@ public class DialogAddGuest extends Application {
 
         Scene scene = new Scene(verticalBox, 350, 170);
 
-        primaryStage.setScene(scene);
+        dialogAddGuest.setScene(scene);
 
-        primaryStage.show();
+        dialogAddGuest.setOnCloseRequest(event -> {
+
+            new DialogMain().displayMainGui();
+            dialogAddGuest.close();
+        });
+
+        dialogAddGuest.show();
 
     }
+    }
 
-}
+

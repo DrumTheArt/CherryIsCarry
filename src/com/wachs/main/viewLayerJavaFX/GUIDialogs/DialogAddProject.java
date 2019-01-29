@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 import java.net.URISyntaxException;
 
-public class DialogAddProject extends Application {
+public class DialogAddProject {
 
     //AllColumns
     private VBox verticalBox;
@@ -49,14 +49,11 @@ public class DialogAddProject extends Application {
     private GridPane GridForNewName_TF_LB;
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public void display() {
 
-    @Override
-    public void start(Stage primaryStage) throws URISyntaxException {
+        Stage dialogAddProject = new Stage();
 
-        primaryStage.setTitle("CherryIsCarry --- Add new Vacation");
+        dialogAddProject.setTitle("CherryIsCarry --- Add new Vacation");
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
@@ -69,6 +66,12 @@ public class DialogAddProject extends Application {
 
         btnSave = new CreateGUIButton().createBtn(GUINaming.BTN_SAVE_NEWPROJECT, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINaming.TT_BTN_SAVE_NEWPROJECT);
 
+        btnSave.setOnAction(e -> {
+
+            new DialogMain().displayMainGui();
+            dialogAddProject.close();
+
+        });
         HBox_BTN_Regular.getChildren().addAll(btnSave);
         HBox_BTN_Regular.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -101,8 +104,16 @@ public class DialogAddProject extends Application {
 
         Scene scene = new Scene(verticalBox, 450, 170);
 
-        primaryStage.setScene(scene);
+        dialogAddProject.setScene(scene);
 
-        primaryStage.show();
+        dialogAddProject.setOnCloseRequest(event -> {
+
+            new DialogMain().displayMainGui();
+            dialogAddProject.close();
+        });
+        
+        dialogAddProject.setScene(scene);
+
+        dialogAddProject.show();
     }
 }

@@ -1,7 +1,7 @@
 package com.wachs.testing.dbTestConfig;
 
-import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
-import com.wachs.main.dataBaseLayer.DDL.ITableDBScript;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DDL.ITableDBScript;
 
 import javax.swing.*;
 import java.io.BufferedReader;

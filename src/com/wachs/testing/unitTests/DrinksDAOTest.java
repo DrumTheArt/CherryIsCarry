@@ -1,11 +1,11 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Drinks;
-import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
-import com.wachs.main.dataBaseLayer.DDL.DropAndCreateTableDB;
-import com.wachs.main.dataBaseLayer.DDL.ITableDBScript;
+import com.wachs.main.businessObjects.Drinks;
+import com.wachs.main.dataAcess.DAO.DrinksDAO;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DDL.DropAndCreateTableDB;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DDL.ITableDBScript;
 import com.wachs.testing.dbTestConfig.InsertValuesDBTestData;
 import com.wachs.testing.mocks.MockDrinksDAO;
 import com.wachs.testing.mocks.MockGuestDAO;

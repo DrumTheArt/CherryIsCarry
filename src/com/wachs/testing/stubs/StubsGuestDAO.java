@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.Guest;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
+import com.wachs.main.businessObjects.Guest;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

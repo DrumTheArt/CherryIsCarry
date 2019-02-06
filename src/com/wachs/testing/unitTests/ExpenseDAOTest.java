@@ -1,16 +1,15 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Expense;
-import com.wachs.main.dataBaseLayer.DAO.ExpenseDAO;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.businessObjects.Expense;
+import com.wachs.main.dataAcess.DAO.ExpenseDAO;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
 import com.wachs.testing.mocks.MockExpenseDAO;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

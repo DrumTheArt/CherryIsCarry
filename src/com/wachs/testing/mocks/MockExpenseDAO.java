@@ -1,9 +1,9 @@
 package com.wachs.testing.mocks;
 
-import com.wachs.main.businessLayer.Expense;
-import com.wachs.main.dataBaseLayer.DAO.ExpenseDAO;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense;
-import com.wachs.main.dataBaseLayer.Util.ApplicationLogger;
+import com.wachs.main.businessObjects.Expense;
+import com.wachs.main.dataAcess.DAO.ExpenseDAO;
+import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorExpense;
+import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorExpense.*;
+import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorExpense.*;
 
 public class MockExpenseDAO implements ExpenseDAO {
     private Statement statement;

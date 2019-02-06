@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.Stay;
-import com.wachs.main.dataBaseLayer.DAO.StayDAO;
+import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.dataAcess.DAO.StayDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

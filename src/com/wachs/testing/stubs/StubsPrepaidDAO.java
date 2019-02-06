@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.Prepaid;
-import com.wachs.main.dataBaseLayer.DAO.PrepaidDAO;
+import com.wachs.main.businessObjects.Prepaid;
+import com.wachs.main.dataAcess.DAO.PrepaidDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

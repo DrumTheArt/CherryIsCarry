@@ -1,7 +1,7 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.dataBaseLayer.Util.ConverterStringForDataBase;
-import com.wachs.main.dataBaseLayer.Util.GUIFormater;
+import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ConverterStringForDataBase;
+import com.wachs.main.dataAcess.dataAccessConfigurations.Util.GUIFormater;
 import org.junit.Before;
 import org.junit.Test;
 

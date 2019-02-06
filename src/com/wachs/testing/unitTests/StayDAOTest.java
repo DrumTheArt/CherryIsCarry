@@ -1,9 +1,9 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Stay;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
-import com.wachs.main.dataBaseLayer.DAO.StayDAO;
+import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
+import com.wachs.main.dataAcess.DAO.StayDAO;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import com.wachs.testing.mocks.MockStayDAO;

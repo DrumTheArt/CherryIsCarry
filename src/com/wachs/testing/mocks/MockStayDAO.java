@@ -1,8 +1,8 @@
 package com.wachs.testing.mocks;
 
-import com.wachs.main.businessLayer.Stay;
-import com.wachs.main.dataBaseLayer.DAO.StayDAO;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay;
+import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.dataAcess.DAO.StayDAO;
+import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorStay;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorStay.*;
+import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorStay.*;
 
 public class MockStayDAO implements StayDAO {
     private Statement statement;

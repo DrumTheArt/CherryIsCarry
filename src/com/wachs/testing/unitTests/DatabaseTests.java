@@ -1,7 +1,7 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
-import com.wachs.main.dataBaseLayer.DBValidation.*;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBValidation.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

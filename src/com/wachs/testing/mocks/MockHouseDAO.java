@@ -1,10 +1,10 @@
 package com.wachs.testing.mocks;
 
-import com.wachs.main.businessLayer.House;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
-import com.wachs.main.dataBaseLayer.DBConnection.DbConnection;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorHouse;
-import com.wachs.main.dataBaseLayer.Util.ConverterStringForDataBase;
+import com.wachs.main.businessObjects.House;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
+import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorHouse;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorHouse.*;
+import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorHouse.*;
 
 public class MockHouseDAO implements HouseDAO {
 

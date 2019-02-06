@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.Expense;
-import com.wachs.main.dataBaseLayer.DAO.ExpenseDAO;
+import com.wachs.main.businessObjects.Expense;
+import com.wachs.main.dataAcess.DAO.ExpenseDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

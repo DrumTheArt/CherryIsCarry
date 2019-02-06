@@ -1,9 +1,9 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Drinks;
-import com.wachs.main.dataBaseLayer.DAO.FoodDAO;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.businessObjects.Drinks;
+import com.wachs.main.dataAcess.DAO.FoodDAO;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
 import com.wachs.testing.mocks.MockFoodDAO;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;

@@ -1,8 +1,8 @@
 package com.wachs.testing.mocks;
 
-import com.wachs.main.businessLayer.Prepaid;
-import com.wachs.main.dataBaseLayer.DAO.PrepaidDAO;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid;
+import com.wachs.main.businessObjects.Prepaid;
+import com.wachs.main.dataAcess.DAO.PrepaidDAO;
+import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorPrepaid.*;
+import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorPrepaid.*;
 
 public class MockPrepaidDAO implements PrepaidDAO {
 

@@ -1,9 +1,9 @@
 package com.wachs.testing.mocks;
 
-import com.wachs.main.businessLayer.Guest;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorGuest;
-import com.wachs.main.dataBaseLayer.Util.ConverterStringForDataBase;
+import com.wachs.main.businessObjects.Guest;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorGuest;
+import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 import com.wachs.testing.dbTestConfig.DbTestConnection;
 
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataBaseLayer.DBQueries.QueryGeneratorGuest.*;
+import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorGuest.*;
 
 public class MockGuestDAO implements GuestDAO {
 

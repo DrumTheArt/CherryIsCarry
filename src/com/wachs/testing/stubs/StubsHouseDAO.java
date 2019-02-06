@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.House;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
+import com.wachs.main.businessObjects.House;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

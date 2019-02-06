@@ -1,10 +1,10 @@
 package com.wachs.testing.unitTests;
 
-import com.wachs.main.businessLayer.Guest;
-import com.wachs.main.dataBaseLayer.DAO.GuestDAO;
-import com.wachs.main.dataBaseLayer.DAO.HouseDAO;
-import com.wachs.main.dataBaseLayer.DBValidation.IDbColumnValidator;
-import com.wachs.main.dataBaseLayer.DBValidation.TblGuestColumnValidate;
+import com.wachs.main.businessObjects.Guest;
+import com.wachs.main.dataAcess.DAO.GuestDAO;
+import com.wachs.main.dataAcess.DAO.HouseDAO;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBValidation.IDbColumnValidator;
+import com.wachs.main.dataAcess.dataAccessConfigurations.DBValidation.TblGuestColumnValidate;
 import com.wachs.testing.mocks.MockGuestDAO;
 import com.wachs.testing.mocks.MockHouseDAO;
 import org.junit.Test;

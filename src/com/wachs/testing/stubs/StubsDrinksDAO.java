@@ -1,7 +1,7 @@
 package com.wachs.testing.stubs;
 
-import com.wachs.main.businessLayer.Drinks;
-import com.wachs.main.dataBaseLayer.DAO.DrinksDAO;
+import com.wachs.main.businessObjects.Drinks;
+import com.wachs.main.dataAcess.DAO.DrinksDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

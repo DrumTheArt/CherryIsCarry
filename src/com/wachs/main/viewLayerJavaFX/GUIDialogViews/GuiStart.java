@@ -1,24 +1,19 @@
 package com.wachs.main.viewLayerJavaFX.GUIDialogViews;
 
 import javafx.application.Application;
-
 import javafx.stage.Stage;
-
-import java.net.URISyntaxException;
 
 public class GuiStart extends Application {
 
-    DialogMainGuiView newMainDialog;
-
-
-    public void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws URISyntaxException {
+    public void start(Stage primaryStage) {
 
-       Stage newStage = new DialogMainGuiView().displayMainGui();
+        primaryStage = new DialogMainGuiView().displayMainGui();
+        //Stage dialogAddGuest = new DialogMainGuiView().displayMainGui();
 
     }
 }

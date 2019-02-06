@@ -59,7 +59,7 @@ public class HouseDAOTest {
 
         //Arrange
         GuestDAO daoObject = new MockGuestDAO();
-        ArrayList<House> listHouse = daoObject.readAllData();
+        ArrayList<House> listHouse = daoObject.readAllData(1);
 
         //Act
         IDbColumnValidator countRows = new TblGuestColumnValidate();

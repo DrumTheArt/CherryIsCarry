@@ -10,7 +10,7 @@ public interface GuestDAO {
 
     Guest findOneData(String name, int id_house) throws SQLException, ClassNotFoundException, IOException;
 
-    ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException;
+    ArrayList readAllData(int id_house) throws SQLException, ClassNotFoundException, IOException;
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
     void insertData(int id_house, String name) throws SQLException, ClassNotFoundException, IOException;

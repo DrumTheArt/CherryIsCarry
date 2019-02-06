@@ -15,9 +15,9 @@ public class QueryGeneratorGuest {
         return query;
     }
 
-    public String queryReadAllData() {
+    public String queryReadAllData(int id_house) {
 
-        String query = "SELECT * FROM " + TABLENAME;
+        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN2 + " = " + id_house;
 
 
         return query;

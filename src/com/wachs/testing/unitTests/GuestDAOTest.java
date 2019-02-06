@@ -79,7 +79,7 @@ public class GuestDAOTest {
 
         //Arrange
         GuestDAO daoObject = new MockGuestDAO();
-        ArrayList<Guest> listGuests = daoObject.readAllData();
+        ArrayList<Guest> listGuests = daoObject.readAllData(1);
 
         //Act
         IDbColumnValidator countRows = new TblGuestColumnValidate();

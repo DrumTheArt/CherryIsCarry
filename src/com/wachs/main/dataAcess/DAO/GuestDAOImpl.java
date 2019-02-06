@@ -64,14 +64,14 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList readAllData(int id_house) throws SQLException, ClassNotFoundException, IOException {
 
         QueryGeneratorGuest query = new QueryGeneratorGuest();
         statement = DbConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        ResultSet result = statement.executeQuery(query.queryReadAllData(id_house));
 
         //Log the query
-        ApplicationLogger.loggingQueries(query.queryReadAllData());
+        ApplicationLogger.loggingQueries(query.queryReadAllData(id_house));
 
         while (result.next()) {
             allDataList.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));

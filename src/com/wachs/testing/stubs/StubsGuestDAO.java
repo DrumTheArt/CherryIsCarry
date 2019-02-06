@@ -29,7 +29,7 @@ public class StubsGuestDAO implements GuestDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData(int id_house) throws SQLException, ClassNotFoundException {
 
         return listOfGuests;
     }

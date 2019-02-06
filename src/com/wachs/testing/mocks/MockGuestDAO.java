@@ -59,11 +59,11 @@ public class MockGuestDAO implements GuestDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData(int id_house) throws SQLException, ClassNotFoundException {
 
         QueryGeneratorGuest query = new QueryGeneratorGuest();
         statement = DbTestConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        ResultSet result = statement.executeQuery(query.queryReadAllData(id_house));
 
         while (result.next()) {
             allDataList.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));

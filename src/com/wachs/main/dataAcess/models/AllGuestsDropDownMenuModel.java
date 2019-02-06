@@ -1,7 +1,9 @@
 package com.wachs.main.dataAcess.models;
 
-import javafx.collections.FXCollections;
+import com.wachs.main.businessObjects.Guest;
 import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class AllGuestsDropDownMenuModel {
 
@@ -9,27 +11,31 @@ public class AllGuestsDropDownMenuModel {
 
     }
 
+    //Problem -> alle Gäste angezeigt, anstatt  nur die, die auf die Projektnummer passen
     public ObservableList<String> getAllProjects() {
 
-        /**
-         ObservableList<String> content = FXCollections.observableArrayList();
+        ArrayList<Guest> listGuests = null;
+/**
+ try {
+ listGuests = new GuestDAOImpl().readAllData();
+ } catch (SQLException e) {
+ e.printStackTrace();
+ } catch (ClassNotFoundException e) {
+ e.printStackTrace();
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
 
-         ArrayList<String> listOfProjects = new HouseDAOImpl().readAllData();
+ ObservableList<String> content = FXCollections.observableArrayList();
 
-         for(String e:listOfProjects){
 
-         content.add(e);
-         }
+ for(Guest e:listGuests){
 
-         return content;
-         **/
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "Option 1a",
-                "Option 2a",
-                "Option a3"
-        );
+ content.add(e.getTXT_name());
+ }
+ **/
+        return null;
 
-        return options;
     }
 
 }

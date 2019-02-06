@@ -34,3 +34,5 @@ INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_gues
 [2019-01-29 02:04:28] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 816 AND ID_house = 79 
 [2019-01-29 02:04:28] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_house from TBL_EXPENSE WHERE ID_guest = 817 AND ID_house = 79 
 [2019-01-29 02:41:14] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_FOOD WHERE ID_guest = 1 AND ID_house = 1 
+[2019-02-06 15:06:18] [INFORMATION] SELECT * FROM TBL_HOUSE 
+[2019-02-06 15:06:40] [INFORMATION] SELECT * FROM TBL_HOUSE 

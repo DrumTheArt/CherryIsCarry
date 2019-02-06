@@ -1,9 +1,11 @@
 package com.wachs.main.views.GUIDialogViews;
 
+import com.wachs.main.dataAcess.models.AllProjectsDropDownMenuModel;
 import com.wachs.main.views.GUIElementsGenerators.*;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -37,6 +39,9 @@ public class DialogAddGuestView {
 
     //ComboBox
     private ComboBox cb_SelectedProject;
+
+    //AllModelsforComboBox
+    private ObservableList<String> comboBoxProjectModel;
 
     //AllLabelsGuest
     private Label lb_GuestNewName;
@@ -87,7 +92,8 @@ public class DialogAddGuestView {
 
         tf_GuestNewName = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_NEWGUESTNAME, GUIProperties.TEXTFIELD_DESIGN, true);
 
-        cb_SelectedProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_PROJECTS_SELECTED);
+        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getAllProjects();
+        cb_SelectedProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_PROJECTS_SELECTED, comboBoxProjectModel);
 
         HBox_TF_AreaNewGuestName.setAlignment(Pos.BOTTOM_CENTER);
         HBox_TF_AreaNewGuestName.getChildren().addAll(tf_GuestNewName, cb_SelectedProject);

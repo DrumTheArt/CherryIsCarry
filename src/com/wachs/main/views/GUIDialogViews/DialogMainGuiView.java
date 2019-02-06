@@ -1,9 +1,12 @@
 package com.wachs.main.views.GUIDialogViews;
 
+import com.wachs.main.dataAcess.models.AllGuestsDropDownMenuModel;
+import com.wachs.main.dataAcess.models.AllProjectsDropDownMenuModel;
 import com.wachs.main.views.GUIElementsGenerators.*;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -78,6 +81,10 @@ public class DialogMainGuiView {
     private ComboBox selectProject;
     private ComboBox selectGuest;
 
+    //AllComboBox Models
+    private ObservableList<String> comboBoxGuestModel;
+    private ObservableList<String> comboBoxProjectModel;
+
 
     public Stage displayMainGui() {
 
@@ -128,8 +135,13 @@ public class DialogMainGuiView {
         //Second Row
         HBox_Selector = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
-        selectProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_LB_PROJECTS_SELECT);
-        selectGuest = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_LB_GUEST_SELECT);
+        //Generate ComboBox Model for all Guests
+        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getAllProjects();
+        selectProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_LB_PROJECTS_SELECT, comboBoxProjectModel);
+
+        //Generate ComboBox Model for all Guests
+        comboBoxGuestModel = new AllGuestsDropDownMenuModel().getAllProjects();
+        selectGuest = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_LB_GUEST_SELECT, comboBoxGuestModel);
 
         HBox_Selector.getChildren().addAll(selectProject, selectGuest);
 

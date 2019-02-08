@@ -62,23 +62,31 @@ public class MockHouseDAO implements HouseDAO {
 
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
-        statement = DbTestConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        try {
 
-        while (result.next()) {
-            allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+            QueryGeneratorHouse query = new QueryGeneratorHouse();
+            statement = DbTestConnection.getConnection().createStatement();
+            ResultSet result = null;
+            result = statement.executeQuery(query.queryReadAllData());
 
+            while (result.next()) {
+                allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+
+            }
+
+            result.close();
+            statement.close();
+            DbTestConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        result.close();
-        statement.close();
-        DbTestConnection.closeConnection();
-
         return allDataList;
-
     }
 
     @Override

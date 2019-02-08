@@ -29,7 +29,7 @@ public class StubsHouseDAO implements HouseDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         return listOfHouses;
     }

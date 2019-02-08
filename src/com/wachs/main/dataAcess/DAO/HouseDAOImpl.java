@@ -61,25 +61,34 @@ public class HouseDAOImpl implements HouseDAO {
         return aHouse;
     }
 
-
+    //throws SQLException, ClassNotFoundException, IOException
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList readAllData() {
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
-        statement = DbConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryReadAllData());
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryReadAllData());
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryReadAllData());
 
-        while (result.next()) {
-            allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+            while (result.next()) {
+                allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
 
+            }
+
+            result.close();
+            statement.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        result.close();
-        statement.close();
-        DbConnection.closeConnection();
 
         return allDataList;
     }

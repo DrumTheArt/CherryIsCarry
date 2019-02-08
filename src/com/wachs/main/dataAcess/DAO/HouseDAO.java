@@ -10,7 +10,7 @@ public interface HouseDAO {
 
     House findOneData(String name) throws SQLException, ClassNotFoundException, IOException;
 
-    ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException;
+    ArrayList readAllData();
 
     void insertData(String name, double price, double deposite) throws SQLException, ClassNotFoundException, IOException;
 

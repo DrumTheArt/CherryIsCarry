@@ -5,8 +5,6 @@ import com.wachs.main.dataAcess.DAO.HouseDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AllProjectsDropDownMenuModel {
@@ -15,17 +13,20 @@ public class AllProjectsDropDownMenuModel {
 
     }
 
+    private int[] allPKids;
+
     public ObservableList<String> getAllProjects() {
 
         ArrayList<House> content = null;
-        try {
-            content = new HouseDAOImpl().readAllData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        content = new HouseDAOImpl().readAllData();
+
+        allPKids = new int[content.size()];
+
+        for (int i = 0; i < content.size(); i++) {
+
+            allPKids[i] = content.get(i).getPK_id();
+
         }
 
         ObservableList<String> options = FXCollections.observableArrayList();

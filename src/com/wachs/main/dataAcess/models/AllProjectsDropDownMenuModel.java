@@ -9,36 +9,48 @@ import java.util.ArrayList;
 
 public class AllProjectsDropDownMenuModel {
 
+    private int[] getAllPrimaryKeyToAllProjects;
+    private ObservableList<String> getAllProjects;
+    private ArrayList<House> allProjectsAsList;
+
+
     public AllProjectsDropDownMenuModel() {
 
+        setProjects();
+        setAllIds();
     }
 
-    private int[] allPKids;
+    private void setProjects() {
 
-    public ObservableList<String> getAllProjects() {
+        allProjectsAsList = new HouseDAOImpl().readAllData();
 
-        ArrayList<House> content = null;
+        getAllProjects = FXCollections.observableArrayList();
 
-        content = new HouseDAOImpl().readAllData();
+        for (House e : allProjectsAsList) {
 
-        allPKids = new int[content.size()];
+            getAllProjects.add(e.getTXT_name());
+        }
 
-        for (int i = 0; i < content.size(); i++) {
+    }
 
-            allPKids[i] = content.get(i).getPK_id();
+    private void setAllIds() {
+
+        getAllPrimaryKeyToAllProjects = new int[getAllProjects.size()];
+
+        for (int i = 0; i < getAllProjects.size(); i++) {
+
+            getAllPrimaryKeyToAllProjects[i] = allProjectsAsList.get(i).getPK_id();
 
         }
 
-        ObservableList<String> options = FXCollections.observableArrayList();
-
-        for (House e : content) {
-
-            options.add(e.getTXT_name());
-
-        }
-
-        return options;
     }
 
+    public int[] getGetAllPrimaryKeyToAllProjects() {
+        return getAllPrimaryKeyToAllProjects;
+    }
+
+    public ObservableList<String> getGetAllProjects() {
+        return getAllProjects;
+    }
 
 }

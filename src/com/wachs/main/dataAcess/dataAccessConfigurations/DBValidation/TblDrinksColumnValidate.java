@@ -9,13 +9,12 @@ import java.sql.Statement;
 
 import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorDrinks.*;
 
-
 public class TblDrinksColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
-    private boolean TblColumnTitleOrderValidate=false;
+    private boolean TblColumnTitleOrderValidate = false;
 
-    private boolean isColumnOrderValidate() throws SQLException, ClassNotFoundException {
+    private boolean isColumnOrderValidate() throws SQLException {
         String query = "SELECT * FROM " + TABLENAME;
         statement = DbConnection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
@@ -34,7 +33,6 @@ public class TblDrinksColumnValidate implements IDbColumnValidator {
         String column4 = rsmd.getColumnName(4);
         System.out.println("In DB " + TABLENAME + " heißt Spalte 4: " + column4 + " im QueryGenerator: " + COLUMN4);
 
-
         return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4);
 
     }
@@ -44,7 +42,7 @@ public class TblDrinksColumnValidate implements IDbColumnValidator {
         return this.TblColumnTitleOrderValidate;
     }
 
-    public int getCountRow() throws SQLException, ClassNotFoundException {
+    public int getCountRow() throws SQLException {
 
         String query = "SELECT Count(*) FROM " + TABLENAME;
         ResultSet result = statement.executeQuery(query);

@@ -12,16 +12,16 @@ import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorHouse.*;
 public class TblHouseColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
-    private boolean TblColumnTitleOrderValidate=false;
+    private boolean TblColumnTitleOrderValidate = false;
 
-
-    public TblHouseColumnValidate() throws SQLException, ClassNotFoundException {
+    public TblHouseColumnValidate() throws SQLException {
 
         TblColumnTitleOrderValidate = isColumnOrderValidate();
 
     }
 
-    private boolean isColumnOrderValidate() throws SQLException, ClassNotFoundException {
+    private boolean isColumnOrderValidate() throws SQLException {
+
         String query = "SELECT * FROM " + TABLENAME;
         statement = DbConnection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
@@ -40,7 +40,6 @@ public class TblHouseColumnValidate implements IDbColumnValidator {
         String column4 = rsmd.getColumnName(4);
         System.out.println("In DB " + TABLENAME + " heißt Spalte 4: " + column4 + " im QueryGenerator: " + COLUMN4);
 
-
         return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4);
 
     }
@@ -50,7 +49,7 @@ public class TblHouseColumnValidate implements IDbColumnValidator {
         return TblColumnTitleOrderValidate;
     }
 
-    public int getCountRow() throws SQLException, ClassNotFoundException {
+    public int getCountRow() throws SQLException {
         String query = "SELECT Count(*) FROM " + TABLENAME;
         ResultSet result = statement.executeQuery(query);
         int count = result.getInt(1);

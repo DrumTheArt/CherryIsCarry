@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface IDbColumnValidator {
 
-    boolean getIsColumnTitleOrderValidate() throws SQLException, ClassNotFoundException;
+    boolean getIsColumnTitleOrderValidate() throws SQLException;
 
     int getCountRow() throws SQLException, ClassNotFoundException;
 

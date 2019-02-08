@@ -11,16 +11,27 @@ public class DbConnection {
 
     private static Connection connection;
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection(DataBaseSource.getDataBaseLink());
+    public static Connection getConnection() {
 
-        //Activate Foreign-Key Support on each call (not supported by SQLite ... if you change DBMS, you have to delete this)
-        connection.createStatement().execute("PRAGMA foreign_keys = ON");
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection(DataBaseSource.getDataBaseLink());
+
+            //Activate Foreign-Key Support on each call (not supported by SQLite ... if you change DBMS, you have to delete this)
+            connection.createStatement().execute("PRAGMA foreign_keys = ON");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        }
+
         return connection;
     }
 
-    public static void closeConnection() throws SQLException {
+    public static void closeConnection() {
 
         try {
             connection.close();

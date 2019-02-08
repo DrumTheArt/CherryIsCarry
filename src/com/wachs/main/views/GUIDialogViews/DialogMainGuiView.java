@@ -136,7 +136,7 @@ public class DialogMainGuiView {
         HBox_Selector = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
         //Generate ComboBox Model for all Guests
-        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getAllProjects();
+        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getGetAllProjects();
         selectProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_LB_PROJECTS_SELECT, comboBoxProjectModel);
 
         //Generate ComboBox Model for all Guests

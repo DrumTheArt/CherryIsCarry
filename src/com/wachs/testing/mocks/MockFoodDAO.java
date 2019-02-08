@@ -25,83 +25,105 @@ public class MockFoodDAO implements FoodDAO {
     }
 
     @Override
-    public Food findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public Food findOneData(int id_guest, int id_house) {
 
-        statement = DbTestConnection.getConnection().createStatement();
         QueryGeneratorFood query = new QueryGeneratorFood();
-        ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        int FK_id = result.getInt(1);
-        int nights = result.getInt(2);
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        aFood.setPK_id(FK_id);
-        aFood.setNights(nights);
-        aFood.setId_guest(id_guest);
-        aFood.setId_house(id_house);
+            int FK_id = result.getInt(1);
+            int nights = result.getInt(2);
 
-        result.close();
-        statement.close();
-        DbTestConnection.closeConnection();
+            aFood.setPK_id(FK_id);
+            aFood.setNights(nights);
+            aFood.setId_guest(id_guest);
+            aFood.setId_house(id_house);
+
+            result.close();
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return aFood;
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         QueryGeneratorFood query = new QueryGeneratorFood();
-        statement = DbTestConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
 
-        while (result.next()) {
-            allDataList.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryReadAllData());
 
+            while (result.next()) {
+                allDataList.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+
+            }
+
+            statement.close();
+            result.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        statement.close();
-        result.close();
-        DbTestConnection.closeConnection();
 
         return allDataList;
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, int newNights) {
 
         QueryGeneratorFood newQuery = new QueryGeneratorFood();
 
-        statement = DbTestConnection.getConnection().createStatement();
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newNights));
 
-        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newNights));
+            statement.close();
+            DbTestConnection.closeConnection();
 
-        statement.close();
-        DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteData(int id_guest, int id_house) {
+
+        QueryGeneratorFood newQuery = new QueryGeneratorFood();
+
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
+
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, int nights) {
 
         QueryGeneratorFood newQuery = new QueryGeneratorFood();
 
-        statement = DbTestConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryInsertData(id_guest, id_house, nights));
 
-        statement.close();
-        DbTestConnection.closeConnection();
-    }
-
-    @Override
-    public void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException {
-
-        QueryGeneratorFood newQuery = new QueryGeneratorFood();
-
-        statement = DbTestConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryInsertData(id_guest, id_house, nights));
-
-        statement.close();
-        DbTestConnection.closeConnection();
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
-
 }

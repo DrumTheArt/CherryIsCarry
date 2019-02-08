@@ -24,81 +24,101 @@ public class MockStayDAO implements StayDAO {
     }
 
     @Override
-    public Stay findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public Stay findOneData(int id_guest, int id_house) {
 
-        statement = DbTestConnection.getConnection().createStatement();
         QueryGeneratorStay query = new QueryGeneratorStay();
-        ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        int FK_id = result.getInt(1);
-        int nights = result.getInt(2);
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        aStay.setPK_id(FK_id);
-        aStay.setNights(nights);
-        aStay.setId_guest(id_guest);
-        aStay.setId_house(id_house);
+            int FK_id = result.getInt(1);
+            int nights = result.getInt(2);
 
-        result.close();
-        statement.close();
-        DbTestConnection.closeConnection();
+            aStay.setPK_id(FK_id);
+            aStay.setNights(nights);
+            aStay.setId_guest(id_guest);
+            aStay.setId_house(id_house);
+
+            result.close();
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return aStay;
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         QueryGeneratorStay query = new QueryGeneratorStay();
-        statement = DbTestConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryReadAllData());
 
-        while (result.next()) {
-            allDataList.add(new Stay(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+            while (result.next()) {
+                allDataList.add(new Stay(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
 
+            }
+
+            statement.close();
+            result.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        statement.close();
-        result.close();
-        DbTestConnection.closeConnection();
-
         return allDataList;
+    }
+
+    @Override
+    public void updateData(int id_guest, int id_house, int newNights) {
+        QueryGeneratorStay newQuery = new QueryGeneratorStay();
+
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newNights));
+
+            statement.close();
+            DbTestConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteData(int id_guest, int id_house) {
+        QueryGeneratorStay newQuery = new QueryGeneratorStay();
+
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
+
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException {
-        QueryGeneratorStay newQuery = new QueryGeneratorStay();
-
-        statement = DbTestConnection.getConnection().createStatement();
-
-        statement.executeUpdate(newQuery.queryUpdateData(id_guest, id_house, newNights));
-
-        statement.close();
-        DbTestConnection.closeConnection();
-    }
-
-    @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
-        QueryGeneratorStay newQuery = new QueryGeneratorStay();
-
-        statement = DbTestConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryDeleteData(id_guest, id_house));
-
-        statement.close();
-        DbTestConnection.closeConnection();
-    }
-
-    @Override
-    public void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, int nights) {
 
         QueryGeneratorStay newQuery = new QueryGeneratorStay();
 
-        statement = DbTestConnection.getConnection().createStatement();
-        statement.executeUpdate(newQuery.queryInsertData(id_guest, id_house, nights));
+        try {
+            statement = DbTestConnection.getConnection().createStatement();
+            statement.executeUpdate(newQuery.queryInsertData(id_guest, id_house, nights));
 
-        statement.close();
-        DbTestConnection.closeConnection();
+            statement.close();
+            DbTestConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
-
 }

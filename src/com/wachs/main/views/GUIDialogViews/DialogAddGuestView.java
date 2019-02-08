@@ -92,7 +92,7 @@ public class DialogAddGuestView {
 
         tf_GuestNewName = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_NEWGUESTNAME, GUIProperties.TEXTFIELD_DESIGN, true);
 
-        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getAllProjects();
+        comboBoxProjectModel = new AllProjectsDropDownMenuModel().getGetAllProjects();
         cb_SelectedProject = new CreateGUIComboBox().createComboBox(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_PROJECTS_SELECTED, comboBoxProjectModel);
 
         HBox_TF_AreaNewGuestName.setAlignment(Pos.BOTTOM_CENTER);

@@ -12,15 +12,15 @@ import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorStay.*;
 public class TblStayColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
-    private boolean TblColumnTitleOrderValidate=false;
+    private boolean TblColumnTitleOrderValidate = false;
 
-    public TblStayColumnValidate() throws SQLException, ClassNotFoundException {
+    public TblStayColumnValidate() throws SQLException {
 
         TblColumnTitleOrderValidate = isColumnOrderValidate();
 
     }
 
-    private boolean isColumnOrderValidate() throws SQLException, ClassNotFoundException {
+    private boolean isColumnOrderValidate() throws SQLException {
         String query = "SELECT * FROM " + TABLENAME;
         statement = DbConnection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
@@ -38,7 +38,6 @@ public class TblStayColumnValidate implements IDbColumnValidator {
 
         String column4 = rsmd.getColumnName(4);
         System.out.println("In DB " + TABLENAME + " heißt Spalte 4: " + column4 + " im QueryGenerator: " + COLUMN4);
-
 
         return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4);
 

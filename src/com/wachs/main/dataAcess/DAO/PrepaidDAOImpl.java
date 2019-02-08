@@ -5,7 +5,6 @@ import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ApplicationLogger;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,97 +25,115 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     }
 
     @Override
-    public Prepaid findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public Prepaid findOneData(int id_guest, int id_house) {
 
-        statement = DbConnection.getConnection().createStatement();
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
-        ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        int FK_id = result.getInt(1);
-        double prepaid = result.getDouble(2);
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
 
-        aPrepaid.setPK_id(FK_id);
-        aPrepaid.setPrepaid(prepaid);
-        aPrepaid.setId_guest(id_guest);
-        aPrepaid.setId_house(id_house);
+            int FK_id = result.getInt(1);
+            double prepaid = result.getDouble(2);
 
-        result.close();
-        statement.close();
-        DbConnection.closeConnection();
+            aPrepaid.setPK_id(FK_id);
+            aPrepaid.setPrepaid(prepaid);
+            aPrepaid.setId_guest(id_guest);
+            aPrepaid.setId_house(id_house);
+
+            result.close();
+            statement.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return aPrepaid;
     }
 
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList readAllData() {
 
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
-        statement = DbConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryReadAllData());
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryReadAllData());
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryReadAllData());
 
-        while (result.next()) {
-            allDataList.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+            while (result.next()) {
+                allDataList.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+            }
 
+            statement.close();
+            result.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        statement.close();
-        result.close();
-        DbConnection.closeConnection();
 
         return allDataList;
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, double prepaid) throws SQLException, ClassNotFoundException, IOException {
+    public void insertData(int id_guest, int id_house, double prepaid) {
 
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
-        statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(query.queryInsertData(id_guest, id_house, prepaid));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryInsertData(id_guest, id_house, prepaid));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, prepaid));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, prepaid));
 
-        statement.close();
-        DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double newPrepaid) throws SQLException, ClassNotFoundException, IOException {
+    public void updateData(int id_guest, int id_house, double newPrepaid) {
 
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
-        statement = DbConnection.getConnection().createStatement();
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryUpdateData(id_guest, id_house, newPrepaid));
 
-        statement.executeUpdate(query.queryUpdateData(id_guest, id_house, newPrepaid));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, newPrepaid));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, newPrepaid));
-
-        statement.close();
-        DbConnection.closeConnection();
-
+            statement.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public void deleteData(int id_guest, int id_house) {
 
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
 
-        statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
 
-        statement.close();
-        DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

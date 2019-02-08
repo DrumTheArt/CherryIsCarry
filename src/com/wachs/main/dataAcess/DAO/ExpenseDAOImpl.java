@@ -5,7 +5,6 @@ import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorExpense;
 import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ApplicationLogger;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,92 +27,119 @@ public class ExpenseDAOImpl implements ExpenseDAO {
     }
 
     @Override
-    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) {
 
-        statement = DbConnection.getConnection().createStatement();
         QueryGeneratorExpense query = new QueryGeneratorExpense();
-        ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
 
-        while (result.next()) {
-            AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
+
+            while (result.next()) {
+                AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+            }
+
+            statement.close();
+            result.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        statement.close();
-        result.close();
-        DbConnection.closeConnection();
 
         return AllExpensesSearchedGuests;
 
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException, IOException {
+    public ArrayList readAllData() {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
-        statement = DbConnection.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(query.queryReadAllData());
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query.queryReadAllData());
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryReadAllData());
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryReadAllData());
 
-        while (result.next()) {
-            AllExpensesAllGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+            while (result.next()) {
+                AllExpensesAllGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+            }
+
+            statement.close();
+            result.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        statement.close();
-        result.close();
-        DbConnection.closeConnection();
 
         return AllExpensesAllGuests;
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException, IOException {
+    public void deleteData(int id_guest, int id_house, double price, String reason, String when) {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
 
-        statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(query.queryDeleteData(id_guest, id_house, price, reason, when));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryDeleteData(id_guest, id_house, price, reason, when));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house, price, reason, when));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house, price, reason, when));
 
-        statement.close();
-        DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) throws SQLException, ClassNotFoundException, IOException {
+    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
 
-        statement = DbConnection.getConnection().createStatement();
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
 
-        statement.executeUpdate(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, price, reason, when, newPrice, newReason, newWhen));
+            statement.close();
+            DbConnection.closeConnection();
 
-        statement.close();
-        DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException, IOException {
+    public void insertData(int id_guest, int id_house, double price, String reason, String when) {
 
         QueryGeneratorExpense query = new QueryGeneratorExpense();
-        statement = DbConnection.getConnection().createStatement();
-        statement.executeUpdate(query.queryInsertData(id_guest, id_house, price, reason, when));
 
-        //Log the query
-        ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, price, reason, when));
+        try {
+            statement = DbConnection.getConnection().createStatement();
+            statement.executeUpdate(query.queryInsertData(id_guest, id_house, price, reason, when));
 
-        statement.close();
-        DbConnection.closeConnection();
+            //Log the query
+            ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, price, reason, when));
+
+            statement.close();
+            DbConnection.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

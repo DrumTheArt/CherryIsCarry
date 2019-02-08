@@ -3,7 +3,6 @@ package com.wachs.testing.stubs;
 import com.wachs.main.businessObjects.Stay;
 import com.wachs.main.dataAcess.DAO.StayDAO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StubsStayDAO implements StayDAO {
@@ -23,25 +22,25 @@ public class StubsStayDAO implements StayDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         return listOfStays;
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, int newNights) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, int newNights) {
 
         this.alphaStay.setNights(newNights);
     }
 
     @Override
-    public Stay findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public Stay findOneData(int id_guest, int id_house) {
 
         return this.alphaStay;
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house) {
 
         this.alphaStay.setId_guest(0);
         this.alphaStay.setId_house(0);
@@ -50,7 +49,7 @@ public class StubsStayDAO implements StayDAO {
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, int nights) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, int nights) {
 
         stayTwo = new Stay(1,nights,id_guest, id_house);
         listOfStays.add(stayTwo);

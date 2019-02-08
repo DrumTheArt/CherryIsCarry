@@ -10,10 +10,14 @@ public class ApplicationLogger {
     private static Logger jlog;
     private static Handler fh;
 
-    public static void loggingQueries(String logInput) throws IOException {
+    public static void loggingQueries(String logInput) {
 
         jlog = Logger.getLogger("");
-        fh = new FileHandler("info.log", true);
+        try {
+            fh = new FileHandler("info.log", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Logger.getLogger("").addHandler(fh);
         SimpleFormatter formatter = new SimpleFormatter() {
 

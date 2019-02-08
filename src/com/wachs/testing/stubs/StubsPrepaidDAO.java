@@ -3,7 +3,6 @@ package com.wachs.testing.stubs;
 import com.wachs.main.businessObjects.Prepaid;
 import com.wachs.main.dataAcess.DAO.PrepaidDAO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StubsPrepaidDAO implements PrepaidDAO {
@@ -23,32 +22,32 @@ public class StubsPrepaidDAO implements PrepaidDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         return listOfPrepaid;
     }
 
     @Override
-    public Prepaid findOneData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public Prepaid findOneData(int id_guest, int id_house) {
 
         return this.alphaPrepaid;
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, double prepaid) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, double prepaid) {
 
         prepaidTwo = new Prepaid(1,prepaid,id_guest, id_house);
         listOfPrepaid.add(prepaidTwo);
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double newPrepaid) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, double newPrepaid) {
 
         this.alphaPrepaid.setPrepaid(newPrepaid);
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house) {
 
         this.alphaPrepaid.setPrepaid(0);
         this.alphaPrepaid.setId_guest(0);

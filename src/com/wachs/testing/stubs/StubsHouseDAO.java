@@ -3,7 +3,6 @@ package com.wachs.testing.stubs;
 import com.wachs.main.businessObjects.House;
 import com.wachs.main.dataAcess.DAO.HouseDAO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StubsHouseDAO implements HouseDAO {
@@ -23,7 +22,7 @@ public class StubsHouseDAO implements HouseDAO {
     }
 
     @Override
-    public House findOneData(String name) throws SQLException, ClassNotFoundException {
+    public House findOneData(String name) {
 
         return this.alphaHouse;
     }
@@ -35,14 +34,14 @@ public class StubsHouseDAO implements HouseDAO {
     }
 
     @Override
-    public void insertData(String name, double price, double deposite) throws SQLException, ClassNotFoundException {
+    public void insertData(String name, double price, double deposite) {
 
         houseTwo = new House(name, price, deposite);
         listOfHouses.add(houseTwo);
     }
 
     @Override
-    public void updateData(int oldId, String newName, double newPrice, double newDeposite) throws SQLException, ClassNotFoundException {
+    public void updateData(int oldId, String newName, double newPrice, double newDeposite) {
 
         this.alphaHouse.setTXT_name(newName);
         this.alphaHouse.setREAL_price(newPrice);
@@ -50,7 +49,7 @@ public class StubsHouseDAO implements HouseDAO {
     }
 
     @Override
-    public void deleteData(String name) throws SQLException, ClassNotFoundException {
+    public void deleteData(String name) {
 
         this.alphaHouse.setTXT_name("");
         this.alphaHouse.setREAL_deposite(0);

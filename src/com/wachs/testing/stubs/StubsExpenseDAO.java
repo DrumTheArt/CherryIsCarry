@@ -29,7 +29,7 @@ public class StubsExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) throws SQLException, ClassNotFoundException {
+    public ArrayList fineAllDataToOneGuest(int id_guest, int id_house) {
 
         for (Expense e : listOfExpensesAllGuests) {
 
@@ -43,13 +43,13 @@ public class StubsExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public ArrayList readAllData() throws SQLException, ClassNotFoundException {
+    public ArrayList readAllData() {
 
         return listOfExpensesAllGuests;
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
+    public void deleteData(int id_guest, int id_house, double price, String reason, String when) {
 
 
         for (Expense e : listOfExpensesAllGuests) {
@@ -62,7 +62,7 @@ public class StubsExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) throws SQLException, ClassNotFoundException {
+    public void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
 
 
         for (Expense e : listOfExpensesAllGuests) {
@@ -78,7 +78,7 @@ public class StubsExpenseDAO implements ExpenseDAO {
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, double price, String reason, String when) throws SQLException, ClassNotFoundException {
+    public void insertData(int id_guest, int id_house, double price, String reason, String when) {
 
         Expense someExpense = new Expense(1, price, reason, when, id_guest, id_house);
         listOfExpensesAllGuests.add(someExpense);

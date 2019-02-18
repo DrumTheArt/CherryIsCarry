@@ -4,19 +4,19 @@ public class Stay  {
 
     private int PK_id;
     private int nights;
-    private int id_guest;
-    private int id_house;
+    private int idGuest;
+    private int idProject;
 
     public Stay(){
 
     }
 
-    public Stay(int FK_id, int nights, int id_guest, int id_house){
+    public Stay(int FK_id, int nights, int idGuest, int idProject){
 
         this.PK_id =FK_id;
         this.nights=nights;
-        this.id_guest=id_guest;
-        this.id_house=id_house;
+        this.idGuest =idGuest;
+        this.idProject =idProject;
     }
 
     public int getPK_id() {
@@ -31,24 +31,24 @@ public class Stay  {
         return this.nights;
     }
 
-    public int getId_guest() {
-        return this.id_guest;
+    public int getIdGuest() {
+        return this.idGuest;
     }
 
-    public int getId_house() {
-        return this.id_house;
+    public int getIdProject() {
+        return this.idProject;
     }
 
-    public void setId_house(int id_house) {
-        this.id_house=id_house;
+    public void setIdProject(int idProject) {
+        this.idProject = idProject;
     }
 
     public void setNights(int nights) {
         this.nights = nights;
     }
 
-    public void setId_guest(int id_guest) {
-        this.id_house= id_guest;
+    public void setIdGuest(int idGuest) {
+        this.idProject = idGuest;
     }
 
 }

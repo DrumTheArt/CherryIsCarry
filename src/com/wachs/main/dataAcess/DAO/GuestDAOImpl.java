@@ -32,7 +32,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public Guest findOneData(String name, int id_house) {
+    public Guest findOneGuestByOneProject(String name, int idHouse) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
@@ -40,10 +40,10 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindOneData(name, id_house));
+            ResultSet result = statement.executeQuery(query.queryFindOneGuestByOneProject(name, idHouse));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindOneData(name, id_house));
+            ApplicationLogger.loggingQueries(query.queryFindOneGuestByOneProject(name, idHouse));
 
             //Get db-attributes
             int PK_id = result.getInt(1);
@@ -52,8 +52,8 @@ public class GuestDAOImpl implements GuestDAO {
 
             //Set db-attributes into GuestObject
             aGuest.setPK_id(PK_id);
-            aGuest.setId_house(ID_house);
-            aGuest.setTXT_name(guestName);
+            aGuest.setIdProject(ID_house);
+            aGuest.setGuestName(guestName);
 
             statement.close();
             result.close();
@@ -66,15 +66,15 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public ArrayList readAllData(int id_house) {
+    public ArrayList findAllGuestsByOneProject(int idHouse) {
 
         QueryGeneratorGuest query = new QueryGeneratorGuest();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryReadAllData(id_house));
+            ResultSet result = statement.executeQuery(query.queryFindAllGuestsByOneProject(idHouse));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryReadAllData(id_house));
+            ApplicationLogger.loggingQueries(query.queryFindAllGuestsByOneProject(idHouse));
 
             while (result.next()) {
                 allDataList.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));
@@ -93,7 +93,7 @@ public class GuestDAOImpl implements GuestDAO {
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
     @Override
-    public void insertData(int id_house, String name) {
+    public void insertGuestForOneProject(int idHouse, String name) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
@@ -103,10 +103,10 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(id_house, name));
+            statement.executeUpdate(query.queryInsertGuestForOneProject(idHouse, name));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertData(id_house, name));
+            ApplicationLogger.loggingQueries(query.queryInsertGuestForOneProject(idHouse, name));
 
             statement.close();
             DbConnection.closeConnection();
@@ -118,7 +118,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void updateData(int oldId, String name, int id_house) {
+    public void updateGuestForOneProject(int oldId, String name, int idProject) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
@@ -128,10 +128,10 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(oldId, name, id_house));
+            statement.executeUpdate(query.queryUpdateGuestForOneProject(oldId, name, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(oldId, name, id_house));
+            ApplicationLogger.loggingQueries(query.queryUpdateGuestForOneProject(oldId, name, idProject));
 
             statement.close();
             DbConnection.closeConnection();
@@ -141,7 +141,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void deleteData(String name, int id_house) {
+    public void deleteGuestForOneProject(String name, int idProject) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
@@ -151,10 +151,10 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteData(name, id_house));
+            statement.executeUpdate(query.queryDeleteGuestForOneProject(name, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(name, id_house));
+            ApplicationLogger.loggingQueries(query.queryDeleteGuestForOneProject(name, idProject));
 
             statement.close();
             DbConnection.closeConnection();
@@ -162,31 +162,6 @@ public class GuestDAOImpl implements GuestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public ArrayList findListDataWhereHouseID(int id_house) {
-
-        QueryGeneratorGuest query = new QueryGeneratorGuest();
-        try {
-            statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryfindOneDataWhereHouseID(id_house));
-
-            //Log the query
-            ApplicationLogger.loggingQueries(query.queryfindOneDataWhereHouseID(id_house));
-
-            while (result.next()) {
-                allDatalistWhere.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));
-            }
-
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return allDatalistWhere;
     }
 
 }

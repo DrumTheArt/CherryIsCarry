@@ -6,17 +6,15 @@ import java.util.ArrayList;
 
 public interface GuestDAO {
 
-    Guest findOneData(String name, int id_house);
+    Guest findOneGuestByOneProject(String name, int idHouse);
 
-    ArrayList readAllData(int id_house);
+    ArrayList findAllGuestsByOneProject(int idHouse);
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
-    void insertData(int id_house, String name);
+    void insertGuestForOneProject(int idHouse, String name);
 
-    void updateData(int oldId, String name, int id_house);
+    void updateGuestForOneProject(int oldId, String name, int idProject);
 
-    void deleteData(String name, int id_house);
-
-    ArrayList findListDataWhereHouseID(int id_house);
+    void deleteGuestForOneProject(String name, int idProject);
 
 }

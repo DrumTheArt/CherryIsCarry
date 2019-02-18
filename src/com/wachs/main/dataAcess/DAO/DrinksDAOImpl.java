@@ -24,24 +24,24 @@ public class DrinksDAOImpl implements DrinksDAO {
         allDataList = new ArrayList<Drinks>();
     }
 
-    public Drinks findOneData(int id_guest, int id_house) {
+    public Drinks findDrinksByOneGuest(int idGuest, int idProject) {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
+            ResultSet result = statement.executeQuery(query.queryFindDrinksByOneGuest(idGuest, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
+            ApplicationLogger.loggingQueries(query.queryFindDrinksByOneGuest(idGuest, idProject));
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
             aDrink.setPK_id(FK_id);
             aDrink.setNights(nights);
-            aDrink.setId_guest(id_guest);
-            aDrink.setId_house(id_house);
+            aDrink.setIdGuest(idGuest);
+            aDrink.setIdProject(idProject);
 
             result.close();
             statement.close();
@@ -54,16 +54,16 @@ public class DrinksDAOImpl implements DrinksDAO {
         return aDrink;
     }
 
-    public ArrayList readAllData() {
+    public ArrayList findAllDrinksByOneProject(int idProject) {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
         try {
 
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryReadAllData());
+            ResultSet result = statement.executeQuery(query.queryFindAllDrinksByOneProject(idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryReadAllData());
+            ApplicationLogger.loggingQueries(query.queryFindAllDrinksByOneProject(idProject));
 
             while (result.next()) {
                 allDataList.add(new Drinks(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -81,16 +81,16 @@ public class DrinksDAOImpl implements DrinksDAO {
         return allDataList;
     }
 
-    public void updateData(int id_guest, int id_house, int newNights) {
+    public void updateDrinksForOneGuest(int idGuest, int idProject, int newNights) {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(id_guest, id_house, newNights));
+            statement.executeUpdate(query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, newNights));
+            ApplicationLogger.loggingQueries(query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights));
 
             statement.close();
             DbConnection.closeConnection();
@@ -101,16 +101,16 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     }
 
-    public void deleteData(int id_guest, int id_house) {
+    public void deleteDrinksForOneGuest(int idGuest, int idProject) {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
+            statement.executeUpdate(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
+            ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
 
             statement.close();
             DbConnection.closeConnection();
@@ -120,16 +120,16 @@ public class DrinksDAOImpl implements DrinksDAO {
         }
     }
 
-    public void insertData(int id_guest, int id_house, int nights) {
+    public void insertDrinksForOneGuest(int idGuest, int idProject, int nights) {
 
         QueryGeneratorDrinks query = new QueryGeneratorDrinks();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(id_guest, id_house, nights));
+            statement.executeUpdate(query.queryInsertDrinksForOneGuest(idGuest, idProject, nights));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
+            ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
 
             statement.close();
             DbConnection.closeConnection();

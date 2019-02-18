@@ -8,48 +8,39 @@ public class QueryGeneratorGuest {
     public static String COLUMN3 = "TXT_name";
 
 
-    public String queryFindOneData(String name, int id_house) {
+    public String queryFindOneGuestByOneProject(String name, int idProject) {
 
-        String query = "SELECT " + COLUMN1 + ", " + COLUMN2 + ", " + COLUMN3 + " from " + TABLENAME + " WHERE " + COLUMN3 + " = " + "'" + name + "'" + " AND " + COLUMN2 + " = " + id_house;
-
-        return query;
-    }
-
-    public String queryReadAllData(int id_house) {
-
-        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN2 + " = " + id_house;
-
+        String query = "SELECT " + COLUMN1 + ", " + COLUMN2 + ", " + COLUMN3 + " from " + TABLENAME + " WHERE " + COLUMN3 + " = " + "'" + name + "'" + " AND " + COLUMN2 + " = " + idProject;
 
         return query;
     }
 
-    public String queryInsertData(int id_house, String name) {
+    public String queryFindAllGuestsByOneProject(int idProject) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + ") VALUES (? ," + id_house + "," + "'" + name + "'" + ")";
-
-        return query;
-    }
-
-    public String queryUpdateData(int oldId, String newName, int id_house) {
-
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN3 + " = " + "'" + newName + "'" + " WHERE " + COLUMN1 + "=" + oldId + " AND " + COLUMN2 + " =" + id_house;
+        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN2 + " = " + idProject;
 
         return query;
     }
 
-    public String queryDeleteData(String name, int id_house) {
+    public String queryInsertGuestForOneProject(int idProject, String name) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN3 + "=" + "'" + name + "'" + " AND " + COLUMN2 + "=" + id_house;
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + ") VALUES (? ," + idProject + "," + "'" + name + "'" + ")";
 
         return query;
     }
 
-    public String queryfindOneDataWhereHouseID(int id_house) {
+    public String queryUpdateGuestForOneProject(int oldId, String newName, int idProject) {
 
-        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN2 + " =" + id_house;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN3 + " = " + "'" + newName + "'" + " WHERE " + COLUMN1 + "=" + oldId + " AND " + COLUMN2 + " =" + idProject;
 
         return query;
+    }
 
+    public String queryDeleteGuestForOneProject(String name, int idProject) {
+
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN3 + "=" + "'" + name + "'" + " AND " + COLUMN2 + "=" + idProject;
+
+        return query;
     }
 
 }

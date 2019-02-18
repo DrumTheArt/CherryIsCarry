@@ -9,16 +9,16 @@ public class QueryGeneratorHouse {
     public static String COLUMN4 = "REAL_deposite";
 
 
-    public String queryFindOneData(String name) {
+    public String queryFindOneData(String projectName) {
 
-        String query = "SELECT " + COLUMN1 + ", " + COLUMN2 + ", " + COLUMN3 + ", " + COLUMN4 + " from " + TABLENAME + " WHERE " + COLUMN2 + " = " + "'" + name + "'";
+        String query = "SELECT " + COLUMN1 + ", " + COLUMN2 + ", " + COLUMN3 + ", " + COLUMN4 + " from " + TABLENAME + " WHERE " + COLUMN2 + " = " + "'" + projectName + "'";
 
         return query;
     }
 
-    public String queryDeleteData(String name) {
+    public String queryDeleteData(String projectName) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN2 + "=" + "'" + name + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN2 + "=" + "'" + projectName + "'";
 
         return query;
     }
@@ -30,16 +30,16 @@ public class QueryGeneratorHouse {
         return query;
     }
 
-    public String queryInsertData(String name, double realPrice, double realDeposite) {
+    public String queryInsertData(String projectName, double projectPrice, double projectDeposite) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + "'" + name + "'" + "," + realPrice + "," + realDeposite + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + "'" + projectName + "'" + "," + projectPrice + "," + projectDeposite + ")";
 
         return query;
     }
 
-    public String queryUpdateData(int oldId, String newName, double newPrice, double newDeposite) {
+    public String queryUpdateData(int oldId, String projectNewName, double projectNewPrice, double projectNewDeposite) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + "'" + newName + "'" + ", " + COLUMN3 + "=" + newPrice + "," + COLUMN4 + "=" + newDeposite + " WHERE " + COLUMN1 + " = "  + oldId;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + "'" + projectNewName + "'" + ", " + COLUMN3 + "=" + projectNewPrice + "," + COLUMN4 + "=" + projectNewDeposite + " WHERE " + COLUMN1 + " = "  + oldId;
 
         return query;
     }

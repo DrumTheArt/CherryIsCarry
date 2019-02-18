@@ -6,7 +6,7 @@ public class GuestModel {
     private GuestDAO newDAO;
     private Guest searchedGuest;
 
-    //findOneData(String name, int id_house)
+    //findDrinksByOneGuest(String name, int id_house)
 
     GuestModel(String guestName, int id_house) throws SQLException, IOException, ClassNotFoundException {
 
@@ -16,7 +16,7 @@ public class GuestModel {
     private Guest createModel(String guestName, int id_house) throws SQLException, IOException, ClassNotFoundException {
 
         newDAO = new GuestDAOImpl();
-        searchedGuest = newDAO.findOneData(guestName, id_house);
+        searchedGuest = newDAO.findDrinksByOneGuest(guestName, id_house);
 
         return searchedGuest;
     }
@@ -29,19 +29,19 @@ public class GuestModel {
 
     public String getprojectTitle(){
 
-        return searchedGuest.getTXT_name();
+        return searchedGuest.getGuestName();
 
     }
 
     public double getPrice(){
 
-        return searchedGuest.getREAL_price();
+        return searchedGuest.getProjectPrice();
 
     }
 
     public double getDeposite(){
 
-        return searchedGuest.getREAL_deposite();
+        return searchedGuest.getProjectDeposite();
 
     }
      **/

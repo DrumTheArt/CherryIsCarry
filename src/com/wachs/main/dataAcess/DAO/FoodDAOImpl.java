@@ -25,23 +25,23 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
-    public Food findOneData(int id_guest, int id_house) {
+    public Food findFoodByOneGuest(int IdGuest, int idProject) {
 
         try {
             statement = DbConnection.getConnection().createStatement();
             QueryGeneratorFood query = new QueryGeneratorFood();
-            ResultSet result = statement.executeQuery(query.queryFindOneData(id_guest, id_house));
+            ResultSet result = statement.executeQuery(query.queryFindFoodByOneGuest(IdGuest, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindOneData(id_guest, id_house));
+            ApplicationLogger.loggingQueries(query.queryFindFoodByOneGuest(IdGuest, idProject));
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
             aFood.setPK_id(FK_id);
             aFood.setNights(nights);
-            aFood.setId_guest(id_guest);
-            aFood.setId_house(id_house);
+            aFood.setIdGuest(IdGuest);
+            aFood.setIdProject(idProject);
 
             result.close();
             statement.close();
@@ -55,16 +55,16 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
-    public ArrayList readAllData() {
+    public ArrayList findAllFoodByOneProject(int idProject) {
 
         QueryGeneratorFood query = new QueryGeneratorFood();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryReadAllData());
+            ResultSet result = statement.executeQuery(query.queryFindAllFoodByOneProject(idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryReadAllData());
+            ApplicationLogger.loggingQueries(query.queryFindAllFoodByOneProject(idProject));
 
             while (result.next()) {
                 allDataList.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -81,15 +81,15 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
-    public void updateData(int id_guest, int id_house, int newNights) {
+    public void updateFoodForOneGuest(int idGuest, int idProject, int newNights) {
 
         QueryGeneratorFood query = new QueryGeneratorFood();
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(id_guest, id_house, newNights));
+            statement.executeUpdate(query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(id_guest, id_house, newNights));
+            ApplicationLogger.loggingQueries(query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights));
 
             statement.close();
             DbConnection.closeConnection();
@@ -99,16 +99,16 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
-    public void deleteData(int id_guest, int id_house) {
+    public void deleteFoodForOneGuest(int idGuest, int idProject) {
 
         QueryGeneratorFood query = new QueryGeneratorFood();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteData(id_guest, id_house));
+            statement.executeUpdate(query.queryDeleteFoodForOneGuest(idGuest, idProject));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(id_guest, id_house));
+            ApplicationLogger.loggingQueries(query.queryDeleteFoodForOneGuest(idGuest, idProject));
 
             statement.close();
             DbConnection.closeConnection();
@@ -118,16 +118,16 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
-    public void insertData(int id_guest, int id_house, int nights) {
+    public void insertFoodForOneGuest(int idGuest, int idProject, int nights) {
 
         QueryGeneratorFood query = new QueryGeneratorFood();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(id_guest, id_house, nights));
+            statement.executeUpdate(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertData(id_guest, id_house, nights));
+            ApplicationLogger.loggingQueries(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
 
             statement.close();
             DbConnection.closeConnection();

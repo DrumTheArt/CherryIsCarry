@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public interface ExpenseDAO {
 
-    ArrayList fineAllDataToOneGuest(int id_guest, int id_house);
+    ArrayList findExpensesByOneGuest(int idGuest, int idProject);
 
-    ArrayList readAllData();
+    ArrayList findAllExpensesByOneProject(int idProject);
 
-    void deleteData(int id_guest, int id_house, double price, String reason, String when);
+    void deleteExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when);
 
-    void updateData(int id_guest, int id_house, double price, String reason, String when, double newPrice, String newReason, String newWhen);
+    void updateExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
 
-    void insertData(int id_guest, int id_house, double price, String reason, String when);
+    void insertExpensesForOneGuest(int idGuest, int IdProject, double price, String reason, String when);
 
 }

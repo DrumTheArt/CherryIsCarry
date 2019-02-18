@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface StayDAO {
 
-    Stay findOneData(int id_guest, int id_house);
+    Stay findStayByOneGuest(int idGuest, int idProject);
 
-    ArrayList readAllData();
+    ArrayList findAllStayByOneProject(int idProject);
 
-    void updateData(int id_guest, int id_house, int newNights);
+    void updateStayForOneGuest(int idGuest, int idProject, int newNights);
 
-    void deleteData(int id_guest, int id_house);
+    void deleteStayForOneGuest(int idGuest, int idProject);
 
-    void insertData(int id_guest, int id_house, int nights);
+    void insertStayForOneGuest(int idGuest, int idProject, int nights);
 }

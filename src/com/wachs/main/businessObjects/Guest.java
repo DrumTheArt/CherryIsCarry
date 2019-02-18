@@ -3,49 +3,49 @@ package com.wachs.main.businessObjects;
 public class Guest  {
 
     private int PK_id;
-    private int id_house;
-    private String TXT_name;
+    private int idProject;
+    private String guestName;
 
     public Guest(){
 
     }
 
-    public Guest(String TXT_name, int id_house) {
+    public Guest(String guestName, int idProject) {
 
-        this.id_house = id_house;
-        this.TXT_name = TXT_name;
+        this.idProject = idProject;
+        this.guestName = guestName;
 
     }
 
-    public Guest(int pk_id, int id_house, String TXT_name) {
+    public Guest(int pk_id, int idProject, String guestName) {
 
         this.PK_id = pk_id;
-        this.TXT_name = TXT_name;
-        this.id_house = id_house;
+        this.guestName = guestName;
+        this.idProject = idProject;
     }
 
     public int getPK_id() {
         return this.PK_id;
     }
 
-    public int getId_house() {
-        return this.id_house;
+    public int getIdProject() {
+        return this.idProject;
     }
 
-    public String getTXT_name() {
-        return this.TXT_name;
+    public String getGuestName() {
+        return this.guestName;
     }
 
-    public void setTXT_name(String TXT_name) {
-        this.TXT_name = TXT_name;
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
     }
 
     public void setPK_id(int PK_id) {
         this.PK_id = PK_id;
     }
 
-    public void setId_house(int id_house) {
-        this.id_house = id_house;
+    public void setIdProject(int idProject) {
+        this.idProject = idProject;
     }
 
 }

@@ -26,7 +26,7 @@ public class GUINamingProperties {
     public static String LB_GUEST_STILL_TO_PAY = "Still to Pay";
 
     //Labels for AllDetails
-    public static String LB_ALL_RENT_PRICE = "Rent House";
+    public static String LB_ALL_RENT_PRICE = "Rent Project";
     public static String LB_ALL_DRINKS_EUR = "Drinks all Guests";
     public static String LB_ALL_FOOD_EUR = "Food all Guests";
     public static String LB_ALL_TOTAL_COSTS = "Total Costs All";

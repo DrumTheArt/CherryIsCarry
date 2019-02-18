@@ -1,6 +1,6 @@
 package com.wachs.main.dataAcess.DAO;
 
-import com.wachs.main.businessObjects.House;
+import com.wachs.main.businessObjects.Project;
 import com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorHouse;
 import com.wachs.main.dataAcess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAcess.dataAccessConfigurations.Util.ApplicationLogger;
@@ -13,23 +13,23 @@ import java.util.ArrayList;
 
 import static com.wachs.main.dataAcess.dBQueryGenerators.QueryGeneratorHouse.*;
 
-public class HouseDAOImpl implements HouseDAO {
+public class ProjectDAOImpl implements ProjectDAO {
 
     private Statement statement;
-    private ArrayList<House> allDataList;
-    private House aHouse;
+    private ArrayList<Project> allDataList;
+    private Project aProject;
     private ConverterStringForDataBase convertString;
 
 
-    public HouseDAOImpl() {
-        aHouse = new House();
-        allDataList = new ArrayList<House>();
+    public ProjectDAOImpl() {
+        aProject = new Project();
+        allDataList = new ArrayList<Project>();
         convertString = new ConverterStringForDataBase();
 
     }
 
     @Override
-    public House findOneData(String name) {
+    public Project fineOneProject(String name) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
@@ -49,10 +49,10 @@ public class HouseDAOImpl implements HouseDAO {
             double reaL_deposite = result.getDouble(4);
 
             //Set db-attributes into GuestObject
-            aHouse.setPK_id(pk_id);
-            aHouse.setTXT_name(txt_name);
-            aHouse.setREAL_price(real_price);
-            aHouse.setREAL_deposite(reaL_deposite);
+            aProject.setPK_id(pk_id);
+            aProject.setProjectName(txt_name);
+            aProject.setProjectPrice(real_price);
+            aProject.setProjectDeposite(reaL_deposite);
 
             result.close();
             statement.close();
@@ -61,12 +61,12 @@ public class HouseDAOImpl implements HouseDAO {
             e.printStackTrace();
         }
 
-        return aHouse;
+        return aProject;
     }
 
     //throws SQLException, ClassNotFoundException, IOException
     @Override
-    public ArrayList readAllData() {
+    public ArrayList findOneProject() {
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
         try {
@@ -77,7 +77,7 @@ public class HouseDAOImpl implements HouseDAO {
             ApplicationLogger.loggingQueries(query.queryReadAllData());
 
             while (result.next()) {
-                allDataList.add(new House(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+                allDataList.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
 
             }
 
@@ -92,19 +92,19 @@ public class HouseDAOImpl implements HouseDAO {
     }
 
     @Override
-    public void insertData(String name, double price, double deposite) {
+    public void insertProject(String projectName, double projectPrice, double projectDeposite) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
-        name = convertString.convertString(name);
+        projectName = convertString.convertString(projectName);
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(name, price, deposite));
+            statement.executeUpdate(query.queryInsertData(projectName, projectPrice, projectDeposite));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertData(name, price, deposite));
+            ApplicationLogger.loggingQueries(query.queryInsertData(projectName, projectPrice, projectDeposite));
 
             statement.close();
             DbConnection.closeConnection();
@@ -115,20 +115,20 @@ public class HouseDAOImpl implements HouseDAO {
     }
 
     @Override
-    public void updateData(int oldId, String newName, double newPrice, double newDeposite) {
+    public void updateProject(int oldId, String newProjectName, double projectPrice, double projectDeposite) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
-        newName = convertString.convertString(newName);
+        newProjectName = convertString.convertString(newProjectName);
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(oldId, newName, newPrice, newDeposite));
+            statement.executeUpdate(query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(oldId, newName, newPrice, newDeposite));
+            ApplicationLogger.loggingQueries(query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite));
 
             statement.close();
             DbConnection.closeConnection();
@@ -139,24 +139,24 @@ public class HouseDAOImpl implements HouseDAO {
     }
 
     @Override
-    public void deleteData(String name) {
+    public void deleteProject(String projectName) {
 
 
         //Because every names starts with a Capital, Rest lowerCases
-        int countLettersName = name.length();
-        String firstLetter = name.substring(0,1).toUpperCase();
-        String lastLetters = name.substring(1,countLettersName).toLowerCase();
+        int countLettersName = projectName.length();
+        String firstLetter = projectName.substring(0,1).toUpperCase();
+        String lastLetters = projectName.substring(1,countLettersName).toLowerCase();
 
-        name = firstLetter + lastLetters;
+        projectName = firstLetter + lastLetters;
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteData(name));
+            statement.executeUpdate(query.queryDeleteData(projectName));
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(name));
+            ApplicationLogger.loggingQueries(query.queryDeleteData(projectName));
 
             statement.close();
             DbConnection.closeConnection();

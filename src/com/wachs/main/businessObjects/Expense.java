@@ -4,23 +4,23 @@ public class Expense  {
 
     private int PK_id;
     private double spend;
-    private String TXT_reason;
+    private String reason;
     private String when;
-    private int id_guest;
-    private int id_house;
+    private int idGuest;
+    private int IdProject;
 
     public Expense(){
 
     }
 
-    public Expense(int FK_id, double spend, String TXT_reason, String when, int id_guest, int id_house) {
+    public Expense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
 
         this.PK_id =FK_id;
         this.spend = spend;
-        this.TXT_reason = TXT_reason;
+        this.reason = reason;
         this.when=when;
-        this.id_guest=id_guest;
-        this.id_house=id_house;
+        this.idGuest =idGuest;
+        this.IdProject =idProject;
     }
 
     public int getPK_id() {
@@ -31,20 +31,20 @@ public class Expense  {
         this.PK_id=PK_id;
     }
 
-    public int getId_house() {
-        return id_house;
+    public int getIdProject() {
+        return IdProject;
     }
 
-    public void setId_house(int id_house) {
-        this.id_house=id_house;
+    public void setIdProject(int idProject) {
+        this.IdProject = idProject;
     }
 
-    public String getTXT_reason() {
-        return this.TXT_reason;
+    public String getReason() {
+        return this.reason;
     }
 
-    public void setTXT_reason(String TXT_name) {
-        this.TXT_reason = TXT_name;
+    public void setReason(String TXT_name) {
+        this.reason = TXT_name;
     }
 
     public void setREAL_price(double REAL_price) {
@@ -55,12 +55,12 @@ public class Expense  {
         return this.spend;
     }
 
-    public int getId_guest() {
-        return this.id_guest;
+    public int getIdGuest() {
+        return this.idGuest;
     }
 
-    public void setId_guest(int id_guest) {
-        this.id_guest=id_guest;
+    public void setIdGuest(int idGuest) {
+        this.idGuest = idGuest;
     }
 
     public void setWhen(String when){

@@ -21,20 +21,20 @@ public class DrinksModel {
     private Drinks createModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
 
         newDAO = new DrinksDAOImpl();
-        drinksSearchedGuest = newDAO.findOneData(idGuest, idHouse);
+        drinksSearchedGuest = newDAO.findDrinksByOneGuest(idGuest, idHouse);
 
         return drinksSearchedGuest;
     }
 
     public int getIdHouse(){
 
-        return drinksSearchedGuest.getId_house();
+        return drinksSearchedGuest.getIdProject();
 
     }
 
     public int getIdGuest(){
 
-        return drinksSearchedGuest.getId_guest();
+        return drinksSearchedGuest.getIdGuest();
 
     }
 

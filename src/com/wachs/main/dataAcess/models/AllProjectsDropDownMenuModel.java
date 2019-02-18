@@ -1,7 +1,7 @@
 package com.wachs.main.dataAcess.models;
 
-import com.wachs.main.businessObjects.House;
-import com.wachs.main.dataAcess.DAO.HouseDAOImpl;
+import com.wachs.main.businessObjects.Project;
+import com.wachs.main.dataAcess.DAO.ProjectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,7 +11,7 @@ public class AllProjectsDropDownMenuModel {
 
     private int[] getAllPrimaryKeyToAllProjects;
     private ObservableList<String> getAllProjects;
-    private ArrayList<House> allProjectsAsList;
+    private ArrayList<Project> allProjectsAsList;
 
 
     public AllProjectsDropDownMenuModel() {
@@ -22,13 +22,13 @@ public class AllProjectsDropDownMenuModel {
 
     private void setProjects() {
 
-        allProjectsAsList = new HouseDAOImpl().readAllData();
+        allProjectsAsList = new ProjectDAOImpl().findOneProject();
 
         getAllProjects = FXCollections.observableArrayList();
 
-        for (House e : allProjectsAsList) {
+        for (Project e : allProjectsAsList) {
 
-            getAllProjects.add(e.getTXT_name());
+            getAllProjects.add(e.getProjectName());
         }
 
     }

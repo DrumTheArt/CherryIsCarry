@@ -4,19 +4,19 @@ public class Prepaid  {
 
     private int PK_id;
     private double prepaid;
-    private int id_guest;
-    private int id_house;
+    private int idGuest;
+    private int idProject;
 
     public Prepaid(){
 
     }
 
-    public Prepaid(int FK_id, double prepaid, int id_guest, int id_house){
+    public Prepaid(int FK_id, double prepaid, int idGuest, int idProject){
 
         this.PK_id =FK_id;
         this.prepaid=prepaid;
-        this.id_guest=id_guest;
-        this.id_house=id_house;
+        this.idGuest =idGuest;
+        this.idProject =idProject;
     }
 
     public double getPrepaid() {
@@ -35,20 +35,20 @@ public class Prepaid  {
         this.PK_id=PK_id;
     }
 
-    public int getId_house() {
-        return this.id_house;
+    public int getIdProject() {
+        return this.idProject;
     }
 
-    public void setId_house(int id_house) {
-        this.id_house=id_house;
+    public void setIdProject(int idProject) {
+        this.idProject = idProject;
     }
 
-    public int getId_guest() {
-        return this.id_guest;
+    public int getIdGuest() {
+        return this.idGuest;
     }
 
-    public void setId_guest(int id_guest) {
-        this.id_guest=id_guest;
+    public void setIdGuest(int idGuest) {
+        this.idGuest = idGuest;
     }
 
 }

@@ -25,7 +25,7 @@ public class ExpenseModel {
     private ArrayList<Expense> createModel(int idGuest, int id_house) throws SQLException, IOException, ClassNotFoundException {
 
         newDAO = new ExpenseDAOImpl();
-        expensesSearchedGuest = newDAO.fineAllDataToOneGuest(idGuest, id_house);
+        expensesSearchedGuest = newDAO.findExpensesByOneGuest(idGuest, id_house);
 
         return expensesSearchedGuest;
     }
@@ -40,7 +40,7 @@ public class ExpenseModel {
 
         for(Expense e:expensesSearchedGuest){
 
-            expensesReasons.add(e.getTXT_reason());
+            expensesReasons.add(e.getReason());
         }
         return expensesReasons;
 

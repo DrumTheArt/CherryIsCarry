@@ -21,20 +21,20 @@ public class PrepaidModel {
     private Prepaid createModel(int idGuest, int idHouse) throws SQLException, IOException, ClassNotFoundException {
 
         newDAO = new PrepaidDAOImpl();
-        staySearchedGuest = newDAO.findOneData(idGuest, idHouse);
+        staySearchedGuest = newDAO.findPrepaidByOneGuest(idGuest, idHouse);
 
         return staySearchedGuest;
     }
 
     public int getIdHouse(){
 
-        return staySearchedGuest.getId_house();
+        return staySearchedGuest.getIdProject();
 
     }
 
     public int getIdGuest(){
 
-        return staySearchedGuest.getId_guest();
+        return staySearchedGuest.getIdGuest();
 
     }
 

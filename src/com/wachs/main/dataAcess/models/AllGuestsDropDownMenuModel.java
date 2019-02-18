@@ -17,7 +17,7 @@ public class AllGuestsDropDownMenuModel {
         ArrayList<Guest> listGuests = null;
 /**
  try {
- listGuests = new GuestDAOImpl().readAllData();
+ listGuests = new GuestDAOImpl().queryFindAllDrinksByOneProject();
  } catch (SQLException e) {
  e.printStackTrace();
  } catch (ClassNotFoundException e) {
@@ -31,7 +31,7 @@ public class AllGuestsDropDownMenuModel {
 
  for(Guest e:listGuests){
 
- content.add(e.getTXT_name());
+ content.add(e.getGuestName());
  }
  **/
         return null;

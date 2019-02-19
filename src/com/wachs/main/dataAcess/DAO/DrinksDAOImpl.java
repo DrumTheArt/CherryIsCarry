@@ -30,10 +30,11 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindDrinksByOneGuest(idGuest, idProject));
+            String queryCommand = query.queryFindDrinksByOneGuest(idGuest, idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindDrinksByOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
@@ -60,10 +61,11 @@ public class DrinksDAOImpl implements DrinksDAO {
         try {
 
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllDrinksByOneProject(idProject));
+            String queryCommand = query.queryFindAllDrinksByOneProject(idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllDrinksByOneProject(idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Drinks(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -87,10 +89,11 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights));
+            String queryCommand = query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -107,10 +110,11 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
+            String queryCommand = query.queryDeleteDrinksForOneGuest(idGuest, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -126,7 +130,8 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertDrinksForOneGuest(idGuest, idProject, nights));
+            String queryCommand = query.queryInsertDrinksForOneGuest(idGuest, idProject, nights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));

@@ -40,10 +40,11 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindOneGuestByOneProject(name, idHouse));
+            String queryCommand = query.queryFindOneGuestByOneProject(name, idHouse);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindOneGuestByOneProject(name, idHouse));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             //Get db-attributes
             int PK_id = result.getInt(1);
@@ -71,10 +72,11 @@ public class GuestDAOImpl implements GuestDAO {
         QueryGeneratorGuest query = new QueryGeneratorGuest();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllGuestsByOneProject(idHouse));
+            String queryCommand = query.queryFindAllGuestsByOneProject(idHouse);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllGuestsByOneProject(idHouse));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));
@@ -103,10 +105,11 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertGuestForOneProject(idHouse, name));
+            String queryCommand = query.queryInsertGuestForOneProject(idHouse, name);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertGuestForOneProject(idHouse, name));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -114,7 +117,6 @@ public class GuestDAOImpl implements GuestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -128,10 +130,11 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateGuestForOneProject(oldId, name, idProject));
+            String queryCommand = query.queryUpdateGuestForOneProject(oldId, name, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateGuestForOneProject(oldId, name, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -151,10 +154,11 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteGuestForOneProject(name, idProject));
+            String queryCommand = query.queryDeleteGuestForOneProject(name, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteGuestForOneProject(name, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

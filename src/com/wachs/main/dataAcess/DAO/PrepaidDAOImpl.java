@@ -31,10 +31,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindPrepaidByOneGuest(idGuest, idProject));
+            String queryCommand = query.queryFindPrepaidByOneGuest(idGuest, idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindPrepaidByOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             int FK_id = result.getInt(1);
             double prepaid = result.getDouble(2);
@@ -59,10 +60,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
         QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllPrepaidByOneProject(idProject));
+            String queryCommand = query.queryFindAllPrepaidByOneProject(idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllPrepaidByOneProject(idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -85,10 +87,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid));
+            String queryCommand = query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -105,10 +108,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid));
+            String queryCommand = query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -124,10 +128,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeletePrepaidForOneGuest(idGuest, idProject));
+            String queryCommand = query.queryDeletePrepaidForOneGuest(idGuest, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeletePrepaidForOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

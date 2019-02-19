@@ -37,10 +37,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindOneData(name));
+            String queryCommand = query.queryFindOneData(name);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindOneData(name));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             //Get db-attributes
             int pk_id = result.getInt(1);
@@ -71,10 +72,11 @@ public class ProjectDAOImpl implements ProjectDAO {
         QueryGeneratorHouse query = new QueryGeneratorHouse();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryReadAllData());
+            String queryCommand = query.queryReadAllData();
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryReadAllData());
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
@@ -101,10 +103,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(projectName, projectPrice, projectDeposite));
+            String queryCommand = query.queryInsertData(projectName, projectPrice, projectDeposite);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertData(projectName, projectPrice, projectDeposite));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -125,10 +128,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite));
+            String queryCommand = query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -153,10 +157,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteData(projectName));
+            String queryCommand = query.queryDeleteData(projectName);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteData(projectName));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

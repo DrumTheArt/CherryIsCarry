@@ -33,10 +33,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindExpensesByOneGuest(idGuest, idProject));
+            String queryCommand = query.queryFindExpensesByOneGuest(idGuest, idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindExpensesByOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -60,10 +61,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
         QueryGeneratorExpense query = new QueryGeneratorExpense();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllExpensesByOneProject(idProject));
+            String queryCommand = query.queryFindAllExpensesByOneProject(idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllExpensesByOneProject(idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 AllExpensesAllGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -87,10 +89,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteExpensesForOneGuest(idGuest, idProject, price, reason, when));
+            String queryCommand = query.queryDeleteExpensesForOneGuest(idGuest, idProject, price, reason, when);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteExpensesForOneGuest(idGuest, idProject, price, reason, when));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -108,10 +111,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateData(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen));
+            String queryCommand = query.queryUpdateData(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateData(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -129,10 +133,11 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertData(idGuest, IdProject, price, reason, when));
+            String queryCommand = query.queryInsertData(idGuest, IdProject, price, reason, when);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertData(idGuest, IdProject, price, reason, when));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

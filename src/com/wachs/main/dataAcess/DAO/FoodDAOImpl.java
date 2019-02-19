@@ -30,10 +30,11 @@ public class FoodDAOImpl implements FoodDAO {
         try {
             statement = DbConnection.getConnection().createStatement();
             QueryGeneratorFood query = new QueryGeneratorFood();
-            ResultSet result = statement.executeQuery(query.queryFindFoodByOneGuest(IdGuest, idProject));
+            String queryCommand = query.queryFindFoodByOneGuest(IdGuest, idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindFoodByOneGuest(IdGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
@@ -61,10 +62,11 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllFoodByOneProject(idProject));
+            String queryCommand = query.queryFindAllFoodByOneProject(idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllFoodByOneProject(idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -86,10 +88,11 @@ public class FoodDAOImpl implements FoodDAO {
         QueryGeneratorFood query = new QueryGeneratorFood();
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights));
+            String queryCommand = query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -105,10 +108,11 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteFoodForOneGuest(idGuest, idProject));
+            String queryCommand = query.queryDeleteFoodForOneGuest(idGuest, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteFoodForOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -124,10 +128,11 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
+            String queryCommand = query.queryInsertStayForOneGuest(idGuest, idProject, nights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

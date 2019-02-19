@@ -31,10 +31,11 @@ public class StayDAOImpl implements StayDAO {
         try {
             statement = DbConnection.getConnection().createStatement();
             QueryGeneratorStay query = new QueryGeneratorStay();
-            ResultSet result = statement.executeQuery(query.queryFindStayByOneGuest(idGuest, idProject));
+            String queryCommand = query.queryFindStayByOneGuest(idGuest, idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindStayByOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
@@ -60,10 +61,11 @@ public class StayDAOImpl implements StayDAO {
         QueryGeneratorStay query = new QueryGeneratorStay();
         try {
             statement = DbConnection.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query.queryFindAllStayByOneProject(idProject));
+            String queryCommand = query.queryFindAllStayByOneProject(idProject);
+            ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryFindAllStayByOneProject(idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
                 allDataList.add(new Stay(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -88,10 +90,11 @@ public class StayDAOImpl implements StayDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryUpdateStayForOneGuest(idGuest, idProject, newNights));
+            String queryCommand = query.queryUpdateStayForOneGuest(idGuest, idProject, newNights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryUpdateStayForOneGuest(idGuest, idProject, newNights));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -110,10 +113,11 @@ public class StayDAOImpl implements StayDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryDeleteStayForOneGuest(idGuest, idProject));
+            String queryCommand = query.queryDeleteStayForOneGuest(idGuest, idProject);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteStayForOneGuest(idGuest, idProject));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();
@@ -131,10 +135,11 @@ public class StayDAOImpl implements StayDAO {
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
+            String queryCommand = query.queryInsertStayForOneGuest(idGuest, idProject, nights);
+            statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.queryInsertStayForOneGuest(idGuest, idProject, nights));
+            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

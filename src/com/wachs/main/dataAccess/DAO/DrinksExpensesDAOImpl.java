@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinksExpenses.*;
 
-public class DrinksExpensesDAOImpl implements FoodExpensesDAO {
+public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
     private Statement statement;
     private ArrayList<DrinksExpense> allDrinksExpensesAllGuests;

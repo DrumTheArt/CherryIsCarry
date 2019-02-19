@@ -7,14 +7,14 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses.*;
+import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinksExpenses.*;
 
-public class TblExpenseColumnValidate implements IDbColumnValidator {
+public class TblDrinksExpensesColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
     private boolean TblColumnTitleOrderValidate = false;
 
-    public TblExpenseColumnValidate() throws SQLException {
+    public TblDrinksExpensesColumnValidate() throws SQLException {
 
         TblColumnTitleOrderValidate = isColumnOrderValidate();
 
@@ -40,23 +40,16 @@ public class TblExpenseColumnValidate implements IDbColumnValidator {
         String column4 = rsmd.getColumnName(4);
         System.out.println("In DB " + TABLENAME + " heißt Spalte 4: " + column4 + " im QueryGenerator: " + COLUMN4);
 
-        String column5 = rsmd.getColumnName(5);
-        System.out.println("In DB " + TABLENAME + " heißt Spalte 5: " + column5 + " im QueryGenerator: " + COLUMN5);
-
-        String column6 = rsmd.getColumnName(6);
-        System.out.println("In DB " + TABLENAME + " heißt Spalte 6: " + column6 + " im QueryGenerator: " + COLUMN6);
-
-        return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4) && COLUMN5.equals(column5) && COLUMN6.equals(column6);
+        return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4);
 
     }
 
     public boolean getIsColumnTitleOrderValidate() {
 
-        return this.TblColumnTitleOrderValidate;
+        return TblColumnTitleOrderValidate;
     }
 
     public int getCountRow() throws SQLException {
-
         String query = "SELECT Count(*) FROM " + TABLENAME;
         ResultSet result = statement.executeQuery(query);
         int count = result.getInt(1);

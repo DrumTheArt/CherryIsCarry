@@ -2,7 +2,7 @@ package com.wachs.main.dataAccess.DAO;
 
 import java.util.ArrayList;
 
-interface DrinksExpensesDAO {
+public interface DrinksExpensesDAO {
 
     ArrayList findDrinksExpensesByOneGuest(int idGuest, int idProject);
 
@@ -12,5 +12,5 @@ interface DrinksExpensesDAO {
 
     void updateDrinksExpensesForOneGuest(int idGuest, int idProject, double oldSpendValue, double newSpendValue);
 
-    void insertOtherExpensesForOneGuest(int idGuest, int IdProject, double spend);
+    void insertDrinksExpensesForOneGuest(int idGuest, int IdProject, double spend);
 }

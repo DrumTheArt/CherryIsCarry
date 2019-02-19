@@ -51,6 +51,7 @@ public class InsertValuesDBTestData implements ITableDBScript {
     }
 
     private String getSQLScriptFilePath() {
+
         String absPath = new File("").getAbsolutePath();
         return absPath + "//sources//testdatabase/INSERT_INTO.sql";
     }

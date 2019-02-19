@@ -2,7 +2,7 @@ package com.wachs.main.dataAccess.dBQueryGenerators;
 
 public class QueryGeneratorOtherExpenses {
 
-    public static final String TABLENAME = "TBL_EXPENSE";
+    public static final String TABLENAME = "TBL_OTHEREXPENSE";
     public static String COLUMN1 = "FK_id";
     public static String COLUMN2 = "REAL_spend";
     public static String COLUMN3 = "TXT_reason";

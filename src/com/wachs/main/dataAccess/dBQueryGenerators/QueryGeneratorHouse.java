@@ -5,8 +5,8 @@ public class QueryGeneratorHouse {
     public static final String TABLENAME = "TBL_PROJECT";
     public static String COLUMN1 = "PK_id";
     public static String COLUMN2 = "TXT_title";
-    public static String COLUMN3 = "REAL_price";
-    public static String COLUMN4 = "REAL_deposite";
+    public static String COLUMN3 = "REAL_projectPrice";
+    public static String COLUMN4 = "REAL_projectDeposite";
 
 
     public String queryFindOneData(String projectName) {

@@ -25,7 +25,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public ArrayList findDrinksExpensesByOneGuest(int idGuest, int idProject) {
+    public ArrayList findFoodExpensesByOneGuest(int idGuest, int idProject) {
 
 
         QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
@@ -56,7 +56,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public ArrayList findAllDrinksExpensesByOneProject(int idProject) {
+    public ArrayList findAllFoodExpensesByOneProject(int idProject) {
 
         QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
         try {
@@ -83,7 +83,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public void deleteDrinksExpensesForOneGuest(int idGuest, int idProject, double spend) {
+    public void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double spend) {
 
         QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
 
@@ -104,7 +104,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public void updateDrinksExpensesForOneGuest(int idGuest, int idProject, double oldSpendValue, double newSpendValue) {
+    public void updateFoodExpensesForOneGuest(int idGuest, int idProject, double oldSpendValue, double newSpendValue) {
 
         QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
 
@@ -125,7 +125,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public void insertDrinksExpensesForOneGuest(int idGuest, int IdProject, double spend) {
+    public void insertFoodExpensesForOneGuest(int idGuest, int IdProject, double spend) {
 
         QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
 

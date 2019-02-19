@@ -1,6 +1,6 @@
 package com.wachs.main.views.GUIDialogViews;
 
-import com.wachs.main.dataAcess.models.AllProjectsDropDownMenuModel;
+import com.wachs.main.dataAccess.models.AllProjectsDropDownMenuModel;
 import com.wachs.main.views.GUIElementsGenerators.*;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;

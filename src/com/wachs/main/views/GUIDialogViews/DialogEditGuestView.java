@@ -41,11 +41,11 @@ public class DialogEditGuestView {
     private TextField tf_GuestDrinks;
     private TextField tf_GuestFood;
     private TextField tf_prepaid;
-
-    //AllTextFields
     private TextField tf_GuestExpensesPrice;
     private TextField tf_GuestExpensesReason;
     private TextField tf_GuestExpensesWhen;
+    private TextField tf_GuestDrinksExpensePrice;
+    private TextField tf_GuestFoodExpensePrice;
 
     //AllLabelsGuest
     private Label lb_GuestNights;
@@ -54,6 +54,8 @@ public class DialogEditGuestView {
     private Label lb_GuestPrepaid;
 
     //AllLabelsAll
+    private Label lb_GuestFoodExpensePrice;
+    private Label lb_GuestDrinksExpensePrice;
     private Label lb_GuestExpensePrice;
     private Label lb_GuestExpenseReason;
     private Label lb_GuestExpenseWhen;
@@ -101,7 +103,6 @@ public class DialogEditGuestView {
 
         HBox_LB_AreaGuests = new CreateGUIHBox().CreateHBox(10, 10, 20, 0, 20);
 
-
         lb_GuestNights = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_NIGHTS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestDrinks = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestFood = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
@@ -113,8 +114,8 @@ public class DialogEditGuestView {
         HBox_TF_AreaGuests = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
         tf_GuestNights = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_DRINKS, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_FOOD, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_prepaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
@@ -132,23 +133,26 @@ public class DialogEditGuestView {
 
         HBox_LB_AreaExpenses = new CreateGUIHBox().CreateHBox(10, 40, 20, 0, 20);
 
-
-        lb_GuestExpensePrice = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_EXPENSE_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestExpenseReason = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_EXPENSE_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestExpenseWhen = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_EXPENSE_WHEN, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestFoodExpensePrice = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOODEXPENSES, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestDrinksExpensePrice = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_DRINKSEXPENSES, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpensePrice = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_OTHEREXPENSES_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseReason = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_OTHEREXPENSES_REASON, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestExpenseWhen = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_OTHEREXPENSES_WHEN, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
         HBox_LB_AreaExpenses.setAlignment(Pos.BOTTOM_CENTER);
-        HBox_LB_AreaExpenses.getChildren().addAll(lb_GuestExpensePrice, lb_GuestExpenseReason, lb_GuestExpenseWhen);
+        HBox_LB_AreaExpenses.getChildren().addAll(lb_GuestFoodExpensePrice, lb_GuestDrinksExpensePrice, lb_GuestExpensePrice, lb_GuestExpenseReason, lb_GuestExpenseWhen);
 
 
         HBox_TF_AreaExpenses = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
+        tf_GuestDrinksExpensePrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_DRINKSEXPENSES, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestFoodExpensePrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_FOODEXPENSES, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestExpensesPrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestExpensesReason = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestExpensesWhen = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_WHEN, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
-        HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
+        HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestDrinksExpensePrice, tf_GuestFoodExpensePrice, tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
 
         //Fifth Row
         HBox_BTN_SaveExpense = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
@@ -172,7 +176,7 @@ public class DialogEditGuestView {
 
         verticalBox.getChildren().addAll(HBox_BTN_Regular, GridForGuestDetails, GridForExpensesDetails, HBox_BTN_SaveExpense, HBox_LIST_Expense);
 
-        Scene scene = new Scene(verticalBox, 700, 700);
+        Scene scene = new Scene(verticalBox, 900, 700);
 
         dialogEditGuest.setOnCloseRequest(event -> {
 

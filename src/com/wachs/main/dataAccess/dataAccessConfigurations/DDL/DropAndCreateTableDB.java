@@ -1,7 +1,6 @@
-package com.wachs.testing.dbTestConfig;
+package com.wachs.main.dataAccess.dataAccessConfigurations.DDL;
 
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DDL.ITableDBScript;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -11,16 +10,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertValuesDBTestData implements ITableDBScript {
+public class DropAndCreateTableDB implements ITableDBScript {
 
     private Statement st;
-    private StringBuffer queryInsertValueCommands;
+    private StringBuffer queryCreateTableCommands;
 
-    public InsertValuesDBTestData() {
+    public DropAndCreateTableDB() {
 
-        queryInsertValueCommands = new StringBuffer();
+        queryCreateTableCommands = new StringBuffer();
     }
-
 
     public void executeQuery() throws IOException, SQLException, ClassNotFoundException {
 
@@ -31,7 +29,7 @@ public class InsertValuesDBTestData implements ITableDBScript {
         try {
             String line = null;
             while ((line = reader.readLine()) != null) {
-                queryInsertValueCommands.append(line);
+                queryCreateTableCommands.append(line);
             }
 
         } catch (IOException ex) {
@@ -42,17 +40,17 @@ public class InsertValuesDBTestData implements ITableDBScript {
         }
 
         st = DbConnection.getConnection().createStatement();
-        st.executeUpdate(String.valueOf(queryInsertValueCommands));
+        st.executeUpdate(String.valueOf(queryCreateTableCommands));
         st.close();
         DbConnection.closeConnection();
 
-        JOptionPane.showMessageDialog(null,"Die Datenbank wurde mit Testdaten geladen");
-
+        JOptionPane.showMessageDialog(null,"Die Datenbank wurde gelöscht und neu aufgesetzt");
     }
+
 
     private String getSQLScriptFilePath() {
         String absPath = new File("").getAbsolutePath();
-        return absPath + "//sources//testdatabase/INSERT_INTO.sql";
+        return absPath + "//sources//database/CREATE_TABLE.sql";
     }
 
 }

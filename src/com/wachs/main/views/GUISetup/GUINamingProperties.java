@@ -15,12 +15,13 @@ public class GUINamingProperties {
     //Labels for GuestDetails
 
     public static String LB_GUEST_NEWGUESTNAME = "New Guest Name";
-    public static String LB_GUEST_NIGHTS = "Nights";
-    public static String LB_GUEST_NIGHTS_EUR = "Nights";
-    public static String LB_GUEST_DRINKS = "Drinks";
-    public static String LB_GUEST_DRINKS_EUR = "Drinks";
-    public static String LB_GUEST_FOOD_EUR = "Food";
-    public static String LB_GUEST_FOOD = "Food";
+    public static String LB_GUEST_NIGHTS = "How many Nights";
+    public static String LB_GUEST_NIGHTS_EUR = "Nights in EUR";
+    public static String LB_GUEST_DRINKS = "How many days (Drinks)";
+    public static String LB_GUEST_DRINKS_EUR = "Drinks in EUR";
+    public static String LB_GUEST_FOOD = "How many days (Food)";
+    public static String LB_GUEST_FOOD_EUR = "Food in EUR";
+
     public static String LB_GUEST_TOTAL_COSTS = "Total Costs";
     public static String LB_GUEST_ALREADY_PAID = "Already Paid";
     public static String LB_GUEST_STILL_TO_PAY = "Still to Pay";
@@ -33,9 +34,11 @@ public class GUINamingProperties {
     public static String LB_ALL_OUTSTANDING_PAYMENT = "Outstanding Payments";
 
     //Labels for Expenses
-    public static String LB_GUEST_EXPENSE_PRICE = "Expense";
-    public static String LB_GUEST_EXPENSE_REASON = "What you bought";
-    public static String LB_GUEST_EXPENSE_WHEN = "When you bought it";
+    public static String LB_GUEST_OTHEREXPENSES_PRICE = "Other Expense";
+    public static String LB_GUEST_OTHEREXPENSES_REASON = "What you bought";
+    public static String LB_GUEST_OTHEREXPENSES_WHEN = "When you bought it";
+    public static String LB_GUEST_DRINKSEXPENSES = "Expenses Drinks";
+    public static String LB_GUEST_FOODEXPENSES = "Expenses Food";
 
     //Labels for Projects
     public static String LB_PROJECTS_NEWPROJECTNAME = "New Vacation Project";
@@ -54,7 +57,7 @@ public class GUINamingProperties {
     //ToolTips for GuestDetails
     public static String TT_LB_GUEST_SELECT = "Select Guest";
     public static String TT_TF_GUEST_NEWGUESTNAME = "Fill in the name of the new Guest";
-    public static String TT_TF_GUEST_NIGHTS = "How many overnights";
+    public static String TT_TF_GUEST_NIGHTS = "How many sleep overs";
     public static String TT_TF_GUEST_NIGHTS_EUR = "Price for all overnights";
     public static String TT_TF_GUEST_DRINKS = "How many days for drinks. No separation between non-alc. and alc. Drinks";
     public static String TT_TF_GUEST_DRINKS_EUR = "Price for all drinks in EUR. No separation between non-alc. and alc. Drinks)";
@@ -75,6 +78,8 @@ public class GUINamingProperties {
     public static String TT_TF_GUEST_EXPENSE_PRICE = "Amount of the expense";
     public static String TT_TF_GUEST_EXPENSE_REASON = "Name the reason for the expense, g.e. 'buying candles''";
     public static String TT_TF_GUEST_EXPENSE_WHEN = "Put in the date of the made expense of your selected guest";
+    public static String TT_TF_GUEST_DRINKSEXPENSES = "Expenses for Drinks in EUR";
+    public static String TT_TF_GUEST_FOODEXPENSES = "Expenses for Food in EUR";
 
     //ToolTips for Projects
     public static String TT_LB_PROJECTS_SELECT = "Select Vacation";

@@ -13,13 +13,12 @@ public class GUINamingProperties {
     public static String BTN_SAVE_NEWPROJECT = "Save new Vacation";
 
     //Labels for GuestDetails
-
     public static String LB_GUEST_NEWGUESTNAME = "New Guest Name";
     public static String LB_GUEST_NIGHTS = "How many Nights";
     public static String LB_GUEST_NIGHTS_EUR = "Nights in EUR";
-    public static String LB_GUEST_DRINKS = "How many days (Drinks)";
+    public static String LB_GUEST_DRINKS = "Days (Drinks)";
     public static String LB_GUEST_DRINKS_EUR = "Drinks in EUR";
-    public static String LB_GUEST_FOOD = "How many days (Food)";
+    public static String LB_GUEST_FOOD = "Days (Food)";
     public static String LB_GUEST_FOOD_EUR = "Food in EUR";
 
     public static String LB_GUEST_TOTAL_COSTS = "Total Costs";
@@ -32,6 +31,7 @@ public class GUINamingProperties {
     public static String LB_ALL_FOOD_EUR = "Food all Guests";
     public static String LB_ALL_TOTAL_COSTS = "Total Costs All";
     public static String LB_ALL_OUTSTANDING_PAYMENT = "Outstanding Payments";
+    public static String  LB_ALL_ALREADYPAID = "Already paid";
 
     //Labels for Expenses
     public static String LB_GUEST_OTHEREXPENSES_PRICE = "Other OtherExpense";
@@ -73,6 +73,7 @@ public class GUINamingProperties {
     public static String TT_TF_ALL_FOOD_EUR = "Total cost for food  all guests in sum";
     public static String TT_TF_ALL_TOTAL_COSTS = "Total costs for everything all guests in sum";
     public static String TT_TF_ALL_OUTSTANDING_SUM = "Outstanding sum";
+    public static String TT_TF_ALL_ALLREADYPAID_SUM = "Allready paid";
 
     //ToolTips for Expenses
     public static String TT_TF_GUEST_EXPENSE_PRICE = "Amount of the expense";

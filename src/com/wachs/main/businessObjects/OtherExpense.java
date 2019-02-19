@@ -1,6 +1,6 @@
 package com.wachs.main.businessObjects;
 
-public class Expense  {
+public class OtherExpense {
 
     private int PK_id;
     private double spend;
@@ -9,11 +9,11 @@ public class Expense  {
     private int idGuest;
     private int IdProject;
 
-    public Expense(){
+    public OtherExpense() {
 
     }
 
-    public Expense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
+    public OtherExpense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
 
         this.PK_id =FK_id;
         this.spend = spend;

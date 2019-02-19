@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Expense;
+import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
@@ -15,15 +15,15 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExp
 public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
     private Statement statement;
-    private ArrayList<Expense> AllExpensesAllGuests;
-    private ArrayList<Expense> AllExpensesSearchedGuests;
-    private Expense aExpense;
+    private ArrayList<OtherExpense> allExpensesAllGuests;
+    private ArrayList<OtherExpense> allExpensesSearchedGuests;
+    private OtherExpense aOtherExpense;
 
     public OtherExpensesDAOImpl() {
 
-        aExpense = new Expense();
-        AllExpensesAllGuests = new ArrayList<Expense>();
-        AllExpensesSearchedGuests = new ArrayList<Expense>();
+        aOtherExpense = new OtherExpense();
+        allExpensesAllGuests = new ArrayList<OtherExpense>();
+        allExpensesSearchedGuests = new ArrayList<OtherExpense>();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
-                AllExpensesSearchedGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+                allExpensesSearchedGuests.add(new OtherExpense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
             }
 
             statement.close();
@@ -51,7 +51,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             e.printStackTrace();
         }
 
-        return AllExpensesSearchedGuests;
+        return allExpensesSearchedGuests;
 
     }
 
@@ -68,7 +68,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
-                AllExpensesAllGuests.add(new Expense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+                allExpensesAllGuests.add(new OtherExpense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
             }
 
             statement.close();
@@ -79,7 +79,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             e.printStackTrace();
         }
 
-        return AllExpensesAllGuests;
+        return allExpensesAllGuests;
     }
 
     @Override

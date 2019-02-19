@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.models;
 
-import com.wachs.main.businessObjects.Expense;
+import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class OtherExpenseModel {
 
     private OtherExpensesDAO newDAO;
-    private ArrayList<Expense> expensesSearchedGuest;
+    private ArrayList<OtherExpense> expensesSearchedGuest;
     private ArrayList<String> expensesReasons;
     private ArrayList<String> expensesWhen;
 
@@ -22,7 +22,7 @@ public class OtherExpenseModel {
         createModel(idGuest, id_house);
     }
 
-    private ArrayList<Expense> createModel(int idGuest, int id_house) throws SQLException, IOException, ClassNotFoundException {
+    private ArrayList<OtherExpense> createModel(int idGuest, int id_house) throws SQLException, IOException, ClassNotFoundException {
 
         newDAO = new OtherExpensesDAOImpl();
         expensesSearchedGuest = newDAO.findOtherExpensesByOneGuest(idGuest, id_house);
@@ -38,7 +38,7 @@ public class OtherExpenseModel {
 
     public ArrayList<String> getReasons(){
 
-        for(Expense e:expensesSearchedGuest){
+        for (OtherExpense e : expensesSearchedGuest) {
 
             expensesReasons.add(e.getReason());
         }
@@ -48,7 +48,7 @@ public class OtherExpenseModel {
 
     public ArrayList<String> getWhens(){
 
-        for(Expense e:expensesSearchedGuest){
+        for (OtherExpense e : expensesSearchedGuest) {
             expensesWhen.add(e.getWhen());
         }
         return expensesWhen;
@@ -59,7 +59,7 @@ public class OtherExpenseModel {
 
         double sum = 0;
 
-        for(Expense e:expensesSearchedGuest){
+        for (OtherExpense e : expensesSearchedGuest) {
             sum =+ e.getREAL_price();
         }
         return sum;

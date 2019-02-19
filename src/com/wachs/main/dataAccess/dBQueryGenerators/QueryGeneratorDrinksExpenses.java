@@ -34,7 +34,6 @@ public class QueryGeneratorDrinksExpenses {
         String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + spend + "," + idGuest + "," + idProject + ")";
 
         return query;
-
     }
 
     public String queryUpdateDrinksExpensesForOneGuest(int idGuest, int idProject, double oldSpendValue, double newSpendValue) {

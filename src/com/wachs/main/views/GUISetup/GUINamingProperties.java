@@ -8,7 +8,7 @@ public class GUINamingProperties {
     public static String BTN_EDIT_GUEST = "Edit Guest Data";
     public static String BTN_SAVE_ALLDATA = "Save data";
     public static String BTN_DELETE_GUEST = "Delete Guest";
-    public static String BTN_SAVE_EXPENSE = "Save Expense";
+    public static String BTN_SAVE_EXPENSE = "Save OtherExpense";
     public static String BTN_SAVE_NEWGUEST = "Save new Guest";
     public static String BTN_SAVE_NEWPROJECT = "Save new Vacation";
 
@@ -34,7 +34,7 @@ public class GUINamingProperties {
     public static String LB_ALL_OUTSTANDING_PAYMENT = "Outstanding Payments";
 
     //Labels for Expenses
-    public static String LB_GUEST_OTHEREXPENSES_PRICE = "Other Expense";
+    public static String LB_GUEST_OTHEREXPENSES_PRICE = "Other OtherExpense";
     public static String LB_GUEST_OTHEREXPENSES_REASON = "What you bought";
     public static String LB_GUEST_OTHEREXPENSES_WHEN = "When you bought it";
     public static String LB_GUEST_DRINKSEXPENSES = "Expenses Drinks";

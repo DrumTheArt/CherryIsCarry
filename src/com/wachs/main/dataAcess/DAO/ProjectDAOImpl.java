@@ -67,7 +67,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     //throws SQLException, ClassNotFoundException, IOException
     @Override
-    public ArrayList findOneProject() {
+    public ArrayList findAllProjects() {
 
         QueryGeneratorHouse query = new QueryGeneratorHouse();
         try {

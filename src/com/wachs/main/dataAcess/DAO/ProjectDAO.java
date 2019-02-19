@@ -8,7 +8,7 @@ public interface ProjectDAO {
 
     Project fineOneProject(String name);
 
-    ArrayList findOneProject();
+    ArrayList findAllProjects();
 
     void insertProject(String projectName, double projectPrice, double projectDeposite);
 

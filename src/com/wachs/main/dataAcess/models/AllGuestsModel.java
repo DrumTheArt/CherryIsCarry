@@ -22,7 +22,7 @@ public class AllGuestsModel {
 
     public double getRentHouse(String nameProject){
 
-        ArrayList<Project> listOfProjects = new ProjectDAOImpl().findOneProject();
+        ArrayList<Project> listOfProjects = new ProjectDAOImpl().findAllProjects();
 
         for (Project projectSelected : listOfProjects) {
 

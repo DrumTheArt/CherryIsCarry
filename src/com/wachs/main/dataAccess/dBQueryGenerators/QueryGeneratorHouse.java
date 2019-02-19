@@ -2,7 +2,7 @@ package com.wachs.main.dataAccess.dBQueryGenerators;
 
 public class QueryGeneratorHouse {
 
-    public static final String TABLENAME = "TBL_HOUSE";
+    public static final String TABLENAME = "TBL_PROJECT";
     public static String COLUMN1 = "PK_id";
     public static String COLUMN2 = "TXT_title";
     public static String COLUMN3 = "REAL_price";

@@ -1,7 +1,7 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.businessObjects.Expense;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorExpense;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorExpense.*;
+import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses.*;
 
 public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
@@ -27,13 +27,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public ArrayList findExpensesByOneGuest(int idGuest, int idProject) {
+    public ArrayList findOtherExpensesByOneGuest(int idGuest, int idProject) {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryFindExpensesByOneGuest(idGuest, idProject);
+            String queryCommand = query.queryFindOtherExpensesByOneGuest(idGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
@@ -56,12 +56,12 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public ArrayList findAllExpensesByOneProject(int idProject) {
+    public ArrayList findAllOtherExpensesByOneProject(int idProject) {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
         try {
             statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryFindAllExpensesByOneProject(idProject);
+            String queryCommand = query.queryFindAllOtherExpensesByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
@@ -83,13 +83,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public void deleteExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when) {
+    public void deleteOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when) {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryDeleteExpensesForOneGuest(idGuest, idProject, price, reason, when);
+            String queryCommand = query.queryDeleteOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -105,13 +105,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public void updateExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
+    public void updateOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryUpdateData(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+            String queryCommand = query.queryUpdateOtherExpensesForOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -127,13 +127,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public void insertExpensesForOneGuest(int idGuest, int IdProject, double price, String reason, String when) {
+    public void insertOtherExpensesForOneGuest(int idGuest, int IdProject, double price, String reason, String when) {
 
-        QueryGeneratorExpense query = new QueryGeneratorExpense();
+        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
 
         try {
             statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryInsertData(idGuest, IdProject, price, reason, when);
+            String queryCommand = query.queryInsertOtherExpensesForOneGuest(idGuest, IdProject, price, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query

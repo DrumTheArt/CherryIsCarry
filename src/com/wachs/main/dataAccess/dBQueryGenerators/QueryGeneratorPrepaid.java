@@ -6,11 +6,11 @@ public class QueryGeneratorPrepaid {
     public static String COLUMN1 = "FK_id";
     public static String COLUMN2 = "REAL_prepaid";
     public static String COLUMN3 = "ID_guest";
-    public static String COLUMN4 = "ID_house";
+    public static String COLUMN4 = "ID_project";
 
     public String queryFindAllPrepaidByOneProject(int idProject) {
 
-        String query = "SELECT * FROM " + TABLENAME + " where " + COLUMN4 + " = " + idProject;
+        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN4 + " = " + idProject;
 
         return query;
     }

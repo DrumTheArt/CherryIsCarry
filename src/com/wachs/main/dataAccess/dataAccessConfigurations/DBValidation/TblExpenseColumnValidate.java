@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorExpense.*;
+import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses.*;
 
 public class TblExpenseColumnValidate implements IDbColumnValidator {
 

@@ -6,7 +6,7 @@ public class QueryGeneratorDrinks {
     public static String COLUMN1 = "FK_id";
     public static String COLUMN2 = "INT_nights";
     public static String COLUMN3 = "ID_guest";
-    public static String COLUMN4 = "ID_house";
+    public static String COLUMN4 = "ID_project";
 
 
     public String queryFindDrinksByOneGuest(int idGuest, int idProject) {

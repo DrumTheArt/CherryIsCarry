@@ -6,7 +6,7 @@ public class QueryGeneratorStay {
     public static String COLUMN1 = "FK_id";
     public static String COLUMN2 = "INT_nights";
     public static String COLUMN3 = "ID_guest";
-    public static String COLUMN4 = "ID_house";
+    public static String COLUMN4 = "ID_project";
 
     public String queryFindStayByOneGuest(int idGuest, int idProject) {
 
@@ -38,7 +38,7 @@ public class QueryGeneratorStay {
 
     public String queryFindAllStayByOneProject(int idProject) {
 
-        String query = "SELECT * FROM " + TABLENAME + " where " + COLUMN4 + " = " + idProject ;
+        String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN4 + " = " + idProject;
 
         return query;
     }

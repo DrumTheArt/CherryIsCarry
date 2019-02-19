@@ -4,7 +4,7 @@ public class QueryGeneratorGuest {
 
     public static final String TABLENAME = "TBL_GUEST";
     public static String COLUMN1 = "PK_id";
-    public static String COLUMN2 = "ID_house";
+    public static String COLUMN2 = "ID_project";
     public static String COLUMN3 = "TXT_name";
 
 

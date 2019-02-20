@@ -4,7 +4,6 @@ import com.wachs.main.businessObjects.Drinks;
 import com.wachs.main.dataAccess.DAO.DrinksDAO;
 import com.wachs.main.dataAccess.DAO.DrinksDAOImpl;
 
-
 public class DrinksModel {
 
     private DrinksDAO newDAO;

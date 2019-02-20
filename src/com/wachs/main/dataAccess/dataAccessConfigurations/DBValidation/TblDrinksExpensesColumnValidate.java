@@ -40,7 +40,13 @@ public class TblDrinksExpensesColumnValidate implements IDbColumnValidator {
         String column4 = rsmd.getColumnName(4);
         System.out.println("In DB " + TABLENAME + " heißt Spalte 4: " + column4 + " im QueryGenerator: " + COLUMN4);
 
-        return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4);
+        String column5 = rsmd.getColumnName(5);
+        System.out.println("In DB " + TABLENAME + " heißt Spalte 5: " + column5 + " im QueryGenerator: " + COLUMN5);
+
+        String column6 = rsmd.getColumnName(6);
+        System.out.println("In DB " + TABLENAME + " heißt Spalte 6: " + column6 + " im QueryGenerator: " + COLUMN6);
+
+        return COLUMN1.equals(column1) && COLUMN2.equals(column2) && COLUMN3.equals(column3) && COLUMN4.equals(column4) && COLUMN5.equals(column5) && COLUMN6.equals(column6);
 
     }
 

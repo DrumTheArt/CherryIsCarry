@@ -3,9 +3,7 @@ package com.wachs.main.viewModels;
 import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
-
 import java.util.ArrayList;
-
 
 public class OtherExpenseModel {
 

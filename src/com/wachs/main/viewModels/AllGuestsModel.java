@@ -8,7 +8,6 @@ import com.wachs.main.dataAccess.DAO.DrinksExpensesDAOImpl;
 import com.wachs.main.dataAccess.DAO.FoodExpensesDAOImpl;
 import com.wachs.main.dataAccess.DAO.PrepaidDAOImpl;
 import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
-
 import java.util.ArrayList;
 
 public class AllGuestsModel {

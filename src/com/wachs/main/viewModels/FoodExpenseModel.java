@@ -1,12 +1,9 @@
 package com.wachs.main.viewModels;
 
 import com.wachs.main.businessObjects.FoodExpense;
-import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.DAO.FoodExpensesDAO;
 import com.wachs.main.dataAccess.DAO.FoodExpensesDAOImpl;
-
 import java.util.ArrayList;
-
 
 public class FoodExpenseModel {
 
@@ -34,7 +31,7 @@ public class FoodExpenseModel {
         }
     }
 
-    public double getSumOtherExpenses() {
+    public double getSumExpenses() {
 
         double sum = 0;
 
@@ -56,15 +53,9 @@ public class FoodExpenseModel {
 
         int newFK = getFkId();
 
-        foodExpensesSearchedGuest.add(new OtherExpense(newFK, price, reason, when, idGuest, idProject));
+        foodExpensesSearchedGuest.add(new FoodExpense(newFK, price, reason, when, idGuest, idProject));
 
-        newDAO.insertOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
-
-    }
-
-    private int getFkId() {
-
-        return foodExpensesSearchedGuest.size() + 1;
+        newDAO.insertFoodExpensesForOneGuest(idGuest, idProject, price, reason, when);
 
     }
 
@@ -77,7 +68,13 @@ public class FoodExpenseModel {
             }
         }
 
-        newDAO.deleteOtherExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+        newDAO.deleteFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+
+    }
+
+    private int getFkId() {
+
+        return foodExpensesSearchedGuest.size() + 1;
 
     }
 

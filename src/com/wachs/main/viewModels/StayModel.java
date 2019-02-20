@@ -11,7 +11,6 @@ public class StayModel {
     private int idGuest;
     private int idProject;
 
-
     StayModel(int idGuest, int idProject) {
 
         createModel(idGuest, idProject);

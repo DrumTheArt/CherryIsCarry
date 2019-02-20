@@ -8,10 +8,10 @@ public interface FoodExpensesDAO {
 
     ArrayList findAllFoodExpensesByOneProject(int idProject);
 
-    void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double spend);
+    void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when);
 
-    void updateFoodExpensesForOneGuest(int idGuest, int idProject, double oldSpendValue, double newSpendValue);
+    void updateFoodExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
 
-    void insertFoodExpensesForOneGuest(int idGuest, int IdProject, double spend);
+    void insertFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when);
 
 }

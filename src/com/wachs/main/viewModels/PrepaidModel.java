@@ -4,26 +4,41 @@ import com.wachs.main.businessObjects.Prepaid;
 import com.wachs.main.dataAccess.DAO.PrepaidDAO;
 import com.wachs.main.dataAccess.DAO.PrepaidDAOImpl;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-
 public class PrepaidModel {
 
     private PrepaidDAO newDAO;
-    private Prepaid staySearchedGuest;
+    private Prepaid prepaidSearchedGuest;
+    private int idGuest;
+    private int idProject;
 
     PrepaidModel(int idGuest, int idHouse) {
 
         createModel(idGuest, idHouse);
     }
 
-    private Prepaid createModel(int idGuest, int idHouse) {
+    private void createModel(int idGuest, int idProject) {
 
         newDAO = new PrepaidDAOImpl();
-        staySearchedGuest = newDAO.findPrepaidByOneGuest(idGuest, idHouse);
+        prepaidSearchedGuest = newDAO.findPrepaidByOneGuest(idGuest, idProject);
 
-        return staySearchedGuest;
+        this.idGuest = prepaidSearchedGuest.getIdGuest();
+        this.idProject = prepaidSearchedGuest.getIdProject();
     }
 
+    public double getPrepaid() {
+
+        return prepaidSearchedGuest.getPrepaid();
+    }
+
+    public void setPrepaid(double prepaidValue) {
+
+        prepaidSearchedGuest.setPrepaid(prepaidValue);
+        if (prepaidSearchedGuest == null) {
+
+            newDAO.insertPrepaidForOneGuest(idGuest, idProject, prepaidValue);
+        } else {
+
+            newDAO.updatePrepaidForOneGuest(idGuest, idProject, prepaidValue);
+        }
+    }
 }

@@ -4,30 +4,80 @@ import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class OtherExpenseModel {
 
     private OtherExpensesDAO newDAO;
-    private ArrayList<OtherExpense> expensesSearchedGuest;
-    private ArrayList<String> expensesReasons;
-    private ArrayList<String> expensesWhen;
+    private ArrayList<OtherExpense> otherExpensesSearchedGuest;
+    private int idGuest;
+    private int idProject;
 
+    OtherExpenseModel(int idGuest, int idProject) {
 
-    OtherExpenseModel(int idGuest, int id_house)  {
-
-        createModel(idGuest, id_house);
+        createModel(idGuest, idProject);
     }
 
-    private ArrayList<OtherExpense> createModel(int idGuest, int id_house) {
+
+    private void createModel(int idGuest, int idProject) {
 
         newDAO = new OtherExpensesDAOImpl();
-        expensesSearchedGuest = newDAO.findOtherExpensesByOneGuest(idGuest, id_house);
+        otherExpensesSearchedGuest = newDAO.findOtherExpensesByOneGuest(idGuest, idProject);
 
-        return expensesSearchedGuest;
+        if (otherExpensesSearchedGuest != null) {
+
+            this.idProject = otherExpensesSearchedGuest.get(0).getIdProject();
+            this.idGuest = otherExpensesSearchedGuest.get(0).getIdGuest();
+
+        }
+    }
+
+    public double getSumOtherExpenses() {
+
+        double sum = 0;
+
+        for (OtherExpense othExp : otherExpensesSearchedGuest) {
+
+            sum += othExp.getREAL_price();
+
+        }
+        return sum;
+    }
+
+    public ArrayList<OtherExpense> getOtherExpensesSearchedGuest() {
+
+        return otherExpensesSearchedGuest;
+
+    }
+
+    public void setOtherExpenses(double price, String reason, String when) {
+
+        int newFK = getFkId();
+
+        otherExpensesSearchedGuest.add(new OtherExpense(newFK, price, reason, when, idGuest, idProject));
+
+        newDAO.insertOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
+
+    }
+
+    private int getFkId() {
+
+        return otherExpensesSearchedGuest.size() + 1;
+
+    }
+
+    public void deleteOneOtherExpenses(double spend, String reason, String when) {
+
+        for (OtherExpense e : otherExpensesSearchedGuest) {
+
+            if (e.getREAL_price() == spend && e.getReason().equals(reason) && e.getWhen().equals(when)) {
+                otherExpensesSearchedGuest.remove(e);
+            }
+        }
+
+        newDAO.deleteOtherExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+
     }
 
 }

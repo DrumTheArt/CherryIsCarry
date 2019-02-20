@@ -43,4 +43,8 @@ public class QueryGeneratorStay {
         return query;
     }
 
+    public static void main(String[] args) {
+        QueryGeneratorStay t = new QueryGeneratorStay();
+        System.out.println(t.queryUpdateStayForOneGuest(1, 1, 2));
+    }
 }

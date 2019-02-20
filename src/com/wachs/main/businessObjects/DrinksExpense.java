@@ -4,6 +4,8 @@ public class DrinksExpense {
 
     private int PK_id;
     private double spend;
+    private String reason;
+    private String when;
     private int idGuest;
     private int IdProject;
 
@@ -11,10 +13,12 @@ public class DrinksExpense {
 
     }
 
-    public DrinksExpense(int FK_id, double spend, int idGuest, int idProject) {
+    public DrinksExpense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
 
         this.PK_id = FK_id;
         this.spend = spend;
+        this.when = when;
+        this.reason = reason;
         this.idGuest = idGuest;
         this.IdProject = idProject;
     }
@@ -45,6 +49,22 @@ public class DrinksExpense {
 
     public int getIdGuest() {
         return this.idGuest;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getWhen() {
+        return when;
+    }
+
+    public void setWhen(String when) {
+        this.when = when;
     }
 
     public void setIdGuest(int idGuest) {

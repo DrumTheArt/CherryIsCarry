@@ -48,12 +48,12 @@ public class GuestDAOImpl implements GuestDAO {
 
             //Get db-attributes
             int PK_id = result.getInt(1);
-            int ID_house = result.getInt(2);
+            int idProject = result.getInt(2);
             String guestName = result.getString(3);
 
             //Set db-attributes into GuestObject
             aGuest.setPK_id(PK_id);
-            aGuest.setIdProject(ID_house);
+            aGuest.setIdProject(idProject);
             aGuest.setGuestName(guestName);
 
             statement.close();

@@ -13,7 +13,7 @@ public class GuiStart extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws SQLException, IOException, ClassNotFoundException {
+    public void start(Stage primaryStage) {
 
         primaryStage = new DialogMainGuiView().displayMainGui();
         //Stage dialogAddGuest = new DialogMainGuiView().displayMainGui();

@@ -73,7 +73,8 @@ public class GUINamingProperties {
     public static String TT_TF_ALL_FOOD_EUR = "Total cost for food  all guests in sum";
     public static String TT_TF_ALL_TOTAL_COSTS = "Total costs for everything all guests in sum";
     public static String TT_TF_ALL_OUTSTANDING_SUM = "Outstanding sum";
-    public static String TT_TF_ALL_ALLREADYPAID_SUM = "Allready paid";
+    public static String TT_TF_ALL_ALLREADYPAID_SUM = "Already paid";
+    public static String TT_TF_ALL_DEPOSITE_EUR = "Deposite amount";
 
     //ToolTips for Expenses
     public static String TT_TF_GUEST_EXPENSE_PRICE = "Amount of the expense";

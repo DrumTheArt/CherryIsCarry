@@ -1,4 +1,4 @@
-package com.wachs.main.viewModels;
+package com.wachs.main.models;
 
 import com.wachs.main.businessObjects.Project;
 import com.wachs.main.dataAccess.DAO.ProjectDAO;

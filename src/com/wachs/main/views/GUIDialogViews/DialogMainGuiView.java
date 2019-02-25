@@ -1,7 +1,7 @@
 package com.wachs.main.views.GUIDialogViews;
 
-import com.wachs.main.viewModels.AllGuestsDropDownMenuModel;
-import com.wachs.main.viewModels.AllProjectsDropDownMenuModel;
+import com.wachs.main.models.AllGuestsDropDownMenuModel;
+import com.wachs.main.models.AllProjectsDropDownMenuModel;
 import com.wachs.main.views.GUIElementsGenerators.*;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
@@ -52,6 +52,7 @@ public class DialogMainGuiView {
     private TextField tf_AllRentPrice;
     private TextField tf_AllDrinks;
     private TextField tf_AllFood;
+    private TextField tf_Deposite;
     private TextField tf_AllTotalCosts;
     private TextField tf_AllOutstandingPayment;
     private TextField tf_AllAllreadyPaid;
@@ -69,6 +70,7 @@ public class DialogMainGuiView {
 
     //AllLabelsAll
     private Label lb_AllRentPrice;
+    private Label lb_Deposite;
     private Label lb_AllDrinks;
     private Label lb_AllFood;
     private Label lb_AllTotalCosts;
@@ -83,7 +85,7 @@ public class DialogMainGuiView {
     private ComboBox selectProject;
     private ComboBox selectGuest;
 
-    //AllComboBox Models
+    //AllComboBox models
     private ObservableList<String> comboBoxGuestModel;
     private ObservableList<String> comboBoxProjectModel;
 
@@ -189,25 +191,26 @@ public class DialogMainGuiView {
         HBox_LabelFieldsAll = new CreateGUIHBox().CreateHBox(10, 80, 20, 0, 20);
 
         lb_AllRentPrice = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_RENT_PRICE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_Deposite = new CreateGUILabel().createLabel(GUINamingProperties.LB_PROJECTS_DEPOSITE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllDrinks = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_DRINKS_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllFood = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_FOOD_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllTotalCosts = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_TOTAL_COSTS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllOutstandingPayment = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_OUTSTANDING_PAYMENT, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllAlreadyPaid = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_ALREADYPAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
-        HBox_LabelFieldsAll.getChildren().addAll(lb_AllRentPrice, lb_AllDrinks, lb_AllFood, lb_AllTotalCosts, lb_AllAlreadyPaid, lb_AllOutstandingPayment);
+        HBox_LabelFieldsAll.getChildren().addAll(lb_AllRentPrice, lb_Deposite, lb_AllDrinks, lb_AllFood, lb_AllTotalCosts, lb_AllAlreadyPaid, lb_AllOutstandingPayment);
 
         HBox_TextFieldsAll = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
         tf_AllRentPrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_RENT, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
-
+        tf_Deposite = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_DEPOSITE_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllTotalCosts = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_TOTAL_COSTS, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllOutstandingPayment = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_OUTSTANDING_SUM, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllAllreadyPaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_ALLREADYPAID_SUM, GUIProperties.TEXTFIELD_DESIGN, false);
 
-        HBox_TextFieldsAll.getChildren().addAll(tf_AllRentPrice, tf_AllDrinks, tf_AllFood, tf_AllTotalCosts, tf_AllAllreadyPaid, tf_AllOutstandingPayment);
+        HBox_TextFieldsAll.getChildren().addAll(tf_AllRentPrice, tf_Deposite, tf_AllDrinks, tf_AllFood, tf_AllTotalCosts, tf_AllAllreadyPaid, tf_AllOutstandingPayment);
 
         GridPane.setConstraints(HBox_LabelFieldsAll, 1, 1);
         GridPane.setConstraints(HBox_TextFieldsAll, 1, 2);
@@ -224,149 +227,68 @@ public class DialogMainGuiView {
         return primaryStage;
     }
 
-    public TextField getTf_GuestNights() {
-        return tf_GuestNights;
+    public void setTf_GuestNights(int nights) {
+        this.tf_GuestNights.setText(String.valueOf(nights));
     }
 
-    public void setTf_GuestNights(TextField tf_GuestNights) {
-        this.tf_GuestNights = tf_GuestNights;
+    public void setTf_GuestNightsEUR(double amount) {
+        this.tf_GuestNightsEUR.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestNightsEUR() {
-        return tf_GuestNightsEUR;
+    public void setTf_GuestDrinks(int nights) {
+        this.tf_GuestDrinks.setText(String.valueOf(nights));
     }
 
-    public void setTf_GuestNightsEUR(TextField tf_GuestNightsEUR) {
-        this.tf_GuestNightsEUR = tf_GuestNightsEUR;
+    public void setTf_GuestDrinksEUR(double amount) {
+        this.tf_GuestDrinksEUR.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestDrinks() {
-        return tf_GuestDrinks;
+    public void setTf_GuestFood(int nights) {
+        this.tf_GuestFood.setText(String.valueOf(nights));
     }
 
-    public void setTf_GuestDrinks(TextField tf_GuestDrinks) {
-        this.tf_GuestDrinks = tf_GuestDrinks;
+    public void setTf_GuestFoodEUR(double amount) {
+        this.tf_GuestFoodEUR.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestDrinksEUR() {
-        return tf_GuestDrinksEUR;
+    public void setTf_GuestTotalCosts(double amount) {
+        this.tf_GuestTotalCosts.setText(String.valueOf(amount));
     }
 
-    public void setTf_GuestDrinksEUR(TextField tf_GuestDrinksEUR) {
-        this.tf_GuestDrinksEUR = tf_GuestDrinksEUR;
+    public void setTf_GuestAlreadyPaid(double amount) {
+        this.tf_GuestAlreadyPaid.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestFood() {
-        return tf_GuestFood;
+    public void setTf_StillToPay(double amount) {
+        this.tf_StillToPay.setText(String.valueOf(amount));
     }
 
-    public void setTf_GuestFood(String tf_GuestFood) {
-
-        this.tf_GuestFood.setText(tf_GuestFood);
-
+    public void setTf_AllRentPrice(double amount) {
+        this.tf_AllRentPrice.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestFoodEUR() {
-        return tf_GuestFoodEUR;
+    public void setTf_AllDrinksEUR(double amount) {
+        this.tf_AllDrinks.setText(String.valueOf(amount));
     }
 
-    public void setTf_GuestFoodEUR(TextField tf_GuestFoodEUR) {
-        this.tf_GuestFoodEUR = tf_GuestFoodEUR;
+    public void setTf_AllFoodEUR(double amount) {
+        this.tf_AllFood.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestTotalCosts() {
-        return tf_GuestTotalCosts;
+    public void setTf_AllTotalCosts(double amount) {
+        this.tf_AllTotalCosts.setText(String.valueOf(amount));
     }
 
-    public void setTf_GuestTotalCosts(TextField tf_GuestTotalCosts) {
-        this.tf_GuestTotalCosts = tf_GuestTotalCosts;
+    public void setTf_AllOutstandingPayment(double amount) {
+        this.tf_AllOutstandingPayment.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_GuestAlreadyPaid() {
-        return tf_GuestAlreadyPaid;
+    public void setTf_Deposite(double amount) {
+        this.tf_Deposite.setText(String.valueOf(amount));
     }
 
-    public void setTf_GuestAlreadyPaid(TextField tf_GuestAlreadyPaid) {
-        this.tf_GuestAlreadyPaid = tf_GuestAlreadyPaid;
+    public void setTf_AllAlreadyPaid(double amount) {
+        this.tf_AllAllreadyPaid.setText(String.valueOf(amount));
     }
 
-    public TextField getTf_StillToPay() {
-        return tf_StillToPay;
-    }
-
-    public void setTf_StillToPay(TextField tf_StillToPay) {
-        this.tf_StillToPay = tf_StillToPay;
-    }
-
-    public TextField getTf_AllRentPrice() {
-        return tf_AllRentPrice;
-    }
-
-    public void setTf_AllRentPrice(TextField tf_AllRentPrice) {
-        this.tf_AllRentPrice = tf_AllRentPrice;
-    }
-
-    public TextField getTf_AllDrinks() {
-        return tf_AllDrinks;
-    }
-
-    public void setTf_AllDrinks(TextField tf_AllDrinks) {
-        this.tf_AllDrinks = tf_AllDrinks;
-    }
-
-    public TextField getTf_AllFood() {
-        return tf_AllFood;
-    }
-
-    public void setTf_AllFood(TextField tf_AllFood) {
-        this.tf_AllFood = tf_AllFood;
-    }
-
-    public TextField getTf_AllTotalCosts() {
-        return tf_AllTotalCosts;
-    }
-
-    public void setTf_AllTotalCosts(TextField tf_AllTotalCosts) {
-        this.tf_AllTotalCosts = tf_AllTotalCosts;
-    }
-
-    public TextField getTf_AllOutstandingPayment() {
-        return tf_AllOutstandingPayment;
-    }
-
-    public void setTf_AllOutstandingPayment(TextField tf_AllOutstandingPayment) {
-        this.tf_AllOutstandingPayment = tf_AllOutstandingPayment;
-    }
-
-    public GridPane getGridForGuestDetails() {
-        return GridForGuestDetails;
-    }
-
-    public void setGridForGuestDetails(GridPane gridForGuestDetails) {
-        GridForGuestDetails = gridForGuestDetails;
-    }
-
-    public GridPane getGridForAllDetails() {
-        return GridForAllDetails;
-    }
-
-    public void setGridForAllDetails(GridPane gridForAllDetails) {
-        GridForAllDetails = gridForAllDetails;
-    }
-
-    public ComboBox getSelectProject() {
-        return selectProject;
-    }
-
-    public void setSelectProject(ComboBox selectProject) {
-        this.selectProject = selectProject;
-    }
-
-    public ComboBox getSelectGuest() {
-        return selectGuest;
-    }
-
-    public void setSelectGuest(ComboBox selectGuest) {
-        this.selectGuest = selectGuest;
-    }
 }

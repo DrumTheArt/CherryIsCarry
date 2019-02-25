@@ -2,10 +2,7 @@
 
 package com.wachs.main.viewModels;
 
-import com.wachs.main.businessObjects.Drinks;
-import com.wachs.main.businessObjects.Guest;
-import com.wachs.main.businessObjects.Project;
-import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.businessObjects.*;
 import com.wachs.main.dataAccess.DAO.*;
 
 import java.util.ArrayList;
@@ -15,6 +12,7 @@ public class GuestModel {
     private GuestDAO guestDAO;
     private ProjectDAO projectDAO;
     private StayDAO stayDAO;
+    private FoodDAO foodDAO;
     private DrinksDAO drinksDAO;
     private DrinksExpensesDAO drinksExpensesDAO;
     private FoodExpensesDAO foodExpensesDAO;
@@ -23,8 +21,6 @@ public class GuestModel {
     private DrinksModel drinksSearchedGuest;
     private FoodModel foodSearchedGuest;
     private PrepaidModel prepaidSearchedGuest;
-    private FoodExpenseModel foodExpensesSearchedGuest;
-    private DrinksExpenseModel drinksExpensesSearchedGuest;
     private Project searchedProject;
     private int idProject;
     private int idGuest;
@@ -49,6 +45,7 @@ public class GuestModel {
         drinksDAO = new DrinksDAOImpl();
         drinksExpensesDAO = new DrinksExpensesDAOImpl();
         foodExpensesDAO = new FoodExpensesDAOImpl();
+        foodDAO = new FoodDAOImpl();
 
         //get numbers of Guests
         countGuestSelectedProject = guestDAO.findAllGuestsByOneProject(idProject).size();
@@ -57,9 +54,6 @@ public class GuestModel {
         drinksSearchedGuest = new DrinksModel(idGuest, idProject);
         foodSearchedGuest = new FoodModel(idGuest, idProject);
         prepaidSearchedGuest = new PrepaidModel(idGuest, idProject);
-        foodExpensesSearchedGuest = new FoodExpenseModel(idGuest, idProject);
-        drinksExpensesSearchedGuest = new DrinksExpenseModel(idGuest, idProject);
-
 
     }
 
@@ -80,7 +74,7 @@ public class GuestModel {
 
     public double getDrinksEUR() {
 
-        return this.getAllDrinksExpensesOneProject() * (this.getDrinksCount() / this.getAllDrinksOneProject());
+        return (this.getAllDrinksExpensesOneProject() * (this.getDrinksCount() / this.getAllDrinksOneProject()));
     }
 
     public int getFoodCount() {
@@ -90,7 +84,7 @@ public class GuestModel {
 
     public double getFoodEUR() {
 
-        return 0;
+        return ((this. getAllFoodExpensesOneProject() * this.getFoodCount() / this.getAllFoodOneProject()));
     }
 
     public double getTotalCost() {
@@ -100,7 +94,7 @@ public class GuestModel {
 
     public double getAlreadyPaid() {
 
-        return prepaidSearchedGuest.getPrepaid();
+        return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesOneProjectOneGuest() + this.getAllDrinksExpensesOneProjectOneGuest());
     }
 
     public double getStillToPay() {
@@ -145,7 +139,71 @@ public class GuestModel {
 
         double allDrinksExpenses = 0;
 
+        ArrayList<DrinksExpense> foodSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
+
+        for (DrinksExpense drinksExpense : foodSelectedProject){
+
+            allDrinksExpenses = allDrinksExpenses + drinksExpense.get_spend();
+
+        }
 
         return allDrinksExpenses;
+    }
+
+    private double getAllFoodExpensesOneProject(){
+
+        double allFoodExpenses = 0;
+
+        ArrayList<FoodExpense> foodSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
+
+        for (FoodExpense foodExpense : foodSelectedProject) {
+
+            allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
+        }
+
+        return allFoodExpenses;
+    }
+
+    private double getAllFoodOneProject() {
+
+        int allFoodCountSelectedProject = 0;
+
+        ArrayList<Food> foodSelectedProject = foodDAO.findAllFoodByOneProject(idProject);
+
+        for (Food food : foodSelectedProject) {
+
+            allFoodCountSelectedProject = allFoodCountSelectedProject + food.getNights();
+        }
+
+        return allFoodCountSelectedProject;
+    }
+
+    private double getAllFoodExpensesOneProjectOneGuest(){
+
+        double allFoodExpenses = 0;
+
+        ArrayList<FoodExpense> foodSelectedProject = foodExpensesDAO.findFoodExpensesByOneGuest(idGuest, idProject);
+
+        for (FoodExpense foodExpense : foodSelectedProject) {
+
+            allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
+        }
+
+        return allFoodExpenses;
+    }
+
+    private double getAllDrinksExpensesOneProjectOneGuest(){
+
+        double allDrinksExpenses = 0;
+
+        ArrayList<DrinksExpense> drinksExpensesSelectedProject = drinksExpensesDAO.findDrinksExpensesByOneGuest(idGuest, idProject);
+
+        for (DrinksExpense drinksExpense : drinksExpensesSelectedProject) {
+
+            allDrinksExpenses = allDrinksExpenses + drinksExpense.get_spend();
+        }
+
+        return allDrinksExpenses;
+
     }
 }

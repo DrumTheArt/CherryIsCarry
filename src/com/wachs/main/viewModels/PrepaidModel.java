@@ -11,9 +11,9 @@ public class PrepaidModel {
     private int idGuest;
     private int idProject;
 
-    PrepaidModel(int idGuest, int idHouse) {
+    PrepaidModel(int idGuest, int idProject) {
 
-        createModel(idGuest, idHouse);
+        createModel(idGuest, idProject);
     }
 
     private void createModel(int idGuest, int idProject) {

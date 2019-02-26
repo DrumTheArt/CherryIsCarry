@@ -6,19 +6,19 @@ import com.wachs.main.views.GUIDialogViews.DialogMainGuiView;
 
 public class ControllerMainGUI {
 
-    DialogMainGuiView view;
-    GuestModel modelGuest;
-    AllGuestsModel modelAllGuest;
+    private DialogMainGuiView view;
+    private GuestModel modelOneGuest;
+    private AllGuestsModel modelAllGuest;
 
-    ControllerMainGUI(DialogMainGuiView theView, GuestModel theModel, AllGuestsModel allGuestModel) {
+    ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel) {
 
         view = theView;
-        modelGuest = theModel;
+        this.modelOneGuest = modelOneGuest;
         modelAllGuest = allGuestModel;
         bindingAllGuest();
+        bindingOneGuest();
 
     }
-
 
     private void bindingAllGuest(){
 
@@ -31,5 +31,17 @@ public class ControllerMainGUI {
         view.setTf_Deposite(modelAllGuest.getDepositeProject());
     }
 
+    private void bindingOneGuest() {
+
+        view.setTf_GuestNights(modelOneGuest.getSleeopover());
+        view.setTf_GuestNightsEUR(modelOneGuest.getSleepOverEUR());
+        view.setTf_GuestDrinks(modelOneGuest.getDrinksCount());
+        view.setTf_GuestDrinksEUR(modelOneGuest.getDrinksEUR());
+        view.setTf_GuestFood(modelOneGuest.getFoodCount());
+        view.setTf_GuestFoodEUR(modelOneGuest.getFoodEUR());
+        view.setTf_GuestTotalCosts(modelOneGuest.getTotalCost());
+        view.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaid());
+        view.setTf_StillToPay(modelOneGuest.getStillToPay());
+    }
 }
 

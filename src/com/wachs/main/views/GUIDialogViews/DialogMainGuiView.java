@@ -218,7 +218,7 @@ public class DialogMainGuiView {
 
         verticalBox.getChildren().addAll(HBox_Buttons, HBox_Selector, GridForGuestDetails, GridForAllDetails);
 
-        Scene scene = new Scene(verticalBox, 1200, 450);
+        Scene scene = new Scene(verticalBox, 1380, 450);
 
         primaryStage.setScene(scene);
 

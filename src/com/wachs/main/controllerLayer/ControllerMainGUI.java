@@ -10,7 +10,7 @@ public class ControllerMainGUI {
     private GuestModel modelOneGuest;
     private AllGuestsModel modelAllGuest;
 
-    ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel) {
+    public ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel) {
 
         view = theView;
         this.modelOneGuest = modelOneGuest;
@@ -33,7 +33,7 @@ public class ControllerMainGUI {
 
     private void bindingOneGuest() {
 
-        view.setTf_GuestNights(modelOneGuest.getSleeopover());
+        view.setTf_GuestNights(modelOneGuest.getSleepOver());
         view.setTf_GuestNightsEUR(modelOneGuest.getSleepOverEUR());
         view.setTf_GuestDrinks(modelOneGuest.getDrinksCount());
         view.setTf_GuestDrinksEUR(modelOneGuest.getDrinksEUR());

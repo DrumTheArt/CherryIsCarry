@@ -25,8 +25,15 @@ public class GuestModel {
     private int idProject;
     private int idGuest;
     private int countGuestSelectedProject;
+    private ArrayList<Stay> staySelectedProject;
+    private ArrayList<Drinks> drinksSelectedProject;
+    private ArrayList<DrinksExpense> drinksExpensesSelectedProject;
+    private ArrayList<DrinksExpense> drinksExpensesSelectedProjectOneGuest;
+    private ArrayList<FoodExpense> foodExpensesSelectedProjectOneGuest;
+    private ArrayList<FoodExpense> foodExpensesSelectedProject;
+    private ArrayList<Food> foodSelectedProject;
 
-    GuestModel(String projectName, String guestName) {
+    public GuestModel(String projectName, String guestName) {
 
         createModel(projectName, guestName);
     }
@@ -55,16 +62,24 @@ public class GuestModel {
         foodSearchedGuest = new FoodModel(idGuest, idProject);
         prepaidSearchedGuest = new PrepaidModel(idGuest, idProject);
 
+        staySelectedProject = stayDAO.findAllStayByOneProject(idProject);
+        drinksSelectedProject = drinksDAO.findAllDrinksByOneProject(idProject);
+        drinksExpensesSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
+        foodExpensesSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
+
+        drinksExpensesSelectedProjectOneGuest = drinksExpensesDAO.findDrinksExpensesByOneGuest(idGuest, idProject);
+        foodExpensesSelectedProjectOneGuest = foodExpensesDAO.findFoodExpensesByOneGuest(idGuest, idProject);
+        foodSelectedProject = foodDAO.findAllFoodByOneProject(idProject);
     }
 
-    public int getSleeopover() {
+    public int getSleepOver() {
 
         return staySearchedGuest.getNights();
     }
 
     public double getSleepOverEUR() {
 
-        return (this.getRent() * (this.getSleeopover() / (this.getAllSleepOverOneProject())));
+        return (this.getRent() * (this.getSleepOver() / (this.getAllSleepOverOneProject())));
     }
 
     public int getDrinksCount() {
@@ -111,7 +126,6 @@ public class GuestModel {
     private int getAllSleepOverOneProject() {
 
         int allNightsCountSelectedProject = 0;
-        ArrayList<Stay> staySelectedProject = stayDAO.findAllStayByOneProject(idProject);
 
         for (Stay stay : staySelectedProject) {
 
@@ -125,7 +139,6 @@ public class GuestModel {
     private int getAllDrinksOneProject() {
 
         int allDrinksCountSelectedProject = 0;
-        ArrayList<Drinks> drinksSelectedProject = drinksDAO.findAllDrinksByOneProject(idProject);
 
         for (Drinks drinks : drinksSelectedProject) {
 
@@ -139,9 +152,7 @@ public class GuestModel {
 
         double allDrinksExpenses = 0;
 
-        ArrayList<DrinksExpense> foodSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
-
-        for (DrinksExpense drinksExpense : foodSelectedProject){
+        for (DrinksExpense drinksExpense : drinksExpensesSelectedProject){
 
             allDrinksExpenses = allDrinksExpenses + drinksExpense.get_spend();
 
@@ -154,9 +165,7 @@ public class GuestModel {
 
         double allFoodExpenses = 0;
 
-        ArrayList<FoodExpense> foodSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
-
-        for (FoodExpense foodExpense : foodSelectedProject) {
+        for (FoodExpense foodExpense : foodExpensesSelectedProject) {
 
             allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
         }
@@ -167,8 +176,6 @@ public class GuestModel {
     private double getAllFoodOneProject() {
 
         int allFoodCountSelectedProject = 0;
-
-        ArrayList<Food> foodSelectedProject = foodDAO.findAllFoodByOneProject(idProject);
 
         for (Food food : foodSelectedProject) {
 
@@ -182,9 +189,7 @@ public class GuestModel {
 
         double allFoodExpenses = 0;
 
-        ArrayList<FoodExpense> foodSelectedProject = foodExpensesDAO.findFoodExpensesByOneGuest(idGuest, idProject);
-
-        for (FoodExpense foodExpense : foodSelectedProject) {
+        for (FoodExpense foodExpense : foodExpensesSelectedProjectOneGuest) {
 
             allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
         }
@@ -196,9 +201,7 @@ public class GuestModel {
 
         double allDrinksExpenses = 0;
 
-        ArrayList<DrinksExpense> drinksExpensesSelectedProject = drinksExpensesDAO.findDrinksExpensesByOneGuest(idGuest, idProject);
-
-        for (DrinksExpense drinksExpense : drinksExpensesSelectedProject) {
+        for (DrinksExpense drinksExpense : drinksExpensesSelectedProjectOneGuest) {
 
             allDrinksExpenses = allDrinksExpenses + drinksExpense.get_spend();
         }

@@ -27,6 +27,11 @@ public class AllGuestsModel {
 
         selectedProject = new ProjectDAOImpl().fineOneProject(nameProject);
         selectedProjectID = selectedProject.getPK_id();
+
+        allDrinksToProject = new DrinksExpensesDAOImpl().findAllDrinksExpensesByOneProject(selectedProjectID);
+        allFoodToProject = new FoodExpensesDAOImpl().findAllFoodExpensesByOneProject(selectedProjectID);
+        allPrepaidToProject = new PrepaidDAOImpl().findAllPrepaidByOneProject(selectedProjectID);
+
     }
 
     public double getRentProject() {
@@ -41,8 +46,6 @@ public class AllGuestsModel {
 
     public double getDrinksAllGuests(){
 
-        allDrinksToProject = new DrinksExpensesDAOImpl().findAllDrinksExpensesByOneProject(selectedProjectID);
-
         double drinksAmount = 0;
 
         for (DrinksExpense drinks : allDrinksToProject) {
@@ -55,8 +58,6 @@ public class AllGuestsModel {
 
     public double getFoodAllGuests(){
 
-        allFoodToProject = new FoodExpensesDAOImpl().findAllFoodExpensesByOneProject(selectedProjectID);
-
         double foodAmountPrice = 0;
 
         for (FoodExpense food : allFoodToProject) {
@@ -68,8 +69,6 @@ public class AllGuestsModel {
     }
 
     public double getAllPrepaid(){
-
-        allPrepaidToProject = new PrepaidDAOImpl().findAllPrepaidByOneProject(selectedProjectID);
 
         double prepaidAmountPrice = 0;
 

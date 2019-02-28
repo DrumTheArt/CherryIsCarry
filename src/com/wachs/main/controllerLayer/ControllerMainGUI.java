@@ -22,7 +22,7 @@ public class ControllerMainGUI {
     }
 
     public Stage startView() {
-        return view.displayMainGui();
+        return view.getDisplayMainGUIStage();
 
     }
     private void bindingAllGuest(){

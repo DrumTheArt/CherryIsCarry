@@ -5,7 +5,6 @@
 - Jenkins
 
 - Hibernate benutzen (oder ein anderes Entity-Framework)
-
 - Was ist mit SQL-Injection?
 - S. 318 Besser coden --> anstatt langer Parameterliste, wurde eine Parameter-Klasse gebaut:
 		- public class Parameter{
@@ -16,25 +15,26 @@
 }
 
 
+    Little Steps:
+        - Anpassungen bei den Tests (ResultSet closed exception)
+        - Initialisierung GuestModel in Abhängigkeit
+
     Big Steps:
         - Bau einer Serializable Version (wie das Adressbuch) ...
 
 	Zuletzt am 23.08.
 	    - Splash Screen bauen
-	    - View bauen
 
-
-Refactoring:
-
-- Return Boolean Expression in tenär-Ausdrücke (one line at return)
-- Null-Pointer Exceptions direkt in andere Exception mit XOR-Operator
-- Final Modifiers ändern
-- Null-Pointer Exception aus API benutzen
-    also anstatt: int getSomething(){(if supply == null){throw new NullPointerException("object darf nicht null sein")}}
-    lieber: Objects.requireNonNull(supply, "object darf nicht null sein")
-- Use Try-with-Resource wenn man aus Streams liest
-- Favor abstract over concrete Types, d.h. List<Supply> a = new LinkedList<>();
-
+	    Refactoring:
+        
+        - Return Boolean Expression in tenär-Ausdrücke (one line at return)
+        - Null-Pointer Exceptions direkt in andere Exception mit XOR-Operator
+        - Final Modifiers ändern
+        - Null-Pointer Exception aus API benutzen
+            also anstatt: int getSomething(){(if supply == null){throw new NullPointerException("object darf nicht null sein")}}
+            lieber: Objects.requireNonNull(supply, "object darf nicht null sein")
+        - Use Try-with-Resource wenn man aus Streams liest
+        - Favor abstract over concrete Types, d.h. List<Supply> a = new LinkedList<>();
 
 
 

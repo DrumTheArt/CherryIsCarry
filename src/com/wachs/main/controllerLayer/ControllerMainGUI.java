@@ -3,6 +3,7 @@ package com.wachs.main.controllerLayer;
 import com.wachs.main.models.AllGuestsModel;
 import com.wachs.main.models.GuestModel;
 import com.wachs.main.views.GUIDialogViews.DialogMainGuiView;
+import javafx.stage.Stage;
 
 public class ControllerMainGUI {
 
@@ -20,6 +21,10 @@ public class ControllerMainGUI {
 
     }
 
+    public Stage startView() {
+        return view.getDisplayMainGUIStage();
+
+    }
     private void bindingAllGuest(){
 
         view.setTf_AllRentPrice(modelAllGuest.getRentProject());

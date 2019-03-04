@@ -24,6 +24,8 @@ public class DialogMainGuiView {
     //AllColumns
     private VBox verticalBox;
 
+    private Stage primaryStage;
+
     // AllRows
     private HBox HBox_Buttons;
     private HBox HBox_Selector;
@@ -90,9 +92,21 @@ public class DialogMainGuiView {
     private ObservableList<String> comboBoxProjectModel;
 
 
-    public Stage displayMainGui() {
+    public DialogMainGuiView() {
 
-        Stage primaryStage = new Stage();
+        displayMainGui();
+
+    }
+
+
+    public Stage getDisplayMainGUIStage() {
+
+        return primaryStage;
+    }
+
+    public void displayMainGui() {
+
+        primaryStage = new Stage();
 
         primaryStage.setTitle("CherryIsCarry");
 
@@ -224,7 +238,7 @@ public class DialogMainGuiView {
 
         primaryStage.show();
 
-        return primaryStage;
+
     }
 
     public void setTf_GuestNights(int nights) {

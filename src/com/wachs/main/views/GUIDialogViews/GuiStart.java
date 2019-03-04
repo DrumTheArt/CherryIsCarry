@@ -16,15 +16,16 @@ public class GuiStart extends Application {
     public void start(Stage primaryStage) {
 
 
-        DialogMainGuiView view = new DialogMainGuiView();
+
         GuestModel modelOneGuest = new GuestModel("Frankreich", "Kim");
 
         AllGuestsModel modelAllGuest = new AllGuestsModel("Frankreich");
-
+        DialogMainGuiView view = new DialogMainGuiView();
 
         ControllerMainGUI b = new ControllerMainGUI(view, modelOneGuest, modelAllGuest);
 
-        primaryStage = view.displayMainGui();
+        primaryStage = b.startView();
+        //primaryStage = view.displayMainGui();
         //primaryStage = new DialogMainGuiView().displayMainGui();
         //Stage dialogAddGuest = new DialogMainGuiView().displayMainGui();
 

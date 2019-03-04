@@ -3,6 +3,7 @@
 - Maven Tool benutzen für den AutoBuild
 - Metriken für Testabdeckungen (Cobertura oder clover)
 - Jenkins
+- Static Code Analysis benutzen (SpotBugs or Prone)
 
 - Hibernate benutzen (oder ein anderes Entity-Framework)
 - Was ist mit SQL-Injection?
@@ -26,7 +27,7 @@
 	    - Splash Screen bauen
 
 	    Refactoring:
-        
+
         - Return Boolean Expression in tenär-Ausdrücke (one line at return)
         - Null-Pointer Exceptions direkt in andere Exception mit XOR-Operator
         - Final Modifiers ändern

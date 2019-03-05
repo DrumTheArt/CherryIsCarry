@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class DataBaseTest {
+public class DataBaseColumnValidationTests {
 
     @Before
     public void setUp() {

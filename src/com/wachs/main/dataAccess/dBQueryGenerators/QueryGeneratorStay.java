@@ -15,9 +15,9 @@ public class QueryGeneratorStay {
         return query;
     }
 
-    public String queryInsertStayForOneGuest(int idGuest, int idProject, int nights) {
+    public String queryInsertStayForOneGuest(int idGuest, int idProject, int stayNights) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + "'" + nights + "'" + "," + idGuest + "," + idProject + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + "'" + stayNights + "'" + "," + idGuest + "," + idProject + ")";
 
         return query;
     }
@@ -29,9 +29,9 @@ public class QueryGeneratorStay {
         return query;
     }
 
-    public String queryUpdateStayForOneGuest(int idGuest, int idProject, int newNights) {
+    public String queryUpdateStayForOneGuest(int idGuest, int idProject, int stayNewNights) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + newNights + " WHERE " + COLUMN3 + " = "  + idGuest + " AND " + COLUMN4 + " = " + idProject;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + stayNewNights + " WHERE " + COLUMN3 + " = " + idGuest + " AND " + COLUMN4 + " = " + idProject;
 
         return query;
     }
@@ -41,10 +41,5 @@ public class QueryGeneratorStay {
         String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN4 + " = " + idProject;
 
         return query;
-    }
-
-    public static void main(String[] args) {
-        QueryGeneratorStay t = new QueryGeneratorStay();
-        System.out.println(t.queryUpdateStayForOneGuest(1, 1, 2));
     }
 }

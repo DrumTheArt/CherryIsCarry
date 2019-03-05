@@ -135,7 +135,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryInsertStayForOneGuest(idGuest, idProject, nights);
+            String queryCommand = query.queryInsertFoodForOneGuest(idGuest, idProject, nights);
             statement.executeUpdate(queryCommand);
 
             //Log the query

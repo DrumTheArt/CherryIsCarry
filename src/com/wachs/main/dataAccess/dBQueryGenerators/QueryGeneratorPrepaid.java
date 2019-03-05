@@ -29,18 +29,17 @@ public class QueryGeneratorPrepaid {
         return query;
     }
 
-    public String queryInsertPrepaidForOneGuest(int idGuest, int idProject, double prepaid) {
+    public String queryInsertPrepaidForOneGuest(int idGuest, int idProject, double prepaidPrice) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ,"  + prepaid  + "," + idGuest + "," + idProject + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + prepaidPrice + "," + idGuest + "," + idProject + ")";
 
         return query;
     }
 
-    public String queryUpdatePrepaidForOneGuest(int idGuest, int idProject, double prepaid) {
+    public String queryUpdatePrepaidForOneGuest(int idGuest, int idProject, double prepaidPrice) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + prepaid + " WHERE " + COLUMN3 + " = "  + idGuest + " AND " + COLUMN4 + " = " + idProject;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + prepaidPrice + " WHERE " + COLUMN3 + " = " + idGuest + " AND " + COLUMN4 + " = " + idProject;
 
         return query;
-
     }
 }

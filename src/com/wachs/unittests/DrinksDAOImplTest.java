@@ -1,10 +1,17 @@
 package com.wachs.unittests;
 
+import com.wachs.main.businessObjects.Drinks;
+import com.wachs.main.dataAccess.DAO.DrinksDAOImpl;
+import com.wachs.main.dataAccess.DAO.GuestDAOImpl;
+import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DAODrinksImplTest {
+public class DrinksDAOImplTest {
+
+
 
     @Before
     public void setUp() {
@@ -14,10 +21,39 @@ public class DAODrinksImplTest {
     @After
     public void tearDown() {
 
+
     }
 
     @Test
     public void findDrinksByOneGuest_Should_Return_DrinkObject_When_idGuestAndIdProjectExist() {
+
+        //Arrange
+        String newProjectName = "HausAmMeer";
+        String newGuestName = "RobertAmMeer";
+        double expectedDeposite = 200.00;
+        double expectedPrice = 300.00;
+        int expectedNight = 3;
+
+        ProjectDAOImpl newDAOProject = new ProjectDAOImpl();
+        newDAOProject.insertProject(newProjectName, expectedPrice, expectedDeposite);
+        int idProject = newDAOProject.fineOneProject(newProjectName).getPK_id();
+
+        GuestDAOImpl newDAOGuest = new GuestDAOImpl();
+        newDAOGuest.insertGuestForOneProject(idProject, newGuestName);
+        int idGuest = newDAOGuest.findOneGuestByOneProject(newGuestName, idProject).getPK_id();
+
+        DrinksDAOImpl newDrinksDAO = new DrinksDAOImpl();
+
+        //Act
+        newDrinksDAO.insertDrinksForOneGuest(idGuest, idProject, expectedNight);
+        Drinks aDrink = newDrinksDAO.findDrinksByOneGuest(idGuest, idProject);
+
+        //Assert
+        Assert.assertNotNull(aDrink);
+        Assert.assertEquals(expectedNight, aDrink.getNights());
+        Assert.assertEquals(idGuest, aDrink.getIdGuest());
+        Assert.assertEquals(idProject, aDrink.getIdProject());
+
     }
 
     @Test

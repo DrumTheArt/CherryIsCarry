@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorHouse.*;
+import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject.*;
 
 public class TblHouseColumnValidate implements IDbColumnValidator {
 

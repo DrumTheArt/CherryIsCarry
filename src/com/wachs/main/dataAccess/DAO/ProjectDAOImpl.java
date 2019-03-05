@@ -1,7 +1,7 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.businessObjects.Project;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorHouse;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
@@ -11,21 +11,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorHouse.*;
+import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject.*;
 
 public class ProjectDAOImpl implements ProjectDAO {
 
     private ArrayList<Project> allProjects;
     private Project aProject;
     private ConverterStringForDataBase convertString;
-    private QueryGeneratorHouse query;
+    private QueryGeneratorProject query;
 
     public ProjectDAOImpl() {
 
         aProject = new Project();
         allProjects = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
-        query = new QueryGeneratorHouse();
+        query = new QueryGeneratorProject();
 
     }
 
@@ -37,7 +37,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryFindOneData(name);
+            String queryCommand = query.queryFindOneProject(name);
             ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
@@ -74,7 +74,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryReadAllData();
+            String queryCommand = query.queryFindAllProjects();
             ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
@@ -107,7 +107,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryInsertData(projectName, projectPrice, projectDeposite);
+            String queryCommand = query.queryInsertOneProject(projectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -131,7 +131,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite);
+            String queryCommand = query.queryUpdateOneProject(oldId, newProjectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -159,7 +159,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryDeleteData(projectName);
+            String queryCommand = query.queryDeleteOneProject(projectName);
             statement.executeUpdate(queryCommand);
 
             //Log the query

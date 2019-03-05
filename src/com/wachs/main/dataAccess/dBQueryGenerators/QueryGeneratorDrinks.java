@@ -16,9 +16,9 @@ public class QueryGeneratorDrinks {
         return query;
     }
 
-    public String queryInsertDrinksForOneGuest(int idGuest, int idProject, int nights) {
+    public String queryInsertDrinksForOneGuest(int idGuest, int idProject, int drinksNights) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," +  nights +  "," + idGuest + "," + idProject + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + drinksNights + "," + idGuest + "," + idProject + ")";
 
         return query;
     }
@@ -30,9 +30,9 @@ public class QueryGeneratorDrinks {
         return query;
     }
 
-    public String queryUpdateDrinksForOneGuest(int idGuest, int idProject, int newNights) {
+    public String queryUpdateDrinksForOneGuest(int idGuest, int idProject, int drinksNewNights) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + newNights + " WHERE " + COLUMN3 + " = "  + idGuest + " AND " + COLUMN4 + " = " + idProject;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + drinksNewNights + " WHERE " + COLUMN3 + " = " + idGuest + " AND " + COLUMN4 + " = " + idProject;
 
         return query;
     }
@@ -43,5 +43,4 @@ public class QueryGeneratorDrinks {
 
         return query;
     }
-
 }

@@ -24,26 +24,24 @@ public class QueryGeneratorOtherExpenses {
         return query;
     }
 
-    public String queryDeleteOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when) {
+    public String queryDeleteOtherExpensesForOneGuest(int idGuest, int idProject, double otherExpensesPrice, String otherExpensesReason, String otherExpensesWhen) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + "'" + reason + "'" + " AND " + COLUMN4 + " = " + "'" + when + "'";
-
-        return query;
-    }
-
-    public String queryInsertOtherExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
-
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + spend + "," + "'" + reason + "'" + "," + "'" + when + "'" + "," + idGuest + "," + idProject + ")";
-
-        return query;
-
-    }
-
-    public String queryUpdateOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
-
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + newPrice + " ," + COLUMN3 + "=" + "'" + newReason + "'" + " ," + COLUMN4 + " = " + "'" + newWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + "'" + reason + "'" + " AND " + COLUMN4 + " = " + "'" + when + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + otherExpensesPrice + " AND " + COLUMN3 + " = " + "'" + otherExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + otherExpensesWhen + "'";
 
         return query;
     }
 
+    public String queryInsertOtherExpensesForOneGuest(int idGuest, int idProject, double otherExpensesSpend, String otherExpensesReason, String otherExpensesWhen) {
+
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + otherExpensesSpend + "," + "'" + otherExpensesReason + "'" + "," + "'" + otherExpensesWhen + "'" + "," + idGuest + "," + idProject + ")";
+
+        return query;
+    }
+
+    public String queryUpdateOtherExpensesForOneGuest(int idGuest, int idProject, double otherExpensesPrice, String otherExpensesReason, String otherExpensesWhen, double otherExpensesNewPrice, String otherExpensesNewReason, String otherExpensesNewWhen) {
+
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + otherExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + otherExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + otherExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + otherExpensesPrice + " AND " + COLUMN3 + " = " + "'" + otherExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + otherExpensesWhen + "'";
+
+        return query;
+    }
 }

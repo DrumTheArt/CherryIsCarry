@@ -24,24 +24,23 @@ public class QueryGeneratorDrinksExpenses {
         return query;
     }
 
-    public String queryDeleteDrinksExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when) {
+    public String queryDeleteDrinksExpensesForOneGuest(int idGuest, int idProject, double drinksExpensesPrice, String drinksExpensesReason, String drinksExpensesWhen) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + "'" + reason + "'" + " AND " + COLUMN4 + " = " + "'" + when + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + drinksExpensesPrice + " AND " + COLUMN3 + " = " + "'" + drinksExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + drinksExpensesWhen + "'";
 
         return query;
     }
 
-    public String queryInsertDrinksExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
+    public String queryInsertDrinksExpensesForOneGuest(int idGuest, int idProject, double drinksExpensesPrice, String drinksExpensesReason, String drinksExpensesWhen) {
 
-        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + spend + "," + "'" + reason + "'" + "," + "'" + when + "'" + "," + idGuest + "," + idProject + ")";
+        String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + "," + COLUMN5 + "," + COLUMN6 + ") VALUES (? ," + drinksExpensesPrice + "," + "'" + drinksExpensesReason + "'" + "," + "'" + drinksExpensesWhen + "'" + "," + idGuest + "," + idProject + ")";
 
         return query;
-
     }
 
-    public String queryUpdateDrinksExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
+    public String queryUpdateDrinksExpensesForOneGuest(int idGuest, int idProject, double drinksExpensesPrice, String drinksExpensesReason, String drinksExpensesWhen, double drinksExpensesNewPrice, String drinksExpensesNewReason, String drinksExpensesNewWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + newPrice + " ," + COLUMN3 + "=" + "'" + newReason + "'" + " ," + COLUMN4 + " = " + "'" + newWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + price + " AND " + COLUMN3 + " = " + "'" + reason + "'" + " AND " + COLUMN4 + " = " + "'" + when + "'";
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + drinksExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + drinksExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + drinksExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + drinksExpensesPrice + " AND " + COLUMN3 + " = " + "'" + drinksExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + drinksExpensesWhen + "'";
 
         return query;
     }

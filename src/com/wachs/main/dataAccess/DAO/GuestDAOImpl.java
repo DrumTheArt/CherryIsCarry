@@ -66,11 +66,11 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public ArrayList findAllGuestsByOneProject(int idHouse) {
+    public ArrayList findAllGuestsByOneProject(int idProject) {
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryFindAllGuestsByOneProject(idHouse);
+            String queryCommand = query.queryFindAllGuestsByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
             //Log the query
@@ -97,14 +97,14 @@ public class GuestDAOImpl implements GuestDAO {
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
     @Override
-    public void insertGuestForOneProject(int idHouse, String name) {
+    public void insertGuestForOneProject(int idProject, String guestName) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
-        name = convertString.convertString(name);
+        guestName = convertString.convertString(guestName);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryInsertGuestForOneProject(idHouse, name);
+            String queryCommand = query.queryInsertGuestForOneProject(guestName, idProject);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -121,14 +121,14 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void updateGuestForOneProject(int oldId, String name, int idProject) {
+    public void updateGuestForOneProject(int oldId, String guestName, int idProject) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
-        name = convertString.convertString(name);
+        guestName = convertString.convertString(guestName);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryUpdateGuestForOneProject(oldId, name, idProject);
+            String queryCommand = query.queryUpdateGuestForOneProject(oldId, guestName, idProject);
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -144,15 +144,15 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void deleteGuestForOneProject(String name, int idProject) {
+    public void deleteGuestForOneProject(String guestName, int idProject) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
-        name = convertString.convertString(name);
+        guestName = convertString.convertString(guestName);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryDeleteGuestForOneProject(name, idProject);
+            String queryCommand = query.queryDeleteGuestForOneProject(guestName, idProject);
             statement.executeUpdate(queryCommand);
 
             //Log the query

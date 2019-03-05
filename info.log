@@ -527,3 +527,15 @@ INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_gues
 [2019-03-05 15:57:15] [INFORMATION] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'Hausammeer' 
 [2019-03-05 15:57:15] [INFORMATION] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robertammeer' AND ID_project = 3 
 [2019-03-05 15:57:15] [INFORMATION] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 3 AND ID_project = 3 
+[2019-03-05 22:07:47] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'Hausammeer' 
+[2019-03-05 22:07:47] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robertammeer' AND ID_project = 3 
+[2019-03-05 22:07:47] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 3 AND ID_project = 3 
+[2019-03-05 22:08:27] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'Hausammeer' 
+[2019-03-05 22:08:27] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robertammeer' AND ID_project = 3 
+[2019-03-05 22:08:27] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 3 AND ID_project = 3 
+[2019-03-05 22:14:25] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'Hausammeer' 
+[2019-03-05 22:14:25] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robertammeer' AND ID_project = 3 
+[2019-03-05 22:14:25] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 3 AND ID_project = 3 
+[2019-03-05 22:17:22] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'Hausammeer' 
+[2019-03-05 22:17:22] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robertammeer' AND ID_project = 3 
+[2019-03-05 22:17:22] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 3 AND ID_project = 3 

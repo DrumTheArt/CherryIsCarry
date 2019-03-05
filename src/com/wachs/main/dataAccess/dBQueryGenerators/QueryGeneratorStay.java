@@ -42,4 +42,10 @@ public class QueryGeneratorStay {
 
         return query;
     }
+
+    @Override
+    public String toString() {
+
+        return this.getClass().getName();
+    }
 }

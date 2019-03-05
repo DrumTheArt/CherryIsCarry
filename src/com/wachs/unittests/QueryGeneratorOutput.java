@@ -2,6 +2,10 @@ package com.wachs.unittests;
 
 import com.wachs.main.dataAccess.dBQueryGenerators.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class QueryGeneratorOutput {
 
     private QueryGeneratorDrinks queryDrinks;
@@ -33,6 +37,9 @@ public class QueryGeneratorOutput {
     private final String newReason = "The second new reason";
     private final String newWhen = "01.12.2019";
 
+    private FileWriter writer;
+    private File file;
+
     public QueryGeneratorOutput() {
 
         queryDrinks = new QueryGeneratorDrinks();
@@ -47,7 +54,7 @@ public class QueryGeneratorOutput {
 
     }
 
-    public String[] queryDrinks() {
+    private String[] queryDrinks() {
 
         String[] allQueriesDrinks = new String[5];
 
@@ -60,7 +67,7 @@ public class QueryGeneratorOutput {
         return allQueriesDrinks;
     }
 
-    public String[] queryDrinksExpenses() {
+    private String[] queryDrinksExpenses() {
 
         String[] allQueriesDrinksExpenses = new String[5];
 
@@ -73,7 +80,7 @@ public class QueryGeneratorOutput {
         return allQueriesDrinksExpenses;
     }
 
-    public String[] queryFood() {
+    private String[] queryFood() {
 
         String[] allQueriesFood = new String[5];
 
@@ -86,7 +93,7 @@ public class QueryGeneratorOutput {
         return allQueriesFood;
     }
 
-    public String[] queryFoodExpenses() {
+    private String[] queryFoodExpenses() {
 
         String[] allQueriesFoodExpenses = new String[5];
 
@@ -99,7 +106,7 @@ public class QueryGeneratorOutput {
         return allQueriesFoodExpenses;
     }
 
-    public String[] queryGuest() {
+    private String[] queryGuest() {
 
         String[] allQueriesGuest = new String[5];
 
@@ -112,7 +119,7 @@ public class QueryGeneratorOutput {
         return allQueriesGuest;
     }
 
-    public String[] queryOtherExpenses() {
+    private String[] queryOtherExpenses() {
 
         String[] allQueriesOtherExpenses = new String[5];
 
@@ -125,7 +132,7 @@ public class QueryGeneratorOutput {
         return allQueriesOtherExpenses;
     }
 
-    public String[] queryPrepaid() {
+    private String[] queryPrepaid() {
 
         String[] allQueriesPrepaid = new String[5];
 
@@ -138,7 +145,7 @@ public class QueryGeneratorOutput {
         return allQueriesPrepaid;
     }
 
-    public String[] queryProject() {
+    private String[] queryProject() {
 
         String[] allQueriesProject = new String[5];
 
@@ -151,7 +158,7 @@ public class QueryGeneratorOutput {
         return allQueriesProject;
     }
 
-    public String[] queryStay() {
+    private String[] queryStay() {
 
         String[] allQueriesStay = new String[5];
 
@@ -162,5 +169,72 @@ public class QueryGeneratorOutput {
         allQueriesStay[4] = queryStay.queryDeleteStayForOneGuest(idGuest, idProject);
 
         return allQueriesStay;
+    }
+
+    public void writeAllQueriesToOneFile() {
+
+        file = new File("AllQueries.txt");
+
+        try {
+
+            writer = new FileWriter(file, false);
+
+            for (int i = 0; i < queryDrinks().length; i++) {
+                writer.write(queryDrinks()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryDrinksExpenses().length; i++) {
+                writer.write(queryDrinksExpenses()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryFood().length; i++) {
+                writer.write(queryFood()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryFoodExpenses().length; i++) {
+                writer.write(queryFoodExpenses()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryGuest().length; i++) {
+                writer.write(queryGuest()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryOtherExpenses().length; i++) {
+                writer.write(queryOtherExpenses()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryPrepaid().length; i++) {
+                writer.write(queryPrepaid()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryProject().length; i++) {
+                writer.write(queryProject()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            for (int i = 0; i < queryStay().length; i++) {
+                writer.write(queryStay()[i]);
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            writer.flush();
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        QueryGeneratorOutput createOutput = new QueryGeneratorOutput();
+        createOutput.writeAllQueriesToOneFile();
     }
 }

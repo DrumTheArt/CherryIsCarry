@@ -43,4 +43,10 @@ public class QueryGeneratorDrinks {
 
         return query;
     }
+
+    @Override
+    public String toString() {
+
+        return this.getClass().getName();
+    }
 }

@@ -1,0 +1,45 @@
+INSERT INTO TBL_DRINKS(FK_id,INT_nights,ID_guest,ID_project) VALUES (? ,3,1,1)
+SELECT * FROM TBL_DRINKS where = ID_project = 1
+SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_DRINKS SET INT_nights = 3 WHERE ID_guest = 1 AND ID_project = 1
+DELETE FROM TBL_DRINKS WHERE ID_guest=1 AND ID_project = 1
+INSERT INTO TBL_DRINKEXPENSE(FK_id,REAL_spend,TXT_reason,TXT_when,ID_guest,ID_project) VALUES (? ,200.0,'The reason','01.01.2019',1,1)
+SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1
+SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_DRINKEXPENSE SET REAL_spend = 800.0 ,TXT_reason='The second new reason' ,TXT_when = '01.12.2019' WHERE ID_guest = 1 AND ID_project = 1 AND REAL_spend = 200.0 AND TXT_reason = 'The reason' AND TXT_when = '01.01.2019'
+DELETE FROM TBL_DRINKEXPENSE WHERE ID_guest=1 AND ID_project = 1 AND REAL_spend = 800.0 AND TXT_reason = 'The second new reason' AND TXT_when = '01.12.2019'
+INSERT INTO TBL_FOOD(FK_id,INT_nights,ID_guest,ID_project) VALUES (? ,'3',1,1)
+SELECT * FROM TBL_FOOD where ID_project = 1
+SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_FOOD SET INT_nights = 3 WHERE ID_guest = 1 AND ID_project = 1
+DELETE FROM TBL_FOOD WHERE ID_guest=1 AND ID_project = 1
+INSERT INTO TBL_FOODEXPENSE(FK_id,REAL_spend,TXT_reason,TXT_when,ID_guest,ID_project) VALUES (? ,200.0,'The reason','01.01.2019',1,1)
+SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1
+SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_FOODEXPENSE SET REAL_spend = 800.0 ,TXT_reason='The second new reason' ,TXT_when = '01.12.2019' WHERE ID_guest = 1 AND ID_project = 1 AND REAL_spend = 200.0 AND TXT_reason = 'The reason' AND TXT_when = '01.01.2019'
+DELETE FROM TBL_FOODEXPENSE WHERE ID_guest=1 AND ID_project = 1 AND REAL_spend = 800.0 AND TXT_reason = 'The second new reason' AND TXT_when = '01.12.2019'
+INSERT INTO TBL_GUEST(PK_id,ID_project,TXT_guestName) VALUES (? ,1,'Robert')
+SELECT * FROM TBL_GUEST WHERE ID_project = 1
+SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robert' AND ID_project = 1
+UPDATE TBL_GUEST SET TXT_guestName = 'Robert der Zweite' WHERE PK_id=1 AND ID_project =1
+DELETE FROM TBL_GUEST WHERE TXT_guestName='Robert der Zweite' AND ID_project=1
+INSERT INTO TBL_OTHEREXPENSE(FK_id,REAL_spend,TXT_reason,TXT_when,ID_guest,ID_project) VALUES (? ,200.0,'The reason','01.01.2019',1,1)
+SELECT * FROM TBL_OTHEREXPENSE WHERE ID_project = 1
+SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_OTHEREXPENSE WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_OTHEREXPENSE SET REAL_spend = 800.0 ,TXT_reason='The second new reason' ,TXT_when = '01.12.2019' WHERE ID_guest = 1 AND ID_project = 1 AND REAL_spend = 200.0 AND TXT_reason = 'The reason' AND TXT_when = '01.01.2019'
+DELETE FROM TBL_OTHEREXPENSE WHERE ID_guest=1 AND ID_project = 1 AND REAL_spend = 800.0 AND TXT_reason = 'The second new reason' AND TXT_when = '01.12.2019'
+INSERT INTO TBL_PREPAID(FK_id,REAL_prepaid,ID_guest,ID_project) VALUES (? ,200.0,1,1)
+SELECT * FROM TBL_PREPAID WHERE ID_project = 1
+SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_PREPAID SET REAL_prepaid = 800.0 WHERE ID_guest = 1 AND ID_project = 1
+DELETE FROM TBL_PREPAID WHERE ID_guest=1 AND ID_project = 1
+INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'The Project 2019',5000.0,2000.0)
+SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The Project 2019'
+SELECT * FROM TBL_PROJECT
+UPDATE TBL_PROJECT SET TXT_title = 'The new Project 2019', REAL_projectPrice=5000.0,REAL_projectDeposite=2000.0 WHERE PK_id = 1
+DELETE FROM TBL_PROJECT WHERE TXT_title='The new Project 2019'
+INSERT INTO TBL_STAY(FK_id,INT_nights,ID_guest,ID_project) VALUES (? ,'3',1,1)
+SELECT * FROM TBL_STAY WHERE ID_project = 1
+SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 1 AND ID_project = 1
+UPDATE TBL_STAY SET INT_nights = 3 WHERE ID_guest = 1 AND ID_project = 1
+DELETE FROM TBL_STAY WHERE ID_guest=1 AND ID_project = 1

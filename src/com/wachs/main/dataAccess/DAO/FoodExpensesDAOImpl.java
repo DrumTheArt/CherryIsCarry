@@ -14,24 +14,23 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpe
 
 public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
-    private Statement statement;
     private ArrayList<FoodExpense> allFoodExpensesAllGuests;
     private ArrayList<FoodExpense> allFoodExpensesSearchedGuests;
+    private QueryGeneratorFoodExpenses query;
 
     public FoodExpensesDAOImpl() {
 
-        allFoodExpensesAllGuests = new ArrayList<FoodExpense>();
-        allFoodExpensesSearchedGuests = new ArrayList<FoodExpense>();
+        allFoodExpensesAllGuests = new ArrayList<>();
+        allFoodExpensesSearchedGuests = new ArrayList<>();
+        query = new QueryGeneratorFoodExpenses();
+
     }
 
     @Override
     public ArrayList findFoodExpensesByOneGuest(int idGuest, int idProject) {
 
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
-
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindFoodExpensesByOneGuest(idGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -39,28 +38,29 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
+
                 allFoodExpensesSearchedGuests.add(new FoodExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return allFoodExpensesSearchedGuests;
-
-
     }
 
     @Override
     public ArrayList findAllFoodExpensesByOneProject(int idProject) {
 
-        QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryFindAllFoodExpensesByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -68,15 +68,19 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
+
                 allFoodExpensesAllGuests.add(new FoodExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return allFoodExpensesAllGuests;
@@ -85,62 +89,63 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
 
-        QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryDeleteFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void updateFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when, double newSpend, String newReason, String newWhen) {
 
-        QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryUpdateFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when, newSpend, newReason, newWhen);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void insertFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
 
-        QueryGeneratorFoodExpenses query = new QueryGeneratorFoodExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryInsertFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 }

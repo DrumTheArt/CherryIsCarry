@@ -15,16 +15,17 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorHouse.*;
 
 public class ProjectDAOImpl implements ProjectDAO {
 
-    private Statement statement;
-    private ArrayList<Project> allDataList;
+    private ArrayList<Project> allProjects;
     private Project aProject;
     private ConverterStringForDataBase convertString;
-
+    private QueryGeneratorHouse query;
 
     public ProjectDAOImpl() {
+
         aProject = new Project();
-        allDataList = new ArrayList<Project>();
+        allProjects = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
+        query = new QueryGeneratorHouse();
 
     }
 
@@ -33,10 +34,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryFindOneData(name);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -56,10 +56,13 @@ public class ProjectDAOImpl implements ProjectDAO {
             aProject.setProjectDeposite(reaL_deposite);
 
             result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return aProject;
@@ -69,9 +72,8 @@ public class ProjectDAOImpl implements ProjectDAO {
     @Override
     public ArrayList findAllProjects() {
 
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryReadAllData();
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -79,18 +81,22 @@ public class ProjectDAOImpl implements ProjectDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
-                allDataList.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+
+                allProjects.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
 
             }
 
             result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
-        return allDataList;
+
+        return allProjects;
     }
 
     @Override
@@ -99,52 +105,50 @@ public class ProjectDAOImpl implements ProjectDAO {
         //Set firstLetter to upperCase and set last to lowerLetters
         projectName = convertString.convertString(projectName);
 
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryInsertData(projectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            //statement.close();
+            //DbConnection.closeConnection();
 
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override
     public void updateProject(int oldId, String newProjectName, double projectPrice, double projectDeposite) {
 
-
         //Set firstLetter to upperCase and set last to lowerLetters
         newProjectName = convertString.convertString(newProjectName);
 
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryUpdateData(oldId, newProjectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            //statement.close();
+            //DbConnection.closeConnection();
 
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override
     public void deleteProject(String projectName) {
-
 
         //Because every names starts with a Capital, Rest lowerCases
         int countLettersName = projectName.length();
@@ -153,22 +157,21 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         projectName = firstLetter + lastLetters;
 
-        QueryGeneratorHouse query = new QueryGeneratorHouse();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryDeleteData(projectName);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
-
     }
-
 }

@@ -23,6 +23,7 @@ public class DrinksDAOImpl implements DrinksDAO {
         aDrink = new Drinks();
         allDrinksByOneProject = new ArrayList<>();
         query = new QueryGeneratorDrinks();
+
     }
 
     public Drinks findDrinksByOneGuest(int idGuest, int idProject) {
@@ -48,7 +49,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return aDrink;
@@ -65,6 +68,7 @@ public class DrinksDAOImpl implements DrinksDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
+
                 allDrinksByOneProject.add(new Drinks(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
 
             }
@@ -74,7 +78,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return allDrinksByOneProject;
@@ -94,7 +100,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
@@ -112,7 +120,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
@@ -130,7 +140,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 }

@@ -14,22 +14,23 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay.*;
 
 public class FoodDAOImpl implements FoodDAO {
 
-    private Statement statement;
-    private ArrayList<Food> allDataList;
+    private ArrayList<Food> allFoodByOneProject;
     private Food aFood;
+    private QueryGeneratorFood query;
 
     public FoodDAOImpl() {
 
         aFood = new Food();
-        allDataList = new ArrayList<Food>();
+        allFoodByOneProject = new ArrayList<>();
+        query = new QueryGeneratorFood();
+
     }
 
     @Override
     public Food findFoodByOneGuest(int IdGuest, int idProject) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
-            QueryGeneratorFood query = new QueryGeneratorFood();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryFindFoodByOneGuest(IdGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -45,11 +46,13 @@ public class FoodDAOImpl implements FoodDAO {
             aFood.setIdProject(idProject);
 
             result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return aFood;
@@ -58,10 +61,8 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public ArrayList findAllFoodByOneProject(int idProject) {
 
-        QueryGeneratorFood query = new QueryGeneratorFood();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindAllFoodByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -69,77 +70,84 @@ public class FoodDAOImpl implements FoodDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
-                allDataList.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+
+                allFoodByOneProject.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
-        return allDataList;
+        return allFoodByOneProject;
     }
 
     @Override
     public void updateFoodForOneGuest(int idGuest, int idProject, int newNights) {
 
-        QueryGeneratorFood query = new QueryGeneratorFood();
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void deleteFoodForOneGuest(int idGuest, int idProject) {
 
-        QueryGeneratorFood query = new QueryGeneratorFood();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryDeleteFoodForOneGuest(idGuest, idProject);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void insertFoodForOneGuest(int idGuest, int idProject, int nights) {
 
-        QueryGeneratorFood query = new QueryGeneratorFood();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryInsertStayForOneGuest(idGuest, idProject, nights);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
-
     }
-
 }

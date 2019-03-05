@@ -75,5 +75,4 @@ public class DAODrinksImplTest {
     @Test
     public void insertDrinksForOneGuest_Should_Throw_Exception_When_NewValueIsNegative() {
     }
-
 }

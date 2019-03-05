@@ -14,25 +14,23 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExp
 
 public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
-    private Statement statement;
     private ArrayList<OtherExpense> allExpensesAllGuests;
     private ArrayList<OtherExpense> allExpensesSearchedGuests;
-    private OtherExpense aOtherExpense;
+    private QueryGeneratorOtherExpenses query;
 
     public OtherExpensesDAOImpl() {
 
-        aOtherExpense = new OtherExpense();
-        allExpensesAllGuests = new ArrayList<OtherExpense>();
-        allExpensesSearchedGuests = new ArrayList<OtherExpense>();
+        allExpensesAllGuests = new ArrayList<>();
+        allExpensesSearchedGuests = new ArrayList<>();
+        query = new QueryGeneratorOtherExpenses();
+
     }
 
     @Override
     public ArrayList findOtherExpensesByOneGuest(int idGuest, int idProject) {
 
-        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindOtherExpensesByOneGuest(idGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -40,27 +38,29 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
+
                 allExpensesSearchedGuests.add(new OtherExpense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return allExpensesSearchedGuests;
-
     }
 
     @Override
     public ArrayList findAllOtherExpensesByOneProject(int idProject) {
 
-        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryFindAllOtherExpensesByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -68,15 +68,19 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
+
                 allExpensesAllGuests.add(new OtherExpense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return allExpensesAllGuests;
@@ -85,67 +89,62 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     @Override
     public void deleteOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when) {
 
-        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryDeleteOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+            e.printStackTrace();
+
+        }
     }
 
     @Override
     public void updateOtherExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
 
-        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryUpdateOtherExpensesForOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+            e.printStackTrace();
+
+        }
     }
 
     @Override
     public void insertOtherExpensesForOneGuest(int idGuest, int IdProject, double price, String reason, String when) {
 
-        QueryGeneratorOtherExpenses query = new QueryGeneratorOtherExpenses();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryInsertOtherExpensesForOneGuest(idGuest, IdProject, price, reason, when);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
-
-
     }
-
 }

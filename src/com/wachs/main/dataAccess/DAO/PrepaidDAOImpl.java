@@ -14,23 +14,23 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid.
 
 public class PrepaidDAOImpl implements PrepaidDAO {
 
-    private Statement statement;
-    private ArrayList<Prepaid> allDataList;
+    private ArrayList<Prepaid> allPrepaidByOneProject;
     private Prepaid aPrepaid;
+    private QueryGeneratorPrepaid query;
 
     public PrepaidDAOImpl() {
 
         aPrepaid = new Prepaid();
-        allDataList = new ArrayList<Prepaid>();
+        allPrepaidByOneProject = new ArrayList<>();
+        query = new QueryGeneratorPrepaid();
+
     }
 
     @Override
     public Prepaid findPrepaidByOneGuest(int idGuest, int idProject) {
 
-        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindPrepaidByOneGuest(idGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -46,10 +46,13 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             aPrepaid.setIdProject(idProject);
 
             result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return aPrepaid;
@@ -57,9 +60,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
     public ArrayList findAllPrepaidByOneProject(int idProject) {
 
-        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
-        try {
-            statement = DbConnection.getConnection().createStatement();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
+
             String queryCommand = query.queryFindAllPrepaidByOneProject(idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 
@@ -67,78 +69,84 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
-                allDataList.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+
+                allPrepaidByOneProject.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+
             }
 
-            statement.close();
+            //statement.close();
             result.close();
-            DbConnection.closeConnection();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
-        return allDataList;
+        return allPrepaidByOneProject;
     }
 
     @Override
     public void insertPrepaidForOneGuest(int idGuest, int idProject, double prepaid) {
 
-        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            //statement.close();
+            //DbConnection.closeConnection();
 
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override
     public void updatePrepaidForOneGuest(int idGuest, int idProject, double newPrepaid) {
 
-        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void deletePrepaidForOneGuest(int idGuest, int idProject) {
 
-        QueryGeneratorPrepaid query = new QueryGeneratorPrepaid();
+        try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-        try {
-            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryDeletePrepaidForOneGuest(idGuest, idProject);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            //statement.close();
+            //DbConnection.closeConnection();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
     }
-
 }

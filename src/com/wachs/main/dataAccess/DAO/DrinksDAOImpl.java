@@ -45,8 +45,8 @@ public class DrinksDAOImpl implements DrinksDAO {
             aDrink.setIdProject(idProject);
 
             result.close();
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -73,9 +73,9 @@ public class DrinksDAOImpl implements DrinksDAO {
 
             }
 
-            //statement.close();
-            //result.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            result.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -96,8 +96,8 @@ public class DrinksDAOImpl implements DrinksDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -116,8 +116,8 @@ public class DrinksDAOImpl implements DrinksDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -136,8 +136,8 @@ public class DrinksDAOImpl implements DrinksDAO {
             //Log the query
             ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

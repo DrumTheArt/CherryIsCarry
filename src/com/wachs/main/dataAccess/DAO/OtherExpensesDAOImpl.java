@@ -43,9 +43,9 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -73,9 +73,9 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -97,8 +97,8 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -118,8 +118,8 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -139,8 +139,8 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
         } catch (SQLException e) {
 
             e.printStackTrace();

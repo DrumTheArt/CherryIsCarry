@@ -56,8 +56,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             aProject.setProjectDeposite(reaL_deposite);
 
             result.close();
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -87,8 +87,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             }
 
             result.close();
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -113,8 +113,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -137,8 +137,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -165,8 +165,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

@@ -43,9 +43,9 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -74,9 +74,9 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -98,8 +98,8 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -119,8 +119,8 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -140,8 +140,8 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

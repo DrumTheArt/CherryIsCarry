@@ -45,9 +45,9 @@ public class StayDAOImpl implements StayDAO {
             aStay.setIdGuest(idGuest);
             aStay.setIdProject(idProject);
 
-            //result.close();
+            result.close();
             statement.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -75,9 +75,9 @@ public class StayDAOImpl implements StayDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -100,8 +100,8 @@ public class StayDAOImpl implements StayDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -121,8 +121,8 @@ public class StayDAOImpl implements StayDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -142,8 +142,8 @@ public class StayDAOImpl implements StayDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

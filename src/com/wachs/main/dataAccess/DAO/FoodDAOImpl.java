@@ -46,8 +46,8 @@ public class FoodDAOImpl implements FoodDAO {
             aFood.setIdProject(idProject);
 
             result.close();
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -75,9 +75,9 @@ public class FoodDAOImpl implements FoodDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -99,8 +99,8 @@ public class FoodDAOImpl implements FoodDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -120,8 +120,8 @@ public class FoodDAOImpl implements FoodDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -141,8 +141,8 @@ public class FoodDAOImpl implements FoodDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

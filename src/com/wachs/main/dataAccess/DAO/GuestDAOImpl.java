@@ -54,7 +54,7 @@ public class GuestDAOImpl implements GuestDAO {
             aGuest.setGuestName(guestName);
 
             //statement.close();
-            result.close();
+            //result.close();
             //DbConnection.closeConnection();
         } catch (SQLException e) {
 
@@ -82,9 +82,9 @@ public class GuestDAOImpl implements GuestDAO {
 
             }
 
-            //statement.close();
+            statement.close();
             result.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -111,7 +111,7 @@ public class GuestDAOImpl implements GuestDAO {
             ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
-            //DbConnection.closeConnection();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -134,8 +134,9 @@ public class GuestDAOImpl implements GuestDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -158,8 +159,8 @@ public class GuestDAOImpl implements GuestDAO {
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            //statement.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 

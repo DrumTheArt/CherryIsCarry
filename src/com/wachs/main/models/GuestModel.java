@@ -79,6 +79,10 @@ public class GuestModel {
 
     public double getSleepOverEUR() {
 
+        if (this.getAllSleepOverOneProject() == 0) {
+
+            return 0;
+        }
         return (this.getRent() * (this.getSleepOver() / (this.getAllSleepOverOneProject())));
     }
 
@@ -89,6 +93,10 @@ public class GuestModel {
 
     public double getDrinksEUR() {
 
+        if (this.getAllDrinksOneProject() == 0) {
+
+            return 0;
+        }
         return (this.getAllDrinksExpensesOneProject() * (this.getDrinksCount() / this.getAllDrinksOneProject()));
     }
 
@@ -99,6 +107,10 @@ public class GuestModel {
 
     public double getFoodEUR() {
 
+        if (this.getAllFoodOneProject() == 0) {
+
+            return 0;
+        }
         return ((this. getAllFoodExpensesOneProject() * this.getFoodCount() / this.getAllFoodOneProject()));
     }
 

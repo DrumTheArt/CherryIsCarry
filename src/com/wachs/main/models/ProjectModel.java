@@ -17,7 +17,7 @@ public class ProjectModel {
     private Project createModel(String projectName) {
 
         newDAO = new ProjectDAOImpl();
-        searchedProject = newDAO.fineOneProject(projectName);
+        searchedProject = newDAO.findOneProject(projectName);
 
         return searchedProject;
     }

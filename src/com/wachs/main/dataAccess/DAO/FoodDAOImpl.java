@@ -17,6 +17,8 @@ public class FoodDAOImpl implements FoodDAO {
     private ArrayList<Food> allFoodByOneProject;
     private Food aFood;
     private QueryGeneratorFood query;
+    private Statement statement;
+    private ResultSet result;
 
     public FoodDAOImpl() {
 
@@ -29,10 +31,11 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public Food findFoodByOneGuest(int IdGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindFoodByOneGuest(IdGuest, idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -44,6 +47,14 @@ public class FoodDAOImpl implements FoodDAO {
             aFood.setNights(nights);
             aFood.setIdGuest(IdGuest);
             aFood.setIdProject(idProject);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             result.close();
             statement.close();
@@ -61,10 +72,11 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public ArrayList findAllFoodByOneProject(int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindAllFoodByOneProject(idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -74,6 +86,14 @@ public class FoodDAOImpl implements FoodDAO {
                 allFoodByOneProject.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
 
             }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             result.close();
@@ -112,13 +132,22 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public void deleteFoodForOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryDeleteFoodForOneGuest(idGuest, idProject);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();
@@ -133,13 +162,22 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public void insertFoodForOneGuest(int idGuest, int idProject, int nights) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryInsertFoodForOneGuest(idGuest, idProject, nights);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();

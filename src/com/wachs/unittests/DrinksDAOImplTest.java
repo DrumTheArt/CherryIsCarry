@@ -36,7 +36,7 @@ public class DrinksDAOImplTest {
 
         ProjectDAOImpl newDAOProject = new ProjectDAOImpl();
         newDAOProject.insertProject(newProjectName, expectedPrice, expectedDeposite);
-        int idProject = newDAOProject.fineOneProject(newProjectName).getPK_id();
+        int idProject = newDAOProject.findOneProject(newProjectName).getPK_id();
 
         GuestDAOImpl newDAOGuest = new GuestDAOImpl();
         newDAOGuest.insertGuestForOneProject(idProject, newGuestName);

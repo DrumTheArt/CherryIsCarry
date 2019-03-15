@@ -19,6 +19,8 @@ public class ProjectDAOImpl implements ProjectDAO {
     private Project aProject;
     private ConverterStringForDataBase convertString;
     private QueryGeneratorProject query;
+    private Statement statement;
+    private ResultSet result;
 
     public ProjectDAOImpl() {
 
@@ -30,19 +32,17 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public Project fineOneProject(String name) {
+    public Project findOneProject(String name) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
         String queryCommand = query.queryFindOneProject(name);
 
+
         try {
 
-            Statement statement = DbConnection.getConnection().createStatement();
-
-            ResultSet result = statement.executeQuery(queryCommand);
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Get db-attributes
             int pk_id = result.getInt(1);
@@ -56,10 +56,17 @@ public class ProjectDAOImpl implements ProjectDAO {
             aProject.setProjectPrice(real_price);
             aProject.setProjectDeposite(reaL_deposite);
 
-            result.isClosed();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
+
             result.close();
-            result.isClosed();
             statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -74,7 +81,11 @@ public class ProjectDAOImpl implements ProjectDAO {
     public ArrayList findAllProjects() {
 
         String queryCommand = query.queryFindAllProjects();
-        try (Statement statement = DbConnection.getConnection().createStatement(); ResultSet result = statement.executeQuery(queryCommand)) {
+
+        try {
+
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -84,6 +95,18 @@ public class ProjectDAOImpl implements ProjectDAO {
                 allProjects.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
 
             }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
+
+            result.close();
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -101,12 +124,23 @@ public class ProjectDAOImpl implements ProjectDAO {
         projectName = convertString.convertString(projectName);
         String queryCommand = query.queryInsertOneProject(projectName, projectPrice, projectDeposite);
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+        try {
+
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -122,12 +156,24 @@ public class ProjectDAOImpl implements ProjectDAO {
         newProjectName = convertString.convertString(newProjectName);
         String queryCommand = query.queryUpdateOneProject(oldId, newProjectName, projectPrice, projectDeposite);
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
+
+            statement.close();
+            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -140,15 +186,13 @@ public class ProjectDAOImpl implements ProjectDAO {
     public void deleteProject(String projectName) {
 
         //Because every names starts with a Capital, Rest lowerCases
-        int countLettersName = projectName.length();
-        String firstLetter = projectName.substring(0,1).toUpperCase();
-        String lastLetters = projectName.substring(1,countLettersName).toLowerCase();
+        projectName = convertString.convertString(projectName);
 
-        projectName = firstLetter + lastLetters;
         String queryCommand = query.queryDeleteOneProject(projectName);
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -159,12 +203,16 @@ public class ProjectDAOImpl implements ProjectDAO {
             e.printStackTrace();
 
         }
-    }
 
-    public static void main(String[] args) {
-        Project pro = new Project();
-        ProjectDAOImpl a = new ProjectDAOImpl();
-        pro = a.fineOneProject("The project 2019");
+        try {
 
+            statement.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
     }
 }

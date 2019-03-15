@@ -17,6 +17,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     private ArrayList<FoodExpense> allFoodExpensesAllGuests;
     private ArrayList<FoodExpense> allFoodExpensesSearchedGuests;
     private QueryGeneratorFoodExpenses query;
+    private Statement statement;
+    private ResultSet result;
 
     public FoodExpensesDAOImpl() {
 
@@ -29,10 +31,11 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public ArrayList findFoodExpensesByOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindFoodExpensesByOneGuest(idGuest, idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -42,6 +45,14 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
                 allFoodExpensesSearchedGuests.add(new FoodExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
 
             }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             result.close();
@@ -59,10 +70,11 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public ArrayList findAllFoodExpensesByOneProject(int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindAllFoodExpensesByOneProject(idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -72,6 +84,14 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
                 allFoodExpensesAllGuests.add(new FoodExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
 
             }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             result.close();
@@ -89,13 +109,22 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryDeleteFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();
@@ -110,13 +139,22 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public void updateFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when, double newSpend, String newReason, String newWhen) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryUpdateFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when, newSpend, newReason, newWhen);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();
@@ -131,13 +169,22 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     @Override
     public void insertFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryInsertFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();

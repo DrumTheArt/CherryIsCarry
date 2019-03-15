@@ -25,7 +25,7 @@ public class AllGuestsModel {
 
     private void createModel(String nameProject){
 
-        selectedProject = new ProjectDAOImpl().fineOneProject(nameProject);
+        selectedProject = new ProjectDAOImpl().findOneProject(nameProject);
         selectedProjectID = selectedProject.getPK_id();
 
         allDrinksToProject = new DrinksExpensesDAOImpl().findAllDrinksExpensesByOneProject(selectedProjectID);

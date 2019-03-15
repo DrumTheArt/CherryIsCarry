@@ -1137,3 +1137,107 @@ INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_gues
 [2019-03-15 15:08:13] [INFORMATION] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The project 2019' 
 [2019-03-15 15:08:28] [INFORMATION] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The project 2019' 
 [2019-03-15 15:09:22] [INFORMATION] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The project 2019' 
+[2019-03-15 15:57:49] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The project 2019' 
+[2019-03-15 16:06:09] [INFO   ] SELECT PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite from TBL_PROJECT WHERE TXT_title = 'The project 2019' 
+[2019-03-15 17:35:42] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Kim' AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 0 AND ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 0 
+[2019-03-15 17:35:42] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 0 
+[2019-03-15 17:35:43] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:36:14] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Kim' AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:36:14] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 1 
+[2019-03-15 17:36:15] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:41:00] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:41:20] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:42:00] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:42:24] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:42:43] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:42:59] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 17:48:49] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Kim' AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 1 
+[2019-03-15 17:48:49] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 18:20:24] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Kim' AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 0 AND ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:20:24] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 1 
+[2019-03-15 18:20:25] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 18:22:04] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robert' AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:22:04] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 1 
+[2019-03-15 18:22:05] [INFO   ] SELECT * FROM TBL_PROJECT 
+[2019-03-15 18:24:13] [INFO   ] SELECT PK_id, ID_project, TXT_guestName from TBL_GUEST WHERE TXT_guestName = 'Robert' AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_GUEST WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_STAY WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, REAL_prepaid, ID_guest, ID_project from TBL_PREPAID WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_STAY WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 1 AND ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_FOOD where ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1 
+[2019-03-15 18:24:13] [INFO   ] SELECT * FROM TBL_PREPAID WHERE ID_project = 1 
+[2019-03-15 18:24:14] [INFO   ] SELECT * FROM TBL_PROJECT 

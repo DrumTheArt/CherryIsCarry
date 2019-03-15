@@ -2,11 +2,12 @@ package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.businessObjects.Project;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProjectDAO {
 
-    Project fineOneProject(String name);
+    Project findOneProject(String name);
 
     ArrayList findAllProjects();
 

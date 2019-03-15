@@ -17,6 +17,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     private ArrayList<Prepaid> allPrepaidByOneProject;
     private Prepaid aPrepaid;
     private QueryGeneratorPrepaid query;
+    private Statement statement;
+    private ResultSet result;
 
     public PrepaidDAOImpl() {
 
@@ -29,10 +31,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     @Override
     public Prepaid findPrepaidByOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindPrepaidByOneGuest(idGuest, idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -44,6 +47,14 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             aPrepaid.setPrepaid(prepaid);
             aPrepaid.setIdGuest(idGuest);
             aPrepaid.setIdProject(idProject);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             result.close();
             statement.close();
@@ -60,10 +71,11 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
     public ArrayList findAllPrepaidByOneProject(int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindAllPrepaidByOneProject(idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -73,6 +85,14 @@ public class PrepaidDAOImpl implements PrepaidDAO {
                 allPrepaidByOneProject.add(new Prepaid(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
 
             }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             result.close();
@@ -90,13 +110,22 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     @Override
     public void insertPrepaidForOneGuest(int idGuest, int idProject, double prepaid) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();
@@ -111,13 +140,22 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     @Override
     public void updatePrepaidForOneGuest(int idGuest, int idProject, double newPrepaid) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();
@@ -132,13 +170,22 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     @Override
     public void deletePrepaidForOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryDeletePrepaidForOneGuest(idGuest, idProject);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
 
             statement.close();
             DbConnection.closeConnection();

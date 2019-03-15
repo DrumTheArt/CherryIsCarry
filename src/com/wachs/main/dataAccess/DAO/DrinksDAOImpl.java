@@ -28,8 +28,9 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     public Drinks findDrinksByOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
+            Statement statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindDrinksByOneGuest(idGuest, idProject);
             ResultSet result = statement.executeQuery(queryCommand);
 

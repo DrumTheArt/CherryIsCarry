@@ -41,7 +41,7 @@ public class GuestModel {
     private void createModel(String projectName, String guestName) {
 
         projectDAO = new ProjectDAOImpl();
-        searchedProject = projectDAO.fineOneProject(projectName);
+        searchedProject = projectDAO.findOneProject(projectName);
         idProject = searchedProject.getPK_id();
 
         guestDAO = new GuestDAOImpl();

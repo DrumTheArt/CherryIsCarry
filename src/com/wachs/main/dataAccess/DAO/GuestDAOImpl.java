@@ -53,9 +53,9 @@ public class GuestDAOImpl implements GuestDAO {
             aGuest.setIdProject(idProject);
             aGuest.setGuestName(guestName);
 
-            //statement.close();
-            //result.close();
-            //DbConnection.closeConnection();
+            statement.close();
+            result.close();
+            DbConnection.closeConnection();
         } catch (SQLException e) {
 
             e.printStackTrace();

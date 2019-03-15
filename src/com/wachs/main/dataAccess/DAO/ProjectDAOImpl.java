@@ -34,12 +34,13 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
+        String queryCommand = query.queryFindOneProject(name);
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
-            String queryCommand = query.queryFindOneProject(name);
+            Statement statement = DbConnection.getConnection().createStatement();
+
             ResultSet result = statement.executeQuery(queryCommand);
-
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
@@ -55,9 +56,10 @@ public class ProjectDAOImpl implements ProjectDAO {
             aProject.setProjectPrice(real_price);
             aProject.setProjectDeposite(reaL_deposite);
 
+            result.isClosed();
             result.close();
+            result.isClosed();
             statement.close();
-            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -68,14 +70,11 @@ public class ProjectDAOImpl implements ProjectDAO {
         return aProject;
     }
 
-    //throws SQLException, ClassNotFoundException, IOException
     @Override
     public ArrayList findAllProjects() {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
-
-            String queryCommand = query.queryFindAllProjects();
-            ResultSet result = statement.executeQuery(queryCommand);
+        String queryCommand = query.queryFindAllProjects();
+        try (Statement statement = DbConnection.getConnection().createStatement(); ResultSet result = statement.executeQuery(queryCommand)) {
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -85,10 +84,6 @@ public class ProjectDAOImpl implements ProjectDAO {
                 allProjects.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
 
             }
-
-            result.close();
-            statement.close();
-            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -104,17 +99,14 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         projectName = convertString.convertString(projectName);
+        String queryCommand = query.queryInsertOneProject(projectName, projectPrice, projectDeposite);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryInsertOneProject(projectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
-
-            statement.close();
-            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -128,17 +120,14 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         newProjectName = convertString.convertString(newProjectName);
+        String queryCommand = query.queryUpdateOneProject(oldId, newProjectName, projectPrice, projectDeposite);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryUpdateOneProject(oldId, newProjectName, projectPrice, projectDeposite);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
-
-            statement.close();
-            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -156,22 +145,26 @@ public class ProjectDAOImpl implements ProjectDAO {
         String lastLetters = projectName.substring(1,countLettersName).toLowerCase();
 
         projectName = firstLetter + lastLetters;
+        String queryCommand = query.queryDeleteOneProject(projectName);
 
         try (Statement statement = DbConnection.getConnection().createStatement()) {
 
-            String queryCommand = query.queryDeleteOneProject(projectName);
             statement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
-
-            statement.close();
-            DbConnection.closeConnection();
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+    }
+
+    public static void main(String[] args) {
+        Project pro = new Project();
+        ProjectDAOImpl a = new ProjectDAOImpl();
+        pro = a.fineOneProject("The project 2019");
+
     }
 }

@@ -31,9 +31,10 @@ public class StayDAOImpl implements StayDAO {
     @Override
     public Stay findStayByOneGuest(int idGuest, int idProject) {
 
+        String queryCommand = query.queryFindStayByOneGuest(idGuest, idProject);
+
         try {
 
-            String queryCommand = query.queryFindStayByOneGuest(idGuest, idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 

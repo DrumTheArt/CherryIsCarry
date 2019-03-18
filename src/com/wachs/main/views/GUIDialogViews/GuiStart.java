@@ -16,10 +16,9 @@ public class GuiStart extends Application {
     public void start(Stage primaryStage) {
 
 
+        GuestModel modelOneGuest = new GuestModel("Frankreich", "Kim");
 
-        GuestModel modelOneGuest = new GuestModel("The project 2019", "Robert");
-
-        AllGuestsModel modelAllGuest = new AllGuestsModel("The project 2019");
+        AllGuestsModel modelAllGuest = new AllGuestsModel("Frankreich");
         DialogMainGuiView view = new DialogMainGuiView();
 
         ControllerMainGUI b = new ControllerMainGUI(view, modelOneGuest, modelAllGuest);

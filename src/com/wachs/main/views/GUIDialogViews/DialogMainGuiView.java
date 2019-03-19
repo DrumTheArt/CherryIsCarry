@@ -172,8 +172,8 @@ public class DialogMainGuiView {
         lb_GuestNightsEUR = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_NIGHTS_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestDrinks = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_DRINKS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestDrinksEUR = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_DRINKS_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestFood = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOOD_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
-        lb_GuestFoodEUR = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestFood = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOOD, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_GuestFoodEUR = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_FOOD_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestTotalCosts = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_TOTAL_COSTS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestAlreadyPaid = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_ALREADY_PAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_GuestStillToPay = new CreateGUILabel().createLabel(GUINamingProperties.LB_GUEST_STILL_TO_PAY, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);

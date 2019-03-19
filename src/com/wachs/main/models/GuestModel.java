@@ -16,6 +16,7 @@ public class GuestModel {
     private DrinksDAO drinksDAO;
     private DrinksExpensesDAO drinksExpensesDAO;
     private FoodExpensesDAO foodExpensesDAO;
+    private OtherExpensesDAO otherExpensesDAO;
     private Guest searchedGuest;
     private StayModel staySearchedGuest;
     private DrinksModel drinksSearchedGuest;
@@ -32,6 +33,8 @@ public class GuestModel {
     private ArrayList<FoodExpense> foodExpensesSelectedProjectOneGuest;
     private ArrayList<FoodExpense> foodExpensesSelectedProject;
     private ArrayList<Food> foodSelectedProject;
+    private ArrayList<OtherExpense> otherExpensesSearchedGuest;
+    private ArrayList<OtherExpense> allOtherExpensesSelectedProject;
 
     public GuestModel(String projectName, String guestName) {
 
@@ -53,6 +56,7 @@ public class GuestModel {
         drinksExpensesDAO = new DrinksExpensesDAOImpl();
         foodExpensesDAO = new FoodExpensesDAOImpl();
         foodDAO = new FoodDAOImpl();
+        otherExpensesDAO = new OtherExpensesDAOImpl();
 
         //get numbers of Guests
         countGuestSelectedProject = guestDAO.findAllGuestsByOneProject(idProject).size();
@@ -66,6 +70,8 @@ public class GuestModel {
         drinksSelectedProject = drinksDAO.findAllDrinksByOneProject(idProject);
         drinksExpensesSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
         foodExpensesSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
+        otherExpensesSearchedGuest = otherExpensesDAO.findOtherExpensesByOneGuest(idGuest, idProject);
+        allOtherExpensesSelectedProject = otherExpensesDAO.findAllOtherExpensesByOneProject(idProject);
 
         drinksExpensesSelectedProjectOneGuest = drinksExpensesDAO.findDrinksExpensesByOneGuest(idGuest, idProject);
         foodExpensesSelectedProjectOneGuest = foodExpensesDAO.findFoodExpensesByOneGuest(idGuest, idProject);
@@ -116,12 +122,12 @@ public class GuestModel {
 
     public double getTotalCost() {
 
-        return (this.getRent() + this.getFoodEUR() + this.getDrinksEUR());
+        return (this.getRent() + this.getFoodEUR() + this.getDrinksEUR() + this.getAllOtherExpensesOneProjectHaveToPayBySearchedGuest());
     }
 
     public double getAlreadyPaid() {
 
-        return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesOneProjectOneGuest() + this.getAllDrinksExpensesOneProjectOneGuest());
+        return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesOneProjectOneGuest() + this.getAllDrinksExpensesOneProjectOneGuest() + this.getAllOtherExpensesOneProjectPayedByOneGuest());
     }
 
     public double getStillToPay() {
@@ -220,5 +226,31 @@ public class GuestModel {
 
         return allDrinksExpenses;
 
+    }
+
+    private double getAllOtherExpensesOneProjectPayedByOneGuest() {
+
+        double sum = 0;
+
+        for (OtherExpense othExp : otherExpensesSearchedGuest) {
+
+            sum += othExp.getREAL_price();
+        }
+
+        return sum;
+    }
+
+    private double getAllOtherExpensesOneProjectHaveToPayBySearchedGuest() {
+
+        double sum = 0;
+
+        for (OtherExpense othExp : allOtherExpensesSelectedProject) {
+
+            sum += othExp.getREAL_price();
+        }
+
+        double result = sum / this.getAllSleepOverOneProject() * this.getSleepOver();
+
+        return result;
     }
 }

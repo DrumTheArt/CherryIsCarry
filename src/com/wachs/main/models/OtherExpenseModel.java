@@ -3,12 +3,14 @@ package com.wachs.main.models;
 import com.wachs.main.businessObjects.OtherExpense;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
+
 import java.util.ArrayList;
 
 public class OtherExpenseModel {
 
     private OtherExpensesDAO newDAO;
     private ArrayList<OtherExpense> otherExpensesSearchedGuest;
+    private ArrayList<OtherExpense> otherExpensesSearchedProject;
     private int idGuest;
     private int idProject;
 
@@ -22,6 +24,7 @@ public class OtherExpenseModel {
 
         newDAO = new OtherExpensesDAOImpl();
         otherExpensesSearchedGuest = newDAO.findOtherExpensesByOneGuest(idGuest, idProject);
+        otherExpensesSearchedProject = newDAO.findAllOtherExpensesByOneProject(idProject);
 
         if (otherExpensesSearchedGuest != null) {
 
@@ -31,7 +34,19 @@ public class OtherExpenseModel {
         }
     }
 
-    public double getSumOtherExpenses() {
+    public double getSumOtherExpensesByOneProject() {
+
+        double sum = 0;
+
+        for (OtherExpense othExp : otherExpensesSearchedProject) {
+
+            sum += othExp.getREAL_price();
+        }
+
+        return sum;
+    }
+
+    public double getSumOtherExpensesSearchedGuest() {
 
         double sum = 0;
 
@@ -43,7 +58,7 @@ public class OtherExpenseModel {
         return sum;
     }
 
-    public ArrayList<OtherExpense> getOtherExpensesSearchedGuest() {
+    public ArrayList<OtherExpense> getOtherExpensesSearchedGuestAsList() {
 
         return otherExpensesSearchedGuest;
 

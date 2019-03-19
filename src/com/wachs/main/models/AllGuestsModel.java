@@ -1,13 +1,8 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.DrinksExpense;
-import com.wachs.main.businessObjects.FoodExpense;
-import com.wachs.main.businessObjects.Prepaid;
-import com.wachs.main.businessObjects.Project;
-import com.wachs.main.dataAccess.DAO.DrinksExpensesDAOImpl;
-import com.wachs.main.dataAccess.DAO.FoodExpensesDAOImpl;
-import com.wachs.main.dataAccess.DAO.PrepaidDAOImpl;
-import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
+import com.wachs.main.businessObjects.*;
+import com.wachs.main.dataAccess.DAO.*;
+
 import java.util.ArrayList;
 
 public class AllGuestsModel {
@@ -17,6 +12,7 @@ public class AllGuestsModel {
     private ArrayList<DrinksExpense> allDrinksToProject;
     private ArrayList<FoodExpense> allFoodToProject;
     private ArrayList<Prepaid> allPrepaidToProject;
+    private ArrayList<OtherExpense> allOtherExpensesToProject;
 
     public AllGuestsModel(String nameProject) {
 
@@ -31,9 +27,21 @@ public class AllGuestsModel {
         allDrinksToProject = new DrinksExpensesDAOImpl().findAllDrinksExpensesByOneProject(selectedProjectID);
         allFoodToProject = new FoodExpensesDAOImpl().findAllFoodExpensesByOneProject(selectedProjectID);
         allPrepaidToProject = new PrepaidDAOImpl().findAllPrepaidByOneProject(selectedProjectID);
+        allOtherExpensesToProject = new OtherExpensesDAOImpl().findAllOtherExpensesByOneProject(selectedProjectID);
 
     }
 
+    public double getAllOtherExpenses() {
+
+        double sum = 0;
+
+        for (OtherExpense e : allOtherExpensesToProject) {
+
+            sum += e.getREAL_price();
+        }
+
+        return sum;
+    }
     public double getRentProject() {
 
         return selectedProject.getProjectPrice();
@@ -82,7 +90,7 @@ public class AllGuestsModel {
 
     public double getTotalCostsAll(){
 
-        return (this.getFoodAllGuests() + this.getRentProject() + this.getDrinksAllGuests());
+        return (this.getFoodAllGuests() + this.getRentProject() + this.getDrinksAllGuests() + this.getAllOtherExpenses());
     }
 
     public double getOutstandingPayments(){

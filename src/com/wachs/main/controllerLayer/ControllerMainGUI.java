@@ -34,6 +34,7 @@ public class ControllerMainGUI {
         view.setTf_AllFoodEUR(modelAllGuest.getFoodAllGuests());
         view.setTf_AllAlreadyPaid(modelAllGuest.getAllPrepaid());
         view.setTf_Deposite(modelAllGuest.getDepositeProject());
+        view.setTf_AllOtherExpenses(modelAllGuest.getAllOtherExpenses());
     }
 
     private void bindingOneGuest() {

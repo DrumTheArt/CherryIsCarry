@@ -32,6 +32,7 @@ public class GUINamingProperties {
     public static String LB_ALL_TOTAL_COSTS = "Total Costs All";
     public static String LB_ALL_OUTSTANDING_PAYMENT = "Outstanding Payments";
     public static String  LB_ALL_ALREADYPAID = "Already paid";
+    public static String LB_ALL_OTHEREXPENSES = "Other Expenses";
 
     //Labels for Expenses
     public static String LB_GUEST_OTHEREXPENSES_PRICE = "Other OtherExpense";
@@ -75,6 +76,7 @@ public class GUINamingProperties {
     public static String TT_TF_ALL_OUTSTANDING_SUM = "Outstanding sum";
     public static String TT_TF_ALL_ALLREADYPAID_SUM = "Already paid";
     public static String TT_TF_ALL_DEPOSITE_EUR = "Deposite amount";
+    public static String TT_TF_ALL_OTHEREXPENSES_EUR = "Other Expenses";
 
     //ToolTips for Expenses
     public static String TT_TF_GUEST_EXPENSE_PRICE = "Amount of the expense";

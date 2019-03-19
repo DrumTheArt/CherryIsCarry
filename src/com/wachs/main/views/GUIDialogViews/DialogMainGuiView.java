@@ -52,9 +52,10 @@ public class DialogMainGuiView {
 
     //AllTextFields
     private TextField tf_AllRentPrice;
+    private TextField tf_Deposite;
     private TextField tf_AllDrinks;
     private TextField tf_AllFood;
-    private TextField tf_Deposite;
+    private TextField tf_otherExpenses;
     private TextField tf_AllTotalCosts;
     private TextField tf_AllOutstandingPayment;
     private TextField tf_AllAllreadyPaid;
@@ -75,6 +76,7 @@ public class DialogMainGuiView {
     private Label lb_Deposite;
     private Label lb_AllDrinks;
     private Label lb_AllFood;
+    private Label lb_otherExpenses;
     private Label lb_AllTotalCosts;
     private Label lb_AllOutstandingPayment;
     private Label lb_AllAlreadyPaid;
@@ -208,11 +210,12 @@ public class DialogMainGuiView {
         lb_Deposite = new CreateGUILabel().createLabel(GUINamingProperties.LB_PROJECTS_DEPOSITE, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllDrinks = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_DRINKS_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllFood = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_FOOD_EUR, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
+        lb_otherExpenses = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_OTHEREXPENSES, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllTotalCosts = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_TOTAL_COSTS, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllOutstandingPayment = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_OUTSTANDING_PAYMENT, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
         lb_AllAlreadyPaid = new CreateGUILabel().createLabel(GUINamingProperties.LB_ALL_ALREADYPAID, GUIProperties.SIZE_GUI_ELEMENTS, GUIProperties.FONT_BOLD);
 
-        HBox_LabelFieldsAll.getChildren().addAll(lb_AllRentPrice, lb_Deposite, lb_AllDrinks, lb_AllFood, lb_AllTotalCosts, lb_AllAlreadyPaid, lb_AllOutstandingPayment);
+        HBox_LabelFieldsAll.getChildren().addAll(lb_AllRentPrice, lb_Deposite, lb_AllDrinks, lb_AllFood, lb_otherExpenses, lb_AllTotalCosts, lb_AllAlreadyPaid, lb_AllOutstandingPayment);
 
         HBox_TextFieldsAll = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
@@ -220,11 +223,12 @@ public class DialogMainGuiView {
         tf_AllDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_DRINKS_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_FOOD_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_Deposite = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_DEPOSITE_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
+        tf_otherExpenses = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_OTHEREXPENSES_EUR, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllTotalCosts = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_TOTAL_COSTS, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllOutstandingPayment = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_OUTSTANDING_SUM, GUIProperties.TEXTFIELD_DESIGN, false);
         tf_AllAllreadyPaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_ALL_ALLREADYPAID_SUM, GUIProperties.TEXTFIELD_DESIGN, false);
 
-        HBox_TextFieldsAll.getChildren().addAll(tf_AllRentPrice, tf_Deposite, tf_AllDrinks, tf_AllFood, tf_AllTotalCosts, tf_AllAllreadyPaid, tf_AllOutstandingPayment);
+        HBox_TextFieldsAll.getChildren().addAll(tf_AllRentPrice, tf_Deposite, tf_AllDrinks, tf_AllFood, tf_otherExpenses, tf_AllTotalCosts, tf_AllAllreadyPaid, tf_AllOutstandingPayment);
 
         GridPane.setConstraints(HBox_LabelFieldsAll, 1, 1);
         GridPane.setConstraints(HBox_TextFieldsAll, 1, 2);
@@ -237,7 +241,6 @@ public class DialogMainGuiView {
         primaryStage.setScene(scene);
 
         primaryStage.show();
-
 
     }
 
@@ -305,4 +308,8 @@ public class DialogMainGuiView {
         this.tf_AllAllreadyPaid.setText(String.valueOf(amount));
     }
 
+    public void setTf_AllOtherExpenses(double amount) {
+        this.tf_otherExpenses.setText(String.valueOf(amount));
+
+    }
 }

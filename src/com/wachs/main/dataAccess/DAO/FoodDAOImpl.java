@@ -111,9 +111,10 @@ public class FoodDAOImpl implements FoodDAO {
     @Override
     public void updateFoodForOneGuest(int idGuest, int idProject, int newNights) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query

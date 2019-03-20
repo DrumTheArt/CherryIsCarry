@@ -17,6 +17,8 @@ public class DrinksDAOImpl implements DrinksDAO {
     private ArrayList<Drinks> allDrinksByOneProject;
     private Drinks aDrink;
     private QueryGeneratorDrinks query;
+    private Statement statement;
+    private ResultSet result;
 
     public DrinksDAOImpl() {
 
@@ -30,9 +32,9 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         try {
 
-            Statement statement = DbConnection.getConnection().createStatement();
+            statement = DbConnection.getConnection().createStatement();
             String queryCommand = query.queryFindDrinksByOneGuest(idGuest, idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -60,10 +62,11 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     public ArrayList findAllDrinksByOneProject(int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryFindAllDrinksByOneProject(idProject);
-            ResultSet result = statement.executeQuery(queryCommand);
+            statement = DbConnection.getConnection().createStatement();
+            result = statement.executeQuery(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -89,9 +92,10 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     public void updateDrinksForOneGuest(int idGuest, int idProject, int newNights) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -109,9 +113,10 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     public void deleteDrinksForOneGuest(int idGuest, int idProject) {
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+        try {
 
             String queryCommand = query.queryDeleteDrinksForOneGuest(idGuest, idProject);
+            statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query

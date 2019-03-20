@@ -39,7 +39,7 @@ public class QueryGeneratorDrinks {
 
     public String queryFindAllDrinksByOneProject(int idProject) {
 
-        String query = "SELECT * FROM " + TABLENAME + " where = " + COLUMN4 + " = " + idProject;
+        String query = "SELECT * FROM " + TABLENAME + " where " + COLUMN4 + " = " + idProject;
 
         return query;
     }

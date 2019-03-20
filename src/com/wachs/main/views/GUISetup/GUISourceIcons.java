@@ -9,5 +9,7 @@ public class GUISourceIcons {
     public static String sourceAddGuest2 = "com/wachs/main/views/GUIIcons/addGuest2.png";
     public static String sourceAddGuest = "com/wachs/main/views/GUIIcons/addGuest.png";
     public static String sourceEditGuest = "com/wachs/main/views/GUIIcons/editGuest.png";
+    public static String sourceAppIcon = "com/wachs/main/views/GUIIcons/wachsRot.png";
+    public static String sourceAboutItPicture = "com/wachs/main/views/GUIIcons/aboutIt.jpg";
 
 }

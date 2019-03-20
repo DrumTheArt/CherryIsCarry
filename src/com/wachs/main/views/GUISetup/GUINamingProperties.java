@@ -92,5 +92,12 @@ public class GUINamingProperties {
     public static String TT_TF_PROJECTS_PRICE = "Price for the house without deposite";
     public static String TT_TF_PROJECTS_DEPOSITE = "Deposite for the house";
 
+    //MenuBar
+    public static String MB_FIRSTMENU = "File";
+
+    //MenuItems
+    public static String MB_FIRSTMENU_ITEM = "Export to";
+    public static String MB_SECONDMENU_ITEM = "About this";
+    public static String MB_THIRDMENU_ITEM = "Close";
 
 }

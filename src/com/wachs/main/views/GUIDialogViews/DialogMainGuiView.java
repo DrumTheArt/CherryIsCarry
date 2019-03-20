@@ -7,12 +7,13 @@ import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -108,15 +109,45 @@ public class DialogMainGuiView {
 
     public void displayMainGui() {
 
+        CreateMenuBar settingsMenuBar = new CreateMenuBar();
+        MenuBar mb = settingsMenuBar.getMenuBar(GUINamingProperties.MB_FIRSTMENU, GUINamingProperties.MB_FIRSTMENU_ITEM, GUINamingProperties.MB_SECONDMENU_ITEM, GUINamingProperties.MB_THIRDMENU_ITEM);
+
+        EventHandler<ActionEvent> closeEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                primaryStage.close();
+            }
+        };
+
+        EventHandler<ActionEvent> aboutItEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("About this app ...");
+                alert.setHeaderText("");
+                alert.setContentText("A couple of beautiful friends from cologne are going to a surf championship in Seignosse and using this app to share the costs \n\n\nFurther questions? \nWrite an email to tassen.ab@posteo.de \n\nLicence issues?? Feel free to use this app like u want and use the code like u want");
+
+                Image image = new Image(GUISourceIcons.sourceAboutItPicture);
+                ImageView imageView = new ImageView(image);
+                alert.setGraphic(imageView);
+
+                alert.showAndWait();
+            }
+        };
+
+
+        settingsMenuBar.setEventFirstItem(closeEvent);
+        settingsMenuBar.setEventSecondItem(aboutItEvent);
+        settingsMenuBar.setEventThirdItem(closeEvent);
+
         primaryStage = new Stage();
 
+        primaryStage.getIcons().add(new Image(GUISourceIcons.sourceAppIcon));
         primaryStage.setTitle("CherryIsCarry");
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
 
         //Holding all HBoxes
-        verticalBox = new VBox();
+        verticalBox = new VBox(mb);
 
         //First Row
         HBox_Buttons = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
@@ -310,6 +341,5 @@ public class DialogMainGuiView {
 
     public void setTf_AllOtherExpenses(double amount) {
         this.tf_otherExpenses.setText(String.valueOf(amount));
-
     }
 }

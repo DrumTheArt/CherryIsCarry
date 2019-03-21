@@ -78,70 +78,70 @@ public class GuestModel {
         foodSelectedProject = foodDAO.findAllFoodByOneProject(idProject);
     }
 
-    public int getSleepOver() {
+    public int getSleepOverSelectedGuest() {
 
         return staySearchedGuest.getNights();
     }
 
-    public double getSleepOverEUR() {
+    public double getSleepOverSelectedGuestEUR() {
 
-        if (this.getAllSleepOverOneProject() == 0) {
+        if (this.getAllSleepOverSelectedProjectEUR() == 0) {
 
             return 0;
         }
-        return (this.getRent() * (this.getSleepOver() / (this.getAllSleepOverOneProject())));
+
+        return (this.getRentSelectedProjectEUR() / this.getAllSleepOverSelectedProjectEUR()) * this.getSleepOverSelectedGuest();
     }
 
-    public int getDrinksCount() {
+    public int getDrinksSelectedGuestCount() {
 
         return drinksSearchedGuest.getDrinks();
     }
 
-    public double getDrinksEUR() {
+    public double getDrinksSelectedGuestEUR() {
 
-        if (this.getAllDrinksOneProject() == 0) {
+        if (this.getAllDrinksSelectedProjectEUR() == 0) {
 
             return 0;
         }
-        return (this.getAllDrinksExpensesOneProject() * (this.getDrinksCount() / this.getAllDrinksOneProject()));
+        return ((this.getAllDrinksExpensesSelectedProjectEUR() / this.getAllDrinksSelectedProjectEUR()) * (this.getDrinksSelectedGuestCount()));
     }
 
-    public int getFoodCount() {
+    public int getFoodSelectedGuestCount() {
 
         return foodSearchedGuest.getFood();
     }
 
-    public double getFoodEUR() {
+    public double getFoodSelectedGuestEUR() {
 
-        if (this.getAllFoodOneProject() == 0) {
+        if (this.getAllFoodSelectedProjectCount() == 0) {
 
             return 0;
         }
-        return ((this. getAllFoodExpensesOneProject() * this.getFoodCount() / this.getAllFoodOneProject()));
+        return ((this.getAllFoodExpensesSelectedProjectEUR() / this.getAllFoodSelectedProjectCount() * this.getFoodSelectedGuestCount()));
     }
 
-    public double getTotalCost() {
+    public double getTotalCostSelectedGuestEUR() {
 
-        return (this.getRent() + this.getFoodEUR() + this.getDrinksEUR() + this.getAllOtherExpensesOneProjectHaveToPayBySearchedGuest());
+        return (this.getSleepOverSelectedGuestEUR() + this.getFoodSelectedGuestEUR() + this.getDrinksSelectedGuestEUR() + this.getAllOtherExpensesSelectedProjectHaveToPayBySelectedGuestEUR());
     }
 
-    public double getAlreadyPaid() {
+    public double getAlreadyPaidSelectedGuestEUR() {
 
-        return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesOneProjectOneGuest() + this.getAllDrinksExpensesOneProjectOneGuest() + this.getAllOtherExpensesOneProjectPayedByOneGuest());
+        return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesSelectedProjectSelectedGuestEUR() + this.getAllDrinksExpensesSelectedProjectSelectedGuestEUR() + this.getAllOtherExpensesSelectedProjectPayedBySelectedGuestEUR());
     }
 
-    public double getStillToPay() {
+    public double getStillToPaySelectedGuestEUR() {
 
-        return (this.getTotalCost() - this.getAlreadyPaid());
+        return (this.getTotalCostSelectedGuestEUR() - this.getAlreadyPaidSelectedGuestEUR());
     }
 
-    public double getRent() {
+    public double getRentSelectedProjectEUR() {
 
-        return (searchedProject.getProjectPrice() / countGuestSelectedProject);
-
+        return (searchedProject.getProjectPrice());
     }
 
-    private int getAllSleepOverOneProject() {
+    private int getAllSleepOverSelectedProjectEUR() {
 
         int allNightsCountSelectedProject = 0;
 
@@ -154,7 +154,7 @@ public class GuestModel {
 
     }
 
-    private int getAllDrinksOneProject() {
+    private int getAllDrinksSelectedProjectEUR() {
 
         int allDrinksCountSelectedProject = 0;
 
@@ -166,7 +166,7 @@ public class GuestModel {
         return allDrinksCountSelectedProject;
     }
 
-    private double getAllDrinksExpensesOneProject() {
+    private double getAllDrinksExpensesSelectedProjectEUR() {
 
         double allDrinksExpenses = 0;
 
@@ -179,7 +179,7 @@ public class GuestModel {
         return allDrinksExpenses;
     }
 
-    private double getAllFoodExpensesOneProject(){
+    private double getAllFoodExpensesSelectedProjectEUR() {
 
         double allFoodExpenses = 0;
 
@@ -191,7 +191,7 @@ public class GuestModel {
         return allFoodExpenses;
     }
 
-    private double getAllFoodOneProject() {
+    private double getAllFoodSelectedProjectCount() {
 
         int allFoodCountSelectedProject = 0;
 
@@ -203,7 +203,7 @@ public class GuestModel {
         return allFoodCountSelectedProject;
     }
 
-    private double getAllFoodExpensesOneProjectOneGuest(){
+    private double getAllFoodExpensesSelectedProjectSelectedGuestEUR() {
 
         double allFoodExpenses = 0;
 
@@ -215,7 +215,7 @@ public class GuestModel {
         return allFoodExpenses;
     }
 
-    private double getAllDrinksExpensesOneProjectOneGuest(){
+    private double getAllDrinksExpensesSelectedProjectSelectedGuestEUR() {
 
         double allDrinksExpenses = 0;
 
@@ -228,7 +228,7 @@ public class GuestModel {
 
     }
 
-    private double getAllOtherExpensesOneProjectPayedByOneGuest() {
+    private double getAllOtherExpensesSelectedProjectPayedBySelectedGuestEUR() {
 
         double sum = 0;
 
@@ -240,7 +240,7 @@ public class GuestModel {
         return sum;
     }
 
-    private double getAllOtherExpensesOneProjectHaveToPayBySearchedGuest() {
+    private double getAllOtherExpensesSelectedProjectHaveToPayBySelectedGuestEUR() {
 
         double sum = 0;
 
@@ -249,7 +249,7 @@ public class GuestModel {
             sum += othExp.getREAL_price();
         }
 
-        double result = sum / this.getAllSleepOverOneProject() * this.getSleepOver();
+        double result = sum / this.getAllSleepOverSelectedProjectEUR() * this.getSleepOverSelectedGuest();
 
         return result;
     }

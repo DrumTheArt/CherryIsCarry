@@ -39,15 +39,15 @@ public class ControllerMainGUI {
 
     private void bindingOneGuest() {
 
-        view.setTf_GuestNights(modelOneGuest.getSleepOver());
-        view.setTf_GuestNightsEUR(modelOneGuest.getSleepOverEUR());
-        view.setTf_GuestDrinks(modelOneGuest.getDrinksCount());
-        view.setTf_GuestDrinksEUR(modelOneGuest.getDrinksEUR());
-        view.setTf_GuestFood(modelOneGuest.getFoodCount());
-        view.setTf_GuestFoodEUR(modelOneGuest.getFoodEUR());
-        view.setTf_GuestTotalCosts(modelOneGuest.getTotalCost());
-        view.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaid());
-        view.setTf_StillToPay(modelOneGuest.getStillToPay());
+        view.setTf_GuestNights(modelOneGuest.getSleepOverSelectedGuest());
+        view.setTf_GuestNightsEUR(modelOneGuest.getSleepOverSelectedGuestEUR());
+        view.setTf_GuestDrinks(modelOneGuest.getDrinksSelectedGuestCount());
+        view.setTf_GuestDrinksEUR(modelOneGuest.getDrinksSelectedGuestEUR());
+        view.setTf_GuestFood(modelOneGuest.getFoodSelectedGuestCount());
+        view.setTf_GuestFoodEUR(modelOneGuest.getFoodSelectedGuestEUR());
+        view.setTf_GuestTotalCosts(modelOneGuest.getTotalCostSelectedGuestEUR());
+        view.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaidSelectedGuestEUR());
+        view.setTf_StillToPay(modelOneGuest.getStillToPaySelectedGuestEUR());
     }
 }
 

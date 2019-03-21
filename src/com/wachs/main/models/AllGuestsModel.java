@@ -17,6 +17,7 @@ public class AllGuestsModel {
     public AllGuestsModel(String nameProject) {
 
         createModel(nameProject);
+
     }
 
     private void createModel(String nameProject){

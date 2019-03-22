@@ -22,4 +22,28 @@ public class ProjectModel {
         return searchedProject;
     }
 
+    public double getPrice() {
+
+        return searchedProject.getProjectPrice();
+    }
+
+    public double getDeposite() {
+
+        return searchedProject.getProjectDeposite();
+    }
+
+    public String getProjectName() {
+
+        return searchedProject.getProjectName();
+    }
+
+    public int getProjectPrimaryKey() {
+
+        return searchedProject.getPK_id();
+    }
+
+    public void setNewProject(String newNameProject, double price, double deposite) {
+
+        newDAO.insertProject(newNameProject, price, deposite);
+    }
 }

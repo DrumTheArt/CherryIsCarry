@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -51,7 +52,7 @@ public class DialogAddProjectView {
         Stage dialogAddProject = new Stage();
 
         dialogAddProject.setTitle("CherryIsCarry --- Add new Vacation");
-
+        dialogAddProject.getIcons().add(new Image(GUISourceIcons.sourceAppIcon));
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
 
@@ -104,37 +105,29 @@ public class DialogAddProjectView {
 
         dialogAddProject.setScene(scene);
 
-        dialogAddProject.setOnCloseRequest(event -> {
-
-            new DialogMainGuiView().displayMainGui();
-            dialogAddProject.close();
-        });
-
-        dialogAddProject.setScene(scene);
-
         dialogAddProject.show();
 
         return dialogAddProject;
     }
 
-    public TextField getTf_ProjectNewName() {
-        return tf_ProjectNewName;
+    public String getTf_ProjectNewName() {
+        return String.valueOf(tf_ProjectNewName);
     }
 
     public void setTf_ProjectNewName(TextField tf_ProjectNewName) {
         this.tf_ProjectNewName = tf_ProjectNewName;
     }
 
-    public TextField getTf_ProjectPrice() {
-        return tf_ProjectPrice;
+    public double getTf_ProjectPrice() {
+        return Double.valueOf(String.valueOf(tf_ProjectPrice));
     }
 
     public void setTf_ProjectPrice(TextField tf_ProjectPrice) {
         this.tf_ProjectPrice = tf_ProjectPrice;
     }
 
-    public TextField getTf_ProjectDeposite() {
-        return tf_ProjectDeposite;
+    public double getTf_ProjectDeposite() {
+        return Double.valueOf(String.valueOf(tf_ProjectDeposite));
     }
 
     public void setTf_ProjectDeposite(TextField tf_ProjectDeposite) {

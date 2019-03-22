@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 public class ControllerMainGUI {
 
-    private DialogMainGuiView view;
+    private DialogMainGuiView viewMainGui;
     private GuestModel modelOneGuest;
     private AllGuestsModel modelAllGuest;
 
     public ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel) {
 
-        view = theView;
+        viewMainGui = theView;
         this.modelOneGuest = modelOneGuest;
         modelAllGuest = allGuestModel;
         bindingAllGuest();
@@ -22,32 +22,32 @@ public class ControllerMainGUI {
     }
 
     public Stage startView() {
-        return view.getDisplayMainGUIStage();
+        return viewMainGui.getDisplayMainGUIStage();
 
     }
     private void bindingAllGuest(){
 
-        view.setTf_AllRentPrice(modelAllGuest.getRentProject());
-        view.setTf_AllOutstandingPayment(modelAllGuest.getOutstandingPayments());
-        view.setTf_AllTotalCosts(modelAllGuest.getTotalCostsAll());
-        view.setTf_AllDrinksEUR(modelAllGuest.getDrinksAllGuests());
-        view.setTf_AllFoodEUR(modelAllGuest.getFoodAllGuests());
-        view.setTf_AllAlreadyPaid(modelAllGuest.getAllPrepaid());
-        view.setTf_Deposite(modelAllGuest.getDepositeProject());
-        view.setTf_AllOtherExpenses(modelAllGuest.getAllOtherExpenses());
+        viewMainGui.setTf_AllRentPrice(modelAllGuest.getRentProject());
+        viewMainGui.setTf_AllOutstandingPayment(modelAllGuest.getOutstandingPayments());
+        viewMainGui.setTf_AllTotalCosts(modelAllGuest.getTotalCostsAll());
+        viewMainGui.setTf_AllDrinksEUR(modelAllGuest.getDrinksAllGuests());
+        viewMainGui.setTf_AllFoodEUR(modelAllGuest.getFoodAllGuests());
+        viewMainGui.setTf_AllAlreadyPaid(modelAllGuest.getAllPrepaid());
+        viewMainGui.setTf_Deposite(modelAllGuest.getDepositeProject());
+        viewMainGui.setTf_AllOtherExpenses(modelAllGuest.getAllOtherExpenses());
     }
 
     private void bindingOneGuest() {
 
-        view.setTf_GuestNights(modelOneGuest.getSleepOverSelectedGuest());
-        view.setTf_GuestNightsEUR(modelOneGuest.getSleepOverSelectedGuestEUR());
-        view.setTf_GuestDrinks(modelOneGuest.getDrinksSelectedGuestCount());
-        view.setTf_GuestDrinksEUR(modelOneGuest.getDrinksSelectedGuestEUR());
-        view.setTf_GuestFood(modelOneGuest.getFoodSelectedGuestCount());
-        view.setTf_GuestFoodEUR(modelOneGuest.getFoodSelectedGuestEUR());
-        view.setTf_GuestTotalCosts(modelOneGuest.getTotalCostSelectedGuestEUR());
-        view.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaidSelectedGuestEUR());
-        view.setTf_StillToPay(modelOneGuest.getStillToPaySelectedGuestEUR());
+        viewMainGui.setTf_GuestNights(modelOneGuest.getSleepOverSelectedGuest());
+        viewMainGui.setTf_GuestNightsEUR(modelOneGuest.getSleepOverSelectedGuestEUR());
+        viewMainGui.setTf_GuestDrinks(modelOneGuest.getDrinksSelectedGuestCount());
+        viewMainGui.setTf_GuestDrinksEUR(modelOneGuest.getDrinksSelectedGuestEUR());
+        viewMainGui.setTf_GuestFood(modelOneGuest.getFoodSelectedGuestCount());
+        viewMainGui.setTf_GuestFoodEUR(modelOneGuest.getFoodSelectedGuestEUR());
+        viewMainGui.setTf_GuestTotalCosts(modelOneGuest.getTotalCostSelectedGuestEUR());
+        viewMainGui.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaidSelectedGuestEUR());
+        viewMainGui.setTf_StillToPay(modelOneGuest.getStillToPaySelectedGuestEUR());
     }
 }
 

@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -72,6 +73,8 @@ public class DialogEditGuestView {
         Stage dialogEditGuest = new Stage();
 
         dialogEditGuest.setTitle("CherryIsCarry --- Edit Guest Details");
+
+        dialogEditGuest.getIcons().add(new Image(GUISourceIcons.sourceAppIcon));
 
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));

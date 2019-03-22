@@ -36,9 +36,6 @@ public class DrinksDAOImpl implements DrinksDAO {
             String queryCommand = query.queryFindDrinksByOneGuest(idGuest, idProject);
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
@@ -67,9 +64,6 @@ public class DrinksDAOImpl implements DrinksDAO {
             String queryCommand = query.queryFindAllDrinksByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

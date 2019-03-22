@@ -37,9 +37,6 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             while (result.next()) {
 
                 allExpensesSearchedGuests.add(new OtherExpense(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -75,9 +72,6 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             String queryCommand = query.queryFindAllOtherExpensesByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

@@ -3,7 +3,12 @@ package com.wachs.main.controllerLayer;
 import com.wachs.main.models.ProjectModel;
 import com.wachs.main.views.GUIDialogViews.DialogAddProjectView;
 import com.wachs.main.views.GUIDialogViews.DialogMainGuiView;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+
+import java.awt.event.ActionListener;
 
 public class ControllerAddNewProject {
 
@@ -19,6 +24,8 @@ public class ControllerAddNewProject {
         viewAddProject = theView;
         this.modelProject = projectModel;
         this.stage = viewAddProject.display();
+
+        //this.viewAddProject.buttonCloseActionEvent(new CloseEvent());
     }
 
     public void setNewProject() {
@@ -40,15 +47,14 @@ public class ControllerAddNewProject {
 
     }
 
-    public void saveAction() {
+    class CloseEvent implements EventHandler<ActionEvent> {
 
-        setNewProject();
 
-        stage.setOnCloseRequest(event -> {
+        @Override
+        public void handle(ActionEvent event) {
 
-            modelProject.setNewProject(projectName, price, deposite);
             new DialogMainGuiView().displayMainGui();
-            stage.close();
-        });
+            viewAddProject.display().close();
+        }
     }
 }

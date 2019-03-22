@@ -43,9 +43,6 @@ public class GuestDAOImpl implements GuestDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             //Get db-attributes
             int PK_id = result.getInt(1);
             int idProject = result.getInt(2);
@@ -85,9 +82,6 @@ public class GuestDAOImpl implements GuestDAO {
             String queryCommand = query.queryFindAllGuestsByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

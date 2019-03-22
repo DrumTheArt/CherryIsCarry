@@ -7,6 +7,9 @@ import com.wachs.main.views.GUIElementsGenerators.CreateGUITextfield;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,8 +22,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+
 
 public class DialogAddProjectView {
+
+    //Stage
+    Stage dialogAddProject;
 
     //AllColumns
     private VBox verticalBox;
@@ -49,7 +57,7 @@ public class DialogAddProjectView {
 
     public Stage display() {
 
-        Stage dialogAddProject = new Stage();
+        dialogAddProject = new Stage();
 
         dialogAddProject.setTitle("CherryIsCarry --- Add new Vacation");
         dialogAddProject.getIcons().add(new Image(GUISourceIcons.sourceAppIcon));
@@ -63,13 +71,6 @@ public class DialogAddProjectView {
         HBox_BTN_Regular = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
         btnSave = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_NEWPROJECT, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_NEWPROJECT);
-
-        btnSave.setOnAction(e -> {
-
-            new DialogMainGuiView().displayMainGui();
-            dialogAddProject.close();
-
-        });
 
         HBox_BTN_Regular.getChildren().addAll(btnSave);
         HBox_BTN_Regular.setAlignment(Pos.BOTTOM_CENTER);
@@ -103,6 +104,16 @@ public class DialogAddProjectView {
 
         Scene scene = new Scene(verticalBox, 450, 170);
 
+        this.buttonCloseActionEvent(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                new DialogMainGuiView().displayMainGui();
+                dialogAddProject.close();
+            }
+
+        });
+
         dialogAddProject.setScene(scene);
 
         dialogAddProject.show();
@@ -110,36 +121,22 @@ public class DialogAddProjectView {
         return dialogAddProject;
     }
 
-    public String getTf_ProjectNewName() {
-        return String.valueOf(tf_ProjectNewName);
+    public void buttonCloseActionEvent(EventHandler<ActionEvent> event){
+
+    this.btnSave.setOnAction(event);
+
     }
 
-    public void setTf_ProjectNewName(TextField tf_ProjectNewName) {
-        this.tf_ProjectNewName = tf_ProjectNewName;
+    public String getTf_ProjectNewName() {
+        return String.valueOf(tf_ProjectNewName);
     }
 
     public double getTf_ProjectPrice() {
         return Double.valueOf(String.valueOf(tf_ProjectPrice));
     }
 
-    public void setTf_ProjectPrice(TextField tf_ProjectPrice) {
-        this.tf_ProjectPrice = tf_ProjectPrice;
-    }
-
     public double getTf_ProjectDeposite() {
         return Double.valueOf(String.valueOf(tf_ProjectDeposite));
-    }
-
-    public void setTf_ProjectDeposite(TextField tf_ProjectDeposite) {
-        this.tf_ProjectDeposite = tf_ProjectDeposite;
-    }
-
-    public GridPane getGridForNewName_TF_LB() {
-        return GridForNewName_TF_LB;
-    }
-
-    public void setGridForNewName_TF_LB(GridPane gridForNewName_TF_LB) {
-        GridForNewName_TF_LB = gridForNewName_TF_LB;
     }
 
 }

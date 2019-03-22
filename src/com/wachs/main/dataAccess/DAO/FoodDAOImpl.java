@@ -37,9 +37,6 @@ public class FoodDAOImpl implements FoodDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
@@ -78,9 +75,6 @@ public class FoodDAOImpl implements FoodDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             while (result.next()) {
 
                 allFoodByOneProject.add(new Food(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
@@ -116,9 +110,6 @@ public class FoodDAOImpl implements FoodDAO {
             String queryCommand = query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
             statement = DbConnection.getConnection().createStatement();
             statement.executeUpdate(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             statement.close();
             DbConnection.closeConnection();

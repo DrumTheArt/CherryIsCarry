@@ -37,9 +37,6 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             int FK_id = result.getInt(1);
             double prepaid = result.getDouble(2);
 
@@ -76,9 +73,6 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             String queryCommand = query.queryFindAllPrepaidByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

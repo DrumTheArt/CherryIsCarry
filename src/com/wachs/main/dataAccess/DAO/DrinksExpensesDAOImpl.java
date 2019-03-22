@@ -37,9 +37,6 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             while (result.next()) {
 
                 allDrinksExpensesSearchedGuests.add(new DrinksExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -76,9 +73,6 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
             String queryCommand = query.queryFindAllDrinksExpensesByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

@@ -37,9 +37,6 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             while (result.next()) {
 
                 allFoodExpensesSearchedGuests.add(new FoodExpense(result.getInt(COLUMN1), result.getDouble(COLUMN2), result.getString(COLUMN3), result.getString(COLUMN4), result.getInt(COLUMN5), result.getInt(COLUMN6)));
@@ -75,9 +72,6 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             String queryCommand = query.queryFindAllFoodExpensesByOneProject(idProject);
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 

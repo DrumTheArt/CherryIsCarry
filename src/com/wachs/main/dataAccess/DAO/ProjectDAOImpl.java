@@ -44,9 +44,6 @@ public class ProjectDAOImpl implements ProjectDAO {
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
             //Get db-attributes
             int pk_id = result.getInt(1);
             String txt_name = result.getString(2);
@@ -89,9 +86,6 @@ public class ProjectDAOImpl implements ProjectDAO {
 
             statement = DbConnection.getConnection().createStatement();
             result = statement.executeQuery(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
 
             while (result.next()) {
 
@@ -217,15 +211,5 @@ public class ProjectDAOImpl implements ProjectDAO {
             e.printStackTrace();
 
         }
-    }
-
-    public static void main(String[] args) {
-
-
-        Project b = new Project();
-        ProjectDAOImpl a = new ProjectDAOImpl();
-        b = a.findOneProject("The project 2019");
-
-        System.out.println(b.getProjectPrice());
     }
 }

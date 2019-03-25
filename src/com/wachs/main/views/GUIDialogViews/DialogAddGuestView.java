@@ -6,6 +6,8 @@ import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,7 +35,7 @@ public class DialogAddGuestView {
     private HBox HBox_TF_AreaNewGuestName;
 
     //AllButtons
-    private Button btnSave;
+    private Button btnSaveNewGuest;
 
     //AllTextFields
     private TextField tf_GuestNewName;
@@ -67,14 +69,9 @@ public class DialogAddGuestView {
         //First Row
         HBox_BTN_Save = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
-        btnSave = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_NEWGUEST, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_GUEST);
+        btnSaveNewGuest = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_NEWGUEST, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_GUEST);
 
-        btnSave.setOnAction(e -> {
-            new DialogMainGuiView().displayMainGui();
-            dialogAddGuest.close();
-        });
-
-        HBox_BTN_Save.getChildren().addAll(btnSave);
+        HBox_BTN_Save.getChildren().addAll(btnSaveNewGuest);
         HBox_BTN_Save.setAlignment(Pos.BOTTOM_CENTER);
 
         //Third Row Labels & TextFields for GuestDetails
@@ -89,7 +86,6 @@ public class DialogAddGuestView {
         HBox_LB_AreaNewGuestName.getChildren().addAll(lb_GuestNewName, lb_Guest_SelectedProject);
 
         HBox_TF_AreaNewGuestName = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
-
 
         tf_GuestNewName = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_NEWGUESTNAME, GUIProperties.TEXTFIELD_DESIGN, true);
 
@@ -109,43 +105,29 @@ public class DialogAddGuestView {
         Scene scene = new Scene(verticalBox, 350, 170);
 
         dialogAddGuest.setScene(scene);
-
-        dialogAddGuest.setOnCloseRequest(event -> {
-
-            new DialogMainGuiView().displayMainGui();
-            dialogAddGuest.close();
-        });
-
         dialogAddGuest.show();
 
         return dialogAddGuest;
 
     }
-    public TextField getTf_GuestNewName() {
-        return tf_GuestNewName;
+
+    public void buttonSaveActionEvent(EventHandler<ActionEvent> event) {
+
+        this.btnSaveNewGuest.setOnAction(event);
+
     }
 
-    public void setTf_GuestNewName(TextField tf_GuestNewName) {
-        this.tf_GuestNewName = tf_GuestNewName;
+    public String getTf_GuestNewName() {
+        return String.valueOf(tf_GuestNewName);
     }
 
-    public ComboBox getCb_SelectedProject() {
-        return cb_SelectedProject;
+    public String getCb_SelectedProject() {
+        return cb_SelectedProject.getValue().toString();
     }
 
-    public void setCb_SelectedProject(ComboBox cb_SelectedProject) {
-        this.cb_SelectedProject = cb_SelectedProject;
-    }
+    public void setNewGuest(String projectName, String guestName) {
 
-    public GridPane getGridForNewGuestName_LB_TF() {
-        return GridForNewGuestName_LB_TF;
-    }
 
-    public void setGridForNewGuestName_LB_TF(GridPane gridForNewGuestName_LB_TF) {
-        GridForNewGuestName_LB_TF = gridForNewGuestName_LB_TF;
     }
 
 }
-
-
-

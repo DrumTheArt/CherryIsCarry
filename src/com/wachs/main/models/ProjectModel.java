@@ -9,9 +9,13 @@ public class ProjectModel {
     private ProjectDAO newDAO;
     private Project searchedProject;
 
-    ProjectModel(String nameProject) {
+    public ProjectModel(String nameProject) {
 
         createModel(nameProject);
+    }
+
+    public ProjectModel() {
+
     }
 
     private Project createModel(String projectName) {

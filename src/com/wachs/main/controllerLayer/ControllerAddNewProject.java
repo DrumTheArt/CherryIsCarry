@@ -4,11 +4,8 @@ import com.wachs.main.models.ProjectModel;
 import com.wachs.main.views.GUIDialogViews.DialogAddProjectView;
 import com.wachs.main.views.GUIDialogViews.DialogMainGuiView;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionListener;
 
 public class ControllerAddNewProject {
 
@@ -19,16 +16,15 @@ public class ControllerAddNewProject {
     private double deposite;
     private double price;
 
-    public ControllerAddNewProject(DialogAddProjectView theView, ProjectModel projectModel) {
+    public ControllerAddNewProject(DialogAddProjectView viewAddProject, ProjectModel projectModel) {
 
-        viewAddProject = theView;
+        this.viewAddProject = viewAddProject;
         this.modelProject = projectModel;
-        this.stage = viewAddProject.display();
-
-        //this.viewAddProject.buttonCloseActionEvent(new CloseEvent());
+        this.stage = this.viewAddProject.display();
+        this.viewAddProject.buttonCloseActionEvent(new BtnSaveNewProject());
     }
 
-    public void setNewProject() {
+    private void setNewProject() {
 
         projectName = viewAddProject.getTf_ProjectNewName();
         deposite = viewAddProject.getTf_ProjectDeposite();
@@ -37,23 +33,13 @@ public class ControllerAddNewProject {
         modelProject.setNewProject(projectName, deposite, price);
     }
 
-    public void closeAction() {
-
-        stage.setOnCloseRequest(event -> {
-
-            new DialogMainGuiView().displayMainGui();
-            stage.close();
-        });
-
-    }
-
-    class CloseEvent implements EventHandler<ActionEvent> {
-
+    class BtnSaveNewProject implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
 
             new DialogMainGuiView().displayMainGui();
+            setNewProject();
             viewAddProject.display().close();
         }
     }

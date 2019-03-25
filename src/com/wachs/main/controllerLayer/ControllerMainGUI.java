@@ -2,7 +2,13 @@ package com.wachs.main.controllerLayer;
 
 import com.wachs.main.models.AllGuestsModel;
 import com.wachs.main.models.GuestModel;
+import com.wachs.main.models.ProjectModel;
+import com.wachs.main.views.GUIDialogViews.DialogAddGuestView;
+import com.wachs.main.views.GUIDialogViews.DialogAddProjectView;
+import com.wachs.main.views.GUIDialogViews.DialogEditGuestView;
 import com.wachs.main.views.GUIDialogViews.DialogMainGuiView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class ControllerMainGUI {
@@ -18,6 +24,9 @@ public class ControllerMainGUI {
         modelAllGuest = allGuestModel;
         bindingAllGuest();
         bindingOneGuest();
+        this.viewMainGui.btnAddProject(new BtnAddProject());
+        this.viewMainGui.btnAddGuest(new BtnAddGuest());
+        this.viewMainGui.btnEditGuestData(new BtnEditGuest());
 
     }
 
@@ -25,6 +34,7 @@ public class ControllerMainGUI {
         return viewMainGui.getDisplayMainGUIStage();
 
     }
+
     private void bindingAllGuest(){
 
         viewMainGui.setTf_AllRentPrice(modelAllGuest.getRentProject());
@@ -49,5 +59,35 @@ public class ControllerMainGUI {
         viewMainGui.setTf_GuestAlreadyPaid(modelOneGuest.getAlreadyPaidSelectedGuestEUR());
         viewMainGui.setTf_StillToPay(modelOneGuest.getStillToPaySelectedGuestEUR());
     }
-}
 
+    class BtnAddProject implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+
+            new ControllerAddNewProject(new DialogAddProjectView(), new ProjectModel());
+            viewMainGui.getDisplayMainGUIStage().close();
+        }
+    }
+
+    class BtnAddGuest implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+
+            new DialogAddGuestView().display();
+            viewMainGui.getDisplayMainGUIStage().close();
+        }
+    }
+
+    class BtnEditGuest implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+
+            //TODO Hier muss ein neuer Controller mit bestehendem  GuestModel rein
+            new DialogEditGuestView().display();
+            viewMainGui.getDisplayMainGUIStage().close();
+        }
+    }
+}

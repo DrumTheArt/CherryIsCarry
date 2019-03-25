@@ -253,4 +253,13 @@ public class GuestModel {
 
         return result;
     }
+
+    public void setNewGuest(String projectName, String guestName) {
+
+        int projectId = projectDAO.findOneProject(projectName).getPK_id();
+        GuestDAOImpl newDAO = new GuestDAOImpl();
+
+        newDAO.insertGuestForOneProject(projectId, guestName);
+    }
+
 }

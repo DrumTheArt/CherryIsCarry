@@ -8,7 +8,6 @@ import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +21,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
 
 
 public class DialogAddProjectView {
@@ -39,7 +37,7 @@ public class DialogAddProjectView {
     private HBox HBox_TF_AreaProjects;
 
     //AllButtons
-    private Button btnSave;
+    private Button btnSaveNewProject;
 
     //AllTextFields
     private TextField tf_ProjectNewName;
@@ -70,9 +68,9 @@ public class DialogAddProjectView {
         //First Row
         HBox_BTN_Regular = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
 
-        btnSave = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_NEWPROJECT, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_NEWPROJECT);
+        btnSaveNewProject = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_NEWPROJECT, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_NEWPROJECT);
 
-        HBox_BTN_Regular.getChildren().addAll(btnSave);
+        HBox_BTN_Regular.getChildren().addAll(btnSaveNewProject);
         HBox_BTN_Regular.setAlignment(Pos.BOTTOM_CENTER);
 
         //Third Row Labels & TextFields for GuestDetails
@@ -104,18 +102,7 @@ public class DialogAddProjectView {
 
         Scene scene = new Scene(verticalBox, 450, 170);
 
-        this.buttonCloseActionEvent(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                new DialogMainGuiView().displayMainGui();
-                dialogAddProject.close();
-            }
-
-        });
-
         dialogAddProject.setScene(scene);
-
         dialogAddProject.show();
 
         return dialogAddProject;
@@ -123,7 +110,7 @@ public class DialogAddProjectView {
 
     public void buttonCloseActionEvent(EventHandler<ActionEvent> event){
 
-    this.btnSave.setOnAction(event);
+        this.btnSaveNewProject.setOnAction(event);
 
     }
 

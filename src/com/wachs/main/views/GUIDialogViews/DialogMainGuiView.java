@@ -155,31 +155,11 @@ public class DialogMainGuiView {
         //Button Add new Project
         btnAddProject = new CreateGUIButton().createBtn(GUINamingProperties.BTN_ADD_PROJECT, GUISourceIcons.sourceAddProject, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_ADD_PROJECT);
 
-        btnAddProject.setOnAction(e -> {
-
-            new DialogAddProjectView().display();
-            primaryStage.close();
-
-        });
         //Button Add new Guest
         btnAddGuest = new CreateGUIButton().createBtn(GUINamingProperties.BTN_ADD_GUEST, GUISourceIcons.sourceAddGuest2, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_ADD_GUEST);
 
-        btnAddGuest.setOnAction(e -> {
-
-            new DialogAddGuestView().display();
-            primaryStage.close();
-
-        });
-
         //Button Edit Guest
         btnEditGuestData = new CreateGUIButton().createBtn(GUINamingProperties.BTN_EDIT_GUEST, GUISourceIcons.sourceEditGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_EDIT_GUEST);
-
-        btnEditGuestData.setOnAction(e -> {
-
-            new DialogEditGuestView().display();
-            primaryStage.close();
-
-        });
 
         HBox_Buttons.getChildren().addAll(btnAddProject, btnAddGuest, btnEditGuestData);
 
@@ -273,6 +253,21 @@ public class DialogMainGuiView {
 
         primaryStage.show();
 
+    }
+
+    public void btnAddProject(EventHandler<ActionEvent> event) {
+
+        this.btnAddProject.setOnAction(event);
+    }
+
+    public void btnAddGuest(EventHandler<ActionEvent> event) {
+
+        this.btnAddGuest.setOnAction(event);
+    }
+
+    public void btnEditGuestData(EventHandler<ActionEvent> event) {
+
+        this.btnEditGuestData.setOnAction(event);
     }
 
     public void setTf_GuestNights(int nights) {

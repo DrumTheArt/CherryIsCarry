@@ -118,16 +118,14 @@ public class DialogAddGuestView {
     }
 
     public String getTf_GuestNewName() {
-        return String.valueOf(tf_GuestNewName);
+
+        return String.valueOf(tf_GuestNewName.getText());
+
     }
 
     public String getCb_SelectedProject() {
+
         return cb_SelectedProject.getValue().toString();
-    }
-
-    public void setNewGuest(String projectName, String guestName) {
-
 
     }
-
 }

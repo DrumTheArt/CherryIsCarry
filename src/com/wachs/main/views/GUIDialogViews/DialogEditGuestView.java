@@ -4,6 +4,8 @@ import com.wachs.main.views.GUIElementsGenerators.*;
 import com.wachs.main.views.GUISetup.GUINamingProperties;
 import com.wachs.main.views.GUISetup.GUIProperties;
 import com.wachs.main.views.GUISetup.GUISourceIcons;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,8 +43,8 @@ public class DialogEditGuestView {
     private TextField tf_GuestNights;
     private TextField tf_GuestDrinks;
     private TextField tf_GuestFood;
-    private TextField tf_prepaid;
-    private TextField tf_GuestExpensesPrice;
+    private TextField tf_alreadyPaid;
+    private TextField tf_GuestOtherExpensesPrice;
     private TextField tf_GuestExpensesReason;
     private TextField tf_GuestExpensesWhen;
     private TextField tf_GuestDrinksExpensePrice;
@@ -87,12 +89,6 @@ public class DialogEditGuestView {
 
         btnSaveAll = new CreateGUIButton().createBtn(GUINamingProperties.BTN_SAVE_ALLDATA, GUISourceIcons.sourceSaveData, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_SAVE_GUEST);
 
-        btnSaveAll.setOnAction(e -> {
-
-            new DialogMainGuiView().displayMainGui();
-            dialogEditGuest.close();
-
-        });
         //Button Delete Guest
         btnDeleteGuest = new CreateGUIButton().createBtn(GUINamingProperties.BTN_DELETE_GUEST, GUISourceIcons.sourceDeleteGuest, GUIProperties.BTN_COLOR_BLUELIGHT, GUINamingProperties.TT_BTN_DELETE_GUEST);
 
@@ -119,11 +115,11 @@ public class DialogEditGuestView {
         tf_GuestNights = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_NIGHTS, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestDrinks = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_DRINKS, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestFood = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_FOOD, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_prepaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_alreadyPaid = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_ALREADY_PAID, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
         HBox_TF_AreaGuests.setAlignment(Pos.BOTTOM_CENTER);
-        HBox_TF_AreaGuests.getChildren().addAll(tf_GuestNights, tf_GuestDrinks, tf_GuestFood, tf_prepaid);
+        HBox_TF_AreaGuests.getChildren().addAll(tf_GuestNights, tf_GuestDrinks, tf_GuestFood, tf_alreadyPaid);
 
         GridPane.setConstraints(HBox_LB_AreaGuests, 1, 1);
         GridPane.setConstraints(HBox_TF_AreaGuests, 1, 2);
@@ -150,12 +146,12 @@ public class DialogEditGuestView {
 
         tf_GuestDrinksExpensePrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_DRINKSEXPENSES, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestFoodExpensePrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_FOODEXPENSES, GUIProperties.TEXTFIELD_DESIGN, true);
-        tf_GuestExpensesPrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true);
+        tf_GuestOtherExpensesPrice = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_PRICE, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestExpensesReason = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_REASON, GUIProperties.TEXTFIELD_DESIGN, true);
         tf_GuestExpensesWhen = new CreateGUITextfield().createTextfield(GUIProperties.SIZE_GUI_ELEMENTS, GUINamingProperties.TT_TF_GUEST_EXPENSE_WHEN, GUIProperties.TEXTFIELD_DESIGN, true);
 
 
-        HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestDrinksExpensePrice, tf_GuestFoodExpensePrice, tf_GuestExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
+        HBox_TF_AreaExpenses.getChildren().addAll(tf_GuestDrinksExpensePrice, tf_GuestFoodExpensePrice, tf_GuestOtherExpensesPrice, tf_GuestExpensesReason, tf_GuestExpensesWhen);
 
         //Fifth Row
         HBox_BTN_SaveExpense = new CreateGUIHBox().CreateHBox(10, 20, 20, 10, 20);
@@ -171,7 +167,6 @@ public class DialogEditGuestView {
         //Sixth Row
         HBox_LIST_Expense = new CreateGUIHBox().CreateHBox(10, 4, 20, 10, 20);
 
-
         tableExpenses = new CreateGUITable().createTable("Amount", "Reason", "Date");
 
         HBox_LIST_Expense.setAlignment(Pos.BOTTOM_CENTER);
@@ -181,13 +176,6 @@ public class DialogEditGuestView {
 
         Scene scene = new Scene(verticalBox, 900, 700);
 
-        dialogEditGuest.setOnCloseRequest(event -> {
-
-            new DialogMainGuiView().displayMainGui();
-            dialogEditGuest.close();
-
-        });
-
         dialogEditGuest.setScene(scene);
 
         dialogEditGuest.show();
@@ -196,86 +184,167 @@ public class DialogEditGuestView {
 
     }
 
-    public TextField getTf_GuestNights() {
-        return tf_GuestNights;
+    public void btnSaveAll(EventHandler<ActionEvent> event){
+
+        this.btnSaveAll.setOnAction(event);
+
     }
 
-    public void setTf_GuestNights(TextField tf_GuestNights) {
-        this.tf_GuestNights = tf_GuestNights;
+    public void btnDeleteGuest(EventHandler<ActionEvent> event){
+
+        this.btnDeleteGuest.setOnAction(event);
+
     }
 
-    public TextField getTf_GuestDrinks() {
-        return tf_GuestDrinks;
+    public void btnSaveExpenses(EventHandler<ActionEvent> event){
+
+        this.btnSaveExpenses.setOnAction(event);
+
     }
 
-    public void setTf_GuestDrinks(TextField tf_GuestDrinks) {
-        this.tf_GuestDrinks = tf_GuestDrinks;
+    public int get_GuestNightsCount() {
+
+        return Integer.valueOf(String.valueOf(tf_GuestNights.getText()));
+
     }
 
-    public TextField getTf_GuestFood() {
-        return tf_GuestFood;
+    public void set_GuestNightsCount(int nightsCount) {
+
+        this.tf_GuestNights.setText(String.valueOf(nightsCount));
+
     }
 
-    public void setTf_GuestFood(TextField tf_GuestFood) {
-        this.tf_GuestFood = tf_GuestFood;
+    public int get_GuestDrinksCount() {
+
+        return Integer.valueOf(String.valueOf(tf_GuestDrinks.getText()));
+
     }
 
-    public TextField getTf_prepaid() {
-        return tf_prepaid;
+    public void set_GuestDrinksCount(int drinksCount) {
+
+        this.tf_GuestDrinks.setText(String.valueOf(drinksCount));
+
     }
 
-    public void setTf_prepaid(TextField tf_prepaid) {
-        this.tf_prepaid = tf_prepaid;
+    public int get_GuestFoodCount() {
+
+        return Integer.valueOf(String.valueOf(tf_GuestFood.getText()));
+
     }
 
-    public TextField getTf_GuestExpensesPrice() {
-        return tf_GuestExpensesPrice;
+    public void set_GuestFoodCount(int foodCount) {
+
+        this.tf_GuestFood.setText(String.valueOf(foodCount));
+
     }
 
-    public void setTf_GuestExpensesPrice(TextField tf_GuestExpensesPrice) {
-        this.tf_GuestExpensesPrice = tf_GuestExpensesPrice;
+    public double get_PrepaidEUR() {
+
+        return Double.valueOf(String.valueOf(tf_alreadyPaid.getText()));
+
     }
 
-    public TextField getTf_GuestExpensesReason() {
-        return tf_GuestExpensesReason;
+    public void set_PrepaidEUR(double prepaidEUR) {
+
+        this.tf_alreadyPaid.setText(String.valueOf(prepaidEUR));
+
     }
 
-    public void setTf_GuestExpensesReason(TextField tf_GuestExpensesReason) {
-        this.tf_GuestExpensesReason = tf_GuestExpensesReason;
+    public void set_GuestFoodExpensesEUR(double foodExpensesEUR){
+
+        tf_GuestFoodExpensePrice.setText(String.valueOf(foodExpensesEUR));
+
     }
 
-    public TextField getTf_GuestExpensesWhen() {
-        return tf_GuestExpensesWhen;
+    public void set_GuestDrinksExpensesEUR(double drinksExpensesEUR){
+
+        tf_GuestDrinksExpensePrice.setText(String.valueOf(drinksExpensesEUR));
+
     }
 
-    public void setTf_GuestExpensesWhen(TextField tf_GuestExpensesWhen) {
-        this.tf_GuestExpensesWhen = tf_GuestExpensesWhen;
+    public double get_GuestFoodExpensesEUR(){
+
+        return Double.valueOf(String.valueOf(tf_GuestFoodExpensePrice.getText()));
+
     }
 
-    public GridPane getGridForGuestDetails() {
+    public double get_GuestDrinksExpensesEUR(){
+
+        return Double.valueOf(String.valueOf(tf_GuestDrinksExpensePrice.getText()));
+
+    }
+
+
+    public double get_GuestOtherExpensesEUR() {
+
+        return Double.valueOf(String.valueOf(tf_GuestOtherExpensesPrice.getText()));
+
+    }
+
+    public void set_GuestOtherExpensesEUR(double otherExpensesEUR) {
+
+        this.tf_GuestOtherExpensesPrice.setText(String.valueOf(otherExpensesEUR));
+
+    }
+
+    public String get_GuestOtherExpensesReason() {
+
+
+        return String.valueOf(tf_GuestExpensesReason.getText());
+
+    }
+
+    public void set_GuestOtherExpensesReason(String expensesReason) {
+
+        this.tf_GuestExpensesReason.setText(expensesReason);
+
+    }
+
+    public String get_GuestOtherExpensesWhen() {
+
+        return String.valueOf(tf_GuestExpensesWhen.getText());
+
+    }
+
+    public void set_GuestOtherExpensesWhen(String otherExpensesWhen) {
+
+        this.tf_GuestExpensesWhen.setText(otherExpensesWhen);
+
+    }
+
+    public GridPane get_GridForGuestDetails() {
+
         return GridForGuestDetails;
+
     }
 
-    public void setGridForGuestDetails(GridPane gridForGuestDetails) {
+    public void set_GridForGuestDetails(GridPane gridForGuestDetails) {
+
         GridForGuestDetails = gridForGuestDetails;
+
     }
 
-    public GridPane getGridForExpensesDetails() {
+    public GridPane get_GridForExpensesDetails() {
+
         return GridForExpensesDetails;
+
     }
 
-    public void setGridForExpensesDetails(GridPane gridForExpensesDetails) {
+    public void set_GridForExpensesDetails(GridPane gridForExpensesDetails) {
+
         GridForExpensesDetails = gridForExpensesDetails;
+
     }
 
-    public TableView getTableExpenses() {
+    public TableView get_TableExpenses() {
+
         return tableExpenses;
+
     }
 
-    public void setTableExpenses(TableView tableExpenses) {
+    public void set_TableExpenses(TableView tableExpenses) {
+
         this.tableExpenses = tableExpenses;
+
     }
-
 }
-
-

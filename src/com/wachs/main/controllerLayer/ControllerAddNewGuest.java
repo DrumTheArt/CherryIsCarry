@@ -28,7 +28,8 @@ public class ControllerAddNewGuest {
         projectName = viewAddNewGuest.getCb_SelectedProject();
         guestName = viewAddNewGuest.getTf_GuestNewName();
 
-        viewAddNewGuest.setNewGuest(projectName, guestName);
+        //TODO wo soll jetzt das DAO Ding den INSERT Befehl reinmachen?
+        //viewAddNewGuest.setNewGuest(projectName, guestName);
     }
 
     class BtnSaveNewGuest implements EventHandler<ActionEvent> {

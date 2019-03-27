@@ -271,70 +271,104 @@ public class DialogMainGuiView {
     }
 
     public void setTf_GuestNights(int nights) {
+
         this.tf_GuestNights.setText(String.valueOf(nights));
+
     }
 
     public void setTf_GuestNightsEUR(double amount) {
+
         this.tf_GuestNightsEUR.setText(String.valueOf(amount));
+
     }
 
     public void setTf_GuestDrinks(int nights) {
+
         this.tf_GuestDrinks.setText(String.valueOf(nights));
+
     }
 
     public void setTf_GuestDrinksEUR(double amount) {
+
         this.tf_GuestDrinksEUR.setText(String.valueOf(amount));
+
     }
 
     public void setTf_GuestFood(int nights) {
+
         this.tf_GuestFood.setText(String.valueOf(nights));
+
     }
 
     public void setTf_GuestFoodEUR(double amount) {
+
         this.tf_GuestFoodEUR.setText(String.valueOf(amount));
+
     }
 
     public void setTf_GuestTotalCosts(double amount) {
+
         this.tf_GuestTotalCosts.setText(String.valueOf(amount));
+
     }
 
     public void setTf_GuestAlreadyPaid(double amount) {
+
         this.tf_GuestAlreadyPaid.setText(String.valueOf(amount));
+
     }
 
     public void setTf_StillToPay(double amount) {
+
         this.tf_StillToPay.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllRentPrice(double amount) {
+
         this.tf_AllRentPrice.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllDrinksEUR(double amount) {
+
         this.tf_AllDrinks.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllFoodEUR(double amount) {
+
         this.tf_AllFood.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllTotalCosts(double amount) {
+
         this.tf_AllTotalCosts.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllOutstandingPayment(double amount) {
+
         this.tf_AllOutstandingPayment.setText(String.valueOf(amount));
+
     }
 
     public void setTf_Deposite(double amount) {
+
         this.tf_Deposite.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllAlreadyPaid(double amount) {
+
         this.tf_AllAllreadyPaid.setText(String.valueOf(amount));
+
     }
 
     public void setTf_AllOtherExpenses(double amount) {
+
         this.tf_otherExpenses.setText(String.valueOf(amount));
+
     }
 }

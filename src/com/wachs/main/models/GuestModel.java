@@ -131,6 +131,11 @@ public class GuestModel {
         return (prepaidSearchedGuest.getPrepaid() + this.getAllFoodExpensesSelectedProjectSelectedGuestEUR() + this.getAllDrinksExpensesSelectedProjectSelectedGuestEUR() + this.getAllOtherExpensesSelectedProjectPayedBySelectedGuestEUR());
     }
 
+    public double getPrepaidSelectedGuestEUR() {
+
+        return prepaidSearchedGuest.getPrepaid();
+    }
+
     public double getStillToPaySelectedGuestEUR() {
 
         return (this.getTotalCostSelectedGuestEUR() - this.getAlreadyPaidSelectedGuestEUR());
@@ -203,7 +208,7 @@ public class GuestModel {
         return allFoodCountSelectedProject;
     }
 
-    private double getAllFoodExpensesSelectedProjectSelectedGuestEUR() {
+    public double getAllFoodExpensesSelectedProjectSelectedGuestEUR() {
 
         double allFoodExpenses = 0;
 
@@ -215,7 +220,7 @@ public class GuestModel {
         return allFoodExpenses;
     }
 
-    private double getAllDrinksExpensesSelectedProjectSelectedGuestEUR() {
+    public double getAllDrinksExpensesSelectedProjectSelectedGuestEUR() {
 
         double allDrinksExpenses = 0;
 
@@ -228,7 +233,7 @@ public class GuestModel {
 
     }
 
-    private double getAllOtherExpensesSelectedProjectPayedBySelectedGuestEUR() {
+    public double getAllOtherExpensesSelectedProjectPayedBySelectedGuestEUR() {
 
         double sum = 0;
 
@@ -240,7 +245,7 @@ public class GuestModel {
         return sum;
     }
 
-    private double getAllOtherExpensesSelectedProjectHaveToPayBySelectedGuestEUR() {
+    public double getAllOtherExpensesSelectedProjectHaveToPayBySelectedGuestEUR() {
 
         double sum = 0;
 

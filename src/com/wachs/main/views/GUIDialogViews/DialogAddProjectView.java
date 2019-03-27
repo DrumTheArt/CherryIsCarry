@@ -115,15 +115,20 @@ public class DialogAddProjectView {
     }
 
     public String getTf_ProjectNewName() {
-        return String.valueOf(tf_ProjectNewName);
+
+        return String.valueOf(tf_ProjectNewName.getText());
+
     }
 
     public double getTf_ProjectPrice() {
-        return Double.valueOf(String.valueOf(tf_ProjectPrice));
+
+        return Double.valueOf(String.valueOf(tf_ProjectPrice.getText()));
+
     }
 
     public double getTf_ProjectDeposite() {
-        return Double.valueOf(String.valueOf(tf_ProjectDeposite));
-    }
 
+        return Double.valueOf(String.valueOf(tf_ProjectDeposite.getText()));
+
+    }
 }

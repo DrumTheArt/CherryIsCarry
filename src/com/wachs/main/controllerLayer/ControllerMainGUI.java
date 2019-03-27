@@ -16,10 +16,12 @@ public class ControllerMainGUI {
     private DialogMainGuiView viewMainGui;
     private GuestModel modelOneGuest;
     private AllGuestsModel modelAllGuest;
+    private ProjectModel projectModel;
 
-    public ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel) {
+    public ControllerMainGUI(DialogMainGuiView theView, GuestModel modelOneGuest, AllGuestsModel allGuestModel, ProjectModel projectModel) {
 
         viewMainGui = theView;
+        this.projectModel = projectModel;
         this.modelOneGuest = modelOneGuest;
         modelAllGuest = allGuestModel;
         bindingAllGuest();
@@ -75,7 +77,7 @@ public class ControllerMainGUI {
         @Override
         public void handle(ActionEvent event) {
 
-            new DialogAddGuestView().display();
+            new ControllerAddNewGuest(new DialogAddGuestView(), new ProjectModel());
             viewMainGui.getDisplayMainGUIStage().close();
         }
     }
@@ -86,6 +88,7 @@ public class ControllerMainGUI {
         public void handle(ActionEvent event) {
 
             //TODO Hier muss ein neuer Controller mit bestehendem  GuestModel rein
+            new ControllerEditGuest(modelOneGuest);
             new DialogEditGuestView().display();
             viewMainGui.getDisplayMainGUIStage().close();
         }

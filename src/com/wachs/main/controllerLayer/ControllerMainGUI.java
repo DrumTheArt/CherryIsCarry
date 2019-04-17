@@ -88,9 +88,11 @@ public class ControllerMainGUI {
         public void handle(ActionEvent event) {
 
             //TODO Hier muss ein neuer Controller mit bestehendem  GuestModel rein
-            new ControllerEditGuest(modelOneGuest);
-            new DialogEditGuestView().display();
+            DialogEditGuestView r = new DialogEditGuestView();
+            new ControllerEditGuest(projectModel, modelOneGuest);
             viewMainGui.getDisplayMainGUIStage().close();
+
+            new ControllerMainGUI(viewMainGui, modelOneGuest, modelAllGuest, projectModel);
         }
     }
 }

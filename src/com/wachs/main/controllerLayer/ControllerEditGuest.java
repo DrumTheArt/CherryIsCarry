@@ -13,12 +13,7 @@ public class ControllerEditGuest {
     private ProjectModel projectModel;
     private DialogEditGuestView editView;
     private Stage stage;
-
-
-    ControllerEditGuest() {
-
-    }
-
+    
     ControllerEditGuest(ProjectModel project, GuestModel guestToEdit) {
 
         this.projectModel = project;

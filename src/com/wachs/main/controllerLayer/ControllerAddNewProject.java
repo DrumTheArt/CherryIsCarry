@@ -40,7 +40,7 @@ public class ControllerAddNewProject {
 
             new DialogMainGuiView().displayMainGui();
             setNewProject();
-            viewAddProject.display().close();
+            viewAddProject.display().hide();
         }
     }
 }

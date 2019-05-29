@@ -33,6 +33,7 @@ public class ControllerMainGUI {
     }
 
     public Stage startView() {
+
         return viewMainGui.getDisplayMainGUIStage();
 
     }
@@ -68,7 +69,8 @@ public class ControllerMainGUI {
         public void handle(ActionEvent event) {
 
             new ControllerAddNewProject(new DialogAddProjectView(), new ProjectModel());
-            viewMainGui.getDisplayMainGUIStage().close();
+            viewMainGui.getDisplayMainGUIStage().hide();
+            //TODO Model to Save Action
         }
     }
 
@@ -78,7 +80,7 @@ public class ControllerMainGUI {
         public void handle(ActionEvent event) {
 
             new ControllerAddNewGuest(new DialogAddGuestView(), new ProjectModel());
-            viewMainGui.getDisplayMainGUIStage().close();
+            viewMainGui.getDisplayMainGUIStage().hide();
         }
     }
 
@@ -87,10 +89,9 @@ public class ControllerMainGUI {
         @Override
         public void handle(ActionEvent event) {
 
-            //TODO Hier muss ein neuer Controller mit bestehendem  GuestModel rein
-            DialogEditGuestView r = new DialogEditGuestView();
+            DialogEditGuestView editDialog = new DialogEditGuestView();
             new ControllerEditGuest(projectModel, modelOneGuest);
-            viewMainGui.getDisplayMainGUIStage().close();
+            viewMainGui.getDisplayMainGUIStage().hide();
 
             new ControllerMainGUI(viewMainGui, modelOneGuest, modelAllGuest, projectModel);
         }

@@ -46,7 +46,7 @@ public class ControllerEditGuest {
         public void handle(ActionEvent event) {
 
             //newSaveExpenses
-            editView.display().close();
+            editView.display().hide();
         }
     }
 
@@ -56,7 +56,7 @@ public class ControllerEditGuest {
         public void handle(ActionEvent event) {
 
             //deleteGuest
-            editView.display().close();
+            editView.display().hide();
         }
     }
 
@@ -66,7 +66,7 @@ public class ControllerEditGuest {
         public void handle(ActionEvent event) {
 
             //saveAllData
-            editView.display().close();
+            editView.display().hide();
         }
     }
 }

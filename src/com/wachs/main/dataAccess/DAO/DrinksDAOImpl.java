@@ -4,6 +4,7 @@ import com.wachs.main.POJO.Drinks;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -30,6 +31,14 @@ public class DrinksDAOImpl implements DrinksDAO {
         this.allDrinksOneProject = new ArrayList<>();
         this.connection = new DbConnection();
 
+    }
+
+    public DrinksDAOImpl(Connection connectToTestDatabase) {
+
+        this.singleDrink = new Drinks();
+        query = new QueryGeneratorDrinks();
+        this.allDrinksOneProject = new ArrayList<>();
+        this.connection = new TestDBConnection();
 
     }
 

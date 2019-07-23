@@ -1,11 +1,14 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.OtherExpense;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
+import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,6 +32,16 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
         allExpensesAllGuests = new ArrayList<>();
         allExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorOtherExpenses();
+        connection = new DbConnection();
+
+    }
+
+    public OtherExpensesDAOImpl(Connection connectToTestDatabase) {
+
+        allExpensesAllGuests = new ArrayList<>();
+        allExpensesSearchedGuests = new ArrayList<>();
+        query = new QueryGeneratorOtherExpenses();
+        this.connection = new TestDBConnection();
 
     }
 

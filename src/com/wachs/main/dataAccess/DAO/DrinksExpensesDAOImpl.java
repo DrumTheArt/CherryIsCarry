@@ -1,8 +1,12 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.POJO.Drinks;
 import com.wachs.main.POJO.DrinksExpense;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinksExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -20,7 +24,7 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
     private QueryGeneratorDrinksExpenses query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    DbConnection connection;
+    IdbConnection connection;
 
     public DrinksExpensesDAOImpl() {
 
@@ -28,6 +32,15 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         allDrinksExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorDrinksExpenses();
         connection = new DbConnection();
+
+    }
+
+    public DrinksExpensesDAOImpl(Connection connectToTestDatabase) {
+
+        allDrinksExpensesAllGuests = new ArrayList<>();
+        allDrinksExpensesSearchedGuests = new ArrayList<>();
+        query = new QueryGeneratorDrinksExpenses();
+        this.connection = new TestDBConnection();
 
     }
 

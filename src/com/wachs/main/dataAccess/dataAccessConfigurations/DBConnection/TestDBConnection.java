@@ -1,17 +1,23 @@
 package com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class TestDBConnection implements IdbConnection{
 
-    @Override
     public Connection getConnection() {
 
-        return null;
+        return new ConnectionFactory().createTestDataBaseConnection();
+
     }
 
-    @Override
-    public void closeConnection() {
+    public  void closeConnection() {
 
+        try {
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

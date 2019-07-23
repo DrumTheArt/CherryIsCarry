@@ -1,8 +1,11 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.POJO.Food;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinksExpenses;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFood;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -20,7 +23,7 @@ public class FoodDAOImpl implements FoodDAO {
     private QueryGeneratorFood query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private DbConnection connection;
+    private IdbConnection connection;
 
     public FoodDAOImpl() {
 
@@ -28,6 +31,15 @@ public class FoodDAOImpl implements FoodDAO {
         allFoodByOneProject = new ArrayList<>();
         query = new QueryGeneratorFood();
         connection = new DbConnection();
+
+    }
+
+    public FoodDAOImpl(Connection connectToTestDatabase) {
+
+        aFood = new Food();
+        allFoodByOneProject = new ArrayList<>();
+        query = new QueryGeneratorFood();
+        this.connection = new TestDBConnection();
 
     }
 

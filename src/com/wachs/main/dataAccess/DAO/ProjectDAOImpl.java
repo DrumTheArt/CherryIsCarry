@@ -1,8 +1,12 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.POJO.Prepaid;
 import com.wachs.main.POJO.Project;
+import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
@@ -22,7 +26,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     private QueryGeneratorProject query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private DbConnection connection;
+    private IdbConnection connection;
 
     public ProjectDAOImpl() {
 
@@ -31,6 +35,16 @@ public class ProjectDAOImpl implements ProjectDAO {
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorProject();
         connection = new DbConnection();
+
+    }
+
+    public ProjectDAOImpl(Connection connectToTestDatabase) {
+
+        aSingleProject = new Project();
+        allProjects = new ArrayList<>();
+        convertString = new ConverterStringForDataBase();
+        query = new QueryGeneratorProject();
+        this.connection = new TestDBConnection();
 
     }
 

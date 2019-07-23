@@ -1,8 +1,9 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.FoodExpense;
+import com.wachs.main.POJO.FoodExpense;
 import com.wachs.main.dataAccess.DAO.FoodExpensesDAO;
 import com.wachs.main.dataAccess.DAO.FoodExpensesDAOImpl;
+
 import java.util.ArrayList;
 
 public class FoodExpenseModel {

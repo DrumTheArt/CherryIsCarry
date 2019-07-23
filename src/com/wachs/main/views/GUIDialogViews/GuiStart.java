@@ -1,6 +1,6 @@
 package com.wachs.main.views.GUIDialogViews;
 
-import com.wachs.main.controllerLayer.ControllerMainGUI;
+import com.wachs.main.controller.ControllerMainGUI;
 import com.wachs.main.models.AllGuestsModel;
 import com.wachs.main.models.GuestModel;
 import com.wachs.main.models.ProjectModel;

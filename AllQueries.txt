@@ -1,18 +1,4 @@
-INSERT INTO TBL_DRINKS(FK_id,INT_nights,ID_guest,ID_project) VALUES (? ,3,1,1)
-SELECT * FROM TBL_DRINKS where = ID_project = 1
-SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_DRINKS WHERE ID_guest = 1 AND ID_project = 1
-UPDATE TBL_DRINKS SET INT_nights = 5 WHERE ID_guest = 1 AND ID_project = 1
-DELETE FROM TBL_DRINKS WHERE ID_guest=1 AND ID_project = 1
-INSERT INTO TBL_DRINKEXPENSE(FK_id,REAL_spend,TXT_reason,TXT_when,ID_guest,ID_project) VALUES (? ,200.0,'The reason','01.01.2019',1,1)
-SELECT * FROM TBL_DRINKEXPENSE WHERE ID_project = 1
-SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_DRINKEXPENSE WHERE ID_guest = 1 AND ID_project = 1
-UPDATE TBL_DRINKEXPENSE SET REAL_spend = 800.0 ,TXT_reason='The second new reason' ,TXT_when = '01.12.2019' WHERE ID_guest = 1 AND ID_project = 1 AND REAL_spend = 200.0 AND TXT_reason = 'The reason' AND TXT_when = '01.01.2019'
-DELETE FROM TBL_DRINKEXPENSE WHERE ID_guest=1 AND ID_project = 1 AND REAL_spend = 800.0 AND TXT_reason = 'The second new reason' AND TXT_when = '01.12.2019'
-INSERT INTO TBL_FOOD(FK_id,INT_nights,ID_guest,ID_project) VALUES (? ,'3',1,1)
-SELECT * FROM TBL_FOOD where ID_project = 1
-SELECT FK_id, INT_nights, ID_guest, ID_project from TBL_FOOD WHERE ID_guest = 1 AND ID_project = 1
-UPDATE TBL_FOOD SET INT_nights = 3 WHERE ID_guest = 1 AND ID_project = 1
-DELETE FROM TBL_FOOD WHERE ID_guest=1 AND ID_project = 1
+
 INSERT INTO TBL_FOODEXPENSE(FK_id,REAL_spend,TXT_reason,TXT_when,ID_guest,ID_project) VALUES (? ,200.0,'The reason','01.01.2019',1,1)
 SELECT * FROM TBL_FOODEXPENSE WHERE ID_project = 1
 SELECT FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project from TBL_FOODEXPENSE WHERE ID_guest = 1 AND ID_project = 1

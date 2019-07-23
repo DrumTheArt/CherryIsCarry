@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Prepaid;
+import com.wachs.main.POJO.Prepaid;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
@@ -65,7 +65,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.FetchQueryAllPrepaidOneProject(idProject);
+            String queryCommand = query.fetchQueryAllPrepaidOneProject(idProject);
             statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 

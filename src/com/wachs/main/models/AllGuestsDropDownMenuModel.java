@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Guest;
+import com.wachs.main.POJO.Guest;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

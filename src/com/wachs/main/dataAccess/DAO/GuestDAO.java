@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Guest;
+import com.wachs.main.POJO.Guest;
 
 import java.util.ArrayList;
 

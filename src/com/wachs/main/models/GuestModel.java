@@ -2,7 +2,7 @@
 
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.*;
+import com.wachs.main.POJO.*;
 import com.wachs.main.dataAccess.DAO.*;
 
 import java.util.ArrayList;

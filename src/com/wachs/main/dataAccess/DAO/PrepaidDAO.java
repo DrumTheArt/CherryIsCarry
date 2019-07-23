@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Prepaid;
+import com.wachs.main.POJO.Prepaid;
 
 import java.util.ArrayList;
 

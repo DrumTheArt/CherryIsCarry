@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DropAndCreateTableDB implements ITableDBScript {
+public class DropAndCreateTableDB {
 
     private Statement st;
     private StringBuffer queryCreateTableCommands;
@@ -47,11 +47,8 @@ public class DropAndCreateTableDB implements ITableDBScript {
         JOptionPane.showMessageDialog(null,"Die Datenbank wurde gelöscht und neu aufgesetzt");
     }
 
-
     private String getSQLScriptFilePath() {
         String absPath = new File("").getAbsolutePath();
         return absPath + "//sources//database/CREATE_TABLE.sql";
     }
-
 }
-

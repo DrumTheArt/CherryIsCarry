@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.POJO.Stay;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;

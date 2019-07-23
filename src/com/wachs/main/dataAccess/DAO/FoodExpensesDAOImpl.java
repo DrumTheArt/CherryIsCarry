@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.FoodExpense;
+import com.wachs.main.POJO.FoodExpense;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;

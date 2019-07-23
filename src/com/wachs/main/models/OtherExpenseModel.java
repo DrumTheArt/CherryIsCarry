@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.OtherExpense;
+import com.wachs.main.POJO.OtherExpense;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
 import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
 

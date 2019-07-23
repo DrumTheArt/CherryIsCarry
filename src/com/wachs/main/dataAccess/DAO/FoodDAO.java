@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Food;
+import com.wachs.main.POJO.Food;
 
 import java.util.ArrayList;
 

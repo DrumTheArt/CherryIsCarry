@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Project;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

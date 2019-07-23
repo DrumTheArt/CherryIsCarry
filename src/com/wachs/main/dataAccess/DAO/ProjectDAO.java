@@ -1,8 +1,7 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Project;
+import com.wachs.main.POJO.Project;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProjectDAO {

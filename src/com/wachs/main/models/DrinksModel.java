@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Drinks;
+import com.wachs.main.POJO.Drinks;
 import com.wachs.main.dataAccess.DAO.DrinksDAO;
 import com.wachs.main.dataAccess.DAO.DrinksDAOImpl;
 

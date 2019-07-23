@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Prepaid;
+import com.wachs.main.POJO.Prepaid;
 import com.wachs.main.dataAccess.DAO.PrepaidDAO;
 import com.wachs.main.dataAccess.DAO.PrepaidDAOImpl;
 

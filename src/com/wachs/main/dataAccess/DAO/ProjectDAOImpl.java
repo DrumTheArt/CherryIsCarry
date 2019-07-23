@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.businessObjects.Project;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
@@ -92,7 +92,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     @Override
     public ArrayList findAllProjects() {
 
-        String queryCommand = query.FetchQueryAllProjects();
+        String queryCommand = query.fetchQueryAllProjects();
 
         try {
 

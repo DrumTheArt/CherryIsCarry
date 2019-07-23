@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Project;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.DAO.ProjectDAO;
 import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
 

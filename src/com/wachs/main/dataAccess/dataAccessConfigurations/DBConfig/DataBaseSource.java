@@ -21,6 +21,4 @@ public class DataBaseSource {
         JOptionPane.showMessageDialog(null,"Die Datenbank dieser Anwendung " +
                 "liegt unter: " + DATABASEPATH.getAbsolutePath()+ "/" + DATABASENAME);
     }
-
 }
-

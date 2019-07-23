@@ -22,7 +22,7 @@ public class QueryGeneratorProject {
         return query;
     }
 
-    public String FetchQueryAllProjects() {
+    public String fetchQueryAllProjects() {
 
         String query = "SELECT * FROM " + TABLENAME;
 

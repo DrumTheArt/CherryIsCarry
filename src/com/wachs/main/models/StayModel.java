@@ -1,6 +1,6 @@
 package com.wachs.main.models;
 
-import com.wachs.main.businessObjects.Stay;
+import com.wachs.main.POJO.Stay;
 import com.wachs.main.dataAccess.DAO.StayDAO;
 import com.wachs.main.dataAccess.DAO.StayDAOImpl;
 

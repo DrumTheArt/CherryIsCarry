@@ -8,7 +8,7 @@ public class QueryGeneratorPrepaid {
     public static String COLUMN3 = "ID_guest";
     public static String COLUMN4 = "ID_project";
 
-    public String FetchQueryAllPrepaidOneProject(int idProject) {
+    public String fetchQueryAllPrepaidOneProject(int idProject) {
 
         String query = "SELECT * FROM " + TABLENAME + " WHERE " + COLUMN4 + " = " + idProject;
 

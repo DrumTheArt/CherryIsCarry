@@ -13,6 +13,7 @@ public class TblFoodExpenseColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
     private boolean TblColumnTitleOrderValidate = false;
+    private DbConnection connection = new DbConnection();
 
     public TblFoodExpenseColumnValidate() throws SQLException {
 
@@ -23,7 +24,7 @@ public class TblFoodExpenseColumnValidate implements IDbColumnValidator {
     private boolean isColumnOrderValidate() throws SQLException {
 
         String query = "SELECT * FROM " + TABLENAME;
-        statement = DbConnection.getConnection().createStatement();
+        statement = connection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
 
         ResultSetMetaData rsmd = result.getMetaData();

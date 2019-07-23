@@ -19,7 +19,7 @@ public class PrepaidModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new PrepaidDAOImpl();
-        prepaidSearchedGuest = newDAO.findPrepaidByOneGuest(idGuest, idProject);
+        prepaidSearchedGuest = newDAO.fetchPrepaidOneGuest(idGuest, idProject);
 
         this.idGuest = prepaidSearchedGuest.getIdGuest();
         this.idProject = prepaidSearchedGuest.getIdProject();
@@ -35,10 +35,10 @@ public class PrepaidModel {
         prepaidSearchedGuest.setPrepaid(prepaidValue);
         if (prepaidSearchedGuest == null) {
 
-            newDAO.insertPrepaidForOneGuest(idGuest, idProject, prepaidValue);
+            newDAO.insertPrepaidOneGuest(idGuest, idProject, prepaidValue);
         } else {
 
-            newDAO.updatePrepaidForOneGuest(idGuest, idProject, prepaidValue);
+            newDAO.updatePrepaidOneGuest(idGuest, idProject, prepaidValue);
         }
     }
 }

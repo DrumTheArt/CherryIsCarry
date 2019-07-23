@@ -3,8 +3,10 @@ package com.wachs.main.dataAccess.DAO;
 import com.wachs.main.POJO.Drinks;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,20 +21,23 @@ public class DrinksDAOImpl implements DrinksDAO {
     private QueryGeneratorDrinks query;
     private Statement queryStatement;
     private ResultSet queryResult;
+    private IdbConnection connection;
 
     public DrinksDAOImpl() {
 
         this.singleDrink = new Drinks();
         query = new QueryGeneratorDrinks();
         this.allDrinksOneProject = new ArrayList<>();
+        this.connection = new DbConnection();
+
 
     }
 
-    public Drinks findDrinksOneGuest(int idGuest, int idProject) {
+    public Drinks fetchDrinksOneGuest(int idGuest, int idProject) {
 
         try {
 
-            queryStatement = getSQLStatement();
+            queryStatement = createSQLStatement();
             String queryCommand = query.fetchQueryOneGuest(idGuest, idProject);
             queryResult = queryStatement.executeQuery(queryCommand);
 
@@ -52,12 +57,12 @@ public class DrinksDAOImpl implements DrinksDAO {
         return singleDrink;
     }
 
-    public ArrayList findAllDrinksOneProject(int idProject) {
+    public ArrayList fetchAllDrinksOneProject(int idProject) {
 
         try {
 
             String queryCommand = query.fetchAllOneProject(idProject);
-            queryStatement = getSQLStatement();
+            queryStatement = createSQLStatement();
             queryResult = queryStatement.executeQuery(queryCommand);
 
             while (queryResult.next()) {
@@ -68,7 +73,7 @@ public class DrinksDAOImpl implements DrinksDAO {
 
             queryStatement.close();
             queryResult.close();
-            DbConnection.closeConnection();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -84,14 +89,14 @@ public class DrinksDAOImpl implements DrinksDAO {
         try {
 
             String queryCommand = query.updateQueryForOneGuest(idGuest, idProject, newNights);
-            queryStatement = getSQLStatement();
+            queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
             queryStatement.close();
-            DbConnection.closeConnection();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -106,14 +111,14 @@ public class DrinksDAOImpl implements DrinksDAO {
         try {
 
             String queryCommand = query.deleteQueryOneGuest(idGuest, idProject);
-            queryStatement = getSQLStatement();
+            queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
             queryStatement.close();
-            DbConnection.closeConnection();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -125,7 +130,7 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     public void insertDrinksOneGuest(int idGuest, int idProject, int nights) {
 
-        try (Statement statement = getSQLStatement()) {
+        try (Statement statement = createSQLStatement()) {
 
             String queryCommand = query.insertQueryOneGuest(idGuest, idProject, nights);
             statement.executeUpdate(queryCommand);
@@ -134,7 +139,7 @@ public class DrinksDAOImpl implements DrinksDAO {
             ApplicationLogger.loggingQueries(query.deleteQueryOneGuest(idGuest, idProject));
 
             statement.close();
-            DbConnection.closeConnection();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -143,8 +148,24 @@ public class DrinksDAOImpl implements DrinksDAO {
         }
     }
 
-    private Statement getSQLStatement() throws SQLException {
-        return DbConnection.getConnection().createStatement();
+    private Connection openConnection() throws SQLException {
+
+        return connection.getConnection();
+
+    }
+
+    private void closingAllConnections() throws SQLException {
+
+        queryStatement.close();
+        queryResult.close();
+        connection.closeConnection();
+
+    }
+
+    private Statement createSQLStatement() throws SQLException {
+
+        return this.openConnection().createStatement();
+
     }
 
     private void createDrinkObject(int idGuest, int idProject, int FK_id, int nights) {
@@ -154,9 +175,4 @@ public class DrinksDAOImpl implements DrinksDAO {
         singleDrink.setIdProject(idProject);
     }
 
-    private void closingAllConnections() throws SQLException {
-        queryResult.close();
-        queryStatement.close();
-        DbConnection.closeConnection();
-    }
 }

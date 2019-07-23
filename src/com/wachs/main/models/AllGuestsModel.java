@@ -22,13 +22,13 @@ public class AllGuestsModel {
 
     private void createModel(String nameProject){
 
-        selectedProject = new ProjectDAOImpl().findOneProject(nameProject);
+        selectedProject = new ProjectDAOImpl().fetchOneProject(nameProject);
         selectedProjectID = selectedProject.getPK_id();
 
-        allDrinksToProject = new DrinksExpensesDAOImpl().findAllDrinksExpensesByOneProject(selectedProjectID);
-        allFoodToProject = new FoodExpensesDAOImpl().findAllFoodExpensesByOneProject(selectedProjectID);
-        allPrepaidToProject = new PrepaidDAOImpl().findAllPrepaidByOneProject(selectedProjectID);
-        allOtherExpensesToProject = new OtherExpensesDAOImpl().findAllOtherExpensesByOneProject(selectedProjectID);
+        allDrinksToProject = new DrinksExpensesDAOImpl().fetchAllDrinksExpensesOneProject(selectedProjectID);
+        allFoodToProject = new FoodExpensesDAOImpl().fetchAllFoodExpensesOneProject(selectedProjectID);
+        allPrepaidToProject = new PrepaidDAOImpl().fetchAllPrepaidOneProject(selectedProjectID);
+        allOtherExpensesToProject = new OtherExpensesDAOImpl().fetchAllOtherExpensesOneProject(selectedProjectID);
 
     }
 

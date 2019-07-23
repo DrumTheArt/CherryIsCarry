@@ -6,6 +6,7 @@ import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnect
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,8 +20,9 @@ public class GuestDAOImpl implements GuestDAO {
     private Guest aGuest;
     private ConverterStringForDataBase convertString;
     private QueryGeneratorGuest query;
-    private Statement statement;
-    private ResultSet result;
+    private Statement queryStatement;
+    private ResultSet queryResult;
+    private DbConnection connection;
 
     public GuestDAOImpl() {
 
@@ -28,11 +30,12 @@ public class GuestDAOImpl implements GuestDAO {
         allGuestByOneProject = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorGuest();
+        connection = new DbConnection();
 
     }
 
     @Override
-    public Guest findOneGuestByOneProject(String name, int idHouse) {
+    public Guest fetchOneGuestOneProject(String name, int idHouse) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
@@ -40,13 +43,13 @@ public class GuestDAOImpl implements GuestDAO {
         try {
 
             String queryCommand = query.fetchQueryOneGuestOneProject(name, idHouse);
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
             //Get db-attributes
-            int PK_id = result.getInt(1);
-            int idProject = result.getInt(2);
-            String guestName = result.getString(3);
+            int PK_id = queryResult.getInt(1);
+            int idProject = queryResult.getInt(2);
+            String guestName = queryResult.getString(3);
 
             //Set db-attributes into GuestObject
             createGuestObject(PK_id, idProject, guestName);
@@ -70,22 +73,18 @@ public class GuestDAOImpl implements GuestDAO {
         return aGuest;
     }
 
-    private Statement getSQLStatement() throws SQLException {
-        return DbConnection.getConnection().createStatement();
-    }
-
     @Override
-    public ArrayList findAllGuestsByOneProject(int idProject) {
+    public ArrayList fetchAllGuestsOneProject(int idProject) {
 
         try {
 
             String queryCommand = query.fetchQueryAllGuestsOneProject(idProject);
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            while (result.next()) {
+            while (queryResult.next()) {
 
-                allGuestByOneProject.add(new Guest(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getString(COLUMN3)));
+                allGuestByOneProject.add(new Guest(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getString(COLUMN3)));
 
             }
 
@@ -109,7 +108,7 @@ public class GuestDAOImpl implements GuestDAO {
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
     @Override
-    public void insertGuestForOneProject(int idProject, String guestName) {
+    public void insertGuestOneProject(int idProject, String guestName) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         guestName = convertString.convertString(guestName);
@@ -117,8 +116,8 @@ public class GuestDAOImpl implements GuestDAO {
         try {
 
             String queryCommand = query.insertQueryGuestOneProject(guestName, idProject);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -141,7 +140,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void updateGuestForOneProject(int oldId, String guestName, int idProject) {
+    public void updateGuestOneProject(int oldId, String guestName, int idProject) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         guestName = convertString.convertString(guestName);
@@ -149,8 +148,8 @@ public class GuestDAOImpl implements GuestDAO {
         try {
 
             String queryCommand = query.updateQueryGuestOneProject(oldId, guestName, idProject);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -172,7 +171,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public void deleteGuestForOneProject(String guestName, int idProject) {
+    public void deleteGuestOneProject(String guestName, int idProject) {
 
 
         //Set firstLetter to upperCase and set last to lowerLetters
@@ -181,8 +180,8 @@ public class GuestDAOImpl implements GuestDAO {
         try {
 
             String queryCommand = query.deleteQueryGuestOneProject(guestName, idProject);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -203,11 +202,26 @@ public class GuestDAOImpl implements GuestDAO {
         }
     }
 
-    private void closingAllConnections() throws SQLException {
-        statement.close();
-        result.close();
-        DbConnection.closeConnection();
+    private Connection openConnection() throws SQLException {
+
+        return connection.getConnection();
+
     }
+
+    private void closingAllConnections() throws SQLException {
+
+        queryStatement.close();
+        queryResult.close();
+        connection.closeConnection();
+
+    }
+
+    private Statement createSQLStatement() throws SQLException {
+
+        return this.openConnection().createStatement();
+
+    }
+
 
     private void createGuestObject(int PK_id, int idProject, String guestName) {
         aGuest.setPK_id(PK_id);

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface FoodDAO {
 
-    Food findFoodByOneGuest(int IdGuest, int idProject);
+    Food fetchFoodByOneGuest(int IdGuest, int idProject);
 
-    ArrayList findAllFoodByOneProject(int idProject);
+    ArrayList fetchAllFoodByOneProject(int idProject);
 
-    void updateFoodForOneGuest(int idGuest, int idProject, int newNights);
+    void updateFoodOneGuest(int idGuest, int idProject, int newNights);
 
-    void deleteFoodForOneGuest(int idGuest, int idProject);
+    void deleteFoodOneGuest(int idGuest, int idProject);
 
-    void insertFoodForOneGuest(int idGuest, int idProject, int nights);
+    void insertFoodOneGuest(int idGuest, int idProject, int nights);
 }

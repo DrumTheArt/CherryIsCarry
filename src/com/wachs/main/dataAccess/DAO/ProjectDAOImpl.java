@@ -6,6 +6,7 @@ import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnect
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,8 +20,9 @@ public class ProjectDAOImpl implements ProjectDAO {
     private Project aSingleProject;
     private ConverterStringForDataBase convertString;
     private QueryGeneratorProject query;
-    private Statement statement;
-    private ResultSet result;
+    private Statement queryStatement;
+    private ResultSet queryResult;
+    private DbConnection connection;
 
     public ProjectDAOImpl() {
 
@@ -28,11 +30,12 @@ public class ProjectDAOImpl implements ProjectDAO {
         allProjects = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorProject();
+        connection = new DbConnection();
 
     }
 
     @Override
-    public Project findOneProject(String name) {
+    public Project fetchOneProject(String name) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         name = convertString.convertString(name);
@@ -41,14 +44,14 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
             //Get db-attributes
-            int pk_id = result.getInt(1);
-            String txt_name = result.getString(2);
-            double real_price = result.getDouble(3);
-            double reaL_deposite = result.getDouble(4);
+            int pk_id = queryResult.getInt(1);
+            String txt_name = queryResult.getString(2);
+            double real_price = queryResult.getDouble(3);
+            double reaL_deposite = queryResult.getDouble(4);
 
             //Set db-attributes into GuestObject
             createProjectObject(pk_id, txt_name, real_price, reaL_deposite);
@@ -72,36 +75,19 @@ public class ProjectDAOImpl implements ProjectDAO {
         return aSingleProject;
     }
 
-    private void closingAllConnections() throws SQLException {
-        result.close();
-        statement.close();
-        DbConnection.closeConnection();
-    }
-
-    private void createProjectObject(int pk_id, String txt_name, double real_price, double reaL_deposite) {
-        aSingleProject.setPK_id(pk_id);
-        aSingleProject.setProjectName(txt_name);
-        aSingleProject.setProjectPrice(real_price);
-        aSingleProject.setProjectDeposite(reaL_deposite);
-    }
-
-    private Statement getSQLStatement() throws SQLException {
-        return DbConnection.getConnection().createStatement();
-    }
-
     @Override
-    public ArrayList findAllProjects() {
+    public ArrayList fetchAllProjects() {
 
         String queryCommand = query.fetchQueryAllProjects();
 
         try {
 
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            while (result.next()) {
+            while (queryResult.next()) {
 
-                allProjects.add(new Project(result.getInt(COLUMN1), result.getString(COLUMN2), result.getDouble(COLUMN3), result.getDouble(COLUMN4)));
+                allProjects.add(new Project(queryResult.getInt(COLUMN1), queryResult.getString(COLUMN2), queryResult.getDouble(COLUMN3), queryResult.getDouble(COLUMN4)));
 
             }
 
@@ -133,8 +119,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -164,8 +150,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -197,8 +183,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -218,5 +204,34 @@ public class ProjectDAOImpl implements ProjectDAO {
             e.printStackTrace();
 
         }
+    }
+
+    private Connection openConnection() throws SQLException {
+
+        return connection.getConnection();
+
+    }
+
+    private void closingAllConnections() throws SQLException {
+
+        queryStatement.close();
+        queryResult.close();
+        connection.closeConnection();
+
+    }
+
+    private Statement createSQLStatement() throws SQLException {
+
+        return this.openConnection().createStatement();
+
+    }
+
+    private void createProjectObject(int pk_id, String txt_name, double real_price, double reaL_deposite) {
+
+        aSingleProject.setPK_id(pk_id);
+        aSingleProject.setProjectName(txt_name);
+        aSingleProject.setProjectPrice(real_price);
+        aSingleProject.setProjectDeposite(reaL_deposite);
+
     }
 }

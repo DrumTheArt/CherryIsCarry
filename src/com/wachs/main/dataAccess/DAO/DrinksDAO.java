@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public interface DrinksDAO {
 
-    Drinks findDrinksOneGuest(int idGuest, int idProject);
+    Drinks fetchDrinksOneGuest(int idGuest, int idProject);
 
-    ArrayList findAllDrinksOneProject(int idProject);
+    ArrayList fetchAllDrinksOneProject(int idProject);
 
     void updateDrinksOneGuest(int idGuest, int idProject, int newNights);
 

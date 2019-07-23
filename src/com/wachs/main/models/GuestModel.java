@@ -44,11 +44,11 @@ public class GuestModel {
     private void createModel(String projectName, String guestName) {
 
         projectDAO = new ProjectDAOImpl();
-        searchedProject = projectDAO.findOneProject(projectName);
+        searchedProject = projectDAO.fetchOneProject(projectName);
         idProject = searchedProject.getPK_id();
 
         guestDAO = new GuestDAOImpl();
-        searchedGuest = guestDAO.findOneGuestByOneProject(guestName, idProject);
+        searchedGuest = guestDAO.fetchOneGuestOneProject(guestName, idProject);
         idGuest = searchedGuest.getPK_id();
 
         stayDAO = new StayDAOImpl();
@@ -59,23 +59,23 @@ public class GuestModel {
         otherExpensesDAO = new OtherExpensesDAOImpl();
 
         //get numbers of Guests
-        countGuestSelectedProject = guestDAO.findAllGuestsByOneProject(idProject).size();
+        countGuestSelectedProject = guestDAO.fetchAllGuestsOneProject(idProject).size();
 
         staySearchedGuest = new StayModel(idGuest, idProject);
         drinksSearchedGuest = new DrinksModel(idGuest, idProject);
         foodSearchedGuest = new FoodModel(idGuest, idProject);
         prepaidSearchedGuest = new PrepaidModel(idGuest, idProject);
 
-        staySelectedProject = stayDAO.findAllStayByOneProject(idProject);
-        drinksSelectedProject = drinksDAO.findAllDrinksOneProject(idProject);
-        drinksExpensesSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
-        foodExpensesSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
-        otherExpensesSearchedGuest = otherExpensesDAO.findOtherExpensesByOneGuest(idGuest, idProject);
-        allOtherExpensesSelectedProject = otherExpensesDAO.findAllOtherExpensesByOneProject(idProject);
+        staySelectedProject = stayDAO.fetchAllStayOneProject(idProject);
+        drinksSelectedProject = drinksDAO.fetchAllDrinksOneProject(idProject);
+        drinksExpensesSelectedProject = drinksExpensesDAO.fetchAllDrinksExpensesOneProject(idProject);
+        foodExpensesSelectedProject = foodExpensesDAO.fetchAllFoodExpensesOneProject(idProject);
+        otherExpensesSearchedGuest = otherExpensesDAO.fetchOtherExpensesOneGuest(idGuest, idProject);
+        allOtherExpensesSelectedProject = otherExpensesDAO.fetchAllOtherExpensesOneProject(idProject);
 
-        drinksExpensesSelectedProjectOneGuest = drinksExpensesDAO.findDrinksExpensesByOneGuest(idGuest, idProject);
-        foodExpensesSelectedProjectOneGuest = foodExpensesDAO.findFoodExpensesByOneGuest(idGuest, idProject);
-        foodSelectedProject = foodDAO.findAllFoodByOneProject(idProject);
+        drinksExpensesSelectedProjectOneGuest = drinksExpensesDAO.fetchDrinksExpensesOneGuest(idGuest, idProject);
+        foodExpensesSelectedProjectOneGuest = foodExpensesDAO.fetchFoodExpensesOneGuest(idGuest, idProject);
+        foodSelectedProject = foodDAO.fetchAllFoodByOneProject(idProject);
     }
 
     public int getSleepOverSelectedGuest() {
@@ -261,10 +261,10 @@ public class GuestModel {
 
     public void setNewGuest(String projectName, String guestName) {
 
-        int projectId = projectDAO.findOneProject(projectName).getPK_id();
+        int projectId = projectDAO.fetchOneProject(projectName).getPK_id();
         GuestDAOImpl newDAO = new GuestDAOImpl();
 
-        newDAO.insertGuestForOneProject(projectId, guestName);
+        newDAO.insertGuestOneProject(projectId, guestName);
     }
 
 }

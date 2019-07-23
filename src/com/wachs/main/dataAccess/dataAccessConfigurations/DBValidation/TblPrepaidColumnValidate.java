@@ -13,7 +13,7 @@ public class TblPrepaidColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
     private boolean TblColumnTitleOrderValidate = false;
-
+    private DbConnection connection = new DbConnection();
     public TblPrepaidColumnValidate() throws SQLException {
 
         TblColumnTitleOrderValidate = isColumnOrderValidate();
@@ -24,7 +24,7 @@ public class TblPrepaidColumnValidate implements IDbColumnValidator {
     public boolean isColumnOrderValidate() throws SQLException {
 
         String query = "SELECT * FROM " + TABLENAME;
-        statement = DbConnection.getConnection().createStatement();
+        statement = connection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
 
         ResultSetMetaData rsmd = result.getMetaData();

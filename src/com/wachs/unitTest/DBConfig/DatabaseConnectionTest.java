@@ -12,7 +12,13 @@ public class DatabaseConnectionTest {
     @Test
     public void getConnection_ShouldBeNotNull() {
 
-        Connection dbConnection = DbConnection.getConnection();
-        assertNotNull(dbConnection);
+        //Arrange
+        DbConnection connection = new DbConnection();
+
+        //Act
+        connection.getConnection();
+
+        //Assert
+        assertNotNull(connection);
     }
 }

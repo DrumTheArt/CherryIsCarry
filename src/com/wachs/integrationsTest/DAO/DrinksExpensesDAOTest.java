@@ -1,4 +1,4 @@
-package com.wachs.unitTest.DAO;
+package com.wachs.integrationsTest.DAO;
 
 public class DrinksExpensesDAOTest {
 

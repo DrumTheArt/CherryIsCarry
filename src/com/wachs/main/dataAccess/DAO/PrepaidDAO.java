@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface PrepaidDAO {
 
-    ArrayList findAllPrepaidByOneProject(int idProject);
+    ArrayList fetchAllPrepaidOneProject(int idProject);
 
-    Prepaid findPrepaidByOneGuest(int idGuest, int idProject);
+    Prepaid fetchPrepaidOneGuest(int idGuest, int idProject);
 
-    void insertPrepaidForOneGuest(int idGuest, int idProject, double prepaid);
+    void insertPrepaidOneGuest(int idGuest, int idProject, double prepaid);
 
-    void updatePrepaidForOneGuest(int idGuest, int idProject, double newPrepaid);
+    void updatePrepaidOneGuest(int idGuest, int idProject, double newPrepaid);
 
-    void deletePrepaidForOneGuest(int idGuest, int idProject);
+    void deletePrepaidOneGuest(int idGuest, int idProject);
 }

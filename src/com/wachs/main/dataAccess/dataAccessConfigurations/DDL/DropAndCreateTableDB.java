@@ -14,6 +14,7 @@ public class DropAndCreateTableDB {
 
     private Statement st;
     private StringBuffer queryCreateTableCommands;
+    private DbConnection connection;
 
     public DropAndCreateTableDB() {
 
@@ -39,10 +40,10 @@ public class DropAndCreateTableDB {
             reader.close();
         }
 
-        st = DbConnection.getConnection().createStatement();
+        st = connection.getConnection().createStatement();
         st.executeUpdate(String.valueOf(queryCreateTableCommands));
         st.close();
-        DbConnection.closeConnection();
+        connection.closeConnection();
 
         JOptionPane.showMessageDialog(null,"Die Datenbank wurde gelöscht und neu aufgesetzt");
     }

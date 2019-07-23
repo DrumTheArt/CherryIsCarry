@@ -1,37 +1,17 @@
 package com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection;
 
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConfig.DataBaseSource;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnection {
+public class DbConnection implements IdbConnection{
 
+    public Connection getConnection() {
 
-    private static Connection connection;
+        return new ConnectionFactory().createConnection();
 
-    public static Connection getConnection() {
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(DataBaseSource.getDataBaseLink());
-
-            //Activate Foreign-Key Support on each call (not supported by SQLite ... if you change DBMS, you have to delete this)
-            connection.createStatement().execute("PRAGMA foreign_keys = ON");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-
-        }
-
-        return connection;
     }
 
-    public static void closeConnection() {
+    public  void closeConnection() {
 
         try {
             connection.close();

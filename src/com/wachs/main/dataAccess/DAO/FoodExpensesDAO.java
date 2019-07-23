@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public interface FoodExpensesDAO {
 
-    ArrayList findFoodExpensesByOneGuest(int idGuest, int idProject);
+    ArrayList fetchFoodExpensesOneGuest(int idGuest, int idProject);
 
-    ArrayList findAllFoodExpensesByOneProject(int idProject);
+    ArrayList fetchAllFoodExpensesOneProject(int idProject);
 
-    void deleteFoodExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when);
+    void deleteFoodExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when);
 
-    void updateFoodExpensesForOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
+    void updateFoodExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
 
-    void insertFoodExpensesForOneGuest(int idGuest, int idProject, double spend, String reason, String when);
+    void insertFoodExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when);
 
 }

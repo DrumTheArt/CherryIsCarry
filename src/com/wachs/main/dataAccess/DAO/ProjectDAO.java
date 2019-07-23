@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public interface ProjectDAO {
 
-    Project findOneProject(String name);
+    Project fetchOneProject(String name);
 
-    ArrayList findAllProjects();
+    ArrayList fetchAllProjects();
 
     void insertProject(String projectName, double projectPrice, double projectDeposite);
 

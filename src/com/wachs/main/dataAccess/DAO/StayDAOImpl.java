@@ -5,6 +5,7 @@ import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,28 +19,30 @@ public class StayDAOImpl implements StayDAO {
     private ArrayList<Stay> AllStayByOneProject;
     private Stay aStay;
     private QueryGeneratorStay query;
-    private Statement statement;
-    private ResultSet result;
+    private Statement queryStatement;
+    private ResultSet queryResult;
+    private DbConnection connection;
 
     public StayDAOImpl() {
 
         aStay = new Stay();
         AllStayByOneProject = new ArrayList<>();
         query = new QueryGeneratorStay();
+        connection = new DbConnection();
     }
 
     @Override
-    public Stay findStayByOneGuest(int idGuest, int idProject) {
+    public Stay fetchStayOneGuest(int idGuest, int idProject) {
 
         String queryCommand = query.fetchQueryStayOneGuest(idGuest, idProject);
 
         try {
 
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            int FK_id = result.getInt(1);
-            int nights = result.getInt(2);
+            int FK_id = queryResult.getInt(1);
+            int nights = queryResult.getInt(2);
 
             createStayObject(idGuest, idProject, FK_id, nights);
 
@@ -63,17 +66,17 @@ public class StayDAOImpl implements StayDAO {
     }
 
     @Override
-    public ArrayList findAllStayByOneProject(int idProject) {
+    public ArrayList fetchAllStayOneProject(int idProject) {
 
         try {
 
             String queryCommand = query.fetchAllStayOneProject(idProject);
-            statement = getSQLStatement();
-            result = statement.executeQuery(queryCommand);
+            queryStatement = createSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            while (result.next()) {
+            while (queryResult.next()) {
 
-                AllStayByOneProject.add(new Stay(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+                AllStayByOneProject.add(new Stay(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getInt(COLUMN3), queryResult.getInt(COLUMN4)));
 
             }
 
@@ -97,13 +100,13 @@ public class StayDAOImpl implements StayDAO {
     }
 
     @Override
-    public void updateStayForOneGuest(int idGuest, int idProject, int newNights) {
+    public void updateStayOneGuest(int idGuest, int idProject, int newNights) {
 
         try {
 
             String queryCommand = query.updateQueryStayOneGuest(idGuest, idProject, newNights);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -127,13 +130,13 @@ public class StayDAOImpl implements StayDAO {
     }
 
     @Override
-    public void deleteStayForOneGuest(int idGuest, int idProject) {
+    public void deleteStayOneGuest(int idGuest, int idProject) {
 
         try {
 
             String queryCommand = query.deleteQueryStayOneGuest(idGuest, idProject);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -156,13 +159,13 @@ public class StayDAOImpl implements StayDAO {
     }
 
     @Override
-    public void insertStayForOneGuest(int idGuest, int idProject, int nights) {
+    public void insertStayOneGuest(int idGuest, int idProject, int nights) {
 
         try {
 
             String queryCommand = query.insertQueryStayOneGuest(idGuest, idProject, nights);
-            statement = getSQLStatement();
-            statement.executeUpdate(queryCommand);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
@@ -183,21 +186,32 @@ public class StayDAOImpl implements StayDAO {
 
         }
     }
+
+    private Connection openConnection() throws SQLException {
+
+        return connection.getConnection();
+
+    }
+
+    private void closingAllConnections() throws SQLException {
+
+        queryStatement.close();
+        queryResult.close();
+        connection.closeConnection();
+
+    }
+
+    private Statement createSQLStatement() throws SQLException {
+
+        return this.openConnection().createStatement();
+
+    }
+
 
     private void createStayObject(int idGuest, int idProject, int FK_id, int nights) {
         aStay.setPK_id(FK_id);
         aStay.setNights(nights);
         aStay.setIdGuest(idGuest);
         aStay.setIdProject(idProject);
-    }
-
-    private Statement getSQLStatement() throws SQLException {
-        return DbConnection.getConnection().createStatement();
-    }
-
-    private void closingAllConnections() throws SQLException {
-        statement.close();
-        result.close();
-        DbConnection.closeConnection();
     }
 }

@@ -1,4 +1,4 @@
-package com.wachs.unitTest.DAO;
+package com.wachs.integrationsTest.DAO;
 
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBValidation.IDbColumnValidator;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBValidation.TblGuestColumnValidate;

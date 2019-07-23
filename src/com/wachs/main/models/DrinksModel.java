@@ -20,7 +20,7 @@ public class DrinksModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new DrinksDAOImpl();
-        staySearchedGuest = newDAO.findDrinksOneGuest(idGuest, idProject);
+        staySearchedGuest = newDAO.fetchDrinksOneGuest(idGuest, idProject);
 
         this.idGuest = staySearchedGuest.getIdGuest();
         this.idProject = staySearchedGuest.getIdProject();

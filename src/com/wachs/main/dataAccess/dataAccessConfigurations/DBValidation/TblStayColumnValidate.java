@@ -13,6 +13,7 @@ public class TblStayColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
     private boolean TblColumnTitleOrderValidate = false;
+    private DbConnection connection = new DbConnection();
 
     public TblStayColumnValidate() throws SQLException {
 
@@ -22,7 +23,7 @@ public class TblStayColumnValidate implements IDbColumnValidator {
 
     private boolean isColumnOrderValidate() throws SQLException {
         String query = "SELECT * FROM " + TABLENAME;
-        statement = DbConnection.getConnection().createStatement();
+        statement = connection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(query);
 
         ResultSetMetaData rsmd = result.getMetaData();

@@ -23,8 +23,8 @@ public class OtherExpenseModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new OtherExpensesDAOImpl();
-        otherExpensesSearchedGuest = newDAO.findOtherExpensesByOneGuest(idGuest, idProject);
-        otherExpensesSearchedProject = newDAO.findAllOtherExpensesByOneProject(idProject);
+        otherExpensesSearchedGuest = newDAO.fetchOtherExpensesOneGuest(idGuest, idProject);
+        otherExpensesSearchedProject = newDAO.fetchAllOtherExpensesOneProject(idProject);
 
         if (otherExpensesSearchedGuest != null) {
 
@@ -70,7 +70,7 @@ public class OtherExpenseModel {
 
         otherExpensesSearchedGuest.add(new OtherExpense(newFK, price, reason, when, idGuest, idProject));
 
-        newDAO.insertOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
+        newDAO.insertOtherExpensesOneGuest(idGuest, idProject, price, reason, when);
 
     }
 
@@ -89,7 +89,7 @@ public class OtherExpenseModel {
             }
         }
 
-        newDAO.deleteOtherExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+        newDAO.deleteOtherExpensesOneGuest(idGuest, idProject, spend, reason, when);
 
     }
 

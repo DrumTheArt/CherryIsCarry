@@ -22,7 +22,7 @@ public class AllProjectsDropDownMenuModel {
 
     private void setProjects() {
 
-        allProjectsAsList = new ProjectDAOImpl().findAllProjects();
+        allProjectsAsList = new ProjectDAOImpl().fetchAllProjects();
 
         getAllProjects = FXCollections.observableArrayList();
 

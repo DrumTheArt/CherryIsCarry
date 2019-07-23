@@ -22,7 +22,7 @@ public class FoodExpenseModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new FoodExpensesDAOImpl();
-        foodExpensesSearchedGuest = newDAO.findFoodExpensesByOneGuest(idGuest, idProject);
+        foodExpensesSearchedGuest = newDAO.fetchFoodExpensesOneGuest(idGuest, idProject);
 
         if (foodExpensesSearchedGuest != null) {
 
@@ -56,7 +56,7 @@ public class FoodExpenseModel {
 
         foodExpensesSearchedGuest.add(new FoodExpense(newFK, price, reason, when, idGuest, idProject));
 
-        newDAO.insertFoodExpensesForOneGuest(idGuest, idProject, price, reason, when);
+        newDAO.insertFoodExpensesOneGuest(idGuest, idProject, price, reason, when);
 
     }
 
@@ -69,7 +69,7 @@ public class FoodExpenseModel {
             }
         }
 
-        newDAO.deleteFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
+        newDAO.deleteFoodExpensesOneGuest(idGuest, idProject, spend, reason, when);
 
     }
 

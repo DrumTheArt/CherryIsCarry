@@ -19,7 +19,7 @@ public class StayModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new StayDAOImpl();
-        staySearchedGuest = newDAO.findStayByOneGuest(idGuest, idProject);
+        staySearchedGuest = newDAO.fetchStayOneGuest(idGuest, idProject);
 
         this.idGuest = staySearchedGuest.getIdGuest();
         this.idProject = staySearchedGuest.getIdProject();
@@ -36,10 +36,10 @@ public class StayModel {
 
         if (staySearchedGuest == null) {
 
-            newDAO.insertStayForOneGuest(idGuest, idProject, nights);
+            newDAO.insertStayOneGuest(idGuest, idProject, nights);
         } else {
 
-            newDAO.updateStayForOneGuest(idGuest, idProject, nights);
+            newDAO.updateStayOneGuest(idGuest, idProject, nights);
         }
     }
 }

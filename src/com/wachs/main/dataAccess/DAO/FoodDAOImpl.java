@@ -33,17 +33,14 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            String queryCommand = query.queryFindFoodByOneGuest(IdGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchQueryFoodOneGuest(IdGuest, idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
-            aFood.setPK_id(FK_id);
-            aFood.setNights(nights);
-            aFood.setIdGuest(IdGuest);
-            aFood.setIdProject(idProject);
+            createFoodObject(IdGuest, idProject, FK_id, nights);
 
         } catch (SQLException e) {
 
@@ -53,9 +50,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -71,8 +66,8 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            String queryCommand = query.queryFindAllFoodByOneProject(idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchAllQueryFoodOneProject(idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             while (result.next()) {
@@ -89,9 +84,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -107,12 +100,11 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            String queryCommand = query.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.updateQueryFoodOneGuest(idGuest, idProject, newNights);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -126,8 +118,8 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            String queryCommand = query.queryDeleteFoodForOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.deleteQueryFoodOneGuest(idGuest, idProject);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -141,8 +133,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -156,8 +147,8 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            String queryCommand = query.queryInsertFoodForOneGuest(idGuest, idProject, nights);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.insertQueryFoodOneGuest(idGuest, idProject, nights);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -171,13 +162,29 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+    }
+
+    private void createFoodObject(int IdGuest, int idProject, int FK_id, int nights) {
+        aFood.setPK_id(FK_id);
+        aFood.setNights(nights);
+        aFood.setIdGuest(IdGuest);
+        aFood.setIdProject(idProject);
+    }
+
+    private Statement getSQLStatement() throws SQLException {
+        return DbConnection.getConnection().createStatement();
+    }
+
+    private void closingAllConnections() throws SQLException {
+        result.close();
+        statement.close();
+        DbConnection.closeConnection();
     }
 }

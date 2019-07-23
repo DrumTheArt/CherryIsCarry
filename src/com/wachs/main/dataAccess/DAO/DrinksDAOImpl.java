@@ -14,39 +14,34 @@ import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay.*;
 
 public class DrinksDAOImpl implements DrinksDAO {
 
-    private ArrayList<Drinks> allDrinksByOneProject;
-    private Drinks aDrink;
+    private ArrayList<Drinks> allDrinksOneProject;
+    private Drinks singleDrink;
     private QueryGeneratorDrinks query;
-    private Statement statement;
-    private ResultSet result;
+    private Statement queryStatement;
+    private ResultSet queryResult;
 
     public DrinksDAOImpl() {
 
-        aDrink = new Drinks();
-        allDrinksByOneProject = new ArrayList<>();
+        this.singleDrink = new Drinks();
         query = new QueryGeneratorDrinks();
+        this.allDrinksOneProject = new ArrayList<>();
 
     }
 
-    public Drinks findDrinksByOneGuest(int idGuest, int idProject) {
+    public Drinks findDrinksOneGuest(int idGuest, int idProject) {
 
         try {
 
-            statement = DbConnection.getConnection().createStatement();
-            String queryCommand = query.queryFindDrinksByOneGuest(idGuest, idProject);
-            result = statement.executeQuery(queryCommand);
+            queryStatement = getSQLStatement();
+            String queryCommand = query.fetchQueryOneGuest(idGuest, idProject);
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            int FK_id = result.getInt(1);
-            int nights = result.getInt(2);
+            int FK_id = queryResult.getInt(1);
+            int nights = queryResult.getInt(2);
 
-            aDrink.setPK_id(FK_id);
-            aDrink.setNights(nights);
-            aDrink.setIdGuest(idGuest);
-            aDrink.setIdProject(idProject);
+            createDrinkObject(idGuest, idProject, FK_id, nights);
 
-            result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -54,25 +49,25 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         }
 
-        return aDrink;
+        return singleDrink;
     }
 
-    public ArrayList findAllDrinksByOneProject(int idProject) {
+    public ArrayList findAllDrinksOneProject(int idProject) {
 
         try {
 
-            String queryCommand = query.queryFindAllDrinksByOneProject(idProject);
-            statement = DbConnection.getConnection().createStatement();
-            result = statement.executeQuery(queryCommand);
+            String queryCommand = query.fetchAllOneProject(idProject);
+            queryStatement = getSQLStatement();
+            queryResult = queryStatement.executeQuery(queryCommand);
 
-            while (result.next()) {
+            while (queryResult.next()) {
 
-                allDrinksByOneProject.add(new Drinks(result.getInt(COLUMN1), result.getInt(COLUMN2), result.getInt(COLUMN3), result.getInt(COLUMN4)));
+                allDrinksOneProject.add(new Drinks(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getInt(COLUMN3), queryResult.getInt(COLUMN4)));
 
             }
 
-            statement.close();
-            result.close();
+            queryStatement.close();
+            queryResult.close();
             DbConnection.closeConnection();
 
         } catch (SQLException e) {
@@ -81,21 +76,21 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         }
 
-        return allDrinksByOneProject;
+        return allDrinksOneProject;
     }
 
-    public void updateDrinksForOneGuest(int idGuest, int idProject, int newNights) {
+    public void updateDrinksOneGuest(int idGuest, int idProject, int newNights) {
 
         try {
 
-            String queryCommand = query.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights);
-            statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(queryCommand);
+            String queryCommand = query.updateQueryForOneGuest(idGuest, idProject, newNights);
+            queryStatement = getSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
-            statement.close();
+            queryStatement.close();
             DbConnection.closeConnection();
 
         } catch (SQLException e) {
@@ -105,17 +100,39 @@ public class DrinksDAOImpl implements DrinksDAO {
         }
     }
 
-    public void deleteDrinksForOneGuest(int idGuest, int idProject) {
+    @Override
+    public void deleteDrinksOneGuest(int idGuest, int idProject) {
 
         try {
 
-            String queryCommand = query.queryDeleteDrinksForOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
-            statement.executeUpdate(queryCommand);
+            String queryCommand = query.deleteQueryOneGuest(idGuest, idProject);
+            queryStatement = getSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
 
             //Log the query
             ApplicationLogger.loggingQueries(queryCommand);
 
+            queryStatement.close();
+            DbConnection.closeConnection();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public void insertDrinksOneGuest(int idGuest, int idProject, int nights) {
+
+        try (Statement statement = getSQLStatement()) {
+
+            String queryCommand = query.insertQueryOneGuest(idGuest, idProject, nights);
+            statement.executeUpdate(queryCommand);
+
+            //Log the query
+            ApplicationLogger.loggingQueries(query.deleteQueryOneGuest(idGuest, idProject));
+
             statement.close();
             DbConnection.closeConnection();
 
@@ -126,23 +143,20 @@ public class DrinksDAOImpl implements DrinksDAO {
         }
     }
 
-    public void insertDrinksForOneGuest(int idGuest, int idProject, int nights) {
+    private Statement getSQLStatement() throws SQLException {
+        return DbConnection.getConnection().createStatement();
+    }
 
-        try (Statement statement = DbConnection.getConnection().createStatement()) {
+    private void createDrinkObject(int idGuest, int idProject, int FK_id, int nights) {
+        singleDrink.setPK_id(FK_id);
+        singleDrink.setNights(nights);
+        singleDrink.setIdGuest(idGuest);
+        singleDrink.setIdProject(idProject);
+    }
 
-            String queryCommand = query.queryInsertDrinksForOneGuest(idGuest, idProject, nights);
-            statement.executeUpdate(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(query.queryDeleteDrinksForOneGuest(idGuest, idProject));
-
-            statement.close();
-            DbConnection.closeConnection();
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
+    private void closingAllConnections() throws SQLException {
+        queryResult.close();
+        queryStatement.close();
+        DbConnection.closeConnection();
     }
 }

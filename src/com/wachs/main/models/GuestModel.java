@@ -67,7 +67,7 @@ public class GuestModel {
         prepaidSearchedGuest = new PrepaidModel(idGuest, idProject);
 
         staySelectedProject = stayDAO.findAllStayByOneProject(idProject);
-        drinksSelectedProject = drinksDAO.findAllDrinksByOneProject(idProject);
+        drinksSelectedProject = drinksDAO.findAllDrinksOneProject(idProject);
         drinksExpensesSelectedProject = drinksExpensesDAO.findAllDrinksExpensesByOneProject(idProject);
         foodExpensesSelectedProject = foodExpensesDAO.findAllFoodExpensesByOneProject(idProject);
         otherExpensesSearchedGuest = otherExpensesDAO.findOtherExpensesByOneGuest(idGuest, idProject);

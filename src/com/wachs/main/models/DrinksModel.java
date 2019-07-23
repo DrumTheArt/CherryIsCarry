@@ -20,7 +20,7 @@ public class DrinksModel {
     private void createModel(int idGuest, int idProject) {
 
         newDAO = new DrinksDAOImpl();
-        staySearchedGuest = newDAO.findDrinksByOneGuest(idGuest, idProject);
+        staySearchedGuest = newDAO.findDrinksOneGuest(idGuest, idProject);
 
         this.idGuest = staySearchedGuest.getIdGuest();
         this.idProject = staySearchedGuest.getIdProject();
@@ -38,10 +38,10 @@ public class DrinksModel {
 
         if (staySearchedGuest == null) {
 
-            newDAO.insertDrinksForOneGuest(idGuest, idProject, nights);
+            newDAO.insertDrinksOneGuest(idGuest, idProject, nights);
         } else {
 
-            newDAO.updateDrinksForOneGuest(idGuest, idProject, nights);
+            newDAO.updateDrinksOneGuest(idGuest, idProject, nights);
         }
     }
 }

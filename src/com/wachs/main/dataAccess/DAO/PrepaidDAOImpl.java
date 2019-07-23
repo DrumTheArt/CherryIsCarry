@@ -33,17 +33,14 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.queryFindPrepaidByOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchQueryPrepaidOneGuest(idGuest, idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             int FK_id = result.getInt(1);
             double prepaid = result.getDouble(2);
 
-            aPrepaid.setPK_id(FK_id);
-            aPrepaid.setPrepaid(prepaid);
-            aPrepaid.setIdGuest(idGuest);
-            aPrepaid.setIdProject(idProject);
+            createPrepaidObject(idGuest, idProject, FK_id, prepaid);
 
         } catch (SQLException e) {
 
@@ -53,9 +50,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -70,8 +65,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.queryFindAllPrepaidByOneProject(idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.FetchQueryAllPrepaidOneProject(idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             while (result.next()) {
@@ -88,9 +83,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -106,8 +99,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.queryInsertPrepaidForOneGuest(idGuest, idProject, prepaid);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.insertQueryPrepaidOneGuest(idGuest, idProject, prepaid);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -121,8 +114,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -136,8 +128,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrepaid);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.updateQueryPrepaidOneGuest(idGuest, idProject, newPrepaid);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -151,8 +143,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -166,8 +157,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            String queryCommand = query.queryDeletePrepaidForOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.deleteQueryPrepaidOneGuest(idGuest, idProject);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -181,13 +172,29 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+    }
+
+    private void createPrepaidObject(int idGuest, int idProject, int FK_id, double prepaid) {
+        aPrepaid.setPK_id(FK_id);
+        aPrepaid.setPrepaid(prepaid);
+        aPrepaid.setIdGuest(idGuest);
+        aPrepaid.setIdProject(idProject);
+    }
+
+    private void closingAllConnections() throws SQLException {
+        result.close();
+        statement.close();
+        DbConnection.closeConnection();
+    }
+
+    private Statement getSQLStatement() throws SQLException {
+        return DbConnection.getConnection().createStatement();
     }
 }

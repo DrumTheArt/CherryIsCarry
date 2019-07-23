@@ -58,11 +58,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesDrinks = new String[5];
 
-        allQueriesDrinks[0] = queryDrinks.queryInsertDrinksForOneGuest(idGuest, idProject, nights);
-        allQueriesDrinks[1] = queryDrinks.queryFindAllDrinksByOneProject(idProject);
-        allQueriesDrinks[2] = queryDrinks.queryFindDrinksByOneGuest(idGuest, idProject);
-        allQueriesDrinks[3] = queryDrinks.queryUpdateDrinksForOneGuest(idGuest, idProject, newNights);
-        allQueriesDrinks[4] = queryDrinks.queryDeleteDrinksForOneGuest(idGuest, idProject);
+        allQueriesDrinks[0] = queryDrinks.insertQueryOneGuest(idGuest, idProject, nights);
+        allQueriesDrinks[1] = queryDrinks.fetchAllOneProject(idProject);
+        allQueriesDrinks[2] = queryDrinks.fetchQueryOneGuest(idGuest, idProject);
+        allQueriesDrinks[3] = queryDrinks.updateQueryForOneGuest(idGuest, idProject, newNights);
+        allQueriesDrinks[4] = queryDrinks.deleteQueryOneGuest(idGuest, idProject);
 
         return allQueriesDrinks;
     }
@@ -71,11 +71,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesDrinksExpenses = new String[5];
 
-        allQueriesDrinksExpenses[0] = queryDrinksExpenses.queryInsertDrinksExpensesForOneGuest(idGuest, idProject, price, reason, when);
-        allQueriesDrinksExpenses[1] = queryDrinksExpenses.queryFindAllDrinksExpensesByOneProject(idProject);
-        allQueriesDrinksExpenses[2] = queryDrinksExpenses.queryFindDrinksExpensesByOneGuest(idGuest, idProject);
-        allQueriesDrinksExpenses[3] = queryDrinksExpenses.queryUpdateDrinksExpensesForOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
-        allQueriesDrinksExpenses[4] = queryDrinksExpenses.queryDeleteDrinksExpensesForOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
+        allQueriesDrinksExpenses[0] = queryDrinksExpenses.insertQueryDrinksExpensesOneGuest(idGuest, idProject, price, reason, when);
+        allQueriesDrinksExpenses[1] = queryDrinksExpenses.fetchAllQueryDrinksExpensesOneProject(idProject);
+        allQueriesDrinksExpenses[2] = queryDrinksExpenses.fetchDrinksExpensesOneGuest(idGuest, idProject);
+        allQueriesDrinksExpenses[3] = queryDrinksExpenses.updateQueryDrinksExpensesOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+        allQueriesDrinksExpenses[4] = queryDrinksExpenses.deleteQueryDrinksExpensesOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
 
         return allQueriesDrinksExpenses;
     }
@@ -84,11 +84,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesFood = new String[5];
 
-        allQueriesFood[0] = queryFood.queryInsertFoodForOneGuest(idGuest, idProject, nights);
-        allQueriesFood[1] = queryFood.queryFindAllFoodByOneProject(idProject);
-        allQueriesFood[2] = queryFood.queryFindFoodByOneGuest(idGuest, idProject);
-        allQueriesFood[3] = queryFood.queryUpdateFoodForOneGuest(idGuest, idProject, newNights);
-        allQueriesFood[4] = queryFood.queryDeleteFoodForOneGuest(idGuest, idProject);
+        allQueriesFood[0] = queryFood.insertQueryFoodOneGuest(idGuest, idProject, nights);
+        allQueriesFood[1] = queryFood.fetchAllQueryFoodOneProject(idProject);
+        allQueriesFood[2] = queryFood.fetchQueryFoodOneGuest(idGuest, idProject);
+        allQueriesFood[3] = queryFood.updateQueryFoodOneGuest(idGuest, idProject, newNights);
+        allQueriesFood[4] = queryFood.deleteQueryFoodOneGuest(idGuest, idProject);
 
         return allQueriesFood;
     }
@@ -97,11 +97,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesFoodExpenses = new String[5];
 
-        allQueriesFoodExpenses[0] = queryFoodExpenses.queryInsertFoodExpensesForOneGuest(idGuest, idProject, price, reason, when);
-        allQueriesFoodExpenses[1] = queryFoodExpenses.queryFindAllFoodExpensesByOneProject(idProject);
-        allQueriesFoodExpenses[2] = queryFoodExpenses.queryFindFoodExpensesByOneGuest(idGuest, idProject);
-        allQueriesFoodExpenses[3] = queryFoodExpenses.queryUpdateFoodExpensesForOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
-        allQueriesFoodExpenses[4] = queryFoodExpenses.queryDeleteFoodExpensesForOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
+        allQueriesFoodExpenses[0] = queryFoodExpenses.insertQueryFoodExpensesOneGuest(idGuest, idProject, price, reason, when);
+        allQueriesFoodExpenses[1] = queryFoodExpenses.fetchAllFoodExpensesOneProject(idProject);
+        allQueriesFoodExpenses[2] = queryFoodExpenses.fetchFoodExpensesOneGuest(idGuest, idProject);
+        allQueriesFoodExpenses[3] = queryFoodExpenses.updateQueryFoodExpensesOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+        allQueriesFoodExpenses[4] = queryFoodExpenses.deleteFoodExpensesOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
 
         return allQueriesFoodExpenses;
     }
@@ -110,11 +110,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesGuest = new String[5];
 
-        allQueriesGuest[0] = queryGuest.queryInsertGuestForOneProject(nameGuest, idProject);
-        allQueriesGuest[1] = queryGuest.queryFindAllGuestsByOneProject(idProject);
-        allQueriesGuest[2] = queryGuest.queryFindOneGuestByOneProject(nameGuest, idProject);
-        allQueriesGuest[3] = queryGuest.queryUpdateGuestForOneProject(idGuest, newName, idProject);
-        allQueriesGuest[4] = queryGuest.queryDeleteGuestForOneProject(newName, idProject);
+        allQueriesGuest[0] = queryGuest.insertQueryGuestOneProject(nameGuest, idProject);
+        allQueriesGuest[1] = queryGuest.fetchQueryAllGuestsOneProject(idProject);
+        allQueriesGuest[2] = queryGuest.fetchQueryOneGuestOneProject(nameGuest, idProject);
+        allQueriesGuest[3] = queryGuest.updateQueryGuestOneProject(idGuest, newName, idProject);
+        allQueriesGuest[4] = queryGuest.deleteQueryGuestOneProject(newName, idProject);
 
         return allQueriesGuest;
     }
@@ -123,11 +123,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesOtherExpenses = new String[5];
 
-        allQueriesOtherExpenses[0] = queryOtherExpenses.queryInsertOtherExpensesForOneGuest(idGuest, idProject, price, reason, when);
-        allQueriesOtherExpenses[1] = queryOtherExpenses.queryFindAllOtherExpensesByOneProject(idProject);
-        allQueriesOtherExpenses[2] = queryOtherExpenses.queryFindOtherExpensesByOneGuest(idGuest, idProject);
-        allQueriesOtherExpenses[3] = queryOtherExpenses.queryUpdateOtherExpensesForOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
-        allQueriesOtherExpenses[4] = queryOtherExpenses.queryDeleteOtherExpensesForOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
+        allQueriesOtherExpenses[0] = queryOtherExpenses.insertQueryOtherExpensesOneGuest(idGuest, idProject, price, reason, when);
+        allQueriesOtherExpenses[1] = queryOtherExpenses.fetchQueryAllOtherExpensesOneProject(idProject);
+        allQueriesOtherExpenses[2] = queryOtherExpenses.fetchQueryOtherExpensesOneGuest(idGuest, idProject);
+        allQueriesOtherExpenses[3] = queryOtherExpenses.updateQueryOtherExpensesOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+        allQueriesOtherExpenses[4] = queryOtherExpenses.deleteQueryOtherExpensesOneGuest(idGuest, idProject, newPrice, newReason, newWhen);
 
         return allQueriesOtherExpenses;
     }
@@ -136,11 +136,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesPrepaid = new String[5];
 
-        allQueriesPrepaid[0] = queryPrepaid.queryInsertPrepaidForOneGuest(idGuest, idProject, price);
-        allQueriesPrepaid[1] = queryPrepaid.queryFindAllPrepaidByOneProject(idProject);
-        allQueriesPrepaid[2] = queryPrepaid.queryFindPrepaidByOneGuest(idGuest, idProject);
-        allQueriesPrepaid[3] = queryPrepaid.queryUpdatePrepaidForOneGuest(idGuest, idProject, newPrice);
-        allQueriesPrepaid[4] = queryPrepaid.queryDeletePrepaidForOneGuest(idGuest, idProject);
+        allQueriesPrepaid[0] = queryPrepaid.insertQueryPrepaidOneGuest(idGuest, idProject, price);
+        allQueriesPrepaid[1] = queryPrepaid.FetchQueryAllPrepaidOneProject(idProject);
+        allQueriesPrepaid[2] = queryPrepaid.fetchQueryPrepaidOneGuest(idGuest, idProject);
+        allQueriesPrepaid[3] = queryPrepaid.updateQueryPrepaidOneGuest(idGuest, idProject, newPrice);
+        allQueriesPrepaid[4] = queryPrepaid.deleteQueryPrepaidOneGuest(idGuest, idProject);
 
         return allQueriesPrepaid;
     }
@@ -149,11 +149,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesProject = new String[5];
 
-        allQueriesProject[0] = queryProject.queryInsertOneProject(projectName, projectPrice, projectDeposite);
-        allQueriesProject[1] = queryProject.queryFindOneProject(projectName);
-        allQueriesProject[2] = queryProject.queryFindAllProjects();
-        allQueriesProject[3] = queryProject.queryUpdateOneProject(idProject, projectNewName, projectnewPrice, projectnewDeposite);
-        allQueriesProject[4] = queryProject.queryDeleteOneProject(projectNewName);
+        allQueriesProject[0] = queryProject.insertQueryOneProject(projectName, projectPrice, projectDeposite);
+        allQueriesProject[1] = queryProject.fetchQueryOneProject(projectName);
+        allQueriesProject[2] = queryProject.FetchQueryAllProjects();
+        allQueriesProject[3] = queryProject.updateQueryOneProject(idProject, projectNewName, projectnewPrice, projectnewDeposite);
+        allQueriesProject[4] = queryProject.deleteQueryOneProject(projectNewName);
 
         return allQueriesProject;
     }
@@ -162,11 +162,11 @@ public class QueryGeneratorOutput {
 
         String[] allQueriesStay = new String[5];
 
-        allQueriesStay[0] = queryStay.queryInsertStayForOneGuest(idGuest, idProject, nights);
-        allQueriesStay[1] = queryStay.queryFindAllStayByOneProject(idProject);
-        allQueriesStay[2] = queryStay.queryFindStayByOneGuest(idGuest, idProject);
-        allQueriesStay[3] = queryStay.queryUpdateStayForOneGuest(idGuest, idProject, newNights);
-        allQueriesStay[4] = queryStay.queryDeleteStayForOneGuest(idGuest, idProject);
+        allQueriesStay[0] = queryStay.insertQueryStayOneGuest(idGuest, idProject, nights);
+        allQueriesStay[1] = queryStay.fetchAllStayOneProject(idProject);
+        allQueriesStay[2] = queryStay.fetchQueryStayOneGuest(idGuest, idProject);
+        allQueriesStay[3] = queryStay.updateQueryStayOneGuest(idGuest, idProject, newNights);
+        allQueriesStay[4] = queryStay.deleteQueryStayOneGuest(idGuest, idProject);
 
         return allQueriesStay;
     }

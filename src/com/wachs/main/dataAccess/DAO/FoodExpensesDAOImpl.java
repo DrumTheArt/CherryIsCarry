@@ -33,8 +33,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.queryFindFoodExpensesByOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchFoodExpensesOneGuest(idGuest, idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             while (result.next()) {
@@ -51,9 +51,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -69,8 +67,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.queryFindAllFoodExpensesByOneProject(idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchAllFoodExpensesOneProject(idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             while (result.next()) {
@@ -87,9 +85,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -105,8 +101,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.queryDeleteFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.deleteFoodExpensesOneGuest(idGuest, idProject, spend, reason, when);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -120,8 +116,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -135,8 +130,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.queryUpdateFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when, newSpend, newReason, newWhen);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.updateQueryFoodExpensesOneGuest(idGuest, idProject, spend, reason, when, newSpend, newReason, newWhen);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -150,8 +145,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -165,8 +159,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.queryInsertFoodExpensesForOneGuest(idGuest, idProject, spend, reason, when);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.insertQueryFoodExpensesOneGuest(idGuest, idProject, spend, reason, when);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -180,13 +174,22 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+    }
+
+    private void closingAllConnections() throws SQLException {
+        statement.close();
+        result.close();
+        DbConnection.closeConnection();
+    }
+
+    private Statement getSQLStatement() throws SQLException {
+        return DbConnection.getConnection().createStatement();
     }
 }

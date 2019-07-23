@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public interface DrinksDAO {
 
-    Drinks findDrinksByOneGuest(int idGuest, int idProject);
+    Drinks findDrinksOneGuest(int idGuest, int idProject);
 
-    ArrayList findAllDrinksByOneProject(int idProject);
+    ArrayList findAllDrinksOneProject(int idProject);
 
-    void updateDrinksForOneGuest(int idGuest, int idProject, int newNights);
+    void updateDrinksOneGuest(int idGuest, int idProject, int newNights);
 
-    void deleteDrinksForOneGuest(int idGuest, int idProject);
+    void deleteDrinksOneGuest(int idGuest, int idProject);
 
-    void insertDrinksForOneGuest(int idGuest, int idProject, int nights);
+    void insertDrinksOneGuest(int idGuest, int idProject, int nights);
 
 }

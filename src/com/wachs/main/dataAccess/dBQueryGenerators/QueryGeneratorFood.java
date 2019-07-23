@@ -9,34 +9,34 @@ public class QueryGeneratorFood {
     public static String COLUMN4 = "ID_project";
 
 
-    public String queryFindFoodByOneGuest(int idGuest, int idProject) {
+    public String fetchQueryFoodOneGuest(int idGuest, int idProject) {
 
         String query = "SELECT " + COLUMN1 + ", " + COLUMN2 + ", " + COLUMN3 + ", " + COLUMN4 + " from " + TABLENAME + " WHERE " + COLUMN3 + " = " + idGuest + " AND " + COLUMN4 + " = " +idProject;
 
         return query;
     }
 
-    public String queryInsertFoodForOneGuest(int idGuest, int idProject, int foodNights) {
+    public String insertQueryFoodOneGuest(int idGuest, int idProject, int foodNights) {
 
         String query = "INSERT INTO " + TABLENAME + "(" + COLUMN1 + "," + COLUMN2 + "," + COLUMN3 + "," + COLUMN4 + ") VALUES (? ," + "'" + foodNights + "'" + "," + idGuest + "," + idProject + ")";
 
         return query;
     }
 
-    public String queryDeleteFoodForOneGuest(int idGuest, int idProject) {
+    public String deleteQueryFoodOneGuest(int idGuest, int idProject) {
         String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN3 + "=" + idGuest + " AND " + COLUMN4 + " = " + idProject;
 
         return query;
     }
 
-    public String queryUpdateFoodForOneGuest(int idGuest, int idProject, int foodNewNights) {
+    public String updateQueryFoodOneGuest(int idGuest, int idProject, int foodNewNights) {
 
         String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + foodNewNights + " WHERE " + COLUMN3 + " = " + idGuest + " AND " + COLUMN4 + " = " + idProject;
 
         return query;
     }
 
-    public String queryFindAllFoodByOneProject(int idProject) {
+    public String fetchAllQueryFoodOneProject(int idProject) {
 
         String query = "SELECT * FROM " + TABLENAME + " where " +  COLUMN4 + " = " + idProject;
 

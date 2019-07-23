@@ -31,20 +31,17 @@ public class StayDAOImpl implements StayDAO {
     @Override
     public Stay findStayByOneGuest(int idGuest, int idProject) {
 
-        String queryCommand = query.queryFindStayByOneGuest(idGuest, idProject);
+        String queryCommand = query.fetchQueryStayOneGuest(idGuest, idProject);
 
         try {
 
-            statement = DbConnection.getConnection().createStatement();
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             int FK_id = result.getInt(1);
             int nights = result.getInt(2);
 
-            aStay.setPK_id(FK_id);
-            aStay.setNights(nights);
-            aStay.setIdGuest(idGuest);
-            aStay.setIdProject(idProject);
+            createStayObject(idGuest, idProject, FK_id, nights);
 
         } catch (SQLException e) {
 
@@ -54,9 +51,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            result.close();
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -72,8 +67,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            String queryCommand = query.queryFindAllStayByOneProject(idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.fetchAllStayOneProject(idProject);
+            statement = getSQLStatement();
             result = statement.executeQuery(queryCommand);
 
             while (result.next()) {
@@ -90,9 +85,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            statement.close();
-            result.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -108,8 +101,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            String queryCommand = query.queryUpdateStayForOneGuest(idGuest, idProject, newNights);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.updateQueryStayOneGuest(idGuest, idProject, newNights);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -124,8 +117,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -139,8 +131,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            String queryCommand = query.queryDeleteStayForOneGuest(idGuest, idProject);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.deleteQueryStayOneGuest(idGuest, idProject);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -154,8 +146,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
@@ -169,8 +160,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            String queryCommand = query.queryInsertStayForOneGuest(idGuest, idProject, nights);
-            statement = DbConnection.getConnection().createStatement();
+            String queryCommand = query.insertQueryStayOneGuest(idGuest, idProject, nights);
+            statement = getSQLStatement();
             statement.executeUpdate(queryCommand);
 
             //Log the query
@@ -184,13 +175,29 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            statement.close();
-            DbConnection.closeConnection();
+            closingAllConnections();
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+    }
+
+    private void createStayObject(int idGuest, int idProject, int FK_id, int nights) {
+        aStay.setPK_id(FK_id);
+        aStay.setNights(nights);
+        aStay.setIdGuest(idGuest);
+        aStay.setIdProject(idProject);
+    }
+
+    private Statement getSQLStatement() throws SQLException {
+        return DbConnection.getConnection().createStatement();
+    }
+
+    private void closingAllConnections() throws SQLException {
+        statement.close();
+        result.close();
+        DbConnection.closeConnection();
     }
 }

@@ -206,7 +206,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

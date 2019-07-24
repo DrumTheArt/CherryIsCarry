@@ -207,7 +207,7 @@ public class StayDAOImpl implements StayDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

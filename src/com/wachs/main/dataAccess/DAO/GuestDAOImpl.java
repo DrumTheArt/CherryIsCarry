@@ -223,7 +223,7 @@ public class GuestDAOImpl implements GuestDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

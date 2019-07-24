@@ -206,7 +206,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

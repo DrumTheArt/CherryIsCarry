@@ -173,7 +173,7 @@ public class DrinksDAOImpl implements DrinksDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

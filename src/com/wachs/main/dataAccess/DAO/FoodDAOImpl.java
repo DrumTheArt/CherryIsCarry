@@ -202,7 +202,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

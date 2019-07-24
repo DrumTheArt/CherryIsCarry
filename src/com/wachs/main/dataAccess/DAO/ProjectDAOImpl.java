@@ -4,6 +4,7 @@ import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
@@ -35,6 +36,19 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     }
 
+    public static void main(String[] args) {
+        IDBConnection con = new TestDBConnection();
+        ProjectDAO t = new ProjectDAOImpl(con);
+
+        Project d = t.fetchOneProject("Frankreich");
+        System.out.println(d.getProjectDeposite());
+
+        /**
+         t.deleteProject("Frankreich");
+         Project e = t.fetchOneProject("Frankreich");
+         System.out.println(e.getProjectDeposite());
+         **/
+    }
     public ProjectDAOImpl(IDBConnection connectToTestDatabase) {
 
         aSingleProject = new Project();
@@ -66,6 +80,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             //Set db-attributes into GuestObject
             createProjectObject(pk_id, txt_name, real_price, reaL_deposite);
 
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -74,7 +89,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            closingAllConnections();
+            //connection.closeConnection();
+            queryResult.close();
+            queryStatement.close();
+
 
         } catch (SQLException e) {
 
@@ -109,7 +127,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            closingAllConnections();
+            //queryStatement.close();
+            queryResult.close();
+            //connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -142,7 +162,9 @@ public class ProjectDAOImpl implements ProjectDAO {
         }
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -174,7 +196,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -207,7 +231,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            connection.closeConnection();
 
         } catch (SQLException e) {
 
@@ -219,14 +244,6 @@ public class ProjectDAOImpl implements ProjectDAO {
     private Connection openConnection() throws SQLException {
 
         return connection.getConnection();
-
-    }
-
-    private void closingAllConnections() throws SQLException {
-
-        queryStatement.close();
-        queryResult.close();
-        connection.closeConnection();
 
     }
 

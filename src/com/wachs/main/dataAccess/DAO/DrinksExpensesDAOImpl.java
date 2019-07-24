@@ -207,7 +207,7 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
         queryStatement.close();
         queryResult.close();
-        connection.closeConnection();
+        //connection.closeConnection();
 
     }
 

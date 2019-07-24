@@ -1,12 +1,9 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.POJO.Food;
 import com.wachs.main.POJO.FoodExpense;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFood;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpenses;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -24,23 +21,23 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     private QueryGeneratorFoodExpenses query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public FoodExpensesDAOImpl() {
 
         allFoodExpensesAllGuests = new ArrayList<>();
         allFoodExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorFoodExpenses();
-        connection = new DbConnection();
+        connection = new DBConnection();
 
     }
 
-    public FoodExpensesDAOImpl(Connection connectToTestDatabase) {
+    public FoodExpensesDAOImpl(IDBConnection connectToTestDatabase) {
 
         allFoodExpensesAllGuests = new ArrayList<>();
         allFoodExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorFoodExpenses();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

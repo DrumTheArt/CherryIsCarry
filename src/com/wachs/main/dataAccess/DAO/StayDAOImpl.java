@@ -1,14 +1,10 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.POJO.Project;
 import com.wachs.main.POJO.Stay;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
-import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -26,22 +22,22 @@ public class StayDAOImpl implements StayDAO {
     private QueryGeneratorStay query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public StayDAOImpl() {
 
         aStay = new Stay();
         AllStayByOneProject = new ArrayList<>();
         query = new QueryGeneratorStay();
-        connection = new DbConnection();
+        connection = new DBConnection();
     }
 
-    public StayDAOImpl(Connection connectToTestDatabase) {
+    public StayDAOImpl(IDBConnection connectToTestDatabase) {
 
         aStay = new Stay();
         AllStayByOneProject = new ArrayList<>();
         query = new QueryGeneratorStay();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

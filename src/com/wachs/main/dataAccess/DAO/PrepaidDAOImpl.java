@@ -1,11 +1,9 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.POJO.Prepaid;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -23,23 +21,23 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     private QueryGeneratorPrepaid query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public PrepaidDAOImpl() {
 
         aPrepaid = new Prepaid();
         allPrepaidByOneProject = new ArrayList<>();
         query = new QueryGeneratorPrepaid();
-        connection = new DbConnection();
+        connection = new DBConnection();
 
     }
 
-    public PrepaidDAOImpl(Connection connectToTestDatabase) {
+    public PrepaidDAOImpl(IDBConnection connectToTestDatabase) {
 
         aPrepaid = new Prepaid();
         allPrepaidByOneProject = new ArrayList<>();
         query = new QueryGeneratorPrepaid();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

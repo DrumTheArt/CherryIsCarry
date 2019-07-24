@@ -1,14 +1,10 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.OtherExpense;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
-import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,23 +21,23 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     private QueryGeneratorOtherExpenses query;
     private ResultSet queryResult;
     private Statement queryStatement;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public OtherExpensesDAOImpl() {
 
         allExpensesAllGuests = new ArrayList<>();
         allExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorOtherExpenses();
-        connection = new DbConnection();
+        connection = new DBConnection();
 
     }
 
-    public OtherExpensesDAOImpl(Connection connectToTestDatabase) {
+    public OtherExpensesDAOImpl(IDBConnection connectToTestDatabase) {
 
         allExpensesAllGuests = new ArrayList<>();
         allExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorOtherExpenses();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

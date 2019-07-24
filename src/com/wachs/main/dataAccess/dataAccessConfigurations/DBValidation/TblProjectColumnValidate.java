@@ -1,7 +1,6 @@
 package com.wachs.main.dataAccess.dataAccessConfigurations.DBValidation;
 
-import com.sun.tools.javac.tree.DCTree;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -14,7 +13,7 @@ public class TblProjectColumnValidate implements IDbColumnValidator {
 
     private Statement statement;
     private boolean TblColumnTitleOrderValidate = false;
-    private DbConnection connection = new DbConnection();
+    private DBConnection connection = new DBConnection();
 
     public TblProjectColumnValidate() throws SQLException {
 

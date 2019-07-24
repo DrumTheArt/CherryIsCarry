@@ -1,11 +1,9 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.POJO.Guest;
-import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpenses;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
@@ -25,7 +23,7 @@ public class GuestDAOImpl implements GuestDAO {
     private QueryGeneratorGuest query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public GuestDAOImpl() {
 
@@ -33,17 +31,17 @@ public class GuestDAOImpl implements GuestDAO {
         allGuestByOneProject = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorGuest();
-        connection = new DbConnection();
+        connection = new DBConnection();
 
     }
 
-    public GuestDAOImpl(Connection connectToTestDatabase) {
+    public GuestDAOImpl(IDBConnection connectToTestDatabase) {
 
         aGuest = new Guest();
         allGuestByOneProject = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorGuest();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

@@ -1,6 +1,6 @@
 package com.wachs.main.dataAccess.dataAccessConfigurations.DDL;
 
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ public class DropAndCreateTableDB {
 
     private Statement st;
     private StringBuffer queryCreateTableCommands;
-    private DbConnection connection;
+    private DBConnection connection;
 
     public DropAndCreateTableDB() {
 

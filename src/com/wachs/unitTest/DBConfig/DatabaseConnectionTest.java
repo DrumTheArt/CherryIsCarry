@@ -1,7 +1,7 @@
 package com.wachs.unitTest.DBConfig;
 
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import org.junit.Test;
 
@@ -15,25 +15,25 @@ public class DatabaseConnectionTest {
     public void getConnection_ShouldBeNotNull() {
 
         //Arrange
-        IdbConnection connection = new DbConnection();
+        IDBConnection connection = new DBConnection();
 
         //Act
-        connection.getConnection();
+        Connection con = connection.getConnection();
 
         //Assert
-        assertNotNull(connection);
+        assertNotNull(con);
     }
 
     @Test
     public void getConnectionTestDatabase_ShouldBeNotNull() {
 
         //Arrange
-        IdbConnection connection = new TestDBConnection();
+        IDBConnection connection = new TestDBConnection();
 
         //Act
-        connection.getConnection();
+        Connection con = connection.getConnection();
 
         //Assert
-        assertNotNull(connection);
+        assertNotNull(con);
     }
 }

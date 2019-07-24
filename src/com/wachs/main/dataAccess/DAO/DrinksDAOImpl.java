@@ -1,10 +1,10 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.POJO.Drinks;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -22,23 +22,29 @@ public class DrinksDAOImpl implements DrinksDAO {
     private QueryGeneratorDrinks query;
     private Statement queryStatement;
     private ResultSet queryResult;
-    private IdbConnection connection;
+    private IDBConnection connection;
 
     public DrinksDAOImpl() {
 
         this.singleDrink = new Drinks();
         query = new QueryGeneratorDrinks();
         this.allDrinksOneProject = new ArrayList<>();
-        this.connection = new DbConnection();
+        this.connection = new DBConnection();
 
     }
 
-    public DrinksDAOImpl(Connection connectToTestDatabase) {
+    public static void main(String[] args) {
+        ProjectDAO t = new ProjectDAOImpl();
+        Project a = t.fetchOneProject("Frankreich");
+        System.out.println(a.getPK_id());
+    }
+
+    public DrinksDAOImpl(IDBConnection connectToTestDatabase) {
 
         this.singleDrink = new Drinks();
         query = new QueryGeneratorDrinks();
         this.allDrinksOneProject = new ArrayList<>();
-        this.connection = new TestDBConnection();
+        this.connection = connectToTestDatabase;
 
     }
 

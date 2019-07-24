@@ -4,17 +4,16 @@ import com.wachs.main.POJO.Drinks;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.DAO.*;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IdbConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
 
 public class DrinksDAOTest {
 
-    IdbConnection testDatabase;
+    IDBConnection testDatabase;
     Connection connection;
     ProjectDAO projectDAO;
     GuestDAO guestDAO;
@@ -39,7 +38,16 @@ public class DrinksDAOTest {
     int guestID;
 
 
+    private void resetTestdata() {
+
+        projectDAO.deleteProject(setupNameProject);
+
+    }
+
     private void insertTestdataToDataBase(){
+
+        //Delete inserted project from this method
+        resetTestdata();
 
         //Insert a new project and get the primaryKey from database
         projectDAO.insertProject(setupNameProject, setupProjectPrice, setupProjectDeposite);
@@ -74,16 +82,15 @@ public class DrinksDAOTest {
     private void createObjects(){
 
         testDatabase = new TestDBConnection();
-        connection = testDatabase.getConnection();
-        projectDAO = new ProjectDAOImpl(connection);
-        guestDAO = new GuestDAOImpl(connection);
-        foodDAO = new FoodDAOImpl(connection);
-        drinksExpensesDAO = new DrinksExpensesDAOImpl(connection);
-        foodExpensesDAO = new FoodExpensesDAOImpl(connection);
-        otherExpensesDAO = new OtherExpensesDAOImpl(connection);
-        prepaidDAO = new PrepaidDAOImpl(connection);
-        stayDAO = new StayDAOImpl(connection);
-        drinksDAO = new DrinksDAOImpl(connection);
+        projectDAO = new ProjectDAOImpl(testDatabase);
+        guestDAO = new GuestDAOImpl(testDatabase);
+        foodDAO = new FoodDAOImpl(testDatabase);
+        drinksExpensesDAO = new DrinksExpensesDAOImpl(testDatabase);
+        foodExpensesDAO = new FoodExpensesDAOImpl(testDatabase);
+        otherExpensesDAO = new OtherExpensesDAOImpl(testDatabase);
+        prepaidDAO = new PrepaidDAOImpl(testDatabase);
+        stayDAO = new StayDAOImpl(testDatabase);
+        drinksDAO = new DrinksDAOImpl(testDatabase);
 
     }
 

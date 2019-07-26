@@ -2991,3 +2991,12 @@ INFO: SELECT FK_id, INT_nights, ID_guest, ID_house from TBL_DRINKS WHERE ID_gues
 [2019-07-24 15:27:17] [INFORMATION] DELETE FROM TBL_PROJECT WHERE TXT_title='Frankreich' 
 [2019-07-24 15:27:35] [INFORMATION] DELETE FROM TBL_PROJECT WHERE TXT_title='Frankreich' 
 [2019-07-24 15:27:58] [INFORMATION] DELETE FROM TBL_PROJECT WHERE TXT_title='Frankreich' 
+[2019-07-26 21:32:54] [INFO   ] INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'Frankfreich',200.0,100.0) 
+[2019-07-26 21:33:30] [INFO   ] INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'Frankfreich1',200.0,100.0) 
+[2019-07-26 21:39:32] [INFO   ] INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'Frankfreich21',200.0,100.0) 
+[2019-07-26 21:39:58] [INFO   ] INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'Frankfreich2211',200.0,100.0) 
+[2019-07-26 21:40:15] [INFO   ] INSERT INTO TBL_PROJECT(PK_id,TXT_title,REAL_projectPrice,REAL_projectDeposite) VALUES (? ,'Frankfreich12211',200.0,100.0) 
+[2019-07-26 21:41:30] [INFO   ] UPDATE TBL_PROJECT SET TXT_title = 'Robert', REAL_projectPrice=300.0,REAL_projectDeposite=400.0 WHERE PK_id = 7 
+[2019-07-26 21:42:03] [INFO   ] UPDATE TBL_PROJECT SET TXT_title = 'Robert2', REAL_projectPrice=300.0,REAL_projectDeposite=400.0 WHERE PK_id = 7 
+[2019-07-26 21:47:33] [INFO   ] DELETE FROM TBL_PROJECT WHERE TXT_title='Robert2' 
+[2019-07-26 21:47:44] [INFO   ] DELETE FROM TBL_PROJECT WHERE TXT_title='Robert2' 

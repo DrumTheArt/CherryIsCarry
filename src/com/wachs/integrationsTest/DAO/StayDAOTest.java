@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class StayDAOTest {
 
+
     @Test
     public void testIsColumnOrderValidate_TblGuest() throws ClassNotFoundException, SQLException {
 

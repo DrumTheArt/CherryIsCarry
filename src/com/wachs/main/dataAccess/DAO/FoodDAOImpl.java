@@ -63,7 +63,8 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -97,7 +98,8 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -117,7 +119,7 @@ public class FoodDAOImpl implements FoodDAO {
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -146,7 +148,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -175,7 +177,7 @@ public class FoodDAOImpl implements FoodDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -195,14 +197,6 @@ public class FoodDAOImpl implements FoodDAO {
     private Connection openConnection() throws SQLException {
 
         return connection.getConnection();
-
-    }
-
-    private void closingAllConnections() throws SQLException {
-
-        queryStatement.close();
-        queryResult.close();
-        //connection.closeConnection();
 
     }
 

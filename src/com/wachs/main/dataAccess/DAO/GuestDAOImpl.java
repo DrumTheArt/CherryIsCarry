@@ -73,7 +73,8 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -107,7 +108,8 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -141,7 +143,7 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -173,7 +175,7 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -205,7 +207,7 @@ public class GuestDAOImpl implements GuestDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -216,14 +218,6 @@ public class GuestDAOImpl implements GuestDAO {
     private Connection openConnection() throws SQLException {
 
         return connection.getConnection();
-
-    }
-
-    private void closingAllConnections() throws SQLException {
-
-        queryStatement.close();
-        queryResult.close();
-        //connection.closeConnection();
 
     }
 

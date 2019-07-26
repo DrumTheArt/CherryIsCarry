@@ -35,7 +35,7 @@ public class ProjectDAOImpl implements ProjectDAO {
         connection = new DBConnection();
 
     }
-    
+
     public ProjectDAOImpl(IDBConnection connectToTestDatabase) {
 
         aSingleProject = new Project();

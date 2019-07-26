@@ -64,7 +64,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -98,7 +99,8 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -107,6 +109,35 @@ public class StayDAOImpl implements StayDAO {
         }
 
         return AllStayByOneProject;
+    }
+
+    @Override
+    public void insertStayOneGuest(int idGuest, int idProject, int nights) {
+
+        try {
+
+            String queryCommand = query.insertQueryStayOneGuest(idGuest, idProject, nights);
+            queryStatement = createSQLStatement();
+            queryStatement.executeUpdate(queryCommand);
+
+            //Log the query
+            ApplicationLogger.loggingQueries(queryCommand);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        try {
+
+            queryStatement.close();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override
@@ -130,7 +161,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -159,36 +190,7 @@ public class StayDAOImpl implements StayDAO {
 
         try {
 
-            closingAllConnections();
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
-    }
-
-    @Override
-    public void insertStayOneGuest(int idGuest, int idProject, int nights) {
-
-        try {
-
-            String queryCommand = query.insertQueryStayOneGuest(idGuest, idProject, nights);
-            queryStatement = createSQLStatement();
-            queryStatement.executeUpdate(queryCommand);
-
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
-
-        try {
-
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -200,14 +202,6 @@ public class StayDAOImpl implements StayDAO {
     private Connection openConnection() throws SQLException {
 
         return connection.getConnection();
-
-    }
-
-    private void closingAllConnections() throws SQLException {
-
-        queryStatement.close();
-        queryResult.close();
-        //connection.closeConnection();
 
     }
 

@@ -63,7 +63,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -96,7 +97,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -127,7 +129,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
+            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -156,7 +159,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -185,7 +188,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
         try {
 
-            closingAllConnections();
+            queryStatement.close();
 
         } catch (SQLException e) {
 
@@ -206,14 +209,6 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     private Connection openConnection() throws SQLException {
 
         return connection.getConnection();
-
-    }
-
-    private void closingAllConnections() throws SQLException {
-
-        queryStatement.close();
-        queryResult.close();
-        //connection.closeConnection();
 
     }
 

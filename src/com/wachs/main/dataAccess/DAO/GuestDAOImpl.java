@@ -6,11 +6,7 @@ import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnect
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest.*;
@@ -57,13 +53,18 @@ public class GuestDAOImpl implements GuestDAO {
             queryStatement = createSQLStatement();
             queryResult = queryStatement.executeQuery(queryCommand);
 
-            //Get db-attributes
-            int PK_id = queryResult.getInt(1);
-            int idProject = queryResult.getInt(2);
-            String guestName = queryResult.getString(3);
+            if (queryResult.next()) {
 
-            //Set db-attributes into GuestObject
-            createGuestObject(PK_id, idProject, guestName);
+
+                //Get db-attributes
+                int PK_id = queryResult.getInt(1);
+                int idProject = queryResult.getInt(2);
+                String guestName = queryResult.getString(3);
+
+                //Set db-attributes into GuestObject
+                createGuestObject(PK_id, idProject, guestName);
+
+            }
 
         } catch (SQLException e) {
 

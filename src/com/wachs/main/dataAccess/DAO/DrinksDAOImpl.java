@@ -1,10 +1,12 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.POJO.Drinks;
+import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -33,12 +35,6 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     }
 
-    public static void main(String[] args) {
-        ProjectDAO t = new ProjectDAOImpl();
-        Project a = t.fetchOneProject("Frankreich");
-        System.out.println(a.getPK_id());
-    }
-
     public DrinksDAOImpl(IDBConnection connectToTestDatabase) {
 
         this.singleDrink = new Drinks();
@@ -56,10 +52,15 @@ public class DrinksDAOImpl implements DrinksDAO {
             String queryCommand = query.fetchQueryOneGuest(idGuest, idProject);
             queryResult = queryStatement.executeQuery(queryCommand);
 
+            if (queryResult.next()) {
+
+
             int FK_id = queryResult.getInt(1);
             int nights = queryResult.getInt(2);
 
             createDrinkObject(idGuest, idProject, FK_id, nights);
+
+            }
 
             queryStatement.close();
             queryResult.close();
@@ -151,7 +152,6 @@ public class DrinksDAOImpl implements DrinksDAO {
             //Log the query
             ApplicationLogger.loggingQueries(query.deleteQueryOneGuest(idGuest, idProject));
 
-            queryStatement.close();
 
         } catch (SQLException e) {
 

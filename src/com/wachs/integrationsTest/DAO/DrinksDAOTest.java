@@ -10,7 +10,6 @@ import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 public class DrinksDAOTest {
 
 
-
     @Test
     public void findDrinksOneGuest_ShouldReturnCorrectDrinkObject() {
 

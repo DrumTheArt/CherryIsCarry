@@ -1,9 +1,13 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.POJO.Drinks;
 import com.wachs.main.POJO.Food;
+import com.wachs.main.POJO.Guest;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFood;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -50,10 +54,13 @@ public class FoodDAOImpl implements FoodDAO {
             queryStatement = createSQLStatement();
             queryResult = queryStatement.executeQuery(queryCommand);
 
+            if (queryResult.next()) {
+
             int FK_id = queryResult.getInt(1);
             int nights = queryResult.getInt(2);
 
             createFoodObject(IdGuest, idProject, FK_id, nights);
+            }
 
         } catch (SQLException e) {
 

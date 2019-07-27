@@ -4,7 +4,6 @@ import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 

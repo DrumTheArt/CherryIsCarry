@@ -5,6 +5,7 @@ import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
 
@@ -112,7 +113,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 
             while (queryResult.next()) {
 
+                int i = 0;
                 allProjects.add(new Project(queryResult.getInt(COLUMN1), queryResult.getString(COLUMN2), queryResult.getDouble(COLUMN3), queryResult.getDouble(COLUMN4)));
+
+
+                System.out.println(allProjects.get(i));
+                i++;
 
             }
 
@@ -176,11 +182,11 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public void updateProject(int oldId, String newProjectName, double projectPrice, double projectDeposite) {
+    public void updateProject(int oldId, String newProjectName, double newProjectPrice, double newProjectDeposite) {
 
         //Set firstLetter to upperCase and set last to lowerLetters
         newProjectName = convertString.convertString(newProjectName);
-        String queryCommand = query.updateQueryOneProject(oldId, newProjectName, projectPrice, projectDeposite);
+        String queryCommand = query.updateQueryOneProject(oldId, newProjectName, newProjectPrice, newProjectDeposite);
 
         try {
 

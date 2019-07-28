@@ -3,9 +3,11 @@ package com.wachs.integrationsTest.DAO;
 import com.wachs.integrationsTest.util.GeneratorTestData;
 import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
+import com.wachs.main.dataAccess.DAO.DrinksDAOImpl;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
@@ -13,7 +15,7 @@ import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 public class DrinksDAOTest {
 
     @Test
-    public void findDrinksOneGuest_ShouldReturnCorrectNights() {
+    public void fetchDrinksOneGuest_ShouldReturnCorrectNights() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -23,7 +25,7 @@ public class DrinksDAOTest {
         Drinks drinkToFind = drinksDAO.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Arrange
-        Assert.assertEquals(drinkToFind.getNights(), setupNights);
+        Assert.assertEquals(setupNights, drinkToFind.getNights());
     }
 
     @Test
@@ -37,7 +39,7 @@ public class DrinksDAOTest {
         Drinks drinkToFind = drinksDAO.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(drinkToFind.getIdGuest(), guestOneID);
+        Assert.assertEquals(guestOneID, drinkToFind.getIdGuest());
 
     }
 
@@ -52,7 +54,7 @@ public class DrinksDAOTest {
         Drinks drinkToFind = drinksDAO.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(drinkToFind.getIdProject(), projectOneID);
+        Assert.assertEquals(projectOneID, drinkToFind.getIdProject());
 
     }
 
@@ -64,7 +66,7 @@ public class DrinksDAOTest {
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        Drinks drinkToFind = drinksDAO.fetchDrinksOneGuest(99999, 99999);
+        drinksDAO.fetchDrinksOneGuest(99999, 99999);
 
     }
 
@@ -74,12 +76,13 @@ public class DrinksDAOTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
+        IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Drinks> listDrinksToFind = drinksDAO.fetchAllDrinksOneProject(projectOneID);
+        ArrayList<Drinks> listDrinksToFind = new DrinksDAOImpl(con, false).fetchAllDrinksOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(listDrinksToFind.size(), 3);
+        Assert.assertEquals(CountAllGuestsProjectOne, listDrinksToFind.size());
     }
 
     @Test
@@ -88,12 +91,13 @@ public class DrinksDAOTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
+        IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Drinks> listDrinksToFind = drinksDAO.fetchAllDrinksOneProject(projectOneID);
+        ArrayList<Drinks> listDrinksToFind = new DrinksDAOImpl(con, false).fetchAllDrinksOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(listDrinksToFind.get(0).getIdGuest(), guestOneID);
+        Assert.assertEquals(guestOneID, listDrinksToFind.get(0).getIdGuest());
 
     }
 
@@ -103,12 +107,13 @@ public class DrinksDAOTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
+        IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Drinks> listDrinksToFind = drinksDAO.fetchAllDrinksOneProject(projectOneID);
+        ArrayList<Drinks> listDrinksToFind = new DrinksDAOImpl(con, false).fetchAllDrinksOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(listDrinksToFind.get(0).getNights(), setupNights);
+        Assert.assertEquals(setupNights, listDrinksToFind.get(0).getNights());
 
     }
 
@@ -118,12 +123,13 @@ public class DrinksDAOTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
+        IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Drinks> listDrinksToFind = drinksDAO.fetchAllDrinksOneProject(projectOneID);
+        ArrayList<Drinks> listDrinksToFind = new DrinksDAOImpl(con, false).fetchAllDrinksOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(listDrinksToFind.get(0).getIdProject(), projectOneID);
+        Assert.assertEquals(projectOneID, listDrinksToFind.get(0).getIdProject());
 
     }
 
@@ -135,12 +141,12 @@ public class DrinksDAOTest {
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        ArrayList<Drinks> listDrinksToFind = drinksDAO.fetchAllDrinksOneProject(99999);
+        drinksDAO.fetchAllDrinksOneProject(99999);
 
     }
 
     @Test
-    public void updateDrinksOneGuest_ShouldReturnCorrectDrinkObject() {
+    public void updateDrinksOneGuest_ShouldReturnUpdatedNights() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -152,43 +158,53 @@ public class DrinksDAOTest {
         Drinks drinkToFind = drinksDAO.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(drinkToFind.getNights(), 100);
+        Assert.assertEquals(newNights, drinkToFind.getNights());
+
+    }
+
+    @Test(expected = NotInDataBaseException.class)
+    public void deleteDrinksOneGuest_ShouldThrowExceptionIfFetchingAlreadyDeletedDrinkObject() {
+
+        //Arrange
+        GeneratorTestData.createObjects();
+        GeneratorTestData.insertTestdataToDataBase();
+
+        //Act
+        drinksDAO.deleteDrinksOneGuest(guestOneID, projectOneID);
+        drinksDAO.fetchDrinksOneGuest(guestOneID, projectOneID);
 
     }
 
     @Test
-    public void updateDrinksOneGuest_IfNotExistInDB_ShouldReturnException() {
+    public void insertDrinksOneGuest_ShouldReturnInsertedNewDrinkObject() {
 
+        //Arrange
+        GeneratorTestData.createObjects();
+        GeneratorTestData.insertTestdataToDataBase();
+        guestDAO.deleteGuestOneProject("JustForThisTestGuest", projectOneID);
+        guestDAO.insertGuestOneProject(projectOneID, "JustForThisTestGuest");
+        int newGuestID = guestDAO.fetchOneGuestOneProject("JustForThisTestGuest", projectOneID).getPK_id();
+
+        //Act
+        drinksDAO.insertDrinksOneGuest(newGuestID, projectOneID, 200);
+        Drinks newDrinks = drinksDAO.fetchDrinksOneGuest(newGuestID, projectOneID);
+
+        //Assert
+        Assert.assertEquals(200, newDrinks.getNights());
     }
 
-    @Test
-    public void updateDrinksOneGuest_ShouldThrowSQLException() {
+    @Test(expected=org.sqlite.SQLiteException.class)
+    public void insertDrinksOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+
+        //Arrange
+        GeneratorTestData.createObjects();
+        GeneratorTestData.insertTestdataToDataBase();
+        int newGuestIDWhichNotExist = 9999999;
+
+        //Act
+        drinksDAO.insertDrinksOneGuest(newGuestIDWhichNotExist, projectOneID, 200);
+
+        //Assert
 
     }
-
-    @Test
-    public void deleteDrinksOneGuest_ShouldNotReturnAlreadyDeletedDrinkObject() {
-
-    }
-
-    @Test
-    public void deleteDrinksOneGuest_ShouldThrowSQLException() {
-
-    }
-
-    @Test
-    public void insertDrinksOneGuest_ShouldReturnInsertDrinkObject() {
-
-    }
-
-    @Test
-    public void insertDrinksOneGuest_IfAlreadyExistInDB_ShouldReturnException() {
-
-    }
-
-    @Test
-    public void insertDrinksOneGuest_ShouldThrowSQLException() {
-
-    }
-
 }

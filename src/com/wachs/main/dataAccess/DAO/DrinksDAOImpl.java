@@ -1,10 +1,8 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.sun.tools.corba.se.idl.constExpr.Not;
+import com.wachs.integrationsTest.util.GeneratorTestData;
 import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
-import com.wachs.main.POJO.Guest;
-import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
@@ -36,14 +34,6 @@ public class DrinksDAOImpl implements DrinksDAO {
         this.allDrinksOneProject = new ArrayList<>();
         this.connection = new DBConnection();
         isLoggerActivated = true;
-
-    }
-
-    public static void main(String[] args) {
-
-        IDBConnection con = new TestDBConnection();
-        DrinksDAO drinksDAO = new DrinksDAOImpl(con, false);
-        ArrayList<Drinks> drinks = drinksDAO.fetchAllDrinksOneProject(9213819);
 
     }
 

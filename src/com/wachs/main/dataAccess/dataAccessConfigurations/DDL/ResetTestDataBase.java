@@ -1,6 +1,7 @@
 package com.wachs.main.dataAccess.dataAccessConfigurations.DDL;
 
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -10,15 +11,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DropAndCreateTableDB {
+public class ResetTestDataBase {
 
     private Statement st;
     private StringBuffer queryCreateTableCommands;
-    private DBConnection connection;
+    private IDBConnection connection;
 
-    public DropAndCreateTableDB() {
+    public ResetTestDataBase() {
 
         queryCreateTableCommands = new StringBuffer();
+        connection = new TestDBConnection();
     }
 
     public void executeQuery() throws IOException, SQLException, ClassNotFoundException {
@@ -45,11 +47,11 @@ public class DropAndCreateTableDB {
         st.close();
         connection.closeConnection();
 
-        JOptionPane.showMessageDialog(null,"Die Datenbank wurde gelöscht und neu aufgesetzt");
+        JOptionPane.showMessageDialog(null,"Die Test-Datenbank wurde gelöscht und neu aufgesetzt");
     }
 
     private String getSQLScriptFilePath() {
         String absPath = new File("").getAbsolutePath();
-        return absPath + "//sources//database/CREATE_TABLE.sql";
+        return absPath + "//sources//testDatabase/CREATE_TABLE.sql";
     }
 }

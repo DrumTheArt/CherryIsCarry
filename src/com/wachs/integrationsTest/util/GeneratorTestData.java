@@ -22,7 +22,7 @@ public class GeneratorTestData {
     public static StayDAO stayDAO;
     public static DrinksDAO drinksDAO;
 
-    public static String setupNameProjectOne = "integrationstest1";
+    public static String setupNameProjectOne = "Integrationstest1";
     public static int projectOneID;
     public static String setupNameGuestOne = "Robert";
     public static int guestOneID;
@@ -31,7 +31,10 @@ public class GeneratorTestData {
     public static String setupNameGuestThree = "Robert3";
     public static int guestThreeID;
 
-    public static String setupNameProjectTwo = "integrationstest2";
+    public static int countAllProjects;
+    public static int CountAllGuestsProjectOne;
+
+    public static String setupNameProjectTwo = "Integrationstest2";
     public static int projectTwoID;
 
     public static String setupNameReason = "Alcohol";
@@ -116,6 +119,10 @@ public class GeneratorTestData {
         prepaidDAO.insertPrepaidOneGuest(guestOneID, projectOneID, setupPrepaid);
         prepaidDAO.insertPrepaidOneGuest(guestTwoID, projectOneID, setupPrepaid);
         prepaidDAO.insertPrepaidOneGuest(guestThreeID, projectOneID, setupPrepaid);
+
+        //Get number of guest in ProjectOne and number of projects in general
+        countAllProjects = projectDAO.fetchAllProjects().size();
+        CountAllGuestsProjectOne =  guestDAO.fetchAllGuestsOneProject(projectOneID).size();
 
     }
 

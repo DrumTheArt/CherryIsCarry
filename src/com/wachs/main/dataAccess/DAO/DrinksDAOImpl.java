@@ -1,5 +1,7 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.sun.tools.corba.se.idl.constExpr.Not;
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.Project;
@@ -25,6 +27,7 @@ public class DrinksDAOImpl implements DrinksDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public DrinksDAOImpl() {
 
@@ -32,15 +35,25 @@ public class DrinksDAOImpl implements DrinksDAO {
         query = new QueryGeneratorDrinks();
         this.allDrinksOneProject = new ArrayList<>();
         this.connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-    public DrinksDAOImpl(IDBConnection connectToTestDatabase) {
+    public static void main(String[] args) {
+
+        IDBConnection con = new TestDBConnection();
+        DrinksDAO drinksDAO = new DrinksDAOImpl(con, false);
+        ArrayList<Drinks> drinks = drinksDAO.fetchAllDrinksOneProject(9213819);
+
+    }
+
+    public DrinksDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         this.singleDrink = new Drinks();
         query = new QueryGeneratorDrinks();
         this.allDrinksOneProject = new ArrayList<>();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -59,6 +72,12 @@ public class DrinksDAOImpl implements DrinksDAO {
             int nights = queryResult.getInt(2);
 
             createDrinkObject(idGuest, idProject, FK_id, nights);
+
+            }
+
+            else {
+
+                throw new NotInDataBaseException();
 
             }
 
@@ -84,8 +103,12 @@ public class DrinksDAOImpl implements DrinksDAO {
 
             while (queryResult.next()) {
 
-                allDrinksOneProject.add(new Drinks(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getInt(COLUMN3), queryResult.getInt(COLUMN4)));
+                    allDrinksOneProject.add(new Drinks(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getInt(COLUMN3), queryResult.getInt(COLUMN4)));
+            }
 
+            if(allDrinksOneProject.isEmpty()){
+
+                throw new NotInDataBaseException();
             }
 
             queryStatement.close();
@@ -108,8 +131,10 @@ public class DrinksDAOImpl implements DrinksDAO {
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
-            //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                //Log the query
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
             queryStatement.close();
 
@@ -130,7 +155,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
             queryStatement.close();
 
@@ -150,8 +177,9 @@ public class DrinksDAOImpl implements DrinksDAO {
             statement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(query.deleteQueryOneGuest(idGuest, idProject));
-
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -173,10 +201,10 @@ public class DrinksDAOImpl implements DrinksDAO {
     }
 
     private void createDrinkObject(int idGuest, int idProject, int FK_id, int nights) {
-        singleDrink.setPK_id(FK_id);
-        singleDrink.setNights(nights);
-        singleDrink.setIdGuest(idGuest);
-        singleDrink.setIdProject(idProject);
-    }
 
+            singleDrink.setPK_id(FK_id);
+            singleDrink.setNights(nights);
+            singleDrink.setIdGuest(idGuest);
+            singleDrink.setIdProject(idProject);
+        }
 }

@@ -1,5 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Stay;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 
 import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay.*;
 
-
 public class StayDAOImpl implements StayDAO {
 
     private ArrayList<Stay> AllStayByOneProject;
@@ -23,6 +23,7 @@ public class StayDAOImpl implements StayDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public StayDAOImpl() {
 
@@ -30,14 +31,17 @@ public class StayDAOImpl implements StayDAO {
         AllStayByOneProject = new ArrayList<>();
         query = new QueryGeneratorStay();
         connection = new DBConnection();
+        this.isLoggerActivated = true;
+
     }
 
-    public StayDAOImpl(IDBConnection connectToTestDatabase) {
+    public StayDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aStay = new Stay();
         AllStayByOneProject = new ArrayList<>();
         query = new QueryGeneratorStay();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -51,10 +55,15 @@ public class StayDAOImpl implements StayDAO {
             queryStatement = createSQLStatement();
             queryResult = queryStatement.executeQuery(queryCommand);
 
-            int FK_id = queryResult.getInt(1);
-            int nights = queryResult.getInt(2);
+            if (queryResult.next()) {
 
-            createStayObject(idGuest, idProject, FK_id, nights);
+
+                int FK_id = queryResult.getInt(1);
+                int nights = queryResult.getInt(2);
+
+                createStayObject(idGuest, idProject, FK_id, nights);
+
+            }
 
         } catch (SQLException e) {
 
@@ -91,6 +100,11 @@ public class StayDAOImpl implements StayDAO {
 
             }
 
+            if(AllStayByOneProject.isEmpty()){
+
+                throw new NotInDataBaseException();
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -121,7 +135,9 @@ public class StayDAOImpl implements StayDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -150,7 +166,9 @@ public class StayDAOImpl implements StayDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
 
         } catch (SQLException e) {
@@ -180,7 +198,9 @@ public class StayDAOImpl implements StayDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

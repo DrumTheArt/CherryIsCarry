@@ -1,5 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
@@ -20,6 +21,7 @@ public class GuestDAOImpl implements GuestDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public GuestDAOImpl() {
 
@@ -28,16 +30,18 @@ public class GuestDAOImpl implements GuestDAO {
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorGuest();
         connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-    public GuestDAOImpl(IDBConnection connectToTestDatabase) {
+    public GuestDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aGuest = new Guest();
         allGuestByOneProject = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorGuest();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -63,6 +67,10 @@ public class GuestDAOImpl implements GuestDAO {
 
                 //Set db-attributes into GuestObject
                 createGuestObject(PK_id, idProject, guestName);
+
+            } else {
+
+                throw new NotInDataBaseException();
 
             }
 
@@ -101,6 +109,13 @@ public class GuestDAOImpl implements GuestDAO {
 
             }
 
+            if(allGuestByOneProject.isEmpty()){
+
+                throw new NotInDataBaseException();
+
+            }
+
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -134,7 +149,9 @@ public class GuestDAOImpl implements GuestDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -166,7 +183,9 @@ public class GuestDAOImpl implements GuestDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -198,7 +217,9 @@ public class GuestDAOImpl implements GuestDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

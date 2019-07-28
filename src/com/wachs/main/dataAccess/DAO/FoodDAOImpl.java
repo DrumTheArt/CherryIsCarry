@@ -1,13 +1,10 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.main.POJO.Drinks;
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Food;
-import com.wachs.main.POJO.Guest;
-import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFood;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -26,6 +23,7 @@ public class FoodDAOImpl implements FoodDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public FoodDAOImpl() {
 
@@ -33,15 +31,17 @@ public class FoodDAOImpl implements FoodDAO {
         allFoodByOneProject = new ArrayList<>();
         query = new QueryGeneratorFood();
         connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-    public FoodDAOImpl(IDBConnection connectToTestDatabase) {
+    public FoodDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aFood = new Food();
         allFoodByOneProject = new ArrayList<>();
         query = new QueryGeneratorFood();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -60,6 +60,11 @@ public class FoodDAOImpl implements FoodDAO {
             int nights = queryResult.getInt(2);
 
             createFoodObject(IdGuest, idProject, FK_id, nights);
+
+            } else {
+
+                throw new NotInDataBaseException();
+
             }
 
         } catch (SQLException e) {
@@ -97,6 +102,11 @@ public class FoodDAOImpl implements FoodDAO {
 
             }
 
+            if(allFoodByOneProject.isEmpty()){
+
+                throw new NotInDataBaseException();
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -128,6 +138,11 @@ public class FoodDAOImpl implements FoodDAO {
 
             queryStatement.close();
 
+            //Log the query
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -145,7 +160,9 @@ public class FoodDAOImpl implements FoodDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -174,7 +191,9 @@ public class FoodDAOImpl implements FoodDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

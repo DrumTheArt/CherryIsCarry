@@ -1,7 +1,6 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.POJO.Drinks;
 import com.wachs.main.POJO.Project;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,12 +20,6 @@ public class ProjectDAOTest {
 
     @Test
     public void fetchOneProject_ShouldReturnCorrectDrinkObject() {
-
-        //Act
-        Project projectToFind = projectDAO.fetchOneProject(setupNameProject);
-
-        //Assert
-        Assert.assertEquals(projectToFind.getProjectName(), setupNights);
 
     }
 

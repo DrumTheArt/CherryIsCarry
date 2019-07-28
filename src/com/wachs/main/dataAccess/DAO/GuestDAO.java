@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public interface GuestDAO {
 
-    Guest fetchOneGuestOneProject(String name, int idHouse);
+    Guest fetchOneGuestOneProject(String name, int idProject);
 
-    ArrayList fetchAllGuestsOneProject(int idHouse);
+    ArrayList fetchAllGuestsOneProject(int idProject);
 
     //For INSERT, UPDATE or DELETE use the executeUpdate() and for select use the executeQuery() which returns the ResultSet.
-    void insertGuestOneProject(int idHouse, String name);
+    void insertGuestOneProject(int idProject, String name);
 
     void updateGuestOneProject(int oldId, String name, int idProject);
 

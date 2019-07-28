@@ -1,6 +1,5 @@
 package com.wachs.integrationsTest.util;
 
-import com.sun.tools.javah.Gen;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.DAO.*;
@@ -23,8 +22,18 @@ public class GeneratorTestData {
     public static StayDAO stayDAO;
     public static DrinksDAO drinksDAO;
 
-    public static String setupNameGuest = "Robert";
-    public static String setupNameProject = "integrationstest";
+    public static String setupNameProjectOne = "integrationstest1";
+    public static int projectOneID;
+    public static String setupNameGuestOne = "Robert";
+    public static int guestOneID;
+    public static String setupNameGuestTwo = "Robert2";
+    public static int guestTwoID;
+    public static String setupNameGuestThree = "Robert3";
+    public static int guestThreeID;
+
+    public static String setupNameProjectTwo = "integrationstest2";
+    public static int projectTwoID;
+
     public static String setupNameReason = "Alcohol";
     public static String setupTime = "01.01.2019";
     public static double setupProjectPrice = 100.0;
@@ -32,21 +41,19 @@ public class GeneratorTestData {
     public static double setupExpenses = 300.0;
     public static double setupPrepaid = 150;
     public static int setupNights = 5;
-    public static int projectID;
-    public static int guestID;
 
     public static void createObjects(){
 
         testDatabase = new TestDBConnection();
-        projectDAO = new ProjectDAOImpl(testDatabase);
-        guestDAO = new GuestDAOImpl(testDatabase);
-        foodDAO = new FoodDAOImpl(testDatabase);
-        drinksExpensesDAO = new DrinksExpensesDAOImpl(testDatabase);
-        foodExpensesDAO = new FoodExpensesDAOImpl(testDatabase);
-        otherExpensesDAO = new OtherExpensesDAOImpl(testDatabase);
-        prepaidDAO = new PrepaidDAOImpl(testDatabase);
-        stayDAO = new StayDAOImpl(testDatabase);
-        drinksDAO = new DrinksDAOImpl(testDatabase);
+        projectDAO = new ProjectDAOImpl(testDatabase, false);
+        guestDAO = new GuestDAOImpl(testDatabase, false);
+        foodDAO = new FoodDAOImpl(testDatabase, false);
+        drinksExpensesDAO = new DrinksExpensesDAOImpl(testDatabase, false);
+        foodExpensesDAO = new FoodExpensesDAOImpl(testDatabase, false);
+        otherExpensesDAO = new OtherExpensesDAOImpl(testDatabase, false);
+        prepaidDAO = new PrepaidDAOImpl(testDatabase, false);
+        stayDAO = new StayDAOImpl(testDatabase, false);
+        drinksDAO = new DrinksDAOImpl(testDatabase, false);
 
     }
 
@@ -56,38 +63,66 @@ public class GeneratorTestData {
         GeneratorTestData.createObjects();
 
         //Insert a new project and get the primaryKey from database
-        projectDAO.insertProject(setupNameProject, setupProjectPrice, setupProjectDeposite);
-        Project project = projectDAO.fetchOneProject(setupNameProject);
-        projectID = project.getPK_id();
+        projectDAO.insertProject(setupNameProjectOne, setupProjectPrice, setupProjectDeposite);
+        Project firstProject = projectDAO.fetchOneProject(setupNameProjectOne);
+        projectOneID = firstProject.getPK_id();
+
+        //Insert a second project and get the primaryKey from database
+        projectDAO.insertProject(setupNameProjectTwo, setupProjectPrice, setupProjectDeposite);
+        Project secondProject = projectDAO.fetchOneProject(setupNameProjectTwo);
+        projectTwoID = secondProject.getPK_id();
 
         //Insert a new guest get the primaryKey from database
-        guestDAO.insertGuestOneProject(projectID, setupNameGuest);
-        Guest guest = guestDAO.fetchOneGuestOneProject(setupNameGuest, projectID);
-        guestID = guest.getPK_id();
+        guestDAO.insertGuestOneProject(projectOneID, setupNameGuestOne);
+        Guest firstGuest = guestDAO.fetchOneGuestOneProject(setupNameGuestOne, projectOneID);
+        guestOneID = firstGuest.getPK_id();
 
-        //Insert duration of stay of the new guest
-        stayDAO.insertStayOneGuest(guestID, projectID, setupNights);
+        //Insert a second guest get the primaryKey from database
+        guestDAO.insertGuestOneProject(projectOneID, setupNameGuestTwo);
+        Guest SecondGuest = guestDAO.fetchOneGuestOneProject(setupNameGuestTwo, projectOneID);
+        guestTwoID = SecondGuest.getPK_id();
+
+        //Insert a third guest get the primaryKey from database
+        guestDAO.insertGuestOneProject(projectOneID, setupNameGuestThree);
+        Guest thirdGuest = guestDAO.fetchOneGuestOneProject(setupNameGuestThree, projectOneID);
+        guestThreeID = thirdGuest.getPK_id();
+
+        //Insert duration of stay for each three guest to the same project
+        stayDAO.insertStayOneGuest(guestOneID, projectOneID, setupNights);
+        stayDAO.insertStayOneGuest(guestTwoID, projectOneID, setupNights);
+        stayDAO.insertStayOneGuest(guestThreeID, projectOneID, setupNights);
 
         //Insert drinks (in days) of the new guest
-        drinksDAO.insertDrinksOneGuest(guestID, projectID, setupNights);
+        drinksDAO.insertDrinksOneGuest(guestOneID, projectOneID, setupNights);
+        drinksDAO.insertDrinksOneGuest(guestTwoID, projectOneID, setupNights);
+        drinksDAO.insertDrinksOneGuest(guestThreeID, projectOneID, setupNights);
 
         //Insert food (in days) of the new guest
-        foodDAO.insertFoodOneGuest(guestID, projectID, setupNights);
+        foodDAO.insertFoodOneGuest(guestOneID, projectOneID, setupNights);
+        foodDAO.insertFoodOneGuest(guestTwoID, projectOneID, setupNights);
+        foodDAO.insertFoodOneGuest(guestThreeID, projectOneID, setupNights);
 
         //Insert drinks expenses of the new guest
-        drinksExpensesDAO.insertDrinksExpensesOneGuest(guestID, projectID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(guestTwoID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(guestThreeID, projectOneID, setupExpenses, setupNameReason, setupTime);
 
         //Insert food expenses of the new guest
-        foodExpensesDAO.insertFoodExpensesOneGuest(guestID, projectID, setupExpenses, setupNameReason, setupTime);
+        foodExpensesDAO.insertFoodExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        foodExpensesDAO.insertFoodExpensesOneGuest(guestTwoID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        foodExpensesDAO.insertFoodExpensesOneGuest(guestThreeID, projectOneID, setupExpenses, setupNameReason, setupTime);
 
         //Insert prepaid of the new guest
-        prepaidDAO.insertPrepaidOneGuest(guestID, projectID, setupPrepaid);
+        prepaidDAO.insertPrepaidOneGuest(guestOneID, projectOneID, setupPrepaid);
+        prepaidDAO.insertPrepaidOneGuest(guestTwoID, projectOneID, setupPrepaid);
+        prepaidDAO.insertPrepaidOneGuest(guestThreeID, projectOneID, setupPrepaid);
 
     }
 
     private static void resetTestdata() {
 
-        projectDAO.deleteProject(setupNameProject);
+        projectDAO.deleteProject(setupNameProjectOne);
+        projectDAO.deleteProject(setupNameProjectTwo);
 
     }
 }

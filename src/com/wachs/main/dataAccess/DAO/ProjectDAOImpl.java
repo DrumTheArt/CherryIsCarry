@@ -1,5 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorProject;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
@@ -24,6 +25,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public ProjectDAOImpl() {
 
@@ -32,16 +34,18 @@ public class ProjectDAOImpl implements ProjectDAO {
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorProject();
         connection = new DBConnection();
+        this.isLoggerActivated = true;
 
     }
 
-    public ProjectDAOImpl(IDBConnection connectToTestDatabase) {
+    public ProjectDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aSingleProject = new Project();
         allProjects = new ArrayList<>();
         convertString = new ConverterStringForDataBase();
         query = new QueryGeneratorProject();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -67,6 +71,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 
                     //Set db-attributes into GuestObject
                     createProjectObject(pk_id, txt_name, real_price, reaL_deposite);
+                }
+
+                else {
+
+                    throw new NotInDataBaseException();
+
                 }
 
         } catch (SQLException e) {
@@ -106,6 +116,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 
             }
 
+            if(allProjects.isEmpty()){
+
+                throw new NotInDataBaseException();
+            }
+
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -139,7 +155,9 @@ public class ProjectDAOImpl implements ProjectDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -170,7 +188,9 @@ public class ProjectDAOImpl implements ProjectDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -204,7 +224,9 @@ public class ProjectDAOImpl implements ProjectDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

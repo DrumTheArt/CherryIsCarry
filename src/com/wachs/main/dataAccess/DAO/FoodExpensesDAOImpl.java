@@ -1,5 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.FoodExpense;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
@@ -22,6 +23,7 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public FoodExpensesDAOImpl() {
 
@@ -29,15 +31,17 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
         allFoodExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorFoodExpenses();
         connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-    public FoodExpensesDAOImpl(IDBConnection connectToTestDatabase) {
+    public FoodExpensesDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         allFoodExpensesAllGuests = new ArrayList<>();
         allFoodExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorFoodExpenses();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -55,6 +59,12 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
                 allFoodExpensesSearchedGuests.add(new FoodExpense(queryResult.getInt(COLUMN1), queryResult.getDouble(COLUMN2), queryResult.getString(COLUMN3), queryResult.getString(COLUMN4), queryResult.getInt(COLUMN5), queryResult.getInt(COLUMN6)));
 
             }
+
+            if(allFoodExpensesSearchedGuests.isEmpty()){
+
+                throw new NotInDataBaseException();
+            }
+
 
         } catch (SQLException e) {
 
@@ -91,6 +101,11 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
             }
 
+            if(allFoodExpensesAllGuests.isEmpty()){
+
+                throw new NotInDataBaseException();
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -121,7 +136,9 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -150,7 +167,9 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -179,7 +198,9 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

@@ -1,11 +1,16 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
+import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.OtherExpense;
+import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
+import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
+import javax.print.attribute.standard.MediaSize;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +27,7 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     private ResultSet queryResult;
     private Statement queryStatement;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public OtherExpensesDAOImpl() {
 
@@ -29,15 +35,17 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
         allExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorOtherExpenses();
         connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-    public OtherExpensesDAOImpl(IDBConnection connectToTestDatabase) {
+    public OtherExpensesDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         allExpensesAllGuests = new ArrayList<>();
         allExpensesSearchedGuests = new ArrayList<>();
         query = new QueryGeneratorOtherExpenses();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
@@ -53,6 +61,12 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             while (queryResult.next()) {
 
                 allExpensesSearchedGuests.add(new OtherExpense(queryResult.getInt(COLUMN1), queryResult.getInt(COLUMN2), queryResult.getString(COLUMN3), queryResult.getString(COLUMN4), queryResult.getInt(COLUMN5), queryResult.getInt(COLUMN6)));
+
+            }
+
+            if(allExpensesSearchedGuests.isEmpty()){
+
+                throw new NotInDataBaseException();
 
             }
 
@@ -91,6 +105,12 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
             }
 
+            if(allExpensesAllGuests.isEmpty()){
+
+                throw new NotInDataBaseException();
+
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -120,7 +140,9 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -149,7 +171,9 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -178,7 +202,9 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

@@ -1,5 +1,6 @@
 package com.wachs.main.dataAccess.DAO;
 
+import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Prepaid;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
@@ -22,6 +23,7 @@ public class PrepaidDAOImpl implements PrepaidDAO {
     private Statement queryStatement;
     private ResultSet queryResult;
     private IDBConnection connection;
+    private boolean isLoggerActivated;
 
     public PrepaidDAOImpl() {
 
@@ -29,20 +31,21 @@ public class PrepaidDAOImpl implements PrepaidDAO {
         allPrepaidByOneProject = new ArrayList<>();
         query = new QueryGeneratorPrepaid();
         connection = new DBConnection();
+        isLoggerActivated = true;
 
     }
 
-
-    public PrepaidDAOImpl(IDBConnection connectToTestDatabase) {
+    public PrepaidDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aPrepaid = new Prepaid();
         allPrepaidByOneProject = new ArrayList<>();
         query = new QueryGeneratorPrepaid();
         this.connection = connectToTestDatabase;
+        this.isLoggerActivated = isLoggerActivated;
 
     }
 
-    @Override
+        @Override
     public Prepaid fetchPrepaidOneGuest(int idGuest, int idProject) {
 
         try {
@@ -51,10 +54,19 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             queryStatement = createSQLStatement();
             queryResult = queryStatement.executeQuery(queryCommand);
 
-            int FK_id = queryResult.getInt(1);
-            double prepaid = queryResult.getDouble(2);
+            if (queryResult.next()) {
 
-            createPrepaidObject(idGuest, idProject, FK_id, prepaid);
+
+                int FK_id = queryResult.getInt(1);
+                double prepaid = queryResult.getDouble(2);
+
+                createPrepaidObject(idGuest, idProject, FK_id, prepaid);
+
+            } else {
+
+                throw new NotInDataBaseException();
+
+            }
 
         } catch (SQLException e) {
 
@@ -90,6 +102,12 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
             }
 
+            if(allPrepaidByOneProject.isEmpty()){
+
+                throw new NotInDataBaseException();
+
+            }
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -120,7 +138,9 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -131,7 +151,6 @@ public class PrepaidDAOImpl implements PrepaidDAO {
         try {
 
             queryStatement.close();
-            queryResult.close();
 
         } catch (SQLException e) {
 
@@ -150,7 +169,9 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 
@@ -179,7 +200,9 @@ public class PrepaidDAOImpl implements PrepaidDAO {
             queryStatement.executeUpdate(queryCommand);
 
             //Log the query
-            ApplicationLogger.loggingQueries(queryCommand);
+            if (isLoggerActivated) {
+                ApplicationLogger.loggingQueries(queryCommand);
+            }
 
         } catch (SQLException e) {
 

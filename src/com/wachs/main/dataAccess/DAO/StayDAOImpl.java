@@ -63,6 +63,10 @@ public class StayDAOImpl implements StayDAO {
 
                 createStayObject(idGuest, idProject, FK_id, nights);
 
+            } else {
+
+                throw new NotInDataBaseException();
+
             }
 
         } catch (SQLException e) {

@@ -48,7 +48,8 @@ public class Stay  {
     }
 
     public void setIdGuest(int idGuest) {
-        this.idProject = idGuest;
+
+        this.idGuest = idGuest;
     }
 
 }

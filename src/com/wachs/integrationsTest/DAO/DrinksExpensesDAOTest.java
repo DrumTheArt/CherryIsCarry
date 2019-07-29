@@ -191,6 +191,9 @@ public class DrinksExpensesDAOTest {
         IDBConnection con = new TestDBConnection();
 
         //Diese Query funktioniert noch nicht ... der löscht die Objekte nicht raus
+        // Das heißt --> wir müssen einen Constraint auf Datum und Reason machen
+        // oder:
+        // wir hauen in die where clause den FK_id rein .. aber nach welchem Kriterium sollte das vergeben werden?
         otherExpensesDAO.deleteOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
         /**
          //Act

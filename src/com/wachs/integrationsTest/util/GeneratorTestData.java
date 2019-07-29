@@ -25,8 +25,9 @@ public class GeneratorTestData {
     public static String setupNameProjectOne = "Integrationstest1";
     public static int projectOneID;
     public static String setupNameGuestOne = "Robert";
-    public static int CountAllOtherExpensesOneProjectOneGuest;
-    public static int CountAllDrinksExpensesOneProjectOneGuest;
+    public static int countAllOtherExpensesOneProjectOneGuest;
+    public static int countAllDrinksExpensesOneProjectOneGuest;
+    public static int countAllFoodExpensesOneProjectOneGuest;
     public static int guestOneID;
     public static String setupNameGuestTwo = "Robert2";
     public static int guestTwoID;
@@ -46,6 +47,10 @@ public class GeneratorTestData {
     public static double setupExpenses = 300.0;
     public static double setupPrepaid = 150;
     public static int setupNights = 5;
+
+    public static int countAllOtherExpensesOneProjectAllGuests;
+    public static int countAllFoodExpensesOneProjectAllGuests;
+    public static int countAllDrinksExpensesOneProjectAllGuests;
 
     public static void createObjects(){
 
@@ -133,8 +138,13 @@ public class GeneratorTestData {
         //Get number of guest in ProjectOne and number of projects in general
         countAllProjects = projectDAO.fetchAllProjects().size();
         CountAllGuestsProjectOne =  guestDAO.fetchAllGuestsOneProject(projectOneID).size();
-        CountAllOtherExpensesOneProjectOneGuest = otherExpensesDAO.fetchOtherExpensesOneGuest(guestOneID, projectOneID).size();
-        CountAllDrinksExpensesOneProjectOneGuest = foodExpensesDAO.fetchFoodExpensesOneGuest(guestOneID, projectOneID).size();
+        countAllOtherExpensesOneProjectOneGuest = otherExpensesDAO.fetchOtherExpensesOneGuest(guestOneID, projectOneID).size();
+        countAllFoodExpensesOneProjectOneGuest = foodExpensesDAO.fetchFoodExpensesOneGuest(guestOneID, projectOneID).size();
+        countAllDrinksExpensesOneProjectOneGuest = drinksExpensesDAO.fetchDrinksExpensesOneGuest(guestOneID, projectOneID).size();
+
+        countAllOtherExpensesOneProjectAllGuests = otherExpensesDAO.fetchAllOtherExpensesOneProject(projectOneID).size();
+        countAllFoodExpensesOneProjectAllGuests = foodExpensesDAO.fetchAllFoodExpensesOneProject(projectOneID).size();
+        countAllDrinksExpensesOneProjectAllGuests = drinksExpensesDAO.fetchAllDrinksExpensesOneProject(projectOneID).size();
 
     }
 

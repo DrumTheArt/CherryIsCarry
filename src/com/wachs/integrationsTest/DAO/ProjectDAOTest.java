@@ -10,8 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 
@@ -90,6 +89,18 @@ public class ProjectDAOTest {
 
     }
 
+    @Test(expected = NotInDataBaseException.class)
+    public void fetchAllProjects_ShouldThrowNotInDataBaseExceptionProjectNotExist() {
+
+        //Arrange
+        GeneratorTestData.createObjects();
+        GeneratorTestData.insertTestdataToDataBase();
+
+        //Act
+        projectDAO.fetchAllProjects();
+
+    }
+
     @Test
     public void fetchAllProjects_ShouldReturnCorrectProjectIDOfFirstElementInList() {
 
@@ -116,13 +127,11 @@ public class ProjectDAOTest {
 
         //Act
         ArrayList<Project> listDrinksToFind = new ProjectDAOImpl(con, false).fetchAllProjects();
-        ArrayList<Project> actualProject = (ArrayList<Project>) listDrinksToFind.stream()
-                .filter(x -> x.getProjectName()
-                .equals(setupNameProjectOne))
-                .collect(Collectors.toList());
+
+        Optional<Project> result = listDrinksToFind.stream().filter(x -> x.getProjectName().equals(setupNameProjectOne)).findFirst();
 
         //Assert
-        Assert.assertEquals(setupProjectPrice, actualProject.get(0).getProjectPrice(), 0.01);
+        Assert.assertEquals(setupProjectPrice, result.get().getProjectPrice(), 0.01);
 
     }
 
@@ -153,14 +162,10 @@ public class ProjectDAOTest {
         //Act
         ArrayList<Project> listDrinksToFind = new ProjectDAOImpl(con, false).fetchAllProjects();
 
-        ArrayList<Project> actualProject = (ArrayList<Project>) listDrinksToFind.stream()
-                .filter(x -> x.getProjectName()
-                .equals(setupNameProjectOne))
-                .collect(Collectors.toList());
+        Optional<Project> result = listDrinksToFind.stream().filter(x -> x.getProjectName().equals(setupNameProjectOne)).findFirst();
         
-
         //Assert
-        Assert.assertEquals(setupNameProjectOne, actualProject.get(0).getProjectName());
+        Assert.assertEquals(setupNameProjectOne, result.get().getProjectName());
 
     }
 
@@ -177,18 +182,6 @@ public class ProjectDAOTest {
 
         //Assert
         Assert.assertNotEquals(listDrinksToFind.get(0).getProjectName(), setupNameProjectTwo);
-
-    }
-
-    @Test(expected = NotInDataBaseException.class)
-    public void fetchOneProject_IfNotExistInDB_ShouldReturnException() {
-
-        //Arrange
-        GeneratorTestData.createObjects();
-        GeneratorTestData.insertTestdataToDataBase();
-
-        //Act
-        projectDAO.fetchOneProject("ProjectDoesntExist");
 
     }
 
@@ -265,7 +258,6 @@ public class ProjectDAOTest {
         GeneratorTestData.insertTestdataToDataBase();
         projectDAO.deleteProject("Justforthistestproject");
         projectDAO.insertProject("Justforthistestproject", setupProjectPrice, setupProjectDeposite);
-        int newProjectID = projectDAO.fetchOneProject("Justforthistestproject").getPK_id();
 
         //Act
         Project newDrinks = projectDAO.fetchOneProject("Justforthistestproject");

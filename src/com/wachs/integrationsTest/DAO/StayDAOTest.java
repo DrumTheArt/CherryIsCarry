@@ -15,7 +15,6 @@ import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 
 public class StayDAOTest {
 
-
     @Test
     public void fetchStayOneGuest_ShouldReturnCorrectNights() {
 
@@ -143,7 +142,7 @@ public class StayDAOTest {
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        stayDAO.fetchStayOneGuest(9999, 9999);
+        stayDAO.fetchAllStayOneProject(9999);
 
     }
 

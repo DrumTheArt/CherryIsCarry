@@ -25,6 +25,8 @@ public class GeneratorTestData {
     public static String setupNameProjectOne = "Integrationstest1";
     public static int projectOneID;
     public static String setupNameGuestOne = "Robert";
+    public static int CountAllOtherExpensesOneProjectOneGuest;
+    public static int CountAllDrinksExpensesOneProjectOneGuest;
     public static int guestOneID;
     public static String setupNameGuestTwo = "Robert2";
     public static int guestTwoID;
@@ -107,13 +109,21 @@ public class GeneratorTestData {
 
         //Insert drinks expenses of the new guest
         drinksExpensesDAO.insertDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
         drinksExpensesDAO.insertDrinksExpensesOneGuest(guestTwoID, projectOneID, setupExpenses, setupNameReason, setupTime);
         drinksExpensesDAO.insertDrinksExpensesOneGuest(guestThreeID, projectOneID, setupExpenses, setupNameReason, setupTime);
 
         //Insert food expenses of the new guest
         foodExpensesDAO.insertFoodExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        foodExpensesDAO.insertFoodExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
         foodExpensesDAO.insertFoodExpensesOneGuest(guestTwoID, projectOneID, setupExpenses, setupNameReason, setupTime);
         foodExpensesDAO.insertFoodExpensesOneGuest(guestThreeID, projectOneID, setupExpenses, setupNameReason, setupTime);
+
+        //Insert other expenses of the new guest
+        otherExpensesDAO.insertOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        otherExpensesDAO.insertOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        otherExpensesDAO.insertOtherExpensesOneGuest(guestTwoID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        otherExpensesDAO.insertOtherExpensesOneGuest(guestThreeID, projectOneID, setupExpenses, setupNameReason, setupTime);
 
         //Insert prepaid of the new guest
         prepaidDAO.insertPrepaidOneGuest(guestOneID, projectOneID, setupPrepaid);
@@ -123,6 +133,8 @@ public class GeneratorTestData {
         //Get number of guest in ProjectOne and number of projects in general
         countAllProjects = projectDAO.fetchAllProjects().size();
         CountAllGuestsProjectOne =  guestDAO.fetchAllGuestsOneProject(projectOneID).size();
+        CountAllOtherExpensesOneProjectOneGuest = otherExpensesDAO.fetchOtherExpensesOneGuest(guestOneID, projectOneID).size();
+        CountAllDrinksExpensesOneProjectOneGuest = foodExpensesDAO.fetchFoodExpensesOneGuest(guestOneID, projectOneID).size();
 
     }
 

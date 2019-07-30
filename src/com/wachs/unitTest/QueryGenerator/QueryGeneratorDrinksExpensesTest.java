@@ -35,6 +35,7 @@ public class QueryGeneratorDrinksExpensesTest {
         assertEquals(result, fetchQueryOneGuest);
     }
 
+    /**
     @Test
     public void deleteQueryDrinksExpensesOneGuest_ShouldReturnCorrectQueryString() {
 
@@ -48,7 +49,7 @@ public class QueryGeneratorDrinksExpensesTest {
         //Assert
         assertEquals(result, deleteQueryOneGuest);
     }
-
+     **/
     @Test
     public void insertQueryDrinksExpensesOneGuest_ShouldReturnCorrectQueryString() {
 
@@ -62,7 +63,7 @@ public class QueryGeneratorDrinksExpensesTest {
         //Assert
         assertEquals(result, insertQueryOneGuest);
     }
-
+    /**
     @Test
     public void updateQueryDrinksExpensesOneGuest_ShouldReturnCorrectQueryString() {
 
@@ -76,4 +77,5 @@ public class QueryGeneratorDrinksExpensesTest {
         //Assert
         assertEquals(result, updateQueryOneGuest);
     }
+     **/
 }

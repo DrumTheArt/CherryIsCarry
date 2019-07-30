@@ -194,7 +194,8 @@ public class DrinksExpensesDAOTest {
         // Das heißt --> wir müssen einen Constraint auf Datum und Reason machen
         // oder:
         // wir hauen in die where clause den FK_id rein .. aber nach welchem Kriterium sollte das vergeben werden?
-        otherExpensesDAO.deleteOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, 1091);
+
         /**
          //Act
          otherExpensesDAO.updateOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime, setupProjectPrice, newReason, setupTime);

@@ -128,11 +128,11 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
     }
 
     @Override
-    public void deleteDrinksExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
+    public void deleteDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id) {
 
         try {
 
-            String queryCommand = query.deleteQueryDrinksExpensesOneGuest(idGuest, idProject, spend, reason, when);
+            String queryCommand = query.deleteQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -158,12 +158,11 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         }
     }
 
-    @Override
-    public void updateDrinksExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when, double newPrice, String newReason, String newWhen) {
+    public void updateDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id, double newPrice, String newReason, String newWhen) {
 
         try {
 
-            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, spend, reason, when, newPrice, newReason, newWhen);
+            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 

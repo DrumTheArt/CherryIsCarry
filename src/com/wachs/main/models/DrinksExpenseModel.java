@@ -69,7 +69,8 @@ public class DrinksExpenseModel {
             }
         }
 
-        newDAO.deleteDrinksExpensesOneGuest(idGuest, idProject, spend, reason, when);
+        //TODO hier Parameter fixen
+        //newDAO.deleteDrinksExpensesOneGuest(idGuest, idProject, spend, reason, when);
 
     }
 

@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 
@@ -194,7 +195,11 @@ public class DrinksExpensesDAOTest {
         // Das heißt --> wir müssen einen Constraint auf Datum und Reason machen
         // oder:
         // wir hauen in die where clause den FK_id rein .. aber nach welchem Kriterium sollte das vergeben werden?
-        drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, 1091);
+
+        ArrayList<DrinksExpense> n = getListOfPKid(guestOneID, projectOneID);
+
+        n.forEach(x -> System.out.println(x.getPK_id()));
+        //drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, 1091);
 
         /**
          //Act
@@ -206,6 +211,23 @@ public class DrinksExpensesDAOTest {
          //Assert
          Assert.assertEquals(newReason, result.get().getReason());
          **/
+
+    }
+
+    private ArrayList<DrinksExpense> getListOfPKid(int guestOneID, int projectOneID) {
+
+        IDBConnection con = new TestDBConnection();
+        ArrayList<DrinksExpense> listDrinksExpensesToFind = new DrinksExpensesDAOImpl(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
+
+        listDrinksExpensesToFind = (ArrayList<DrinksExpense>) listDrinksExpensesToFind.stream()
+                .filter(x -> x.getIdGuest() == 1028
+                        && x.getIdProject() == 31
+                        && x.get_spend() == setupPrepaid
+                        && x.getReason().equals(setupNameReason)
+                        && x.getWhen().equals(setupTime))
+                .collect(Collectors.toList());
+
+        return listDrinksExpensesToFind;
 
     }
 

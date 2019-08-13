@@ -128,9 +128,11 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
     }
 
     @Override
-    public void deleteDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id) {
+    public void deleteDrinksExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when) {
 
         try {
+
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, price, reason, when);
 
             String queryCommand = query.deleteQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id);
             queryStatement = createSQLStatement();
@@ -158,11 +160,14 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         }
     }
 
-    public void updateDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id, double newPrice, String newReason, String newWhen) {
+    public void updateDrinksExpensesOneGuest(int idGuest, int idProject, double newPrice, String newReason, String newWhen, double oldPrice, String oldReason, String oldWhen) {
 
         try {
 
-            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen);
+
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject);
+
+            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen, oldPrice, oldReason, oldWhen);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -230,4 +235,27 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         return this.openConnection().createStatement();
 
     }
+
+    /**
+     * Problem here: The DBMS of SQLite returns a successfull set, if the primaryKey is not given, but all the other parameters match
+     * So if the listOfDrinksExpenses contains a guest with two excactly rows (means same reason, same when, same price), then this method will
+     * find the PK of the table drinksExpenses ... this is neccessary to update, delete it
+     **/
+    private int getPrimaryKeyofASingleRowIfAllDataAreTheSame(int idGuest, int idProject, double price, String reason, String when) {
+
+        ArrayList<DrinksExpense> drinksExpensese = this.fetchDrinksExpensesOneGuest(idGuest, idProject);
+        ArrayList<Integer> listOfPrimaryKeys = new ArrayList<>();
+
+        for (int i = 0; i < drinksExpensese.size(); i++) {
+
+            if ((drinksExpensese.get(i).get_spend() == price) && (drinksExpensese.get(i).getReason().equals(reason)) && (drinksExpensese.get(i).getWhen().equals(when))) {
+
+                listOfPrimaryKeys.add(drinksExpensese.get(i).getPK_id());
+
+            }
+        }
+
+        return listOfPrimaryKeys.get(0);
+    }
+
 }

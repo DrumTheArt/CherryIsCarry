@@ -165,7 +165,7 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         try {
 
 
-            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject);
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, oldPrice, oldReason, oldWhen);
 
             String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen, oldPrice, oldReason, oldWhen);
             queryStatement = createSQLStatement();
@@ -257,5 +257,4 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
         return listOfPrimaryKeys.get(0);
     }
-
 }

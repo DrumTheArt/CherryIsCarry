@@ -35,6 +35,8 @@ public class FoodDAOImpl implements FoodDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public FoodDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aFood = new Food();

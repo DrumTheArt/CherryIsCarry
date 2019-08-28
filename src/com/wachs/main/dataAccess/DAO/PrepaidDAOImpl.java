@@ -35,6 +35,8 @@ public class PrepaidDAOImpl implements PrepaidDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public PrepaidDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aPrepaid = new Prepaid();

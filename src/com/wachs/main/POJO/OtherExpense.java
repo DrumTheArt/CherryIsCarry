@@ -47,11 +47,11 @@ public class OtherExpense {
         this.reason = TXT_name;
     }
 
-    public void setREAL_price(double REAL_price) {
+    public void setSpend(double REAL_price) {
         this.spend=REAL_price;
     }
 
-    public double getREAL_price() {
+    public double getSpend() {
         return this.spend;
     }
 

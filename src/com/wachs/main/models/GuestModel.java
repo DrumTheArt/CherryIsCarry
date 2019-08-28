@@ -239,7 +239,7 @@ public class GuestModel {
 
         for (OtherExpense othExp : otherExpensesSearchedGuest) {
 
-            sum += othExp.getREAL_price();
+            sum += othExp.getSpend();
         }
 
         return sum;
@@ -251,7 +251,7 @@ public class GuestModel {
 
         for (OtherExpense othExp : allOtherExpensesSelectedProject) {
 
-            sum += othExp.getREAL_price();
+            sum += othExp.getSpend();
         }
 
         double result = sum / this.getAllSleepOverSelectedProjectEUR() * this.getSleepOverSelectedGuest();

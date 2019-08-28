@@ -38,6 +38,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public ProjectDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aSingleProject = new Project();

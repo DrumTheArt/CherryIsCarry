@@ -1,16 +1,12 @@
 package com.wachs.main.dataAccess.DAO;
 
 import com.wachs.main.Exceptions.NotInDataBaseException;
-import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.OtherExpense;
-import com.wachs.main.POJO.Project;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorOtherExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
-import javax.print.attribute.standard.MediaSize;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +35,8 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public OtherExpensesDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         allExpensesAllGuests = new ArrayList<>();
@@ -131,11 +129,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public void deleteOtherExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when) {
+    public void deleteOtherExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when) {
 
         try {
 
-            String queryCommand = query.deleteQueryOtherExpensesOneGuest(idGuest, idProject, price, reason, when);
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, spend, reason, when);
+
+            String queryCommand = query.deleteQueryOtherExpensesOneGuest(idGuest, idProject, pk_id);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -162,11 +162,13 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
     }
 
     @Override
-    public void updateOtherExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen) {
+    public void updateOtherExpensesOneGuest(int idGuest, int idProject, double newPrice, String newReason, String newWhen, double oldPrice, String oldReason, String oldWhen) {
 
         try {
 
-            String queryCommand = query.updateQueryOtherExpensesOneGuest(idGuest, idProject, price, reason, when, newPrice, newReason, newWhen);
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, oldPrice, oldReason, oldWhen);
+
+            String queryCommand = query.updateQueryOtherExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -233,6 +235,28 @@ public class OtherExpensesDAOImpl implements OtherExpensesDAO {
 
         return this.openConnection().createStatement();
 
+    }
+
+    /**
+     * Problem here: The DBMS of SQLite returns a successfull set, if the primaryKey is not given, but all the other parameters match
+     * So if the listOfDrinksExpenses contains a guest with two excactly rows (means same reason, same when, same price), then this method will
+     * find the PK of the table drinksExpenses ... this is neccessary to update, delete it
+     **/
+    private int getPrimaryKeyofASingleRowIfAllDataAreTheSame(int idGuest, int idProject, double price, String reason, String when) {
+
+        ArrayList<OtherExpense> otherExpenses = this.fetchOtherExpensesOneGuest(idGuest, idProject);
+        ArrayList<Integer> listOfPrimaryKeys = new ArrayList<>();
+
+        for (int i = 0; i < otherExpenses.size(); i++) {
+
+            if ((otherExpenses.get(i).getSpend() == price) && (otherExpenses.get(i).getReason().equals(reason)) && (otherExpenses.get(i).getWhen().equals(when))) {
+
+                listOfPrimaryKeys.add(otherExpenses.get(i).getPK_id());
+
+            }
+        }
+
+        return listOfPrimaryKeys.get(0);
     }
 
 }

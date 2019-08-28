@@ -8,7 +8,7 @@ public interface OtherExpensesDAO {
 
     ArrayList fetchAllOtherExpensesOneProject(int idProject);
 
-    void deleteOtherExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when);
+    void deleteOtherExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when);
 
     void updateOtherExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
 

@@ -38,9 +38,9 @@ public class QueryGeneratorDrinksExpenses {
         return query;
     }
 
-    public String updateQueryDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id, double drinksExpensesNewPrice, String drinksExpensesNewReason, String drinksExpensesNewWhen, double drinksExpensesOldPrice, String drinksExpensesOldReason, String drinksExpensesOldWhen) {
+    public String updateQueryDrinksExpensesOneGuest(int idGuest, int idProject, int pk_id, double drinksExpensesNewPrice, String drinksExpensesNewReason, String drinksExpensesNewWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + drinksExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + drinksExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + drinksExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + drinksExpensesOldPrice + " AND " + COLUMN3 + " = " + "'" + drinksExpensesOldReason + "'" + " AND " + COLUMN4 + " = " + "'" + drinksExpensesOldWhen + "'" + " AND " + COLUMN1 + " = " + pk_id;
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + drinksExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + drinksExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + drinksExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id;
 
         return query;
 

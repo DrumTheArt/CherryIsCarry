@@ -1,12 +1,10 @@
 package com.wachs.main.dataAccess.DAO;
 
-import com.wachs.integrationsTest.util.GeneratorTestData;
 import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
-import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 
 import java.sql.Connection;
@@ -37,6 +35,8 @@ public class DrinksDAOImpl implements DrinksDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public DrinksDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         this.singleDrink = new Drinks();

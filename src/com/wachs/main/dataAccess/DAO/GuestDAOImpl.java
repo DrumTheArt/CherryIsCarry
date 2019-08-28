@@ -7,7 +7,11 @@ import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnect
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest.*;
@@ -34,6 +38,8 @@ public class GuestDAOImpl implements GuestDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public GuestDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aGuest = new Guest();

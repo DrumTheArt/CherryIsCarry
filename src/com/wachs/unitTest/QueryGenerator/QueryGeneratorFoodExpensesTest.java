@@ -39,11 +39,11 @@ public class QueryGeneratorFoodExpensesTest {
     public void deleteFoodExpensesOneGuest_ShouldReturnCorrectQueryString() {
 
         //Arrange
-        String deleteQueryOneGuest = "DELETE FROM TBL_FOODEXPENSE WHERE ID_guest=1 AND ID_project = 1 AND REAL_spend = 800.0 AND TXT_reason = 'The second new reason' AND TXT_when = '01.12.2019'";
+        String deleteQueryOneGuest = "DELETE FROM TBL_FOODEXPENSE WHERE ID_guest=1 AND ID_project = 1 AND FK_id = 1";
         QueryGeneratorFoodExpenses foodExpensesQuery = new QueryGeneratorFoodExpenses();
 
         //Act
-        String result = foodExpensesQuery.deleteFoodExpensesOneGuest(1, 1, 800.0, "The second new reason", "01.12.2019");
+        String result = foodExpensesQuery.deleteFoodExpensesOneGuest(1, 1, 1);
 
         //Assert
         assertEquals(result, deleteQueryOneGuest);
@@ -53,11 +53,11 @@ public class QueryGeneratorFoodExpensesTest {
     public void updateQueryFoodExpensesOneGuest_ShouldReturnCorrectQueryString() {
 
         //Arrange
-        String updateQueryOneGuest = "UPDATE TBL_FOODEXPENSE SET REAL_spend = 800.0 ,TXT_reason='The second new reason' ,TXT_when = '01.12.2019' WHERE ID_guest = 1 AND ID_project = 1 AND REAL_spend = 200.0 AND TXT_reason = 'The reason' AND TXT_when = '01.01.2019'";
+        String updateQueryOneGuest = "UPDATE TBL_FOODEXPENSE SET REAL_spend = 200.0 ,TXT_reason='The second new reason' ,TXT_when = '01.02.2019' WHERE ID_guest = 1 AND ID_project = 1 AND FK_id = 1";
         QueryGeneratorFoodExpenses foodExpensesQuery = new QueryGeneratorFoodExpenses();
 
         //Act
-        String result = foodExpensesQuery.updateQueryFoodExpensesOneGuest(1, 1, 200.0, "The reason", "01.01.2019", 800, "The second new reason", "01.12.2019");
+        String result = foodExpensesQuery.updateQueryFoodExpensesOneGuest(1, 1, 1, 200.0, "The second new reason", "01.02.2019");
 
         //Assert
         assertEquals(result, updateQueryOneGuest);

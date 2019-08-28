@@ -24,9 +24,9 @@ public class QueryGeneratorOtherExpenses {
         return query;
     }
 
-    public String deleteQueryOtherExpensesOneGuest(int idGuest, int idProject, double otherExpensesPrice, String otherExpensesReason, String otherExpensesWhen) {
+    public String deleteQueryOtherExpensesOneGuest(int idGuest, int idProject, int pk_id) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + otherExpensesPrice + " AND " + COLUMN3 + " = " + "'" + otherExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + otherExpensesWhen + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
 
         return query;
     }
@@ -38,9 +38,9 @@ public class QueryGeneratorOtherExpenses {
         return query;
     }
 
-    public String updateQueryOtherExpensesOneGuest(int idGuest, int idProject, double otherExpensesPrice, String otherExpensesReason, String otherExpensesWhen, double otherExpensesNewPrice, String otherExpensesNewReason, String otherExpensesNewWhen) {
+    public String updateQueryOtherExpensesOneGuest(int idGuest, int idProject, int pk_id, double otherExpensesNewPrice, String otherExpensesNewReason, String otherExpensesNewWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + otherExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + otherExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + otherExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + otherExpensesPrice + " AND " + COLUMN3 + " = " + "'" + otherExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + otherExpensesWhen + "'";
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + otherExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + otherExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + otherExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
 
         return query;
     }

@@ -40,7 +40,7 @@ public class OtherExpenseModel {
 
         for (OtherExpense othExp : otherExpensesSearchedProject) {
 
-            sum += othExp.getREAL_price();
+            sum += othExp.getSpend();
         }
 
         return sum;
@@ -52,7 +52,7 @@ public class OtherExpenseModel {
 
         for (OtherExpense othExp : otherExpensesSearchedGuest) {
 
-            sum += othExp.getREAL_price();
+            sum += othExp.getSpend();
 
         }
         return sum;
@@ -84,7 +84,7 @@ public class OtherExpenseModel {
 
         for (OtherExpense e : otherExpensesSearchedGuest) {
 
-            if (e.getREAL_price() == spend && e.getReason().equals(reason) && e.getWhen().equals(when)) {
+            if (e.getSpend() == spend && e.getReason().equals(reason) && e.getWhen().equals(when)) {
                 otherExpensesSearchedGuest.remove(e);
             }
         }

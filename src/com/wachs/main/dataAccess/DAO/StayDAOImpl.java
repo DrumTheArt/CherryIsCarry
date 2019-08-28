@@ -35,6 +35,8 @@ public class StayDAOImpl implements StayDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public StayDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         aStay = new Stay();

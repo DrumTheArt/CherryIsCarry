@@ -24,9 +24,9 @@ public class QueryGeneratorFoodExpenses {
         return query;
     }
 
-    public String deleteFoodExpensesOneGuest(int idGuest, int idProject, double foodExpensesPrice, String foodExpensesReason, String foodExpensesWhen) {
+    public String deleteFoodExpensesOneGuest(int idGuest, int idProject, int pk_id) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + foodExpensesPrice + " AND " + COLUMN3 + " = " + "'" + foodExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + foodExpensesWhen + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
 
         return query;
     }
@@ -38,9 +38,9 @@ public class QueryGeneratorFoodExpenses {
         return query;
     }
 
-    public String updateQueryFoodExpensesOneGuest(int idGuest, int idProject, double foodExpensesPrice, String foodExpensesReason, String foodExpensesWhen, double foodExpensesNewPrice, String foodExpensesNewReason, String foodExpensesNewWhen) {
+    public String updateQueryFoodExpensesOneGuest(int idGuest, int idProject, int pk_id, double foodExpensesNewPrice, String foodExpensesNewReason, String foodExpensesNewWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + foodExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + foodExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + foodExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN2 + " = " + foodExpensesPrice + " AND " + COLUMN3 + " = " + "'" + foodExpensesReason + "'" + " AND " + COLUMN4 + " = " + "'" + foodExpensesWhen + "'";
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + foodExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + foodExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + foodExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
 
         return query;
     }

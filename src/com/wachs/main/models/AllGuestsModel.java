@@ -38,7 +38,7 @@ public class AllGuestsModel {
 
         for (OtherExpense e : allOtherExpensesToProject) {
 
-            sum += e.getREAL_price();
+            sum += e.getSpend();
         }
 
         return sum;

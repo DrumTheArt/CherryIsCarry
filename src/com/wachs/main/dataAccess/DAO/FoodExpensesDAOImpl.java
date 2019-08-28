@@ -35,6 +35,8 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public FoodExpensesDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         allFoodExpensesAllGuests = new ArrayList<>();
@@ -131,7 +133,9 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         try {
 
-            String queryCommand = query.deleteFoodExpensesOneGuest(idGuest, idProject, spend, reason, when);
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, spend, reason, when);
+
+            String queryCommand = query.deleteFoodExpensesOneGuest(idGuest, idProject, pk_id);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -158,11 +162,13 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
     }
 
     @Override
-    public void updateFoodExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when, double newSpend, String newReason, String newWhen) {
+    public void updateFoodExpensesOneGuest(int idGuest, int idProject, double newPrice, String newReason, String newWhen, double oldPrice, String oldReason, String oldWhen) {
 
         try {
 
-            String queryCommand = query.updateQueryFoodExpensesOneGuest(idGuest, idProject, spend, reason, when, newSpend, newReason, newWhen);
+            int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, oldPrice, oldReason, oldWhen);
+
+            String queryCommand = query.updateQueryFoodExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -229,5 +235,27 @@ public class FoodExpensesDAOImpl implements FoodExpensesDAO {
 
         return this.openConnection().createStatement();
 
+    }
+
+    /**
+     * Problem here: The DBMS of SQLite returns a successfull set, if the primaryKey is not given, but all the other parameters match
+     * So if the listOfDrinksExpenses contains a guest with two excactly rows (means same reason, same when, same price), then this method will
+     * find the PK of the table drinksExpenses ... this is neccessary to update, delete it
+     **/
+    private int getPrimaryKeyofASingleRowIfAllDataAreTheSame(int idGuest, int idProject, double price, String reason, String when) {
+
+        ArrayList<FoodExpense> foodExpenses = this.fetchFoodExpensesOneGuest(idGuest, idProject);
+        ArrayList<Integer> listOfPrimaryKeys = new ArrayList<>();
+
+        for (int i = 0; i < foodExpenses.size(); i++) {
+
+            if ((foodExpenses.get(i).get_spend() == price) && (foodExpenses.get(i).getReason().equals(reason)) && (foodExpenses.get(i).getWhen().equals(when))) {
+
+                listOfPrimaryKeys.add(foodExpenses.get(i).getPK_id());
+
+            }
+        }
+
+        return listOfPrimaryKeys.get(0);
     }
 }

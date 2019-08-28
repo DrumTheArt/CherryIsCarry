@@ -8,9 +8,9 @@ public interface FoodExpensesDAO {
 
     ArrayList fetchAllFoodExpensesOneProject(int idProject);
 
-    void deleteFoodExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when);
+    void deleteFoodExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when);
 
-    void updateFoodExpensesOneGuest(int idGuest, int idProject, double price, String reason, String when, double newPrice, String newReason, String newWhen);
+    void updateFoodExpensesOneGuest(int idGuest, int idProject, double newPrice, String newReason, String newWhen, double oldPrice, String oldReason, String oldWhen);
 
     void insertFoodExpensesOneGuest(int idGuest, int idProject, double spend, String reason, String when);
 

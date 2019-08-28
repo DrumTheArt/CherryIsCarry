@@ -35,6 +35,8 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
 
     }
 
+    //This constructor is for test database
+    //TestDBConnection is the implementation for IDBConnection
     public DrinksExpensesDAOImpl(IDBConnection connectToTestDatabase, boolean isLoggerActivated) {
 
         allDrinksExpensesAllGuests = new ArrayList<>();
@@ -160,14 +162,14 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         }
     }
 
+    @Override
     public void updateDrinksExpensesOneGuest(int idGuest, int idProject, double newPrice, String newReason, String newWhen, double oldPrice, String oldReason, String oldWhen) {
 
         try {
 
-
             int pk_id = getPrimaryKeyofASingleRowIfAllDataAreTheSame(idGuest, idProject, oldPrice, oldReason, oldWhen);
 
-            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen, oldPrice, oldReason, oldWhen);
+            String queryCommand = query.updateQueryDrinksExpensesOneGuest(idGuest, idProject, pk_id, newPrice, newReason, newWhen);
             queryStatement = createSQLStatement();
             queryStatement.executeUpdate(queryCommand);
 
@@ -224,18 +226,6 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         }
     }
 
-    private Connection openConnection() throws SQLException {
-
-        return connection.getConnection();
-
-    }
-
-    private Statement createSQLStatement() throws SQLException {
-
-        return this.openConnection().createStatement();
-
-    }
-
     /**
      * Problem here: The DBMS of SQLite returns a successfull set, if the primaryKey is not given, but all the other parameters match
      * So if the listOfDrinksExpenses contains a guest with two excactly rows (means same reason, same when, same price), then this method will
@@ -256,5 +246,17 @@ public class DrinksExpensesDAOImpl implements DrinksExpensesDAO {
         }
 
         return listOfPrimaryKeys.get(0);
+    }
+
+    private Connection openConnection() throws SQLException {
+
+        return connection.getConnection();
+
+    }
+
+    private Statement createSQLStatement() throws SQLException {
+
+        return this.openConnection().createStatement();
+
     }
 }

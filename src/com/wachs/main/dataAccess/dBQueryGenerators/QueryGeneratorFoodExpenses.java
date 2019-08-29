@@ -26,7 +26,7 @@ public class QueryGeneratorFoodExpenses {
 
     public String deleteFoodExpensesOneGuest(int idGuest, int idProject, int pk_id) {
 
-        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
+        String query = "DELETE FROM " + TABLENAME + " WHERE " + COLUMN5 + "=" + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id;
 
         return query;
     }
@@ -40,7 +40,7 @@ public class QueryGeneratorFoodExpenses {
 
     public String updateQueryFoodExpensesOneGuest(int idGuest, int idProject, int pk_id, double foodExpensesNewPrice, String foodExpensesNewReason, String foodExpensesNewWhen) {
 
-        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + foodExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + foodExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + foodExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id + "'";
+        String query = "UPDATE " + TABLENAME + " SET " + COLUMN2 + " = " + foodExpensesNewPrice + " ," + COLUMN3 + "=" + "'" + foodExpensesNewReason + "'" + " ," + COLUMN4 + " = " + "'" + foodExpensesNewWhen + "'" + " WHERE " + COLUMN5 + " = " + idGuest + " AND " + COLUMN6 + " = " + idProject + " AND " + COLUMN1 + " = " + pk_id;
 
         return query;
     }

@@ -2,62 +2,62 @@ package com.wachs.main.POJO;
 
 public class Project {
 
-    private int PK_id;
-    private String projectName;
-    private double projectPrice;
-    private double projectDeposite;
+    private int primaryKey;
+    private String name;
+    private double price;
+    private double deposite;
 
 
     public Project(){
 
     }
 
-    public Project(String projectName, double projectPrice, double projectDeposite){
+    public Project(String name, double price, double deposite){
 
-        this.projectName = projectName;
-        this.projectPrice = projectPrice;
-        this.projectDeposite = projectDeposite;
+        this.name = name;
+        this.price = price;
+        this.deposite = deposite;
 
     }
 
-    public Project(int pk_id, String projectName, double projectPrice, double projectDeposite) {
+    public Project(int primaryKey, String name, double price, double deposite) {
 
-        this.PK_id = pk_id;
-        this.projectName = projectName;
-        this.projectPrice = projectPrice;
-        this.projectDeposite = projectDeposite;
+        this.primaryKey = primaryKey;
+        this.name = name;
+        this.price = price;
+        this.deposite = deposite;
     }
 
-    public int getPK_id() {
-        return PK_id;
+    public int getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id=PK_id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
-    public void setProjectName(String projectName){
-        this.projectName = projectName;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public double getProjectPrice() {
-        return projectPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProjectPrice(double projectPrice){
-        this.projectPrice = projectPrice;
+    public void setPrice(double price){
+        this.price = price;
     }
 
-    public double getProjectDeposite() {
-        return projectDeposite;
+    public double getDeposite() {
+        return deposite;
     }
 
-    public void setProjectDeposite(double projectDeposite){
-        this.projectDeposite = projectDeposite;
+    public void setDeposite(double deposite){
+        this.deposite = deposite;
     }
 
 }

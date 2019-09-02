@@ -1,12 +1,12 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Project;
-import com.wachs.main.dataAccess.DAO.ProjectDAO;
-import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
+import com.wachs.main.dataAccess.services.IProjectService;
+import com.wachs.main.dataAccess.services.ProjectService;
 
 public class ProjectModel {
 
-    private ProjectDAO newDAO;
+    private IProjectService newDAO;
     private Project searchedProject;
 
     public ProjectModel(String nameProject) {
@@ -20,7 +20,7 @@ public class ProjectModel {
 
     private Project createModel(String projectName) {
 
-        newDAO = new ProjectDAOImpl();
+        newDAO = new ProjectService();
         searchedProject = newDAO.fetchOneProject(projectName);
 
         return searchedProject;
@@ -28,22 +28,22 @@ public class ProjectModel {
 
     public double getPrice() {
 
-        return searchedProject.getProjectPrice();
+        return searchedProject.getPrice();
     }
 
     public double getDeposite() {
 
-        return searchedProject.getProjectDeposite();
+        return searchedProject.getDeposite();
     }
 
     public String getProjectName() {
 
-        return searchedProject.getProjectName();
+        return searchedProject.getName();
     }
 
     public int getProjectPrimaryKey() {
 
-        return searchedProject.getPK_id();
+        return searchedProject.getPrimaryKey();
     }
 
     public void setNewProject(String newNameProject, double price, double deposite) {

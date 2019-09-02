@@ -1,14 +1,14 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.FoodExpense;
-import com.wachs.main.dataAccess.DAO.FoodExpensesDAO;
-import com.wachs.main.dataAccess.DAO.FoodExpensesDAOImpl;
+import com.wachs.main.dataAccess.services.IFoodExpensesService;
+import com.wachs.main.dataAccess.services.FoodExpensesService;
 
 import java.util.ArrayList;
 
 public class FoodExpenseModel {
 
-    private FoodExpensesDAO newDAO;
+    private IFoodExpensesService newDAO;
     private ArrayList<FoodExpense> foodExpensesSearchedGuest;
     private int idGuest;
     private int idProject;
@@ -21,13 +21,13 @@ public class FoodExpenseModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new FoodExpensesDAOImpl();
+        newDAO = new FoodExpensesService();
         foodExpensesSearchedGuest = newDAO.fetchFoodExpensesOneGuest(idGuest, idProject);
 
         if (foodExpensesSearchedGuest != null) {
 
-            this.idProject = foodExpensesSearchedGuest.get(0).getIdProject();
-            this.idGuest = foodExpensesSearchedGuest.get(0).getIdGuest();
+            this.idProject = foodExpensesSearchedGuest.get(0).getProjectId();
+            this.idGuest = foodExpensesSearchedGuest.get(0).getGuestId();
 
         }
     }

@@ -1,12 +1,12 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Food;
-import com.wachs.main.dataAccess.DAO.FoodDAO;
-import com.wachs.main.dataAccess.DAO.FoodDAOImpl;
+import com.wachs.main.dataAccess.services.IFoodService;
+import com.wachs.main.dataAccess.services.FoodService;
 
 public class FoodModel {
 
-    private FoodDAO newDAO;
+    private IFoodService newDAO;
     private Food foodSearchedGuest;
     private int idGuest;
     private int idProject;
@@ -19,11 +19,11 @@ public class FoodModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new FoodDAOImpl();
+        newDAO = new FoodService();
         foodSearchedGuest = newDAO.fetchFoodByOneGuest(idGuest, idProject);
 
-        this.idGuest = foodSearchedGuest.getIdGuest();
-        this.idProject = foodSearchedGuest.getIdProject();
+        this.idGuest = foodSearchedGuest.getGuestId();
+        this.idProject = foodSearchedGuest.getProjectId();
     }
 
     public int getFood() {

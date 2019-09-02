@@ -1,14 +1,14 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.OtherExpense;
-import com.wachs.main.dataAccess.DAO.OtherExpensesDAO;
-import com.wachs.main.dataAccess.DAO.OtherExpensesDAOImpl;
+import com.wachs.main.dataAccess.services.IOtherExpensesService;
+import com.wachs.main.dataAccess.services.OtherExpensesService;
 
 import java.util.ArrayList;
 
 public class OtherExpenseModel {
 
-    private OtherExpensesDAO newDAO;
+    private IOtherExpensesService newDAO;
     private ArrayList<OtherExpense> otherExpensesSearchedGuest;
     private ArrayList<OtherExpense> otherExpensesSearchedProject;
     private int idGuest;
@@ -22,14 +22,14 @@ public class OtherExpenseModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new OtherExpensesDAOImpl();
+        newDAO = new OtherExpensesService();
         otherExpensesSearchedGuest = newDAO.fetchOtherExpensesOneGuest(idGuest, idProject);
         otherExpensesSearchedProject = newDAO.fetchAllOtherExpensesOneProject(idProject);
 
         if (otherExpensesSearchedGuest != null) {
 
-            this.idProject = otherExpensesSearchedGuest.get(0).getIdProject();
-            this.idGuest = otherExpensesSearchedGuest.get(0).getIdGuest();
+            this.idProject = otherExpensesSearchedGuest.get(0).getProjectId();
+            this.idGuest = otherExpensesSearchedGuest.get(0).getGuestId();
 
         }
     }

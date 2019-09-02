@@ -2,53 +2,54 @@ package com.wachs.main.POJO;
 
 public class DrinksExpense {
 
-    private int PK_id;
+    private int primarykey;
     private double spend;
     private String reason;
     private String when;
-    private int idGuest;
-    private int IdProject;
+    private int guestId;
+    private int projectId;
 
     public DrinksExpense() {
 
     }
 
-    public DrinksExpense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
+    public DrinksExpense(int primaryKey, double spend, String reason, String when, int guestId, int projectId) {
 
-        this.PK_id = FK_id;
+        this.primarykey = primaryKey;
         this.spend = spend;
         this.when = when;
         this.reason = reason;
-        this.idGuest = idGuest;
-        this.IdProject = idProject;
+        this.guestId = guestId;
+        this.projectId = projectId;
+
     }
 
-    public int getPK_id() {
-        return this.PK_id;
+    public int getPrimaryKey() {
+        return this.primarykey;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id = PK_id;
+    public void setPrimaryKey(int PK_id) {
+        this.primarykey = PK_id;
     }
 
-    public int getIdProject() {
-        return IdProject;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setIdProject(int idProject) {
-        this.IdProject = idProject;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
-    public void set_spend(double REAL_price) {
+    public void setSpend(double REAL_price) {
         this.spend = REAL_price;
     }
 
-    public double get_spend() {
+    public double getSpend() {
         return this.spend;
     }
 
-    public int getIdGuest() {
-        return this.idGuest;
+    public int getGuestId() {
+        return this.guestId;
     }
 
     public String getReason() {
@@ -67,8 +68,8 @@ public class DrinksExpense {
         this.when = when;
     }
 
-    public void setIdGuest(int idGuest) {
-        this.idGuest = idGuest;
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 
 }

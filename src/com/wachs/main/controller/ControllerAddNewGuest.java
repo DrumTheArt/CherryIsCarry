@@ -28,7 +28,7 @@ public class ControllerAddNewGuest {
         projectName = viewAddNewGuest.getCb_SelectedProject();
         guestName = viewAddNewGuest.getTf_GuestNewName();
 
-        //TODO wo soll jetzt das DAO Ding den INSERT Befehl reinmachen?
+        //TODO wo soll jetzt das services Ding den INSERT Befehl reinmachen?
         //viewAddNewGuest.setNewGuest(projectName, guestName);
     }
 

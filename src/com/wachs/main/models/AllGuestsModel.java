@@ -1,7 +1,7 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.*;
-import com.wachs.main.dataAccess.DAO.*;
+import com.wachs.main.dataAccess.services.*;
 
 import java.util.ArrayList;
 
@@ -22,13 +22,13 @@ public class AllGuestsModel {
 
     private void createModel(String nameProject){
 
-        selectedProject = new ProjectDAOImpl().fetchOneProject(nameProject);
-        selectedProjectID = selectedProject.getPK_id();
+        selectedProject = new ProjectService().fetchOneProject(nameProject);
+        selectedProjectID = selectedProject.getPrimaryKey();
 
-        allDrinksToProject = new DrinksExpensesDAOImpl().fetchAllDrinksExpensesOneProject(selectedProjectID);
-        allFoodToProject = new FoodExpensesDAOImpl().fetchAllFoodExpensesOneProject(selectedProjectID);
-        allPrepaidToProject = new PrepaidDAOImpl().fetchAllPrepaidOneProject(selectedProjectID);
-        allOtherExpensesToProject = new OtherExpensesDAOImpl().fetchAllOtherExpensesOneProject(selectedProjectID);
+        allDrinksToProject = new DrinksExpensesService().fetchAllDrinksExpensesOneProject(selectedProjectID);
+        allFoodToProject = new FoodExpensesService().fetchAllFoodExpensesOneProject(selectedProjectID);
+        allPrepaidToProject = new PrepaidService().fetchAllPrepaidOneProject(selectedProjectID);
+        allOtherExpensesToProject = new OtherExpensesService().fetchAllOtherExpensesOneProject(selectedProjectID);
 
     }
 
@@ -45,12 +45,12 @@ public class AllGuestsModel {
     }
     public double getRentProject() {
 
-        return selectedProject.getProjectPrice();
+        return selectedProject.getPrice();
     }
 
     public double getDepositeProject() {
 
-        return selectedProject.getProjectDeposite();
+        return selectedProject.getDeposite();
     }
 
     public double getDrinksAllGuests(){
@@ -59,7 +59,7 @@ public class AllGuestsModel {
 
         for (DrinksExpense drinks : allDrinksToProject) {
 
-            drinksAmount += drinks.get_spend();
+            drinksAmount += drinks.getSpend();
         }
 
         return drinksAmount;

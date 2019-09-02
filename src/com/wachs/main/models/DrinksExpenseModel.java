@@ -1,14 +1,14 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.DrinksExpense;
-import com.wachs.main.dataAccess.DAO.DrinksExpensesDAO;
-import com.wachs.main.dataAccess.DAO.DrinksExpensesDAOImpl;
+import com.wachs.main.dataAccess.services.IDrinksExpensesService;
+import com.wachs.main.dataAccess.services.DrinksExpensesService;
 
 import java.util.ArrayList;
 
 public class DrinksExpenseModel {
 
-    private DrinksExpensesDAO newDAO;
+    private IDrinksExpensesService newDAO;
     private ArrayList<DrinksExpense> drinksExpensesSearchedGuest;
     private int idGuest;
     private int idProject;
@@ -21,13 +21,13 @@ public class DrinksExpenseModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new DrinksExpensesDAOImpl();
+        newDAO = new DrinksExpensesService();
         drinksExpensesSearchedGuest = newDAO.fetchDrinksExpensesOneGuest(idGuest, idProject);
 
         if (drinksExpensesSearchedGuest != null) {
 
-            this.idProject = drinksExpensesSearchedGuest.get(0).getIdProject();
-            this.idGuest = drinksExpensesSearchedGuest.get(0).getIdGuest();
+            this.idProject = drinksExpensesSearchedGuest.get(0).getProjectId();
+            this.idGuest = drinksExpensesSearchedGuest.get(0).getGuestId();
 
         }
     }
@@ -38,7 +38,7 @@ public class DrinksExpenseModel {
 
         for (DrinksExpense drinksExp : drinksExpensesSearchedGuest) {
 
-            sum += drinksExp.get_spend();
+            sum += drinksExp.getSpend();
 
         }
         return sum;
@@ -64,7 +64,7 @@ public class DrinksExpenseModel {
 
         for (DrinksExpense e : drinksExpensesSearchedGuest) {
 
-            if (e.get_spend() == spend) {
+            if (e.getSpend() == spend) {
                 drinksExpensesSearchedGuest.remove(e);
             }
         }

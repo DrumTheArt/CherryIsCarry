@@ -2,21 +2,21 @@ package com.wachs.main.POJO;
 
 public class Prepaid  {
 
-    private int PK_id;
+    private int primaryKey;
     private double prepaid;
-    private int idGuest;
-    private int idProject;
+    private int guestId;
+    private int projectId;
 
     public Prepaid(){
 
     }
 
-    public Prepaid(int FK_id, double prepaid, int idGuest, int idProject){
+    public Prepaid(int primaryKey, double prepaid, int guestId, int projectId){
 
-        this.PK_id =FK_id;
-        this.prepaid=prepaid;
-        this.idGuest =idGuest;
-        this.idProject =idProject;
+        this.primaryKey = primaryKey;
+        this.prepaid = prepaid;
+        this.guestId = guestId;
+        this.projectId = projectId;
     }
 
     public double getPrepaid() {
@@ -27,28 +27,28 @@ public class Prepaid  {
         this.prepaid=prepaid;
     }
 
-    public int getPK_id() {
-        return this.PK_id;
+    public int getPrimaryKey() {
+        return this.primaryKey;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id=PK_id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public int getIdProject() {
-        return this.idProject;
+    public int getProjectId() {
+        return this.projectId;
     }
 
-    public void setIdProject(int idProject) {
-        this.idProject = idProject;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
-    public int getIdGuest() {
-        return this.idGuest;
+    public int getGuestId() {
+        return this.guestId;
     }
 
-    public void setIdGuest(int idGuest) {
-        this.idGuest = idGuest;
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 
 }

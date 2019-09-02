@@ -2,41 +2,41 @@ package com.wachs.main.POJO;
 
 public class OtherExpense {
 
-    private int PK_id;
+    private int primaryKey;
     private double spend;
     private String reason;
     private String when;
-    private int idGuest;
-    private int IdProject;
+    private int guestId;
+    private int projectId;
 
     public OtherExpense() {
 
     }
 
-    public OtherExpense(int FK_id, double spend, String reason, String when, int idGuest, int idProject) {
+    public OtherExpense(int primaryKey, double spend, String reason, String when, int guestId, int projectId) {
 
-        this.PK_id =FK_id;
+        this.primaryKey =primaryKey;
         this.spend = spend;
         this.reason = reason;
         this.when=when;
-        this.idGuest =idGuest;
-        this.IdProject =idProject;
+        this.guestId = guestId;
+        this.projectId = projectId;
     }
 
-    public int getPK_id() {
-        return this.PK_id;
+    public int getPrimaryKey() {
+        return this.primaryKey;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id=PK_id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public int getIdProject() {
-        return IdProject;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setIdProject(int idProject) {
-        this.IdProject = idProject;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getReason() {
@@ -55,12 +55,12 @@ public class OtherExpense {
         return this.spend;
     }
 
-    public int getIdGuest() {
-        return this.idGuest;
+    public int getGuestId() {
+        return this.guestId;
     }
 
-    public void setIdGuest(int idGuest) {
-        this.idGuest = idGuest;
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 
     public void setWhen(String when){

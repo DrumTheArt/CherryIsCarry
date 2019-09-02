@@ -1,12 +1,12 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Drinks;
-import com.wachs.main.dataAccess.DAO.DrinksDAO;
-import com.wachs.main.dataAccess.DAO.DrinksDAOImpl;
+import com.wachs.main.dataAccess.services.IDrinksService;
+import com.wachs.main.dataAccess.services.DrinksService;
 
 public class DrinksModel {
 
-    private DrinksDAO newDAO;
+    private IDrinksService newDAO;
     private Drinks staySearchedGuest;
     private int idGuest;
     private int idProject;
@@ -19,11 +19,11 @@ public class DrinksModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new DrinksDAOImpl();
+        newDAO = new DrinksService();
         staySearchedGuest = newDAO.fetchDrinksOneGuest(idGuest, idProject);
 
-        this.idGuest = staySearchedGuest.getIdGuest();
-        this.idProject = staySearchedGuest.getIdProject();
+        this.idGuest = staySearchedGuest.getGuestId();
+        this.idProject = staySearchedGuest.getProjectId();
     }
 
     public int getDrinks() {

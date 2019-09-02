@@ -2,49 +2,49 @@ package com.wachs.main.POJO;
 
 public class Drinks  {
 
-    private int PK_id;
+    private int primaryKey;
     private int nights;
-    private int idGuest;
-    private int idProject;
+    private int guestId;
+    private int projectId;
 
     public Drinks(){
 
     }
 
-    public Drinks(int FK_id, int nights, int idGuest, int idProject){
+    public Drinks(int primaryKey, int nights, int guestId, int projectId){
 
-        this.PK_id =FK_id;
-        this.nights=nights;
-        this.idGuest =idGuest;
-        this.idProject =idProject;
+        this.primaryKey = primaryKey;
+        this.nights = nights;
+        this.guestId = guestId;
+        this.projectId = projectId;
     }
 
-    public int getPK_id() {
-        return this.PK_id;
+    public int getPrimaryKey() {
+        return this.primaryKey;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id=PK_id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public int getIdProject() {
-        return this.idProject;
+    public int getProjectId() {
+        return this.projectId;
     }
 
-    public void setIdProject(int idProject) {
-        this.idProject = idProject;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public int getNights() {
         return this.nights;
     }
 
-    public int getIdGuest() {
-        return this.idGuest;
+    public int getGuestId() {
+        return this.guestId;
     }
 
-    public void setIdGuest(int idGuest) {
-        this.idGuest = idGuest;
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
     }
 
     public void setNights(int nights) {

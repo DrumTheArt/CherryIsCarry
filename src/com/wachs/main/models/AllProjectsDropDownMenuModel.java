@@ -1,7 +1,7 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Project;
-import com.wachs.main.dataAccess.DAO.ProjectDAOImpl;
+import com.wachs.main.dataAccess.services.ProjectService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,13 +22,13 @@ public class AllProjectsDropDownMenuModel {
 
     private void setProjects() {
 
-        allProjectsAsList = new ProjectDAOImpl().fetchAllProjects();
+        allProjectsAsList = new ProjectService().fetchAllProjects();
 
         getAllProjects = FXCollections.observableArrayList();
 
         for (Project e : allProjectsAsList) {
 
-            getAllProjects.add(e.getProjectName());
+            getAllProjects.add(e.getName());
         }
 
     }
@@ -39,7 +39,7 @@ public class AllProjectsDropDownMenuModel {
 
         for (int i = 0; i < getAllProjects.size(); i++) {
 
-            getAllPrimaryKeyToAllProjects[i] = allProjectsAsList.get(i).getPK_id();
+            getAllPrimaryKeyToAllProjects[i] = allProjectsAsList.get(i).getPrimaryKey();
 
         }
 

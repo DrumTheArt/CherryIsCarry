@@ -1,12 +1,12 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Stay;
-import com.wachs.main.dataAccess.DAO.StayDAO;
-import com.wachs.main.dataAccess.DAO.StayDAOImpl;
+import com.wachs.main.dataAccess.services.IStayService;
+import com.wachs.main.dataAccess.services.StayService;
 
 public class StayModel {
 
-    private StayDAO newDAO;
+    private IStayService newDAO;
     private Stay staySearchedGuest;
     private int idGuest;
     private int idProject;
@@ -18,11 +18,11 @@ public class StayModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new StayDAOImpl();
+        newDAO = new StayService();
         staySearchedGuest = newDAO.fetchStayOneGuest(idGuest, idProject);
 
-        this.idGuest = staySearchedGuest.getIdGuest();
-        this.idProject = staySearchedGuest.getIdProject();
+        this.idGuest = staySearchedGuest.getGuestId();
+        this.idProject = staySearchedGuest.getProjectId();
     }
 
     public int getNights() {

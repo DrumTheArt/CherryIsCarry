@@ -1,12 +1,12 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.Prepaid;
-import com.wachs.main.dataAccess.DAO.PrepaidDAO;
-import com.wachs.main.dataAccess.DAO.PrepaidDAOImpl;
+import com.wachs.main.dataAccess.services.IPrepaidService;
+import com.wachs.main.dataAccess.services.PrepaidService;
 
 public class PrepaidModel {
 
-    private PrepaidDAO newDAO;
+    private IPrepaidService newDAO;
     private Prepaid prepaidSearchedGuest;
     private int idGuest;
     private int idProject;
@@ -18,11 +18,11 @@ public class PrepaidModel {
 
     private void createModel(int idGuest, int idProject) {
 
-        newDAO = new PrepaidDAOImpl();
+        newDAO = new PrepaidService();
         prepaidSearchedGuest = newDAO.fetchPrepaidOneGuest(idGuest, idProject);
 
-        this.idGuest = prepaidSearchedGuest.getIdGuest();
-        this.idProject = prepaidSearchedGuest.getIdProject();
+        this.idGuest = prepaidSearchedGuest.getGuestId();
+        this.idProject = prepaidSearchedGuest.getProjectId();
     }
 
     public double getPrepaid() {

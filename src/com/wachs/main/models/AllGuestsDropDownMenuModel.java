@@ -17,7 +17,7 @@ public class AllGuestsDropDownMenuModel {
         ArrayList<Guest> listGuests = null;
 /**
  try {
- listGuests = new GuestDAOImpl().fetchAllOneProject();
+ listGuests = new GuestService().fetchAllOneProject();
  } catch (SQLException e) {
  e.printStackTrace();
  } catch (ClassNotFoundException e) {

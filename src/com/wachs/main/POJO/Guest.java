@@ -2,34 +2,34 @@ package com.wachs.main.POJO;
 
 public class Guest  {
 
-    private int PK_id;
-    private int idProject;
+    private int primaryKey;
+    private int projectId;
     private String guestName;
 
     public Guest(){
 
     }
 
-    public Guest(String guestName, int idProject) {
+    public Guest(String guestName, int projectId) {
 
-        this.idProject = idProject;
+        this.projectId = projectId;
         this.guestName = guestName;
 
     }
 
-    public Guest(int pk_id, int idProject, String guestName) {
+    public Guest(int primaryKey, int projectId, String guestName) {
 
-        this.PK_id = pk_id;
+        this.primaryKey = primaryKey;
         this.guestName = guestName;
-        this.idProject = idProject;
+        this.projectId = projectId;
     }
 
-    public int getPK_id() {
-        return this.PK_id;
+    public int getPrimaryKey() {
+        return this.primaryKey;
     }
 
-    public int getIdProject() {
-        return this.idProject;
+    public int getProjectId() {
+        return this.projectId;
     }
 
     public String getGuestName() {
@@ -40,12 +40,12 @@ public class Guest  {
         this.guestName = guestName;
     }
 
-    public void setPK_id(int PK_id) {
-        this.PK_id = PK_id;
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public void setIdProject(int idProject) {
-        this.idProject = idProject;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
 }

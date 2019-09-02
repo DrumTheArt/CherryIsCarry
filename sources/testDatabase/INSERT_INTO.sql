@@ -1,9 +1,9 @@
-INSERT INTO TBL_PROJECT (PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite) VALUES (?,'Frankreich',100,100);
-INSERT INTO TBL_PROJECT (PK_id, TXT_title, REAL_projectPrice, REAL_projectDeposite) VALUES (?,'Deutschland',100,100);
+INSERT INTO TBL_PROJECT (primaryKey, TXT_title, REAL_projectPrice, REAL_projectDeposite) VALUES (?,'Frankreich',100,100);
+INSERT INTO TBL_PROJECT (primaryKey, TXT_title, REAL_projectPrice, REAL_projectDeposite) VALUES (?,'Deutschland',100,100);
 
-INSERT INTO TBL_GUEST (PK_id, ID_project, TXT_guestName) VALUES (?,1,'Kim');
-INSERT INTO TBL_GUEST (PK_id, ID_project, TXT_guestName) VALUES (?,1,'Kim2');
-INSERT INTO TBL_GUEST (PK_id, ID_project, TXT_guestName) VALUES (?,2,'Markus');
+INSERT INTO TBL_GUEST (primaryKey, ID_project, TXT_guestName) VALUES (?,1,'Kim');
+INSERT INTO TBL_GUEST (primaryKey, ID_project, TXT_guestName) VALUES (?,1,'Kim2');
+INSERT INTO TBL_GUEST (primaryKey, ID_project, TXT_guestName) VALUES (?,2,'Markus');
 
 INSERT INTO TBL_OTHEREXPENSE (FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project) VALUES (?, 200, 'NotForFoodAndDrinks', '02/04/2013', 1, 1);
 INSERT INTO TBL_OTHEREXPENSE (FK_id, REAL_spend, TXT_reason, TXT_when, ID_guest, ID_project) VALUES (?, 100, 'NotForFoodAndDrinks', '02/04/2013', 2, 1);

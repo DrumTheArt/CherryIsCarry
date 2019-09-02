@@ -3,7 +3,6 @@ package com.wachs.integrationsTest.DAO;
 import com.wachs.integrationsTest.util.GeneratorTestData;
 import com.wachs.main.Exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.DrinksExpense;
-import com.wachs.main.POJO.Food;
 import com.wachs.main.dataAccess.DAO.DrinksExpensesDAOImpl;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
@@ -11,14 +10,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 
 public class DrinksExpensesDAOTest {
 
     @Test
-    public void fetchFoodByOneGuest_ShouldReturnCompleteList() {
+    public void fetchDrinksExpensesByOneGuest_ShouldReturnCompleteList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -33,7 +31,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchFoodByOneGuest_ShouldReturnCorrectGuestID() {
+    public void fetchDrinksExpensesByOneGuest_ShouldReturnCorrectGuestID() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -48,7 +46,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchFoodByOneGuest_ShouldReturnCorrectProjectID() {
+    public void fetchDrinksExpensesByOneGuest_ShouldReturnCorrectProjectID() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -63,7 +61,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchFoodByOneGuest_ShouldThrowNotInDataBaseExceptionIfGuestAndProjectNotExist() {
+    public void fetchDrinksExpensesByOneGuest_ShouldThrowNotInDataBaseExceptionIfGuestAndProjectNotExist() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -76,7 +74,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectCountOfGuests() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectCountOfGuests() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -91,7 +89,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectSpendAmountOfFirstInList() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectSpendAmountOfFirstInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -107,7 +105,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -123,7 +121,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -139,7 +137,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectWhenOfFirstGuestInList() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectWhenOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -155,7 +153,7 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test
-    public void fetchAllFoodByOneProject_ShouldReturnCorrectReasonOfFirstGuestInList() {
+    public void fetchAllDrinksExpensesByOneProject_ShouldReturnCorrectReasonOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -171,19 +169,19 @@ public class DrinksExpensesDAOTest {
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllFoodByOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllExpensesByOneProject_IfNotExistInDB_ShouldReturnException() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        foodDAO.fetchAllFoodByOneProject(99999);
+        drinksDAO.fetchAllDrinksOneProject(99999);
 
     }
 
     @Test
-    public void updateDrinksOneGuest_ShouldReturnUpdatedReason() {
+    public void updateDrinksExpensesOneGuest_ShouldReturnUpdatedReason() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -191,61 +189,30 @@ public class DrinksExpensesDAOTest {
         String newReason = "Newreason";
         IDBConnection con = new TestDBConnection();
 
-        //Diese Query funktioniert noch nicht ... der löscht die Objekte nicht raus
-        // Das heißt --> wir müssen einen Constraint auf Datum und Reason machen
-        // oder:
-        // wir hauen in die where clause den FK_id rein .. aber nach welchem Kriterium sollte das vergeben werden?
+        //Act
+        drinksExpensesDAO.updateDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, newReason, setupTime, setupExpenses, setupNameReason, setupTime);
+        ArrayList<DrinksExpense> drinkExpensesAfterChanges = new DrinksExpensesDAOImpl(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
 
-        ArrayList<DrinksExpense> n = getListOfPKid(guestOneID, projectOneID);
-
-        n.forEach(x -> System.out.println(x.getPK_id()));
-        //drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, 1091);
-
-        /**
-         //Act
-         otherExpensesDAO.updateOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime, setupProjectPrice, newReason, setupTime);
-         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesDAOImpl(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
-
-         Optional<DrinksExpense> result = drinksExpensesToFind.stream().filter(x -> x.getReason().equals(newReason)).findFirst();
-
-         //Assert
-         Assert.assertEquals(newReason, result.get().getReason());
-         **/
-
-    }
-
-    private ArrayList<DrinksExpense> getListOfPKid(int guestOneID, int projectOneID) {
-
-        IDBConnection con = new TestDBConnection();
-        ArrayList<DrinksExpense> listDrinksExpensesToFind = new DrinksExpensesDAOImpl(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
-
-        listDrinksExpensesToFind = (ArrayList<DrinksExpense>) listDrinksExpensesToFind.stream()
-                .filter(x -> x.getIdGuest() == 1028
-                        && x.getIdProject() == 31
-                        && x.get_spend() == setupPrepaid
-                        && x.getReason().equals(setupNameReason)
-                        && x.getWhen().equals(setupTime))
-                .collect(Collectors.toList());
-
-        return listDrinksExpensesToFind;
+        //Assert
+        Assert.assertEquals(newReason, drinkExpensesAfterChanges.get(0).getReason());
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void deleteFoodOneGuest_ShouldThrowExceptionIfFetchingAlreadyDeletedFoodObject() {
+    public void deleteDrinksExpensesOneGuest_ShouldThrowExceptionIfFetchingAlreadyDeletedDrinksExpensesObject() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
+        drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
+        drinksExpensesDAO.deleteDrinksExpensesOneGuest(guestOneID, projectOneID, setupExpenses, setupNameReason, setupTime);
 
         //Act
-        foodDAO.deleteFoodOneGuest(guestOneID, projectOneID);
-        foodDAO.fetchFoodByOneGuest(guestOneID, projectOneID);
-
+        new DrinksExpensesDAOImpl().fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
     }
 
     @Test
-    public void insertFoodOneGuest_ShouldReturnInsertedNewFoodObject() {
+    public void insertDrinksExpensesOneGuest_ShouldReturnInsertedNewDrinksExpensesObject() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -255,15 +222,15 @@ public class DrinksExpensesDAOTest {
         int newGuestID = guestDAO.fetchOneGuestOneProject("JustForThisTestGuest", projectOneID).getPK_id();
 
         //Act
-        foodDAO.insertFoodOneGuest(newGuestID, projectOneID, 200);
-        Food newFood = foodDAO.fetchFoodByOneGuest(newGuestID, projectOneID);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(newGuestID, projectOneID, 200, "", "");
+        ArrayList<DrinksExpense> newDrinksExpenses = drinksExpensesDAO.fetchDrinksExpensesOneGuest(newGuestID, projectOneID);
 
         //Assert
-        Assert.assertEquals(200, newFood.getNights());
+        Assert.assertEquals(200, newDrinksExpenses.get(2).get_spend(), 0.01);
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertFoodOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertDrinksExpensesOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -271,10 +238,8 @@ public class DrinksExpensesDAOTest {
         int newGuestIDWhichNotExist = 9999999;
 
         //Act
-        foodDAO.insertFoodOneGuest(newGuestIDWhichNotExist, projectOneID, 200);
+        drinksExpensesDAO.insertDrinksExpensesOneGuest(newGuestIDWhichNotExist, projectOneID, 200, "", "");
 
         //Assert
-
     }
-
 }

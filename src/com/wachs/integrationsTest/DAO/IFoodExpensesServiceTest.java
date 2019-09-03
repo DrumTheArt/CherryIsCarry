@@ -235,6 +235,7 @@ public class IFoodExpensesServiceTest {
         //Assert
         //Why no assertThat --> No interest to download hamcrest to use a matcher
         assertEquals(200, newList.get(0).get_spend(), 0.01);
+
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)

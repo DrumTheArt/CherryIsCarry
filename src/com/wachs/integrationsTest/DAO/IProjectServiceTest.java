@@ -10,9 +10,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IProjectServiceTest {
 
@@ -27,7 +31,7 @@ public class IProjectServiceTest {
         Project projectToFind = IProjectService.fetchOneProject(setupNameProjectOne);
 
         //Arrange
-        Assert.assertEquals(setupNameProjectOne, projectToFind.getName());
+        assertThat(projectToFind.getName(), is(setupNameProjectOne));
 
     }
 
@@ -85,7 +89,7 @@ public class IProjectServiceTest {
         ArrayList<Project> listProjectsToFind = new ProjectService(con, false).fetchAllProjects();
 
         //Assert
-        Assert.assertEquals(countAllProjects, listProjectsToFind.size());
+        assertThat(listProjectsToFind.size(), is(countAllProjects));
 
     }
 
@@ -105,7 +109,7 @@ public class IProjectServiceTest {
     }
 
     @Test
-    public void fetchAllProjects_ShouldReturnCorrectProjectIDOfFirstElementInList() {
+    public void fetchAllProjects_ShouldReturnCorrectProjectIdOfFirstElementInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -114,9 +118,10 @@ public class IProjectServiceTest {
 
         //Act
         ArrayList<Project> listProjectToFind = new ProjectService(con, false).fetchAllProjects();
+        List<Project> newList = listProjectToFind.stream().filter(x -> x.getPrimaryKey() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listProjectToFind.get(1).getPrimaryKey());
+        assertThat(newList.get(0).getPrimaryKey(), is(projectOneID));
 
     }
 
@@ -166,9 +171,9 @@ public class IProjectServiceTest {
         ArrayList<Project> listDrinksToFind = new ProjectService(con, false).fetchAllProjects();
 
         Optional<Project> result = listDrinksToFind.stream().filter(x -> x.getName().equals(setupNameProjectOne)).findFirst();
-        
+
         //Assert
-        Assert.assertEquals(setupNameProjectOne, result.get().getName());
+        assertThat(result.get().getName(), is(setupNameProjectOne));
 
     }
 
@@ -182,9 +187,10 @@ public class IProjectServiceTest {
 
         //Act
         ArrayList<Project> listDrinksToFind = new ProjectService(con, false).fetchAllProjects();
+        List<Project> newList = listDrinksToFind.stream().filter(x -> x.getName().equals(setupNameProjectTwo)).collect(Collectors.toList());
 
         //Assert
-        Assert.assertNotEquals(listDrinksToFind.get(0).getName(), setupNameProjectTwo);
+        assertThat(newList.get(0).getName(), is(setupNameProjectTwo));
 
     }
 
@@ -235,8 +241,7 @@ public class IProjectServiceTest {
         Project projectToFind = IProjectService.fetchOneProject(newNameProject);
 
         //Assert
-        Assert.assertEquals(newNameProject, projectToFind.getName());
-
+        assertThat(projectToFind.getName(), is(newNameProject));
 
     }
 
@@ -266,7 +271,7 @@ public class IProjectServiceTest {
         Project newDrinks = IProjectService.fetchOneProject(newNameProject);
 
         //Assert
-        Assert.assertEquals(newNameProject, newDrinks.getName());
+        assertThat(newDrinks.getName(), is(newNameProject));
 
     }
 }

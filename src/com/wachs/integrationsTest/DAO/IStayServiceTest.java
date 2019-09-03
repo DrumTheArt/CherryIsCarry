@@ -1,17 +1,21 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Stay;
-import com.wachs.main.dataAccess.services.StayService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.StayService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IStayServiceTest {
 
@@ -26,11 +30,11 @@ public class IStayServiceTest {
         Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
 
         //Arrange
-        Assert.assertEquals(setupNights, stayToFind.getNights());
+        assertThat(stayToFind.getNights(), is(setupNights));
     }
 
     @Test
-    public void fetchStayOneGuest_ShouldReturnCorrectGuestID() {
+    public void fetchStayOneGuest_ShouldReturnCorrectGuestId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -40,12 +44,12 @@ public class IStayServiceTest {
         Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(guestOneID, stayToFind.getGuestId());
+        assertThat(stayToFind.getGuestId(), is(guestOneID));
 
     }
 
     @Test
-    public void fetchStayOneGuest_ShouldReturnCorrectProjectID() {
+    public void fetchStayOneGuest_ShouldReturnCorrectProjectId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -55,7 +59,7 @@ public class IStayServiceTest {
         Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(projectOneID, stayToFind.getProjectId());
+        assertThat(stayToFind.getProjectId(), is(projectOneID));
 
     }
 
@@ -83,11 +87,12 @@ public class IStayServiceTest {
         ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(CountAllGuestsProjectOne, listStaysToFind.size());
+        assertThat(listStaysToFind.size(), is(CountAllGuestsProjectOne));
+
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectGuestIDOfFirstGuestInList() {
+    public void fetchAllStayOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -112,14 +117,15 @@ public class IStayServiceTest {
 
         //Act
         ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
+        List<Stay> newList = listStaysToFind.stream().filter(x -> x.getNights() == setupNights).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupNights, listStaysToFind.get(0).getNights());
+        assertThat(newList.get(0).getNights(), is(setupNights));
 
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectProjectIDOfFirstGuestInList() {
+    public void fetchAllStayOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -128,14 +134,15 @@ public class IStayServiceTest {
 
         //Act
         ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
+        List<Stay> newList = listStaysToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listStaysToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllStayOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllStayOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -159,7 +166,7 @@ public class IStayServiceTest {
         Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(newNights, stayToFind.getNights());
+        assertThat(stayToFind.getNights(), is(newNights));
 
     }
 
@@ -191,7 +198,7 @@ public class IStayServiceTest {
         Stay newStay = IStayService.fetchStayOneGuest(newGuestID, projectOneID);
 
         //Assert
-        Assert.assertEquals(200, newStay.getNights());
+        assertThat(newStay.getNights(), is(200));
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)

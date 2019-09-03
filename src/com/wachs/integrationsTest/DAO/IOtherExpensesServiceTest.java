@@ -10,8 +10,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IOtherExpensesServiceTest {
 
@@ -26,8 +30,9 @@ public class IOtherExpensesServiceTest {
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchOtherExpensesOneGuest(guestOneID, projectOneID);
 
-        //Arrange
-        Assert.assertEquals(countAllOtherExpensesOneProjectOneGuest, otherExpensesToFind.size());
+        //Assert
+        assertThat(otherExpensesToFind.size(), is(countAllOtherExpensesOneProjectOneGuest));
+
     }
 
     @Test
@@ -39,9 +44,10 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = IOtherExpensesService.fetchOtherExpensesOneGuest(guestOneID, projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, otherExpensesToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -54,9 +60,10 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = IOtherExpensesService.fetchOtherExpensesOneGuest(guestOneID, projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, otherExpensesToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
@@ -85,7 +92,8 @@ public class IOtherExpensesServiceTest {
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(countAllDrinksExpensesOneProjectAllGuests, otherExpensesToFind.size());
+        assertThat(otherExpensesToFind.size(), is(countAllDrinksExpensesOneProjectAllGuests));
+
     }
 
     @Test
@@ -98,9 +106,10 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getSpend() == setupExpenses).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupExpenses, otherExpensesToFind.get(0).getSpend(), 0.001);
+        Assert.assertEquals(setupExpenses, newList.get(0).getSpend(), 0.001);
 
     }
 
@@ -114,9 +123,10 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, otherExpensesToFind.get(0).getProjectId());
+        assertThat(otherExpensesToFind.get(0).getProjectId(), is(projectOneID));
 
     }
 
@@ -129,10 +139,12 @@ public class IOtherExpensesServiceTest {
         IDBConnection con = new TestDBConnection();
 
         //Act
+
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, otherExpensesToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -146,9 +158,10 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getWhen().equals(setupTime)).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupTime, otherExpensesToFind.get(0).getWhen());
+        assertThat(newList.get(0).getWhen(), is(setupTime));
 
     }
 
@@ -162,14 +175,15 @@ public class IOtherExpensesServiceTest {
 
         //Act
         ArrayList<OtherExpense> otherExpensesToFind = new OtherExpensesService(con, false).fetchAllOtherExpensesOneProject(projectOneID);
+        List<OtherExpense> newList = otherExpensesToFind.stream().filter(x -> x.getReason().equals(setupNameReason)).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupNameReason, otherExpensesToFind.get(0).getReason());
+        assertThat(newList.get(0).getReason(), is(setupNameReason));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllOtherExpensesByOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllOtherExpensesByOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -193,8 +207,10 @@ public class IOtherExpensesServiceTest {
         //Act
         IOtherExpensesService.updateOtherExpensesOneGuest(guestOneID, projectOneID, setupExpenses, newReason, setupTime, setupExpenses, setupNameReason, setupTime);
         ArrayList<OtherExpense> otherExpensesAfterChanges = new OtherExpensesService(con, false).fetchOtherExpensesOneGuest(guestOneID, projectOneID);
+        List<OtherExpense> newList = otherExpensesAfterChanges.stream().filter(x -> x.getReason().equals(newReason)).collect(Collectors.toList());
 
         //Assert
+        assertThat(newList.get(0).getReason(), is(newReason));
         Assert.assertEquals(newReason, otherExpensesAfterChanges.get(0).getReason());
 
     }
@@ -233,7 +249,7 @@ public class IOtherExpensesServiceTest {
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertOtherExpensesOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertOtherExpensesOneGuest_IfGuestNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();

@@ -252,7 +252,7 @@ public class FoodExpensesService implements IFoodExpensesService {
 
         for (int i = 0; i < foodExpenses.size(); i++) {
 
-            if ((foodExpenses.get(i).get_spend() == price) && (foodExpenses.get(i).getReason().equals(reason)) && (foodExpenses.get(i).getWhen().equals(when))) {
+            if ((foodExpenses.get(i).getSpend() == price) && (foodExpenses.get(i).getReason().equals(reason)) && (foodExpenses.get(i).getWhen().equals(when))) {
 
                 listOfPrimaryKeys.add(foodExpenses.get(i).getPrimaryKey());
 

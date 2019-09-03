@@ -1,17 +1,21 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Prepaid;
-import com.wachs.main.dataAccess.services.PrepaidService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.PrepaidService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IPrepaidServiceTest {
 
@@ -30,7 +34,7 @@ public class IPrepaidServiceTest {
     }
 
     @Test
-    public void fetchPrepaidOneGuest_ShouldReturnCorrectGuestID() {
+    public void fetchPrepaidOneGuest_ShouldReturnCorrectGuestId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -40,12 +44,12 @@ public class IPrepaidServiceTest {
         Prepaid prepaidToFind = IPrepaidService.fetchPrepaidOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(guestOneID, prepaidToFind.getGuestId());
+        assertThat(prepaidToFind.getGuestId(), is(guestOneID));
 
     }
 
     @Test
-    public void fetchPrepaidOneGuest_ShouldReturnCorrectProjectID() {
+    public void fetchPrepaidOneGuest_ShouldReturnCorrectProjectId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -55,7 +59,7 @@ public class IPrepaidServiceTest {
         Prepaid prepaidToFind = IPrepaidService.fetchPrepaidOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(projectOneID, prepaidToFind.getProjectId());
+        assertThat(prepaidToFind.getProjectId(), is(projectOneID));
 
     }
 
@@ -83,11 +87,11 @@ public class IPrepaidServiceTest {
         ArrayList<Prepaid> listPrepaidToFind = new PrepaidService(con, false).fetchAllPrepaidOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(CountAllGuestsProjectOne, listPrepaidToFind.size());
+        assertThat(listPrepaidToFind.size(), is(CountAllGuestsProjectOne));
     }
 
     @Test
-    public void fetchAllPrepaidOneProject_ShouldReturnCorrectGuestIDOfFirstGuestInList() {
+    public void fetchAllPrepaidOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -96,14 +100,15 @@ public class IPrepaidServiceTest {
 
         //Act
         ArrayList<Prepaid> listPrepaidToFind = new PrepaidService(con, false).fetchAllPrepaidOneProject(projectOneID);
+        List<Prepaid> newList = listPrepaidToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, listPrepaidToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
     @Test
-    public void fetchAllPrepaidOneProject_ShouldReturnCorrectProjectIDOfFirstGuestInList() {
+    public void fetchAllPrepaidOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -112,14 +117,15 @@ public class IPrepaidServiceTest {
 
         //Act
         ArrayList<Prepaid> listPrepaidToFind = new PrepaidService(con, false).fetchAllPrepaidOneProject(projectOneID);
+        List<Prepaid> newList = listPrepaidToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listPrepaidToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllPrepaidOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllPrepaidOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();

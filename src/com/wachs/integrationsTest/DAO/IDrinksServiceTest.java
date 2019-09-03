@@ -1,16 +1,21 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
-import com.wachs.main.dataAccess.services.DrinksService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.DrinksService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IDrinksServiceTest {
 
@@ -39,7 +44,7 @@ public class IDrinksServiceTest {
         Drinks drinkToFind = IDrinksService.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(guestOneID, drinkToFind.getGuestId());
+        assertThat(drinkToFind.getGuestId(), is(guestOneID));
 
     }
 
@@ -54,7 +59,7 @@ public class IDrinksServiceTest {
         Drinks drinkToFind = IDrinksService.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(projectOneID, drinkToFind.getProjectId());
+        assertThat(drinkToFind.getProjectId(), is(projectOneID));
 
     }
 
@@ -82,11 +87,12 @@ public class IDrinksServiceTest {
         ArrayList<Drinks> listDrinksToFind = new DrinksService(con, false).fetchAllDrinksOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(CountAllGuestsProjectOne, listDrinksToFind.size());
+        assertThat(listDrinksToFind.size(), is(CountAllGuestsProjectOne));
+
     }
 
     @Test
-    public void fetchAllDrinksOneProject_ShouldReturnCorrectGuestIDOfFirstGuestInList() {
+    public void fetchAllDrinksOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -95,9 +101,10 @@ public class IDrinksServiceTest {
 
         //Act
         ArrayList<Drinks> listDrinksToFind = new DrinksService(con, false).fetchAllDrinksOneProject(projectOneID);
+        List<Drinks> newList = listDrinksToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, listDrinksToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -111,14 +118,15 @@ public class IDrinksServiceTest {
 
         //Act
         ArrayList<Drinks> listDrinksToFind = new DrinksService(con, false).fetchAllDrinksOneProject(projectOneID);
+        List<Drinks> newList = listDrinksToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupNights, listDrinksToFind.get(0).getNights());
+        assertThat(newList.get(0).getNights(), is(setupNights));
 
     }
 
     @Test
-    public void fetchAllDrinksOneProject_ShouldReturnCorrectProjectIDOfFirstGuestInList() {
+    public void fetchAllDrinksOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -127,10 +135,10 @@ public class IDrinksServiceTest {
 
         //Act
         ArrayList<Drinks> listDrinksToFind = new DrinksService(con, false).fetchAllDrinksOneProject(projectOneID);
+        List<Drinks> newList = listDrinksToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listDrinksToFind.get(0).getProjectId());
-
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
     }
 
     @Test(expected = NotInDataBaseException.class)
@@ -158,7 +166,7 @@ public class IDrinksServiceTest {
         Drinks drinkToFind = IDrinksService.fetchDrinksOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(newNights, drinkToFind.getNights());
+        assertThat(drinkToFind.getNights(), is(newNights));
 
     }
 
@@ -181,16 +189,16 @@ public class IDrinksServiceTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
-        IGuestService.deleteGuestOneProject("JustForThisTestGuest", projectOneID);
-        IGuestService.insertGuestOneProject(projectOneID, "JustForThisTestGuest");
-        int newGuestID = IGuestService.fetchOneGuestOneProject("JustForThisTestGuest", projectOneID).getPrimaryKey();
+        IGuestService.deleteGuestOneProject(newNameProject, projectOneID);
+        IGuestService.insertGuestOneProject(projectOneID, newNameProject);
+        int newGuestID = IGuestService.fetchOneGuestOneProject(newNameProject, projectOneID).getPrimaryKey();
 
         //Act
         IDrinksService.insertDrinksOneGuest(newGuestID, projectOneID, 200);
         Drinks newDrinks = IDrinksService.fetchDrinksOneGuest(newGuestID, projectOneID);
 
         //Assert
-        Assert.assertEquals(200, newDrinks.getNights());
+        assertThat(newDrinks.getNights(), is(200));
     }
 
     @Test(expected=org.sqlite.SQLiteException.class)

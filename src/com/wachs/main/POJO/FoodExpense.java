@@ -43,7 +43,9 @@ public class FoodExpense {
         this.spend = REAL_price;
     }
 
-    public double get_spend() { return this.spend; }
+    public double getSpend() {
+        return this.spend;
+    }
 
     public String getReason() {
         return reason;

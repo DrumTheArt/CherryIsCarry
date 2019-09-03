@@ -1,8 +1,8 @@
 package com.wachs.main.models;
 
 import com.wachs.main.POJO.FoodExpense;
-import com.wachs.main.dataAccess.services.IFoodExpensesService;
 import com.wachs.main.dataAccess.services.FoodExpensesService;
+import com.wachs.main.dataAccess.services.IFoodExpensesService;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class FoodExpenseModel {
 
         for (FoodExpense foodExp : foodExpensesSearchedGuest) {
 
-            sum += foodExp.get_spend();
+            sum += foodExp.getSpend();
 
         }
         return sum;
@@ -64,7 +64,7 @@ public class FoodExpenseModel {
 
         for (FoodExpense e : foodExpensesSearchedGuest) {
 
-            if (e.get_spend() == spend) {
+            if (e.getSpend() == spend) {
                 foodExpensesSearchedGuest.remove(e);
             }
         }

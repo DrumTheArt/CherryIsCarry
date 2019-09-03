@@ -190,7 +190,7 @@ public class GuestModel {
 
         for (FoodExpense foodExpense : foodExpensesSelectedProject) {
 
-            allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
+            allFoodExpenses = allFoodExpenses + foodExpense.getSpend();
         }
 
         return allFoodExpenses;
@@ -214,7 +214,7 @@ public class GuestModel {
 
         for (FoodExpense foodExpense : foodExpensesSelectedProjectOneGuest) {
 
-            allFoodExpenses = allFoodExpenses + foodExpense.get_spend();
+            allFoodExpenses = allFoodExpenses + foodExpense.getSpend();
         }
 
         return allFoodExpenses;

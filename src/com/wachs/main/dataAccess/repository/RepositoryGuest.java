@@ -160,7 +160,7 @@ public class RepositoryGuest {
 
         for (FoodExpense amount:foodExpense) {
 
-            sum += amount.get_spend();
+            sum += amount.getSpend();
         }
 
         return sum;

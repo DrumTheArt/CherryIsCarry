@@ -6,12 +6,16 @@ import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnec
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
 import com.wachs.main.dataAccess.services.DrinksExpensesService;
 import com.wachs.main.exceptions.NotInDataBaseException;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class IDrinksExpensesServiceTest {
 
@@ -27,7 +31,7 @@ public class IDrinksExpensesServiceTest {
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
 
         //Arrange
-        Assert.assertEquals(countAllDrinksExpensesOneProjectOneGuest, drinksExpensesToFind.size());
+        assertEquals(countAllDrinksExpensesOneProjectOneGuest, drinksExpensesToFind.size());
     }
 
     @Test
@@ -39,9 +43,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = IDrinksExpensesService.fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, drinksExpensesToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -54,9 +59,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = IDrinksExpensesService.fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, drinksExpensesToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
@@ -85,7 +91,7 @@ public class IDrinksExpensesServiceTest {
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(countAllDrinksExpensesOneProjectAllGuests, drinksExpensesToFind.size());
+        assertThat(drinksExpensesToFind.size(), is(countAllDrinksExpensesOneProjectAllGuests));
     }
 
     @Test
@@ -98,9 +104,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getSpend() == setupExpenses).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupExpenses, drinksExpensesToFind.get(0).getSpend(), 0.001);
+        assertThat(newList.get(0).getSpend(), is(setupExpenses));
 
     }
 
@@ -114,9 +121,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, drinksExpensesToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
@@ -130,9 +138,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, drinksExpensesToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -146,9 +155,10 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getWhen().equals(setupTime)).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupTime, drinksExpensesToFind.get(0).getWhen());
+        assertThat(newList.get(0).getWhen(), is(setupTime));
 
     }
 
@@ -162,14 +172,15 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         ArrayList<DrinksExpense> drinksExpensesToFind = new DrinksExpensesService(con, false).fetchAllDrinksExpensesOneProject(projectOneID);
+        List<DrinksExpense> newList = drinksExpensesToFind.stream().filter(x -> x.getReason().equals(setupNameReason)).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupNameReason, drinksExpensesToFind.get(0).getReason());
+        assertThat(newList.get(0).getReason(), is(setupNameReason));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllExpensesByOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllExpensesByOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -194,7 +205,7 @@ public class IDrinksExpensesServiceTest {
         ArrayList<DrinksExpense> drinkExpensesAfterChanges = new DrinksExpensesService(con, false).fetchDrinksExpensesOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(newReason, drinkExpensesAfterChanges.get(0).getReason());
+        assertThat(drinkExpensesAfterChanges.get(0).getReason(), is(newReason));
 
     }
 
@@ -224,13 +235,14 @@ public class IDrinksExpensesServiceTest {
         //Act
         IDrinksExpensesService.insertDrinksExpensesOneGuest(newGuestID, projectOneID, 200, "", "");
         ArrayList<DrinksExpense> newDrinksExpenses = IDrinksExpensesService.fetchDrinksExpensesOneGuest(newGuestID, projectOneID);
+        List<DrinksExpense> newList = newDrinksExpenses.stream().filter(x -> x.getSpend() == 200).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(200, newDrinksExpenses.get(0).getSpend(), 0.01);
+        assertEquals(200, newDrinksExpenses.get(0).getSpend(), 0.01);
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertDrinksExpensesOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertDrinksExpensesOneGuest_IfGuestNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -239,7 +251,5 @@ public class IDrinksExpensesServiceTest {
 
         //Act
         IDrinksExpensesService.insertDrinksExpensesOneGuest(newGuestIDWhichNotExist, projectOneID, 200, "", "");
-
-        //Assert
     }
 }

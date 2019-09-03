@@ -71,7 +71,7 @@ public class AllGuestsModel {
 
         for (FoodExpense food : allFoodToProject) {
 
-            foodAmountPrice += food.get_spend();
+            foodAmountPrice += food.getSpend();
         }
 
         return foodAmountPrice;

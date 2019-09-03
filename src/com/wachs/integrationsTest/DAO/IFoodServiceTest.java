@@ -1,17 +1,20 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Food;
-import com.wachs.main.dataAccess.services.FoodService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
-import org.junit.Assert;
+import com.wachs.main.dataAccess.services.FoodService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IFoodServiceTest {
 
@@ -26,7 +29,7 @@ public class IFoodServiceTest {
         Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Arrange
-        Assert.assertEquals(setupNights, foodToFind.getNights());
+        assertThat(foodToFind.getNights(), is(setupNights));
     }
 
     @Test
@@ -40,7 +43,7 @@ public class IFoodServiceTest {
         Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(guestOneID, foodToFind.getGuestId());
+        assertThat(foodToFind.getGuestId(), is(guestOneID));
 
     }
 
@@ -55,7 +58,7 @@ public class IFoodServiceTest {
         Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(projectOneID, foodToFind.getProjectId());
+        assertThat(foodToFind.getProjectId(), is(projectOneID));
 
     }
 
@@ -83,7 +86,7 @@ public class IFoodServiceTest {
         ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
 
         //Assert
-        Assert.assertEquals(CountAllGuestsProjectOne, listFoodToFind.size());
+        assertThat(listFoodToFind.size(), is(CountAllGuestsProjectOne));
     }
 
     @Test
@@ -96,9 +99,9 @@ public class IFoodServiceTest {
 
         //Act
         ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
-
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
         //Assert
-        Assert.assertEquals(guestOneID, listFoodToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
@@ -112,9 +115,10 @@ public class IFoodServiceTest {
 
         //Act
         ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(setupNights, listFoodToFind.get(0).getNights());
+        assertThat(newList.get(0).getNights(), is(setupNights));
 
     }
 
@@ -128,14 +132,15 @@ public class IFoodServiceTest {
 
         //Act
         ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listFoodToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllFoodByOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllFoodByOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -159,7 +164,7 @@ public class IFoodServiceTest {
         Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        Assert.assertEquals(newNights, foodToFind.getNights());
+        assertThat(foodToFind.getNights(), is(newNights));
 
     }
 
@@ -191,11 +196,12 @@ public class IFoodServiceTest {
         Food newFood = IFoodService.fetchFoodByOneGuest(newGuestID, projectOneID);
 
         //Assert
-        Assert.assertEquals(200, newFood.getNights());
+        assertThat(newFood.getNights(), is(200));
+
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertFoodOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertFoodOneGuest_IfGuestNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -204,8 +210,6 @@ public class IFoodServiceTest {
 
         //Act
         IFoodService.insertFoodOneGuest(newGuestIDWhichNotExist, projectOneID, 200);
-
-        //Assert
 
     }
 }

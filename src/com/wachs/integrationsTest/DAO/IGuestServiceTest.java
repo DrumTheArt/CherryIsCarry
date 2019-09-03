@@ -1,17 +1,21 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.dataAccess.services.GuestService;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.GuestService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.wachs.integrationsTest.util.GeneratorTestData.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class IGuestServiceTest {
 
@@ -26,7 +30,7 @@ public class IGuestServiceTest {
         Guest guestToFind = IGuestService.fetchOneGuestOneProject(setupNameGuestOne, projectOneID);
 
         //Arrange
-        Assert.assertEquals(setupNameGuestOne, guestToFind.getGuestName());
+        assertThat(guestToFind.getGuestName(), is(setupNameGuestOne));
 
     }
 
@@ -41,7 +45,7 @@ public class IGuestServiceTest {
         Guest guestToFind = IGuestService.fetchOneGuestOneProject(setupNameGuestOne, projectOneID);
 
         //Assert
-        Assert.assertEquals(guestOneID, guestToFind.getPrimaryKey());
+        assertThat(guestToFind.getPrimaryKey(), is(guestOneID));
 
     }
 
@@ -56,7 +60,7 @@ public class IGuestServiceTest {
         Guest guestToFind = IGuestService.fetchOneGuestOneProject(setupNameGuestOne, projectOneID);
 
         //Assert
-        Assert.assertEquals(projectOneID, guestToFind.getProjectId());
+        assertThat(guestToFind.getProjectId(), is(projectOneID));
 
     }
 
@@ -82,9 +86,11 @@ public class IGuestServiceTest {
 
         //Act
         ArrayList<Guest> listGuestsToFind = new GuestService(con, false).fetchAllGuestsOneProject(projectOneID);
+        List<Guest> newList = listGuestsToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(CountAllGuestsProjectOne, listGuestsToFind.size());
+        assertThat(newList.size(), is(CountAllGuestsProjectOne));
+
     }
 
     @Test
@@ -97,9 +103,10 @@ public class IGuestServiceTest {
 
         //Act
         ArrayList<Guest> listGuestsToFind = new GuestService(con, false).fetchAllGuestsOneProject(projectOneID);
+        List<Guest> newList = listGuestsToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(guestOneID, listGuestsToFind.get(0).getPrimaryKey());
+        assertThat(newList.get(0).getPrimaryKey(), is(guestOneID));
 
     }
 
@@ -113,14 +120,15 @@ public class IGuestServiceTest {
 
         //Act
         ArrayList<Guest> listGuestsToFind = new GuestService(con, false).fetchAllGuestsOneProject(projectOneID);
+        List<Guest> newList = listGuestsToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
-        Assert.assertEquals(projectOneID, listGuestsToFind.get(0).getProjectId());
+        assertThat(newList.get(0).getProjectId(), is(projectOneID));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllPrepaidOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllPrepaidOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -163,7 +171,7 @@ public class IGuestServiceTest {
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertGuestOneProject_IfProjectNotExistInDB_ShouldReturnException() {
+    public void insertGuestOneProject_IfProjectNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();

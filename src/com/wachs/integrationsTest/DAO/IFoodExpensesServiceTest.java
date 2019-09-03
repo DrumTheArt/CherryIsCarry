@@ -36,7 +36,7 @@ public class IFoodExpensesServiceTest {
     }
 
     @Test
-    public void fetchFoodExpensesByOneGuest_ShouldReturnCorrectGuestID() {
+    public void fetchFoodExpensesByOneGuest_ShouldReturnCorrectGuestId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -52,7 +52,7 @@ public class IFoodExpensesServiceTest {
     }
 
     @Test
-    public void fetchFoodExpensesByOneGuest_ShouldReturnCorrectProjectID() {
+    public void fetchFoodExpensesByOneGuest_ShouldReturnCorrectProjectId() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -104,10 +104,10 @@ public class IFoodExpensesServiceTest {
 
         //Act
         ArrayList<FoodExpense> foodExpensesToFind = new FoodExpensesService(con, false).fetchAllFoodExpensesOneProject(projectOneID);
-        List<FoodExpense> newList = foodExpensesToFind.stream().filter(x -> x.get_spend() == setupExpenses).collect(Collectors.toList());
+        List<FoodExpense> newList = foodExpensesToFind.stream().filter(x -> x.getSpend() == setupExpenses).collect(Collectors.toList());
 
         //Assert
-        assertThat(newList.get(0).get_spend(), is(setupExpenses));
+        assertThat(newList.get(0).getSpend(), is(setupExpenses));
     }
 
     @Test
@@ -139,7 +139,7 @@ public class IFoodExpensesServiceTest {
         List<FoodExpense> newList = foodExpensesToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
 
         //Assert
-
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
     }
 
     @Test
@@ -175,7 +175,7 @@ public class IFoodExpensesServiceTest {
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllFoodExpensesByOneProject_IfNotExistInDB_ShouldReturnException() {
+    public void fetchAllFoodExpensesByOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -230,16 +230,16 @@ public class IFoodExpensesServiceTest {
         //Act
         foodExpensesDAO.insertFoodExpensesOneGuest(newGuestID, projectOneID, 200, "", "");
         ArrayList<FoodExpense> newFoodExpenses = foodExpensesDAO.fetchFoodExpensesOneGuest(newGuestID, projectOneID);
-        List<FoodExpense> newList = newFoodExpenses.stream().filter(x -> x.get_spend() == 200).collect(Collectors.toList());
+        List<FoodExpense> newList = newFoodExpenses.stream().filter(x -> x.getSpend() == 200).collect(Collectors.toList());
 
         //Assert
         //Why no assertThat --> No interest to download hamcrest to use a matcher
-        assertEquals(200, newList.get(0).get_spend(), 0.01);
+        assertEquals(200, newList.get(0).getSpend(), 0.01);
 
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertFoodExpensesOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertFoodExpensesOneGuest_IfGuestNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();

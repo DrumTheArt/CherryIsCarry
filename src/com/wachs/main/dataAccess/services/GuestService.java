@@ -1,12 +1,12 @@
 package com.wachs.main.dataAccess.services;
 
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorGuest;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ConverterStringForDataBase;
+import com.wachs.main.exceptions.NotInDataBaseException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -102,6 +102,8 @@ public class GuestService implements IGuestService {
 
     @Override
     public ArrayList fetchAllGuestsOneProject(int idProject) {
+
+        allGuestByOneProject.clear();
 
         try {
 
@@ -254,7 +256,6 @@ public class GuestService implements IGuestService {
         return this.openConnection().createStatement();
 
     }
-
 
     private void createGuestObject(int PK_id, int idProject, String guestName) {
         aGuest.setPrimaryKey(PK_id);

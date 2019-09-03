@@ -1,11 +1,11 @@
 package com.wachs.main.dataAccess.services;
 
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Prepaid;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorPrepaid;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
+import com.wachs.main.exceptions.NotInDataBaseException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -47,8 +47,10 @@ public class PrepaidService implements IPrepaidService {
 
     }
 
-        @Override
+    @Override
     public Prepaid fetchPrepaidOneGuest(int idGuest, int idProject) {
+
+        allPrepaidByOneProject.clear();
 
         try {
 
@@ -90,6 +92,7 @@ public class PrepaidService implements IPrepaidService {
         return aPrepaid;
     }
 
+    @Override
     public ArrayList fetchAllPrepaidOneProject(int idProject) {
 
         try {

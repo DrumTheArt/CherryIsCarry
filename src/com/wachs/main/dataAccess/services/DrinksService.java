@@ -1,11 +1,11 @@
 package com.wachs.main.dataAccess.services;
 
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Drinks;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorDrinks;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
+import com.wachs.main.exceptions.NotInDataBaseException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -84,6 +84,8 @@ public class DrinksService implements IDrinksService {
     }
 
     public ArrayList fetchAllDrinksOneProject(int idProject) {
+
+        allDrinksOneProject.clear();
 
         try {
 

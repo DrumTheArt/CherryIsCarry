@@ -2,9 +2,9 @@ package com.wachs.integrationsTest.util;
 
 import com.wachs.main.POJO.Guest;
 import com.wachs.main.POJO.Project;
-import com.wachs.main.dataAccess.services.*;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.*;
 
 import java.sql.Connection;
 
@@ -48,9 +48,12 @@ public class GeneratorTestData {
     public static double setupPrepaid = 150;
     public static int setupNights = 5;
 
+    public static String newNameProject = "Justforthistestproject";
+
     public static int countAllOtherExpensesOneProjectAllGuests;
     public static int countAllFoodExpensesOneProjectAllGuests;
     public static int countAllDrinksExpensesOneProjectAllGuests;
+
 
     public static void createObjects(){
 
@@ -152,6 +155,7 @@ public class GeneratorTestData {
 
         IProjectService.deleteProject(setupNameProjectOne);
         IProjectService.deleteProject(setupNameProjectTwo);
+        IProjectService = null;
 
     }
 }

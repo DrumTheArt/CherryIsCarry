@@ -1,11 +1,11 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Project;
-import com.wachs.main.dataAccess.services.ProjectService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.ProjectService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -96,7 +96,10 @@ public class IProjectServiceTest {
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
-        //Act
+        IProjectService.deleteProject(setupNameProjectOne);
+        IProjectService.deleteProject(setupNameProjectTwo);
+        IProjectService.deleteProject(newNameProject);
+
         IProjectService.fetchAllProjects();
 
     }
@@ -113,7 +116,7 @@ public class IProjectServiceTest {
         ArrayList<Project> listProjectToFind = new ProjectService(con, false).fetchAllProjects();
 
         //Assert
-        Assert.assertEquals(projectOneID, listProjectToFind.get(0).getPrimaryKey());
+        Assert.assertEquals(projectOneID, listProjectToFind.get(1).getPrimaryKey());
 
     }
 
@@ -225,15 +228,15 @@ public class IProjectServiceTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
-        String newName = "Newprojectname2";
-        IProjectService.deleteProject(newName);
+        IProjectService.deleteProject(newNameProject);
 
         //Act
-        IProjectService.updateProject(projectOneID, newName, setupProjectPrice, setupProjectDeposite);
-        Project projectToFind = IProjectService.fetchOneProject(newName);
+        IProjectService.updateProject(projectOneID, newNameProject, setupProjectPrice, setupProjectDeposite);
+        Project projectToFind = IProjectService.fetchOneProject(newNameProject);
 
         //Assert
-        Assert.assertEquals(newName, projectToFind.getName());
+        Assert.assertEquals(newNameProject, projectToFind.getName());
+
 
     }
 
@@ -256,14 +259,14 @@ public class IProjectServiceTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
-        IProjectService.deleteProject("Justforthistestproject");
-        IProjectService.insertProject("Justforthistestproject", setupProjectPrice, setupProjectDeposite);
+        IProjectService.deleteProject(newNameProject);
+        IProjectService.insertProject(newNameProject, setupProjectPrice, setupProjectDeposite);
 
         //Act
-        Project newDrinks = IProjectService.fetchOneProject("Justforthistestproject");
+        Project newDrinks = IProjectService.fetchOneProject(newNameProject);
 
         //Assert
-        Assert.assertEquals("Justforthistestproject", newDrinks.getName());
+        Assert.assertEquals(newNameProject, newDrinks.getName());
 
     }
 }

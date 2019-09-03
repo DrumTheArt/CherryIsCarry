@@ -1,11 +1,11 @@
 package com.wachs.main.dataAccess.services;
 
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.Stay;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorStay;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
+import com.wachs.main.exceptions.NotInDataBaseException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -93,6 +93,8 @@ public class StayService implements IStayService {
 
     @Override
     public ArrayList fetchAllStayOneProject(int idProject) {
+
+        AllStayByOneProject.clear();
 
         try {
 

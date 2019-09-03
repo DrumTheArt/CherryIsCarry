@@ -1,11 +1,11 @@
 package com.wachs.integrationsTest.DAO;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.DrinksExpense;
-import com.wachs.main.dataAccess.services.DrinksExpensesService;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
+import com.wachs.main.dataAccess.services.DrinksExpensesService;
+import com.wachs.main.exceptions.NotInDataBaseException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -217,16 +217,16 @@ public class IDrinksExpensesServiceTest {
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
-        IGuestService.deleteGuestOneProject("JustForThisTestGuest", projectOneID);
-        IGuestService.insertGuestOneProject(projectOneID, "JustForThisTestGuest");
-        int newGuestID = IGuestService.fetchOneGuestOneProject("JustForThisTestGuest", projectOneID).getPrimaryKey();
+        IGuestService.deleteGuestOneProject(newNameProject, projectOneID);
+        IGuestService.insertGuestOneProject(projectOneID, newNameProject);
+        int newGuestID = IGuestService.fetchOneGuestOneProject(newNameProject, projectOneID).getPrimaryKey();
 
         //Act
         IDrinksExpensesService.insertDrinksExpensesOneGuest(newGuestID, projectOneID, 200, "", "");
         ArrayList<DrinksExpense> newDrinksExpenses = IDrinksExpensesService.fetchDrinksExpensesOneGuest(newGuestID, projectOneID);
 
         //Assert
-        Assert.assertEquals(200, newDrinksExpenses.get(2).getSpend(), 0.01);
+        Assert.assertEquals(200, newDrinksExpenses.get(0).getSpend(), 0.01);
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)

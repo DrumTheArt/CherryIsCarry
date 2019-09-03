@@ -1,11 +1,11 @@
 package com.wachs.main.dataAccess.services;
 
-import com.wachs.main.exceptions.NotInDataBaseException;
 import com.wachs.main.POJO.FoodExpense;
 import com.wachs.main.dataAccess.dBQueryGenerators.QueryGeneratorFoodExpenses;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.DBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.Util.ApplicationLogger;
+import com.wachs.main.exceptions.NotInDataBaseException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -50,6 +50,7 @@ public class FoodExpensesService implements IFoodExpensesService {
     @Override
     public ArrayList fetchFoodExpensesOneGuest(int idGuest, int idProject) {
 
+        allFoodExpensesSearchedGuests.clear();
         try {
 
             String queryCommand = query.fetchFoodExpensesOneGuest(idGuest, idProject);
@@ -90,6 +91,8 @@ public class FoodExpensesService implements IFoodExpensesService {
 
     @Override
     public ArrayList fetchAllFoodExpensesOneProject(int idProject) {
+
+        allFoodExpensesAllGuests.clear();
 
         try {
 

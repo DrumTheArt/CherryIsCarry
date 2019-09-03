@@ -1,12 +1,11 @@
-package com.wachs.integrationsTest.DAO;
+package com.wachs.integrationsTest.repositoryTests;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
-import com.wachs.main.POJO.Stay;
+import com.wachs.main.POJO.Food;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.IDBConnection;
 import com.wachs.main.dataAccess.dataAccessConfigurations.DBConnection.TestDBConnection;
-import com.wachs.main.dataAccess.services.StayService;
+import com.wachs.main.dataAccess.services.FoodService;
 import com.wachs.main.exceptions.NotInDataBaseException;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,66 +16,66 @@ import static com.wachs.integrationsTest.util.GeneratorTestData.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class IStayServiceTest {
+public class IFoodServiceTest {
 
     @Test
-    public void fetchStayOneGuest_ShouldReturnCorrectNights() {
+    public void fetchFoodByOneGuest_ShouldReturnCorrectNights() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
+        Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Arrange
-        assertThat(stayToFind.getNights(), is(setupNights));
+        assertThat(foodToFind.getNights(), is(setupNights));
     }
 
     @Test
-    public void fetchStayOneGuest_ShouldReturnCorrectGuestId() {
+    public void fetchFoodByOneGuest_ShouldReturnCorrectGuestID() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
+        Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        assertThat(stayToFind.getGuestId(), is(guestOneID));
+        assertThat(foodToFind.getGuestId(), is(guestOneID));
 
     }
 
     @Test
-    public void fetchStayOneGuest_ShouldReturnCorrectProjectId() {
+    public void fetchFoodByOneGuest_ShouldReturnCorrectProjectID() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
+        Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        assertThat(stayToFind.getProjectId(), is(projectOneID));
+        assertThat(foodToFind.getProjectId(), is(projectOneID));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchStayOneGuest_ShouldThrowNotInDataBaseExceptionIfGuestAndProjectNotExist() {
+    public void fetchFoodByOneGuest_ShouldThrowNotInDataBaseExceptionIfGuestAndProjectNotExist() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        IStayService.fetchStayOneGuest(99999, 99999);
+        IFoodService.fetchFoodByOneGuest(99999, 99999);
 
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectAmountOfAllStaysToOneProject() {
+    public void fetchAllFoodByOneProject_ShouldReturnCorrectAmountOfGuests() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -84,15 +83,14 @@ public class IStayServiceTest {
         IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
+        ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
 
         //Assert
-        assertThat(listStaysToFind.size(), is(CountAllGuestsProjectOne));
-
+        assertThat(listFoodToFind.size(), is(CountAllGuestsProjectOne));
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectGuestIdOfFirstGuestInList() {
+    public void fetchAllFoodByOneProject_ShouldReturnCorrectGuestIDOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -100,15 +98,15 @@ public class IStayServiceTest {
         IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
-
+        ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getGuestId() == guestOneID).collect(Collectors.toList());
         //Assert
-        Assert.assertEquals(guestOneID, listStaysToFind.get(0).getGuestId());
+        assertThat(newList.get(0).getGuestId(), is(guestOneID));
 
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectStayDurationOfFirstGuestInList() {
+    public void fetchAllFoodByOneProject_ShouldReturnCorrectNightOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -116,8 +114,8 @@ public class IStayServiceTest {
         IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
-        List<Stay> newList = listStaysToFind.stream().filter(x -> x.getNights() == setupNights).collect(Collectors.toList());
+        ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
         assertThat(newList.get(0).getNights(), is(setupNights));
@@ -125,7 +123,7 @@ public class IStayServiceTest {
     }
 
     @Test
-    public void fetchAllStayOneProject_ShouldReturnCorrectProjectIdOfFirstGuestInList() {
+    public void fetchAllFoodByOneProject_ShouldReturnCorrectProjectIDOfFirstGuestInList() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -133,8 +131,8 @@ public class IStayServiceTest {
         IDBConnection con = new TestDBConnection();
 
         //Act
-        ArrayList<Stay> listStaysToFind = new StayService(con, false).fetchAllStayOneProject(projectOneID);
-        List<Stay> newList = listStaysToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
+        ArrayList<Food> listFoodToFind = new FoodService(con, false).fetchAllFoodByOneProject(projectOneID);
+        List<Food> newList = listFoodToFind.stream().filter(x -> x.getProjectId() == projectOneID).collect(Collectors.toList());
 
         //Assert
         assertThat(newList.get(0).getProjectId(), is(projectOneID));
@@ -142,14 +140,14 @@ public class IStayServiceTest {
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void fetchAllStayOneProject_IfNotExistInDB_ShouldThrowException() {
+    public void fetchAllFoodByOneProject_IfNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        IStayService.fetchAllStayOneProject(9999);
+        IFoodService.fetchAllFoodByOneProject(99999);
 
     }
 
@@ -162,29 +160,29 @@ public class IStayServiceTest {
         int newNights = 100;
 
         //Act
-        IStayService.updateStayOneGuest(guestOneID, projectOneID, newNights);
-        Stay stayToFind = IStayService.fetchStayOneGuest(guestOneID, projectOneID);
+        IFoodService.updateFoodOneGuest(guestOneID, projectOneID, newNights);
+        Food foodToFind = IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
         //Assert
-        assertThat(stayToFind.getNights(), is(newNights));
+        assertThat(foodToFind.getNights(), is(newNights));
 
     }
 
     @Test(expected = NotInDataBaseException.class)
-    public void deleteStayOneGuest_ShouldThrowExceptionIfFetchingAlreadyDeletedDrinkObject() {
+    public void deleteFoodOneGuest_ShouldThrowExceptionIfFetchingAlreadyDeletedFoodObject() {
 
         //Arrange
         GeneratorTestData.createObjects();
         GeneratorTestData.insertTestdataToDataBase();
 
         //Act
-        IStayService.deleteStayOneGuest(guestOneID, projectOneID);
-        IStayService.fetchStayOneGuest(guestOneID, projectOneID);
+        IFoodService.deleteFoodOneGuest(guestOneID, projectOneID);
+        IFoodService.fetchFoodByOneGuest(guestOneID, projectOneID);
 
     }
 
     @Test
-    public void insertStayOneGuest_ShouldReturnInsertedNewDrinkObject() {
+    public void insertFoodOneGuest_ShouldReturnInsertedNewFoodObject() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -194,15 +192,16 @@ public class IStayServiceTest {
         int newGuestID = IGuestService.fetchOneGuestOneProject("JustForThisTestGuest", projectOneID).getPrimaryKey();
 
         //Act
-        IStayService.insertStayOneGuest(newGuestID, projectOneID, 200);
-        Stay newStay = IStayService.fetchStayOneGuest(newGuestID, projectOneID);
+        IFoodService.insertFoodOneGuest(newGuestID, projectOneID, 200);
+        Food newFood = IFoodService.fetchFoodByOneGuest(newGuestID, projectOneID);
 
         //Assert
-        assertThat(newStay.getNights(), is(200));
+        assertThat(newFood.getNights(), is(200));
+
     }
 
     @Test(expected = org.sqlite.SQLiteException.class)
-    public void insertDrinksOneGuest_IfGuestNotExistInDB_ShouldReturnException() {
+    public void insertFoodOneGuest_IfGuestNotExistInDB_ShouldThrowException() {
 
         //Arrange
         GeneratorTestData.createObjects();
@@ -210,9 +209,7 @@ public class IStayServiceTest {
         int newGuestIDWhichNotExist = 9999999;
 
         //Act
-        IStayService.insertStayOneGuest(newGuestIDWhichNotExist, projectOneID, 200);
-
-        //Assert
+        IFoodService.insertFoodOneGuest(newGuestIDWhichNotExist, projectOneID, 200);
 
     }
 }

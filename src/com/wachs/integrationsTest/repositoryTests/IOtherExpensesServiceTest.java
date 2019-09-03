@@ -1,4 +1,4 @@
-package com.wachs.integrationsTest.DAO;
+package com.wachs.integrationsTest.repositoryTests;
 
 import com.wachs.integrationsTest.util.GeneratorTestData;
 import com.wachs.main.POJO.OtherExpense;
